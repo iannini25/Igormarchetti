@@ -211,32 +211,30 @@ a { color: inherit; }
 .hero { padding: 56px 0 8px; }
 .hero-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(200px, 272px);
-  column-gap: 48px;
-  align-items: start;
+  grid-template-columns: minmax(0, 1fr) minmax(220px, 320px);
+  column-gap: 56px;
+  align-items: end;
 }
 .hero-copy { grid-column: 1; grid-row: 1; }
-.portrait { grid-column: 2; grid-row: 1; }
-.portrait { margin: 6px 0 0; position: relative; }
+.portrait { grid-column: 2; grid-row: 1; margin: 0 0 -36px; position: relative; z-index: 1; }
 .portrait::before {
   content: "";
   position: absolute;
-  left: -16px;
-  top: 16%;
-  bottom: 18%;
+  left: -18px;
+  top: 12%;
+  bottom: 22%;
   width: 1px;
   background: var(--brass);
 }
 .portrait img {
   width: 100%;
   height: auto;
-  aspect-ratio: 4 / 5;
+  aspect-ratio: 3 / 4;
   object-fit: cover;
-  object-position: 68% 22%;
+  object-position: 70% 16%;
   display: block;
-  mix-blend-mode: darken;
-  -webkit-mask-image: linear-gradient(#000 0%, #000 76%, transparent 100%);
-  mask-image: linear-gradient(#000 0%, #000 76%, transparent 100%);
+  -webkit-mask-image: radial-gradient(closest-side at 62% 38%, #000 42%, transparent 100%);
+  mask-image: radial-gradient(closest-side at 62% 38%, #000 42%, transparent 100%);
 }
 .eyebrow, .kicker {
   margin: 0 0 12px;
@@ -379,10 +377,11 @@ h2 {
   text-wrap: balance;
 }
 h3 { margin: 0 0 8px; font-size: 1.35rem; line-height: 1.25; letter-spacing: -0.015em; }
+.glyph { width: 26px; height: 26px; display: block; margin: 0 0 10px; color: var(--brass); }
 .services {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 32px 28px;
+  grid-template-columns: 1fr 1fr;
+  gap: 36px 64px;
 }
 .card {
   border: 0;
@@ -391,6 +390,14 @@ h3 { margin: 0 0 8px; font-size: 1.35rem; line-height: 1.25; letter-spacing: -0.
   padding: 16px 0 0;
   background: transparent;
 }
+.services .card:first-child {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: minmax(14rem, 20rem) minmax(0, 1fr);
+  gap: 8px 40px;
+  align-items: start;
+}
+.services .card:first-child h3 { margin: 0; }
 .card p, .rolebody p, .intro { margin: 0; color: var(--muted); }
 .searchroles {
   display: flex;
@@ -437,11 +444,14 @@ h3 { margin: 0 0 8px; font-size: 1.35rem; line-height: 1.25; letter-spacing: -0.
   gap: 40px;
   align-items: start;
 }
+.iba .card { margin-top: 56px; }
 .quotes {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 40px 48px;
+  grid-template-columns: 1.25fr 0.75fr;
+  gap: 28px 56px;
+  align-items: start;
 }
+.quote + .quote { margin-top: 64px; }
 .quote { padding: 0; border: 0; border-radius: 0; background: transparent; }
 .quote blockquote {
   font-style: italic;
@@ -452,7 +462,30 @@ h3 { margin: 0 0 8px; font-size: 1.35rem; line-height: 1.25; letter-spacing: -0.
   text-wrap: pretty;
 }
 .who { font-weight: 600; }
-.contact-band { background: var(--ink); color: var(--paper); }
+.contact-band {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: var(--ink);
+  color: var(--paper);
+}
+.city {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 68% 42%;
+}
+.contact-band::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(100deg, rgba(22, 19, 16, 0.94) 0%, rgba(22, 19, 16, 0.8) 46%, rgba(22, 19, 16, 0.38) 100%);
+}
+.contact-band .wrap { position: relative; z-index: 2; }
 .contact-band :focus-visible { outline-color: var(--paper); }
 .contactbox {
   display: grid;
@@ -489,10 +522,13 @@ footer {
 .btn:active, .links a:active { opacity: 0.72; }
 @media (max-width: 800px) {
   .services, .quotes, .iba { grid-template-columns: 1fr; }
+  .services .card:first-child { grid-template-columns: 1fr; }
   .quotes { gap: 36px; }
+  .quote + .quote, .iba .card { margin-top: 0; }
   .iba { gap: 28px; }
   .role { grid-template-columns: 1fr; gap: 12px; }
   .contactbox { grid-template-columns: 1fr; align-items: start; padding: 40px 0; }
+  .contact-band::before { background: rgba(22, 19, 16, 0.86); }
 }
 @media (max-width: 720px) {
   .navin {
@@ -515,7 +551,11 @@ footer {
     margin: 0 0 8px 14px;
   }
   .portrait::before { display: none; }
-  .portrait img { aspect-ratio: 3 / 4; }
+  .portrait img {
+    aspect-ratio: 3 / 4;
+    -webkit-mask-image: linear-gradient(#000 0%, #000 78%, transparent 100%);
+    mask-image: linear-gradient(#000 0%, #000 78%, transparent 100%);
+  }
   .actions { clear: both; }
 }
 @media (max-width: 560px) {
@@ -535,6 +575,7 @@ footer {
 }
 @media print {
   .mast, .skip, .actions, .contact-actions { display: none; }
+  .city { display: none; }
   .contact-band, body { background: #fff; color: #000; }
   .contactbox p, .lead, .card p, .rolebody p { color: #000; }
   a { text-decoration: underline; }
@@ -584,9 +625,9 @@ footer {
 <p class="kicker"><span class="num" aria-hidden="true">01</span>Recruiter snapshot</p>
 <h2>What I bring to a risk team.</h2>
 <div class="services">
-<article class="card"><h3>Enterprise &amp; Operational Risk</h3><p>Risk appetite, RCSA, KRIs, controls, issues, policy governance, outsourcing risk and independent second-line oversight.</p></article>
-<article class="card"><h3>Reporting &amp; Challenge</h3><p>Concise senior-management and Board reporting, independent challenge, control oversight and remediation tracking.</p></article>
-<article class="card"><h3>Payments &amp; Technology</h3><p>Merchant acquiring, payments platforms, software engineering, third parties, regulatory change and technology-enabled controls.</p></article>
+<article class="card"><h3><svg class="glyph" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3.5 19 6.2v6.1c0 4.2-2.9 6.8-7 8.2-4.1-1.4-7-4-7-8.2V6.2L12 3.5Z" stroke="currentColor" stroke-width="1.4"/></svg>Enterprise &amp; Operational Risk</h3><p>Risk appetite, RCSA, KRIs, controls, issues, policy governance, outsourcing risk and independent second-line oversight.</p></article>
+<article class="card"><h3><svg class="glyph" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 3.5h7.2L19 8.2V20.5H7v-17Z" stroke="currentColor" stroke-width="1.4"/><path d="M14 3.8V8.4h4.4M9.5 12.5h6M9.5 16h4.2" stroke="currentColor" stroke-width="1.4"/></svg>Reporting &amp; Challenge</h3><p>Concise senior-management and Board reporting, independent challenge, control oversight and remediation tracking.</p></article>
+<article class="card"><h3><svg class="glyph" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7.5h16v9H4v-9Z" stroke="currentColor" stroke-width="1.4"/><path d="M4 11.2h16M7 15.2h3.2" stroke="currentColor" stroke-width="1.4"/></svg>Payments &amp; Technology</h3><p>Merchant acquiring, payments platforms, software engineering, third parties, regulatory change and technology-enabled controls.</p></article>
 </div>
 <div class="searchroles"><strong>Target roles:</strong><span>Enterprise Risk Manager</span><span>Operational Risk Manager</span><span>Non-Financial Risk Manager</span><span>Risk &amp; Controls Manager</span><span>Enterprise Risk Analyst</span><span>Operational Risk Analyst</span><span>Risk &amp; Controls Analyst</span><span>Payments Risk Analyst</span></div>
 </div>
@@ -645,6 +686,7 @@ footer {
 </div>
 </section>
 <section class="contact-band" id="contact">
+<img class="city" src="dublin.jpeg" alt="Samuel Beckett Bridge on the River Liffey, Dublin" width="1130" height="561" decoding="async" loading="lazy">
 <div class="wrap">
 <div class="contactbox">
 <div><p class="kicker"><span class="num" aria-hidden="true">06</span>Open to permanent roles</p><h2>Hiring in enterprise or operational risk?</h2><p>I am available for manager and senior analyst opportunities across Enterprise Risk, Operational Risk, Non-Financial Risk, Risk &amp; Controls and Payments Risk in Ireland.</p></div>
