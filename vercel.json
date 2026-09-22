@@ -3,6 +3,12 @@
   "trailingSlash": false,
   "redirects": [
     {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "igormarchetti.vercel.app" }],
+      "destination": "https://igormarchetti.me/:path*",
+      "permanent": true
+    },
+    {
       "source": "/igor-marchetti-non-financial-risk-manager-v25-technology-risk.html",
       "destination": "/",
       "permanent": true
