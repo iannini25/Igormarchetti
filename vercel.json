@@ -3,6 +3,12 @@
   "trailingSlash": false,
   "redirects": [
     {
+      "source": "/",
+      "has": [{ "type": "host", "value": "igormarchetti.vercel.app" }],
+      "destination": "https://igormarchetti.me/",
+      "permanent": true
+    },
+    {
       "source": "/:path*",
       "has": [{ "type": "host", "value": "igormarchetti.vercel.app" }],
       "destination": "https://igormarchetti.me/:path*",
