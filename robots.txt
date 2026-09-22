@@ -19,4 +19,4 @@ Allow: /
 User-agent: Google-Extended
 Allow: /
 
-Sitemap: https://igormarchetti.vercel.app/sitemap.xml
+Sitemap: https://igormarchetti.me/sitemap.xml
