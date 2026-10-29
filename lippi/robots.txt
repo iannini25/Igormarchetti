@@ -1,0 +1,3 @@
+# Pre-launch preview — not for indexing.
+User-agent: *
+Disallow: /

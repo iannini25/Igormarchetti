@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Marchetti Fintech Advisory — Risk, Controls &amp; Governance in Dublin</title>
+<meta name="description" content="Igor Marchetti brings 25+ years across payments, technology and risk. Senior risk and governance roles, focused consulting projects, and a conversation in Dublin.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#0E1F1A">
+<link rel="icon" href="favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="canonical" href="https://lippi.igormarchetti.me/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Marchetti Fintech Advisory — Risk, Controls &amp; Governance">
+<meta property="og:description" content="Payments, technology and risk experience brought together to strengthen governance in regulated financial services. Based in Dublin.">
+<meta property="og:url" content="https://lippi.igormarchetti.me/">
+<meta property="og:image" content="https://lippi.igormarchetti.me/img/dublin-liffey.webp">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="image" href="img/dublin-liffey.webp" imagesrcset="img/dublin-liffey-900.webp 800w, img/dublin-liffey.webp 1600w" imagesizes="(max-width:900px) 100vw, 46vw" fetchpriority="high">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+/* ===========================================================================
+   Marchetti Fintech Advisory — design tokens
+   Direction, palette rationale and provenance: see DESIGN.md
+   =========================================================================== */
+:root{
+  /* surfaces — warm limestone, never pure white */
+  --paper:#f2eee7;
+  --paper-lift:#fbf8f3;
+  --paper-sink:#e7e1d6;
+  /* dark field — deep moss, never pure black */
+  --field:#0e1f1a;
+  --field-lift:#16302a;
+  /* ink */
+  --ink:#141a17;
+  --ink-soft:#454e4a;
+  --ink-mute:#5c6662;
+  --field-ink:#e9efea;
+  --field-mute:#a6b8b1;
+  /* accent — brass, the Georgian door furniture */
+  --brass:#c2914a;
+  --brass-deep:#8a5f14;
+  --brass-soft:#e0c999;
+  --door:#1c4c39;
+  /* lines */
+  --line:#cfc5b2;
+  --line-strong:#a89c84;
+  --line-field:rgba(233,239,234,.17);
+
+  /* type */
+  --display:"Fraunces",ui-serif,serif;
+  --body:"IBM Plex Sans",system-ui,sans-serif; /* kit-allow: body-font */
+  --mono:"IBM Plex Mono",ui-monospace,monospace;
+
+  /* scale — ratio 1.25 (major third) from a 17px base */
+  --t--1:.8125rem; --t-0:1.0625rem; --t-1:1.3rem; --t-2:1.62rem;
+  --t-3:2.03rem;  --t-4:2.54rem;   --t-5:3.17rem; --t-6:4rem;
+
+  /* space — 4px base, doubling scale */
+  --s-1:.25rem; --s-2:.5rem; --s-3:.75rem; --s-4:1rem; --s-5:1.5rem;
+  --s-6:2rem;   --s-7:3rem;  --s-8:4rem;   --s-9:6rem; --s-10:8rem;
+
+  --wrap:76rem;
+  --ease:cubic-bezier(.22,.61,.36,1);
+  --arch:50% 50% 3px 3px / 30% 30% 2px 2px;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-padding-top:6rem}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font:400 var(--t-0)/1.65 var(--body);
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+h1,h2,h3{
+  font-family:var(--display);
+  font-variation-settings:"SOFT" 0,"WONK" 0;
+  font-weight:400;
+  letter-spacing:-.018em;
+  line-height:1.08;
+  margin:0;
+  text-wrap:balance;
+}
+p{margin:0;text-wrap:pretty}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%;height:auto}
+ul,ol{margin:0;padding:0;list-style:none}
+::selection{background:var(--brass-soft);color:var(--ink)}
+
+:focus-visible{
+  outline:3px solid var(--brass-deep);
+  outline-offset:3px;
+  border-radius:2px;
+}
+.field :focus-visible,.contact :focus-visible,footer :focus-visible{outline-color:var(--brass-soft)}
+
+.wrap{width:100%;max-width:var(--wrap);margin-inline:auto;padding-inline:var(--s-5)}
+.skip{
+  position:absolute;left:var(--s-4);top:var(--s-4);z-index:40;
+  background:var(--ink);color:var(--paper);padding:var(--s-3) var(--s-5);
+  border-radius:3px;font:500 var(--t--1)/1 var(--mono);
+  transform:translate3d(0,-6rem,0);
+  transition:transform .2s var(--ease);
+}
+.skip:focus{transform:translate3d(0,0,0)}
+
+/* ---------- icons (project set: 1.5px stroke, square cap) ---------------- */
+.ico{
+  width:1em;height:1em;flex:none;
+  stroke:currentColor;fill:none;
+  stroke-width:1.75;stroke-linecap:square;stroke-linejoin:miter;
+  transition:transform .25s var(--ease);
+}
+
+/* ---------- shared pieces ------------------------------------------------ */
+.eyebrow{
+  font:500 var(--t--1)/1.6 var(--mono);
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--brass-deep);
+  display:flex;align-items:flex-start;gap:var(--s-3);
+  margin:0 0 var(--s-5);
+}
+.eyebrow::before{
+  content:"";width:.4rem;height:.4rem;flex:none;
+  margin-top:.55em;
+  background:var(--brass);border-radius:50%;
+}
+.field .eyebrow,.contact .eyebrow{color:var(--brass-soft)}
+
+.lede{
+  font-size:var(--t-1);line-height:1.5;color:var(--ink-soft);
+  max-width:46ch;
+}
+.field .lede,.contact .lede{color:var(--field-mute)}
+
+/* legal / qualifying text — present, but never competing with the lede */
+.disclaimer{
+  font-size:var(--t--1);line-height:1.7;color:var(--ink-mute);
+  max-width:62ch;padding-left:var(--s-5);
+  border-left:1px solid var(--line-strong);
+}
+.field .disclaimer{color:var(--field-mute);border-left-color:var(--line-field)}
+
+.btn{
+  display:inline-flex;align-items:center;gap:var(--s-3);
+  padding:.95rem 1.4rem;
+  font:500 var(--t--1)/1 var(--body);
+  letter-spacing:.01em;
+  border:1px solid var(--ink);
+  background:var(--ink);color:var(--paper-lift);
+  border-radius:3px;
+  transition:background-color .25s var(--ease),color .25s var(--ease),
+             border-color .25s var(--ease),transform .25s var(--ease);
+}
+.btn:hover{background:var(--door);border-color:var(--door);transform:translateY(-2px)}
+.btn:hover .ico{transform:translate3d(3px,0,0)}
+.btn--ghost{background:transparent;color:var(--ink);border-color:var(--line-strong)}
+.btn--ghost:hover{background:transparent;color:var(--door);border-color:var(--door)}
+.btn--onfield{background:var(--brass-soft);border-color:var(--brass-soft);color:var(--field)}
+.btn--onfield:hover{background:#fff;border-color:#fff;color:var(--field)}
+.btn--fieldghost{background:transparent;color:var(--field-ink);border-color:var(--line-field)}
+.btn--fieldghost:hover{background:transparent;color:var(--brass-soft);border-color:var(--brass-soft)}
+
+.linkline{
+  display:inline-flex;align-items:center;gap:.55rem;
+  font-weight:500;color:var(--brass-deep);
+  border-bottom:1px solid currentColor;
+  padding-bottom:3px;
+  transition:color .25s var(--ease);
+}
+.linkline:hover{color:var(--door)}
+.linkline:hover .ico{transform:translate3d(3px,-3px,0)}
+.field .linkline,.contact .linkline,footer .linkline{color:var(--brass-soft)}
+.field .linkline:hover,.contact .linkline:hover,footer .linkline:hover{color:#fff}
+
+/* content images escape the box: the Dublin Georgian arch */
+.arch{
+  border-radius:var(--arch);
+  overflow:hidden;
+  background:var(--paper-sink);
+  position:relative;
+}
+.arch img{width:100%;height:100%;object-fit:cover}
+.arch--wide{--arch:50% 50% 3px 3px / 16% 16% 1px 1px}
+.arch::after{
+  content:"";position:absolute;inset:0;
+  border-radius:inherit;
+  box-shadow:inset 0 0 0 1px rgba(20,26,23,.16);
+  pointer-events:none;
+}
+
+/* ---------- navigation --------------------------------------------------- */
+.nav{
+  position:sticky;top:0;z-index:30;
+  background:color-mix(in srgb,var(--paper) 88%,transparent);
+  backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line);
+}
+.nav__progress{
+  position:absolute;left:0;bottom:-1px;height:2px;width:100%;
+  background:var(--brass);
+  transform:scaleX(0);transform-origin:0 50%;
+  transition:transform .12s linear;
+}
+.nav__inner{
+  display:flex;align-items:center;justify-content:space-between;gap:var(--s-5);
+  min-height:4.5rem;
+}
+.brand{display:flex;flex-direction:column;gap:.25rem;line-height:1}
+.brand b{
+  font:600 var(--t--1)/1 var(--mono);
+  letter-spacing:.2em;text-transform:uppercase;
+}
+.brand span{
+  font:400 .6875rem/1 var(--mono);
+  letter-spacing:.2em;text-transform:uppercase;color:var(--brass-deep);
+}
+.nav__links{display:flex;align-items:center;gap:var(--s-6)}
+.nav__links a{
+  position:relative;
+  font:500 var(--t--1)/1 var(--body);
+  color:var(--ink-mute);
+  padding:.45rem 0;
+  transition:color .2s var(--ease);
+}
+.nav__links a::after{
+  content:"";position:absolute;left:0;right:0;bottom:-.15rem;height:1px;
+  background:var(--brass-deep);
+  transform:scaleX(0);transform-origin:0 50%;
+  transition:transform .25s var(--ease);
+}
+.nav__links a:hover,.nav__links a[aria-current="true"]{color:var(--ink)}
+.nav__links a:hover::after,.nav__links a[aria-current="true"]::after{transform:scaleX(1)}
+.nav__cta{display:flex;align-items:center;gap:var(--s-4)}
+
+/* under 62rem the section links drop to a scrollable second row */
+@media (max-width:62rem){
+  .nav__inner{flex-wrap:wrap;padding-bottom:.35rem;min-height:0;padding-top:.9rem}
+  .nav__links{
+    order:3;width:100%;
+    gap:var(--s-5);
+    overflow-x:auto;
+    scrollbar-width:none;
+    padding:.6rem 0 .35rem;
+    margin-top:.35rem;
+    border-top:1px solid var(--line);
+  }
+  .nav__links::-webkit-scrollbar{display:none}
+  .nav__links a{white-space:nowrap;padding:.5rem 0}
+}
+@media (max-width:34rem){.nav__cta .btn{padding:.8rem 1rem}}
+
+/* ---------- hero --------------------------------------------------------- */
+.hero{padding:var(--s-8) 0 var(--s-7)}
+.hero__grid{
+  display:grid;grid-template-columns:1.05fr .95fr;
+  gap:var(--s-8);align-items:center;
+}
+.status{
+  display:inline-flex;align-items:flex-start;gap:var(--s-3);
+  font:400 var(--t--1)/1.5 var(--mono);
+  color:var(--ink-mute);
+  border:1px solid var(--line-strong);
+  background:var(--paper-lift);
+  border-radius:3px;
+  padding:.55rem .85rem;
+  margin-bottom:var(--s-6);
+}
+.status i{
+  width:.45rem;height:.45rem;flex:none;margin-top:.5em;
+  border-radius:50%;background:var(--brass);
+  animation:pulse 2.8s var(--ease) infinite;
+}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.75)}}
+
+.hero h1{font-size:clamp(2.05rem,7.4vw,4.4rem);margin:0 0 var(--s-5)}
+.hero h1 em{
+  font-style:normal;color:var(--door);
+  font-variation-settings:"SOFT" 0,"WONK" 1;
+}
+.hero__meta{
+  margin-top:var(--s-6);
+  font:400 var(--t--1)/1.7 var(--mono);
+  color:var(--ink-mute);
+}
+.actions{display:flex;flex-wrap:wrap;gap:var(--s-3);margin-top:var(--s-6)}
+
+.hero__media{position:relative}
+.hero__media .arch{--arch:50% 50% 3px 3px / 24% 24% 2px 2px;aspect-ratio:5/4}
+.hero__caption{
+  display:flex;align-items:center;gap:var(--s-4);
+  margin-top:var(--s-4);
+  font:400 .6875rem/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-mute);
+}
+.hero__caption::after{content:"";flex:1;height:1px;background:var(--line)}
+.hero__portrait{
+  position:absolute;right:-1.25rem;bottom:1.5rem;width:8.5rem;
+  border-radius:var(--arch);
+  overflow:hidden;
+  border:6px solid var(--paper);
+  background:var(--paper);
+  box-shadow:0 18px 40px -22px rgba(20,26,23,.55);
+}
+/* studio white drops into the limestone instead of sitting on it as a box */
+.hero__portrait img,.about__photo .arch img{mix-blend-mode:multiply}
+@media (max-width:60rem){
+  .hero__grid{grid-template-columns:1fr;gap:var(--s-8)}
+  .hero__portrait{width:6.5rem;right:0;bottom:1rem}
+}
+
+/* proof strip */
+.proof{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  border-top:1px solid var(--line-strong);
+  margin-top:var(--s-9);
+}
+.proof li{
+  padding:var(--s-5) var(--s-5) var(--s-5) 0;
+  border-right:1px solid var(--line);
+}
+.proof li:last-child{border-right:0}
+.proof b{
+  display:block;font-family:var(--display);font-weight:500;
+  font-size:var(--t-2);letter-spacing:-.01em;line-height:1.15;
+  margin-bottom:.35rem;
+}
+.proof span{font-size:var(--t--1);color:var(--ink-mute);line-height:1.45;display:block}
+@media (max-width:52rem){
+  .proof{grid-template-columns:1fr 1fr}
+  .proof li{padding-inline:0 var(--s-4);border-bottom:1px solid var(--line)}
+  .proof li:nth-child(2n){border-right:0;padding-inline:var(--s-4) 0}
+  .proof li:nth-last-child(-n+2){border-bottom:0}
+}
+
+/* ---------- section scaffolding ------------------------------------------ */
+section{padding:var(--s-9) 0}
+@media (min-width:60rem){section{padding:var(--s-10) 0}}
+.sec__head{
+  display:grid;grid-template-columns:1fr 1fr;gap:var(--s-7);
+  align-items:end;margin-bottom:var(--s-8);
+}
+.sec__head h2{font-size:clamp(2rem,4.2vw,3.1rem)}
+@media (max-width:60rem){.sec__head{grid-template-columns:1fr;gap:var(--s-5)}}
+
+.field{background:var(--field);color:var(--field-ink)}
+.field h2,.field h3{color:var(--field-ink)}
+.alt{background:var(--paper-sink)}
+
+/* ---------- expertise ---------------------------------------------------- */
+.cards{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--s-7) var(--s-8)}
+.card{
+  display:flex;flex-direction:column;gap:var(--s-3);
+  border-top:1px solid var(--line-strong);
+  padding-top:var(--s-5);
+}
+.card__no{font:500 var(--t--1)/1 var(--mono);color:var(--brass-deep);letter-spacing:.1em}
+.card h3{font-size:var(--t-2);margin-bottom:.2rem}
+.card p{color:var(--ink-soft);font-size:var(--t--1);line-height:1.65;max-width:46ch}
+.card__bar{
+  height:2px;width:2.5rem;background:var(--brass);margin-top:auto;
+  transform-origin:0 50%;
+  transition:transform .35s var(--ease);
+}
+.card:hover .card__bar{transform:scaleX(3)}
+@media (max-width:52rem){.cards{grid-template-columns:1fr;gap:var(--s-6)}}
+
+.expertise__strip{
+  display:grid;grid-template-columns:1fr 1fr;gap:var(--s-7);
+  align-items:center;margin-top:var(--s-8);
+}
+.expertise__strip .arch{aspect-ratio:4/3}
+@media (max-width:60rem){.expertise__strip{grid-template-columns:1fr}}
+
+/* ---------- engagement tabs ---------------------------------------------- */
+.tabs{
+  display:inline-flex;border:1px solid var(--line-strong);
+  border-radius:3px;padding:3px;background:var(--paper-lift);
+  margin-bottom:var(--s-7);
+}
+.tabs button{
+  appearance:none;border:0;background:transparent;cursor:pointer;
+  font:500 var(--t--1)/1 var(--body);color:var(--ink-mute);
+  padding:.8rem 1.1rem;border-radius:2px;
+  transition:background-color .25s var(--ease),color .25s var(--ease);
+}
+.tabs button[aria-selected="true"]{background:var(--ink);color:var(--paper-lift)}
+.tabs button[aria-selected="false"]:hover{color:var(--ink)}
+
+.panel[hidden]{display:none}
+.panel__grid{display:grid;grid-template-columns:1.1fr .9fr;gap:var(--s-8);align-items:start}
+.panel h3{font-size:var(--t-3);margin-bottom:var(--s-4)}
+.panel p{color:var(--ink-soft)}
+.panel p+p{margin-top:var(--s-4)}
+.panel__side{max-width:23rem;margin-left:auto}
+.panel__side .arch{aspect-ratio:3/4}
+@media (max-width:60rem){
+  .panel__grid{grid-template-columns:1fr;gap:var(--s-7)}
+  .panel__side{max-width:20rem;margin-left:0}
+}
+
+.deliver{
+  margin-top:var(--s-8);
+  border:1px solid var(--line-strong);
+  border-radius:4px;
+  background:var(--paper-lift);
+  padding:var(--s-7);
+}
+.deliver h3{font-size:var(--t-2);margin-bottom:var(--s-4)}
+.deliver ol{counter-reset:d;display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s-6);margin-top:var(--s-6)}
+.deliver li{counter-increment:d;border-top:2px solid var(--brass);padding-top:var(--s-4)}
+.deliver li::before{
+  content:counter(d,decimal-leading-zero);
+  display:block;font:500 var(--t--1)/1 var(--mono);color:var(--brass-deep);
+  letter-spacing:.1em;margin-bottom:.5rem;
+}
+.deliver li b{display:block;font-weight:600;margin-bottom:.3rem}
+.deliver li span{color:var(--ink-soft);font-size:var(--t--1);line-height:1.6}
+@media (max-width:52rem){.deliver ol{grid-template-columns:1fr}.deliver{padding:var(--s-5)}}
+
+.notice{
+  margin-top:var(--s-6);padding:var(--s-5);
+  border-left:2px solid var(--brass);
+  background:var(--paper-lift);
+  font-size:var(--t--1);color:var(--ink-soft);
+}
+
+/* ---------- experience --------------------------------------------------- */
+.exp__grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:var(--s-8);align-items:start}
+.exp__media .arch{aspect-ratio:4/3}
+.exp__list li{
+  display:grid;grid-template-columns:3rem 1fr;gap:var(--s-5);
+  padding:var(--s-5) 0;
+  border-bottom:1px solid var(--line-field);
+}
+.exp__list li:first-child{border-top:1px solid var(--line-field)}
+.exp__list .no{font:500 var(--t--1)/1.5 var(--mono);color:var(--brass-soft);letter-spacing:.08em}
+.exp__list h3{font-size:var(--t-1);margin-bottom:.35rem}
+.exp__list p{color:var(--field-mute);font-size:var(--t--1);line-height:1.6}
+@media (max-width:60rem){
+  .exp__grid{grid-template-columns:1fr}
+  .exp__media{max-width:26rem}
+}
+
+/* ---------- about -------------------------------------------------------- */
+.about__grid{display:grid;grid-template-columns:.75fr 1.25fr;gap:var(--s-8);align-items:start}
+.about__photo{max-width:21.5rem}
+.about__photo .arch{aspect-ratio:4/5;background:var(--paper-sink)}
+.about__photo .arch::after{box-shadow:none}
+.about__photo p{margin-top:var(--s-5)}
+.roles{display:grid;gap:var(--s-5);margin-top:var(--s-7)}
+.roles li{display:grid;grid-template-columns:13rem 1fr;gap:var(--s-5);align-items:start}
+.roles b{font-weight:600}
+.roles span{color:var(--ink-soft);font-size:var(--t--1);line-height:1.65}
+.creds{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:0 var(--s-7);margin-top:var(--s-7);
+  border-top:1px solid var(--line-strong);
+}
+.creds li{
+  font:400 var(--t--1)/1.5 var(--mono);
+  color:var(--ink-soft);
+  padding:var(--s-4) 0;
+  border-bottom:1px solid var(--line);
+}
+.creds li:nth-last-child(-n+2){border-bottom:0}
+@media (max-width:40rem){
+  .creds{grid-template-columns:1fr}
+  .creds li:nth-last-child(-n+2){border-bottom:1px solid var(--line)}
+  .creds li:last-child{border-bottom:0}
+}
+@media (max-width:60rem){
+  .about__grid{grid-template-columns:1fr}
+  .about__photo{max-width:20rem}
+  .roles li{grid-template-columns:1fr;gap:var(--s-2)}
+}
+
+/* ---------- scope -------------------------------------------------------- */
+.scope__grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--s-7)}
+.scope__grid p{color:var(--ink-soft)}
+@media (max-width:60rem){.scope__grid{grid-template-columns:1fr}}
+
+/* ---------- contact ------------------------------------------------------ */
+.contact{
+  position:relative;
+  background:var(--field);color:var(--field-ink);
+  isolation:isolate;overflow:hidden;
+}
+.contact__bg{position:absolute;inset:0;z-index:-1}
+.contact__bg img{width:100%;height:100%;object-fit:cover;opacity:.32}
+.contact__bg::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(14,31,26,.9) 0%,rgba(14,31,26,.78) 45%,rgba(14,31,26,.95) 100%);
+}
+.contact h2{font-size:clamp(2.2rem,5vw,3.6rem)}
+.contact__grid{display:grid;grid-template-columns:1.15fr .85fr;gap:var(--s-8);align-items:start}
+.contact p{color:var(--field-mute)}
+.contact p+p{margin-top:var(--s-4)}
+.summit{
+  border:1px solid var(--line-field);
+  background:rgba(22,48,42,.7);
+  border-radius:4px;padding:var(--s-6);
+}
+.summit h3{font-size:var(--t-1);margin-bottom:var(--s-2)}
+.summit__when{
+  font:500 var(--t--1)/1.5 var(--mono);color:var(--brass-soft);
+  letter-spacing:.06em;margin-bottom:var(--s-4);
+}
+.summit__count{
+  display:flex;align-items:baseline;gap:var(--s-3);
+  border-top:1px solid var(--line-field);
+  margin-top:var(--s-5);padding-top:var(--s-5);
+}
+.summit__count b{
+  font-family:var(--display);font-weight:500;font-size:var(--t-4);
+  line-height:1;color:var(--brass-soft);
+}
+.summit__count span{font:400 var(--t--1)/1.4 var(--mono);color:var(--field-mute)}
+@media (max-width:60rem){.contact__grid{grid-template-columns:1fr}}
+
+/* ---------- footer ------------------------------------------------------- */
+footer{background:var(--field);color:var(--field-mute);padding:var(--s-7) 0 var(--s-6)}
+.foot__top{
+  display:flex;flex-wrap:wrap;gap:var(--s-5);
+  justify-content:space-between;align-items:center;
+  padding-bottom:var(--s-5);border-bottom:1px solid var(--line-field);
+}
+.foot__top .brand b{color:var(--field-ink)}
+.foot__top .brand span{color:var(--brass-soft)}
+footer p{font-size:var(--t--1);line-height:1.6;max-width:64ch;margin-top:var(--s-5)}
+.credits{font-size:.75rem;line-height:1.75;color:rgba(166,184,177,.78);max-width:none}
+.credits a{border-bottom:1px solid rgba(166,184,177,.4)}
+.credits a:hover{color:var(--brass-soft);border-bottom-color:var(--brass-soft)}
+
+/* ---------- motion ------------------------------------------------------- */
+[data-reveal]{
+  opacity:0;
+  transform:translate3d(0,18px,0);
+  transition:opacity .7s var(--ease),transform .7s var(--ease);
+}
+[data-reveal].is-in{opacity:1;transform:translate3d(0,0,0)}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{
+    animation-duration:.001ms!important;
+    animation-iteration-count:1!important;
+    transition-duration:.001ms!important;
+  }
+  [data-reveal]{opacity:1;transform:none}
+}
+@media (hover:none){
+  .btn:hover{transform:none}
+  .card:hover .card__bar{transform:none}
+  .btn:hover .ico{transform:none}
+}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute">
+  <defs>
+    <symbol id="i-arrow" viewBox="0 0 16 16"><path d="M2 8h12M9 3l5 5-5 5"/></symbol>
+    <symbol id="i-external" viewBox="0 0 16 16"><path d="M4 12 12 4M6 4h6v6"/></symbol>
+  </defs>
+</svg>
+
+<a class="skip" href="#main">Skip to main content</a>
+
+<nav class="nav" aria-label="Main">
+  <div class="nav__progress" id="progress" aria-hidden="true"></div>
+  <div class="wrap nav__inner">
+    <a class="brand" href="#top" aria-label="Marchetti Fintech Advisory, back to top">
+      <b>Marchetti</b><span>Fintech Advisory</span>
+    </a>
+    <div class="nav__links" id="navlinks">
+      <a href="#expertise">Expertise</a>
+      <a href="#engagement">Work together</a>
+      <a href="#experience">Experience</a>
+      <a href="#about">About Igor</a>
+    </div>
+    <div class="nav__cta">
+      <a class="btn" href="#contact">Let’s have a coffee</a>
+    </div>
+  </div>
+</nav>
+
+<main id="main">
+
+<!-- ============================ HERO ============================ -->
+<header class="hero" id="top">
+  <div class="wrap">
+    <div class="hero__grid">
+      <div>
+        <p class="status"><i aria-hidden="true"></i>Website preview · consultancy launch in preparation</p>
+        <p class="eyebrow">Payments · Risk · Governance · Dublin</p>
+        <h1>Stronger controls.<br>Clearer decisions.<br><em>Confident growth.</em></h1>
+        <p class="lede">I’m Igor Marchetti. I bring payments, technology and risk experience together to help financial businesses strengthen governance, manage change and turn risk information into action.</p>
+        <div class="actions">
+          <a class="btn" href="#senior-roles">Discuss a senior role <svg class="ico" aria-hidden="true"><use href="#i-arrow"></use></svg></a>
+          <a class="btn btn--ghost" href="#project-support">Explore project support</a>
+        </div>
+        <p class="hero__meta">Based in Dublin, Ireland.<br>Open to senior permanent roles and selected paid projects.</p>
+      </div>
+
+      <div class="hero__media">
+        <div class="arch arch--wide">
+          <img src="img/dublin-liffey.webp"
+               srcset="img/dublin-liffey-900.webp 800w, img/dublin-liffey.webp 1600w"
+               sizes="(max-width:900px) 100vw, 46vw"
+               width="1600" height="1280" fetchpriority="high" decoding="async"
+               alt="The River Liffey in Dublin, with the Samuel Beckett Bridge and the docklands financial district behind it.">
+        </div>
+        <p class="hero__caption">Dublin docklands, River Liffey</p>
+        <div class="hero__portrait">
+          <img src="img/igor-marchetti.webp" width="760" height="950" loading="lazy" decoding="async"
+               alt="Portrait of Igor Marchetti.">
+        </div>
+      </div>
+    </div>
+
+    <ul class="proof" data-reveal>
+      <li><b>25+ years</b><span>financial services and payments</span></li>
+      <li><b>Europe + Brazil</b><span>international experience</span></li>
+      <li><b>Risk + technology</b><span>from platforms to Board reporting</span></li>
+      <li><b>Practical delivery</b><span>clear priorities, accountable action</span></li>
+    </ul>
+  </div>
+</header>
+
+<!-- ============================ EXPERTISE ============================ -->
+<section id="expertise">
+  <div class="wrap">
+    <div class="sec__head" data-reveal>
+      <div>
+        <p class="eyebrow">Where I can contribute</p>
+        <h2>Build the controls the business needs to grow.</h2>
+      </div>
+      <p class="lede">For payments companies, digital banks and fintechs, financial-services consultancies and businesses expanding into Europe. My focus is practical: clear risks, effective controls, accountable owners and useful reporting.</p>
+    </div>
+
+    <ul class="cards" data-reveal>
+      <li class="card">
+        <span class="card__no">01</span>
+        <h3>Enterprise &amp; operational risk</h3>
+        <p>Make risks visible and give management a clear basis for action. Support risk frameworks, RCSAs, risk appetite, key risk indicators, policy governance and independent second-line oversight.</p>
+        <span class="card__bar" aria-hidden="true"></span>
+      </li>
+      <li class="card">
+        <span class="card__no">02</span>
+        <h3>Technology &amp; change risk</h3>
+        <p>Connect business requirements, technology delivery and operational controls. Support risk and control mapping, change readiness and reporting across business and technology teams.</p>
+        <span class="card__bar" aria-hidden="true"></span>
+      </li>
+      <li class="card">
+        <span class="card__no">03</span>
+        <h3>Outsourcing &amp; third-party governance</h3>
+        <p>Clarify who owns supplier risk and what needs attention. Support oversight models, registers, risk assessments, monitoring, gap analysis and remediation tracking.</p>
+        <span class="card__bar" aria-hidden="true"></span>
+      </li>
+      <li class="card">
+        <span class="card__no">04</span>
+        <h3>Payments change &amp; control support</h3>
+        <p>Translate payments requirements into controlled delivery. Support business analysis, card-scheme change, interchange and scheme-fee requirements, testing and merchant-acquiring operations.</p>
+        <span class="card__bar" aria-hidden="true"></span>
+      </li>
+    </ul>
+
+    <div class="expertise__strip" data-reveal>
+      <div class="arch">
+        <img src="img/emv-chip.webp" width="1100" height="825" loading="lazy" decoding="async"
+             alt="Close-up of the contact plate of an EMV chip on a payment card.">
+      </div>
+      <div>
+        <p class="eyebrow">The ground I know</p>
+        <p class="lede">Twenty-five years on the inside of card payments: processing platforms, scheme compliance releases, interchange and scheme fees, merchant acquiring, and the risk and control layer that has to hold all of it together.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ ENGAGEMENT ============================ -->
+<section class="alt" id="engagement">
+  <div class="wrap">
+    <div class="sec__head" data-reveal>
+      <div>
+        <p class="eyebrow">Ways to work together</p>
+        <h2>A lasting contribution. A clear scope of work.</h2>
+      </div>
+      <p class="lede">My priority is a senior permanent role where I can contribute to a team over the long term. I also welcome conversations about selected paid assignments with defined outcomes.</p>
+    </div>
+
+    <div data-reveal>
+      <div class="tabs" role="tablist" aria-label="Ways to work together">
+        <button type="button" role="tab" id="tab-roles" aria-controls="senior-roles" aria-selected="true">Permanent opportunities</button>
+        <button type="button" role="tab" id="tab-projects" aria-controls="project-support" aria-selected="false" tabindex="-1">Selected paid projects</button>
+      </div>
+
+      <div class="panel" id="senior-roles" role="tabpanel" aria-labelledby="tab-roles" tabindex="0">
+        <div class="panel__grid">
+          <div>
+            <h3>Senior risk &amp; governance roles</h3>
+            <p>Enterprise or operational risk management, risk and controls leadership, and governance roles in regulated financial services and payments.</p>
+            <p>I bring experience supporting CROs, providing independent challenge, coordinating control improvements and preparing risk information for senior management and Board reporting.</p>
+            <p>Dublin-based, including remote roles that can be performed from Ireland.</p>
+            <div class="actions">
+              <a class="btn" href="https://www.linkedin.com/in/igormarchetti/" target="_blank" rel="noopener">Discuss a role or request my CV <svg class="ico" aria-hidden="true"><use href="#i-external"></use></svg></a>
+            </div>
+          </div>
+          <div class="panel__side">
+            <div class="arch">
+              <img src="img/georgian-door.webp" width="840" height="1120" loading="lazy" decoding="async"
+                   alt="A green Georgian front door in Dublin, framed by white columns and a fanlight.">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel" id="project-support" role="tabpanel" aria-labelledby="tab-projects" tabindex="0" hidden>
+        <div class="panel__grid">
+          <div>
+            <h3>Focused support for a defined need</h3>
+            <p>Hands-on support for CROs, COOs, founders and consulting delivery teams tackling a risk, controls, governance or payments-change priority.</p>
+            <p>Examples include risk assessments, control-gap reviews, policy and reporting improvements, third-party oversight and a defined transformation workstream.</p>
+            <p>Scope, deliverables, timing and fees agreed before work begins.</p>
+            <div class="actions">
+              <a class="btn" href="#contact">Talk through a project <svg class="ico" aria-hidden="true"><use href="#i-arrow"></use></svg></a>
+            </div>
+          </div>
+          <div class="panel__side">
+            <div class="arch">
+              <img src="img/emv-chip.webp" width="1100" height="825" loading="lazy" decoding="async"
+                   alt="Close-up of a payment card chip, representing card-scheme and payments change work.">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="deliver" data-reveal>
+      <p class="eyebrow">A practical starting point</p>
+      <h3>Risk &amp; controls review</h3>
+      <p class="lede">A focused review of an agreed business area, with three useful outputs.</p>
+      <ol>
+        <li><b>Prioritised gaps</b><span>A clear view of the risks, controls and evidence that need attention.</span></li>
+        <li><b>Accountable actions</b><span>Recommended actions, owners and priorities for management agreement.</span></li>
+        <li><b>A 90-day improvement plan</b><span>A practical roadmap and concise summary for leadership.</span></li>
+      </ol>
+    </div>
+
+    <p class="notice" data-reveal>Consultancy services are being prepared for launch. Project work starts after the business setup is complete and written terms, availability and any potential conflicts are agreed. Permanent-role enquiries are welcome now.</p>
+  </div>
+</section>
+
+<!-- ============================ EXPERIENCE ============================ -->
+<section class="field" id="experience">
+  <div class="wrap">
+    <div class="sec__head" data-reveal>
+      <div>
+        <p class="eyebrow">Selected professional experience</p>
+        <h2>Real assignments. Practical delivery.</h2>
+      </div>
+      <p class="disclaimer">These examples describe assignments undertaken by Igor Marchetti before the proposed consultancy was established. They are the founder’s professional experience and are not presented as clients of Marchetti Fintech Advisory. References to organisations do not imply endorsement or a current commercial relationship.</p>
+    </div>
+
+    <div class="exp__grid">
+      <div class="exp__media" data-reveal>
+        <div class="arch">
+          <img src="img/central-bank.webp" width="1200" height="900" loading="lazy" decoding="async"
+               alt="Dublin’s North Wall Quay seen across the River Liffey, with the Central Bank of Ireland headquarters.">
+        </div>
+      </div>
+      <ul class="exp__list" data-reveal>
+        <li>
+          <span class="no">01</span>
+          <div>
+            <h3>J.P. Morgan Merchant Services</h3>
+            <p>Business analysis for card-scheme compliance releases, connecting requirements, operations, technology and controls.</p>
+          </div>
+        </li>
+        <li>
+          <span class="no">02</span>
+          <div>
+            <h3>Worldpay &amp; Barclaycard</h3>
+            <p>Worldpay: business and test analysis for an interchange and scheme-fee platform. Barclaycard: testing support for an interchange platform.</p>
+          </div>
+        </li>
+        <li>
+          <span class="no">03</span>
+          <div>
+            <h3>Planet</h3>
+            <p>VAT-return technology analysis across the European Union.</p>
+          </div>
+        </li>
+        <li>
+          <span class="no">04</span>
+          <div>
+            <h3>Tyl by NatWest</h3>
+            <p>GDPR compliance support for implementation of a merchant-acquiring platform.</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ ABOUT ============================ -->
+<section id="about">
+  <div class="wrap">
+    <div class="sec__head" data-reveal>
+      <div>
+        <p class="eyebrow">The person behind the practice</p>
+        <h2>Igor Marchetti</h2>
+      </div>
+      <p class="lede">A Dublin-based payments, technology and risk professional with more than 25 years of international experience.</p>
+    </div>
+
+    <div class="about__grid">
+      <div class="about__photo" data-reveal>
+        <div class="arch">
+          <img src="img/igor-marchetti.webp" width="760" height="950" loading="lazy" decoding="async"
+               alt="Igor Marchetti, founder of Marchetti Fintech Advisory.">
+        </div>
+        <p><a class="linkline" href="https://www.linkedin.com/in/igormarchetti/" target="_blank" rel="noopener">Explore my background on LinkedIn <svg class="ico" aria-hidden="true"><use href="#i-external"></use></svg></a></p>
+      </div>
+
+      <div data-reveal>
+        <p>Igor started in software engineering and card-processing platforms, progressed into payments compliance and change, and later worked in enterprise risk and controls in a regulated Irish acquiring business.</p>
+
+        <ul class="roles">
+          <li>
+            <b>Fiserv / AIB Merchant Services</b>
+            <span>Enterprise and operational risk, controls oversight, third-party risk frameworks, KRI reporting, policy governance and reporting to the CRO and Board.</span>
+          </li>
+          <li>
+            <b>Elavon / U.S. Bank</b>
+            <span>Merchant-processing engineering, international payments platforms, technical card-scheme compliance and subsequent enterprise risk and change work.</span>
+          </li>
+          <li>
+            <b>Earlier international experience</b>
+            <span>VisionPLUS card payments consulting and technology delivery in Brazil.</span>
+          </li>
+          <li>
+            <b>Industry engagement</b>
+            <span>Igor is also the founder of Innovation Business Alliance (IBA), an independent fintech ecosystem initiative connecting Ireland, the UK and Brazil. His IBA role is separate from this consultancy.</span>
+          </li>
+          <li>
+            <b>Commercial independence</b>
+            <span>Marchetti Fintech Advisory is separate from IBA. Consultancy engagements will have their own contracts and fees. IBA membership and participation do not require buying consultancy services and do not imply endorsement, preferential access or shared client relationships.</span>
+          </li>
+        </ul>
+
+        <ul class="creds">
+          <li>MSc Financial Services, UCD through IOB — First Class Honours</li>
+          <li>MSc Management of Information Systems, Trinity College Dublin</li>
+          <li>Associate Professional Risk Manager (APRM)</li>
+          <li>PRINCE2 Foundation</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ SCOPE ============================ -->
+<section class="alt" id="scope">
+  <div class="wrap">
+    <div class="sec__head" data-reveal>
+      <div>
+        <p class="eyebrow">Scope of support</p>
+        <h2>Business consultancy for operational decisions.</h2>
+      </div>
+    </div>
+    <div class="scope__grid" data-reveal>
+      <p>The proposed services cover management consultancy, operational risk, governance, controls and technology change. They do not include investment advice, arranging financial products, payment services or custody of client money. Legal and tax advice are outside scope.</p>
+      <p>Clients remain responsible for their regulatory obligations and business decisions. Consultancy support does not replace any required authorisation, regulated appointment or professional advice.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ CONTACT ============================ -->
+<section class="contact" id="contact">
+  <div class="contact__bg" aria-hidden="true">
+    <img src="img/grand-canal-square.webp" width="1600" height="1066" loading="lazy" decoding="async" alt="">
+  </div>
+  <div class="wrap">
+    <div class="sec__head" data-reveal>
+      <div>
+        <p class="eyebrow">A conversation is a good place to start</p>
+        <h2>Let’s have a coffee.</h2>
+      </div>
+    </div>
+
+    <div class="contact__grid">
+      <div data-reveal>
+        <p class="lede">Hiring for a senior risk or governance role? Working through a payments or controls challenge? I’d be glad to hear what you need and explore where I could contribute.</p>
+        <p>We can meet in Dublin or start with a virtual coffee. Connect with me on LinkedIn and mention whether you have a role or a project in mind.</p>
+        <div class="actions">
+          <a class="btn btn--onfield" href="https://www.linkedin.com/in/igormarchetti/" target="_blank" rel="noopener">Connect with Igor on LinkedIn <svg class="ico" aria-hidden="true"><use href="#i-external"></use></svg></a>
+        </div>
+      </div>
+
+      <aside class="summit" data-reveal>
+        <p class="eyebrow">Meet in Lisbon</p>
+        <h3>Web Summit</h3>
+        <p class="summit__when">9–12 November 2026</p>
+        <p>Attending too? Let’s arrange a coffee to discuss your team, a senior opportunity or a practical project.</p>
+        <div class="summit__count" id="countdown" hidden>
+          <b id="countdown-n">—</b><span id="countdown-l">days away</span>
+        </div>
+        <div class="actions">
+          <a class="btn btn--fieldghost" href="https://www.linkedin.com/in/igormarchetti/" target="_blank" rel="noopener">Arrange a conversation <svg class="ico" aria-hidden="true"><use href="#i-external"></use></svg></a>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot__top">
+      <a class="brand" href="#top"><b>Marchetti</b><span>Fintech Advisory</span></a>
+      <a class="linkline" href="https://www.linkedin.com/in/igormarchetti/" target="_blank" rel="noopener">Igor Marchetti on LinkedIn <svg class="ico" aria-hidden="true"><use href="#i-external"></use></svg></a>
+    </div>
+    <p>© 2026 Igor Marchetti. Marchetti Fintech Advisory is a proposed consultancy based in Dublin, Ireland. Pre-launch preview.</p>
+    <p class="credits">
+      Photography, Wikimedia Commons —
+      Samuel Beckett Bridge by P.&nbsp;Hughes (<a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a>) ·
+      North Wall Quay by William Murphy (<a href="https://creativecommons.org/licenses/by-sa/2.0/" target="_blank" rel="noopener">CC BY-SA 2.0</a>) ·
+      Doors of Dublin by Tim Sackton (<a href="https://creativecommons.org/licenses/by-sa/2.0/" target="_blank" rel="noopener">CC BY-SA 2.0</a>) ·
+      Grand Canal Square by Giorgio Galeotti (<a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a>) ·
+      EMV chip by Bautsch (CC0).
+    </p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  "use strict";
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ---- reveal on scroll ------------------------------------------------- */
+  var targets = Array.prototype.slice.call(document.querySelectorAll("[data-reveal]"));
+  if (reduce || !("IntersectionObserver" in window)) {
+    targets.forEach(function (el) { el.classList.add("is-in"); });
+  } else {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("is-in");
+        io.unobserve(entry.target);
+      });
+    }, { rootMargin: "0px 0px -12% 0px", threshold: 0.08 });
+    targets.forEach(function (el) { io.observe(el); });
+  }
+
+  /* ---- scroll progress + section highlight ------------------------------ */
+  var progress = document.getElementById("progress");
+  var links = Array.prototype.slice.call(document.querySelectorAll("#navlinks a"));
+  var sections = links
+    .map(function (a) { return document.querySelector(a.getAttribute("href")); })
+    .filter(Boolean);
+
+  function onScroll() {
+    var doc = document.documentElement;
+    var max = doc.scrollHeight - doc.clientHeight;
+    var ratio = max > 0 ? Math.min(1, doc.scrollTop / max) : 0;
+    progress.style.transform = "scaleX(" + ratio + ")";
+
+    var mark = doc.scrollTop + doc.clientHeight * 0.32;
+    var active = -1;
+    for (var i = 0; i < sections.length; i++) {
+      if (sections[i].offsetTop <= mark) active = i;
+    }
+    links.forEach(function (a, i) {
+      if (i === active) a.setAttribute("aria-current", "true");
+      else a.removeAttribute("aria-current");
+    });
+  }
+
+  var ticking = false;
+  window.addEventListener("scroll", function () {
+    if (ticking) return;
+    ticking = true;
+    window.requestAnimationFrame(function () { onScroll(); ticking = false; });
+  }, { passive: true });
+  onScroll();
+
+  /* ---- engagement tabs --------------------------------------------------- */
+  var tabs = Array.prototype.slice.call(document.querySelectorAll('[role="tab"]'));
+
+  function selectTab(tab, focus) {
+    tabs.forEach(function (t) {
+      var on = t === tab;
+      t.setAttribute("aria-selected", on ? "true" : "false");
+      t.tabIndex = on ? 0 : -1;
+      document.getElementById(t.getAttribute("aria-controls")).hidden = !on;
+    });
+    if (focus) tab.focus();
+  }
+
+  tabs.forEach(function (tab, i) {
+    tab.addEventListener("click", function () { selectTab(tab); });
+    tab.addEventListener("keydown", function (e) {
+      var next = null;
+      if (e.key === "ArrowRight") next = tabs[(i + 1) % tabs.length];
+      if (e.key === "ArrowLeft") next = tabs[(i - 1 + tabs.length) % tabs.length];
+      if (e.key === "Home") next = tabs[0];
+      if (e.key === "End") next = tabs[tabs.length - 1];
+      if (!next) return;
+      e.preventDefault();
+      selectTab(next, true);
+    });
+  });
+
+  /* the two hero buttons open the matching panel before scrolling to it */
+  Array.prototype.forEach.call(
+    document.querySelectorAll('a[href="#senior-roles"], a[href="#project-support"]'),
+    function (a) {
+      a.addEventListener("click", function () {
+        var id = a.getAttribute("href").slice(1);
+        var tab = tabs.filter(function (t) { return t.getAttribute("aria-controls") === id; })[0];
+        if (tab) selectTab(tab);
+      });
+    }
+  );
+
+  /* ---- Web Summit countdown ---------------------------------------------- */
+  var box = document.getElementById("countdown");
+  var start = new Date("2026-11-09T00:00:00Z");
+  var end = new Date("2026-11-13T00:00:00Z");
+  var now = new Date();
+  var days = Math.ceil((start - now) / 86400000);
+
+  if (now >= start && now < end) {
+    document.getElementById("countdown-n").textContent = "Now";
+    document.getElementById("countdown-l").textContent = "on in Lisbon";
+    box.hidden = false;
+  } else if (days > 0) {
+    document.getElementById("countdown-n").textContent = String(days);
+    document.getElementById("countdown-l").textContent = days === 1 ? "day away" : "days away";
+    box.hidden = false;
+  }
+
+  /* ---- hero parallax (pointer devices, motion allowed) -------------------- */
+  var media = document.querySelector(".hero__media .arch img");
+  if (media && !reduce && window.matchMedia("(hover: hover) and (min-width: 60rem)").matches) {
+    media.style.willChange = "transform";
+    var raf = false;
+    window.addEventListener("scroll", function () {
+      if (raf) return;
+      raf = true;
+      window.requestAnimationFrame(function () {
+        var y = Math.min(window.scrollY, 700);
+        media.style.transform = "translate3d(0," + (y * 0.045).toFixed(2) + "px,0) scale(1.07)";
+        raf = false;
+      });
+    }, { passive: true });
+  }
+})();
+</script>
+</body>
+</html>
