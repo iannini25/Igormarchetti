@@ -4,13 +4,23 @@
   "redirects": [
     {
       "source": "/",
-      "has": [{ "type": "host", "value": "igormarchetti.vercel.app" }],
+      "has": [
+        {
+          "type": "host",
+          "value": "igormarchetti.vercel.app"
+        }
+      ],
       "destination": "https://igormarchetti.me/",
       "permanent": true
     },
     {
       "source": "/:path*",
-      "has": [{ "type": "host", "value": "igormarchetti.vercel.app" }],
+      "has": [
+        {
+          "type": "host",
+          "value": "igormarchetti.vercel.app"
+        }
+      ],
       "destination": "https://igormarchetti.me/:path*",
       "permanent": true
     },
@@ -18,21 +28,43 @@
       "source": "/igor-marchetti-non-financial-risk-manager-v25-technology-risk.html",
       "destination": "/",
       "permanent": true
+    },
+    {
+      "source": "/lippi",
+      "destination": "https://lippi.igormarchetti.me/",
+      "permanent": false
+    },
+    {
+      "source": "/lippi/:path*",
+      "destination": "https://lippi.igormarchetti.me/:path*",
+      "permanent": false
     }
   ],
   "headers": [
     {
       "source": "/(.*)",
       "headers": [
-        { "key": "X-Content-Type-Options", "value": "nosniff" },
-        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
-        { "key": "X-Frame-Options", "value": "SAMEORIGIN" }
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "SAMEORIGIN"
+        }
       ]
     },
     {
       "source": "/igormarchetti.jpeg",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=86400" }
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=86400"
+        }
       ]
     }
   ]
