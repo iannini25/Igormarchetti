@@ -1,20 +1,60 @@
 {
-  "cleanUrls": true,
-  "trailingSlash": false,
-  "headers": [
+ "cleanUrls": false,
+ "functions": {
+  "api/**/*.js": {
+   "includeFiles": "api/_lib/analysis-prompt.txt"
+  }
+ },
+ "rewrites": [
+  {
+   "source": "/api/founder-survey/admin/:path",
+   "destination": "/api/founder-survey/admin?path=:path"
+  }
+ ],
+ "headers": [
+  {
+   "source": "/(.*)",
+   "headers": [
     {
-      "source": "/(.*)",
-      "headers": [
-        { "key": "X-Content-Type-Options", "value": "nosniff" },
-        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
-        { "key": "X-Frame-Options", "value": "SAMEORIGIN" }
-      ]
+     "key": "X-Content-Type-Options",
+     "value": "nosniff"
     },
     {
-      "source": "/img/(.*)",
-      "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
-      ]
+     "key": "Referrer-Policy",
+     "value": "strict-origin-when-cross-origin"
+    },
+    {
+     "key": "Permissions-Policy",
+     "value": "camera=(), microphone=(), geolocation=()"
+    },
+    {
+     "key": "X-Frame-Options",
+     "value": "SAMEORIGIN"
     }
-  ]
+   ]
+  },
+  {
+   "source": "/survey-admin.html",
+   "headers": [
+    {
+     "key": "X-Robots-Tag",
+     "value": "noindex, nofollow"
+    },
+    {
+     "key": "Cache-Control",
+     "value": "no-store"
+    }
+   ]
+  },
+  {
+   "source": "/api/(.*)",
+   "headers": [
+    {
+     "key": "Cache-Control",
+     "value": "no-store"
+    }
+   ]
+  }
+ ],
+ "trailingSlash": false
 }

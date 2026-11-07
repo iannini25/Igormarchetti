@@ -1,3 +1,6 @@
-# Pre-launch preview — not for indexing.
 User-agent: *
-Disallow: /
+Allow: /
+Disallow: /survey-admin.html
+Disallow: /api/
+
+Sitemap: https://lippi.igormarchetti.me/sitemap.xml
