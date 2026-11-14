@@ -575,6 +575,40 @@ footer {
   a { text-decoration: underline; }
 }
 </style>
+<style id="lab-visual">
+:root{--paper:#f4f0e6;--paper-2:#ebe4d4;--ink:#1d1a16;--brass:#7a4f22;--ease:cubic-bezier(.65,0,.35,1);--r:18px}
+body{letter-spacing:.003em}
+.mast{background:color-mix(in srgb,var(--paper) 82%,transparent);backdrop-filter:blur(14px) saturate(1.2);-webkit-backdrop-filter:blur(14px);transition:box-shadow .4s var(--ease),background .4s}
+.mast.is-scrolled{background:color-mix(in srgb,var(--paper) 94%,transparent);box-shadow:0 10px 30px -18px rgba(40,28,12,.35)}
+.links a:not(.cta){position:relative;isolation:isolate}
+.links a:not(.cta)::after,.searchroles a::after{content:"";position:absolute;left:-2px;right:-2px;bottom:30%;height:40%;background:color-mix(in srgb,var(--brass) 22%,transparent);transform:scaleX(0);transform-origin:left;transition:transform .45s var(--ease);z-index:-1}
+.links a:not(.cta):hover::after,.links a:not(.cta):focus-visible::after{transform:scaleX(1)}
+.links a:not(.cta):hover{color:var(--ink)}
+.btn,.links .cta{border-radius:999px;position:relative;isolation:isolate;overflow:hidden;transition:color .45s var(--ease),border-color .45s var(--ease),box-shadow .45s}
+.btn:not(.btn-cv)::before,.links .cta::before{content:"";position:absolute;inset:0;background:var(--brass);transform:scaleX(0);transform-origin:left;transition:transform .5s var(--ease);z-index:-1}
+.btn:not(.btn-cv):hover::before,.btn:not(.btn-cv):focus-visible::before,.links .cta:hover::before,.links .cta:focus-visible::before{transform:scaleX(1)}
+.btn:not(.btn-cv):hover,.btn:not(.btn-cv):focus-visible,.links .cta:hover{color:var(--paper);border-color:var(--brass)}
+.btn-cv::before{transition-duration:.5s;transition-timing-function:var(--ease)}
+.btn:hover{box-shadow:0 12px 26px -14px rgba(60,35,10,.55)}
+.links .cta{padding:0 20px}
+.portrait img{transition:transform 1.2s var(--ease),filter 1.2s var(--ease)}
+.portrait:hover img{transform:scale(1.06);filter:brightness(.94)}
+.proofbar{border-radius:var(--r);border:1px solid var(--line);background:color-mix(in srgb,#fff 35%,var(--paper));overflow:hidden}
+.proof{padding:22px 24px}
+.card,.role,.quote{transition:border-color .45s var(--ease),background-color .45s var(--ease)}
+.card{padding-top:20px}
+.card:hover{border-top-color:var(--brass);background:color-mix(in srgb,var(--brass) 6%,transparent)}
+.card:hover .glyph{color:var(--ink)}
+.glyph{transition:color .45s}
+.role:hover{background:color-mix(in srgb,var(--brass) 5%,transparent)}
+h1{letter-spacing:-.028em}
+h2{letter-spacing:-.025em}
+section{padding:96px 0}
+.rv{opacity:0;transform:translateY(22px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.rv.in{opacity:1;transform:none}
+@media(max-width:700px){section{padding:64px 0}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{transition-duration:0s!important}.rv{opacity:1;transform:none}}
+</style>
 </head>
 <body>
 <a class="skip" href="#content">Skip to content</a>
@@ -684,5 +718,6 @@ footer {
 </section>
 </main>
 <footer><div class="wrap"><strong>IGOR MARCHETTI</strong> · Enterprise Risk Manager · Operational Risk Manager · Risk &amp; Controls Manager</div></footer>
+<script id="lab-motion">(()=>{const n=document.querySelector('.mast');const f=()=>n&&n.classList.toggle('is-scrolled',scrollY>8);addEventListener('scroll',f,{passive:true});f();if(matchMedia('(prefers-reduced-motion: reduce)').matches||!('IntersectionObserver'in window))return;const els=[...document.querySelectorAll('section h2, .card, .role, .quote, .proof, .contactbox')].filter(e=>e.getBoundingClientRect().top>innerHeight*.9);const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){const i=[...e.target.parentNode.children].indexOf(e.target);e.target.style.transitionDelay=Math.min(i,4)*70+'ms';e.target.classList.add('in');io.unobserve(e.target)}}),{rootMargin:'0px 0px -8% 0px'});els.forEach(e=>{e.classList.add('rv');io.observe(e)})})();</script>
 </body>
 </html>
