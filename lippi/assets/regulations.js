@@ -14,7 +14,7 @@
     if (!response.ok) throw new Error('Regulatory content is unavailable.');
     return response.json();
   }).catch(error => { dataPromise = undefined; throw error; });
-  const countLabels = {en:'explainers shown',pt:'temas exibidos',es:'temas mostrados'};
+  const countLabels = {en:'explainers shown',pt:'temas exibidos',es:'temas mostrados',it:'schede visualizzate'};
   function filter() {
     const needle = search.value.trim().toLocaleLowerCase();
     let visible = 0;
@@ -39,7 +39,7 @@
     search.value = ''; topic.value = ''; territory.value = ''; filter();
   }));
   async function translate(lang) {
-    if (!['en','pt','es'].includes(lang)) return;
+    if (!['en','pt','es','it'].includes(lang)) return;
     const data = await readData();
     const labels = data.ui[lang];
     document.querySelectorAll('[data-reg-ui]').forEach(element => {
@@ -51,7 +51,7 @@
         element.textContent = item[element.dataset.regField][lang] || item[element.dataset.regField].en;
       });
     });
-    const locale = {en:'en-IE',pt:'pt-BR',es:'es-ES'}[lang];
+    const locale = {en:'en-IE',pt:'pt-BR',es:'es-ES',it:'it-IT'}[lang];
     document.querySelectorAll('main time').forEach(element => {
       element.textContent = new Intl.DateTimeFormat(locale,{day:'numeric',month:'long',year:'numeric',timeZone:'UTC'}).format(new Date(`${element.dateTime}T12:00:00Z`));
     });
@@ -62,7 +62,7 @@
     search.placeholder = labels.placeholder;
     currentLanguage = lang;
     language.value = lang;
-    document.documentElement.lang = {en:'en',pt:'pt-BR',es:'es'}[lang];
+    document.documentElement.lang = {en:'en',pt:'pt-BR',es:'es',it:'it'}[lang];
     try { localStorage.setItem('lippi-language',lang); } catch {}
     filter();
   }
