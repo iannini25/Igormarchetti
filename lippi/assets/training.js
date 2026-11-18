@@ -36,7 +36,8 @@ export function buildTrainingEmail(payload) {
     if (!sample.reportValidity()) return;
     const selected = new FormData(sample).get('owner');
     const answer = document.getElementById('sample-answer');
-    answer.textContent = (selected === 'business' ? 'Yes. ' : 'The business or service owner should lead. ') + 'Management owns the operational response and corrective actions. Risk and compliance guide, monitor and challenge. Internal audit provides independent assurance. The board oversees the response and holds management accountable.';
+    const tr = text => window.LippiI18n?.translate(text) || text;
+    answer.textContent = tr(selected === 'business' ? 'Yes. ' : 'The business or service owner should lead. ') + tr('Management owns the operational response and corrective actions. Risk and compliance guide, monitor and challenge. Internal audit provides independent assurance. The board oversees the response and holds management accountable.');
     answer.hidden = false;
   });
 
@@ -44,6 +45,9 @@ export function buildTrainingEmail(payload) {
   if (!form) return;
   const button = form.querySelector('button[type="submit"]');
   const status = document.getElementById('training-status');
+  const tr = text => window.LippiI18n?.translate(text) || text;
+  let lastMessage = '', lastError = false;
+  document.addEventListener('lippi:languagechange',()=>{if(lastMessage) status.textContent=tr(lastMessage);});
   const optIn = document.getElementById('contact-opt-in');
   const email = document.getElementById('training-email');
   const contact = document.getElementById('contact-details');
@@ -52,9 +56,9 @@ export function buildTrainingEmail(payload) {
   const draftText = document.getElementById('training-email-text');
   const marketFields = [...form.querySelectorAll('[name="target_markets"]')];
   let ready = false, emailMode = false, busy = false, submissionId = null, sentBody = null;
-  const say = (message, error = false) => { status.textContent = message; status.classList.toggle('error', error); };
+  const say = (message, error = false) => { lastMessage=message;lastError=error;status.textContent = tr(message); status.classList.toggle('error', error); };
   const useEmailFallback = () => {
-    ready = false; emailMode = true; button.disabled = false; button.textContent = 'Prepare email enquiry';
+    ready = false; emailMode = true; button.disabled = false; button.textContent = tr('Prepare email enquiry');
     say('Online registration is temporarily unavailable. You can prepare an email enquiry using your answers.');
   };
   const prepareEmail = payload => {
@@ -82,7 +86,7 @@ export function buildTrainingEmail(payload) {
   form.addEventListener('submit', async event => {
     event.preventDefault();
     if ((!ready && !emailMode) || busy) return;
-    marketFields[0].setCustomValidity(marketFields.some(f => f.checked) ? '' : 'Please select at least one market, or Still exploring.');
+    marketFields[0].setCustomValidity(marketFields.some(f => f.checked) ? '' : tr('Please select at least one market, or Still exploring.'));
     if (!form.reportValidity()) return;
     const data = new FormData(form);
     const payload = {
@@ -96,7 +100,7 @@ export function buildTrainingEmail(payload) {
     if (emailMode) { prepareEmail(payload); return; }
     const serialised = JSON.stringify(payload);
     if (sentBody !== serialised) { submissionId = crypto.randomUUID(); sentBody = serialised; }
-    busy = true; button.disabled = true; button.textContent = 'Submitting…'; say('Saving your response…');
+    busy = true; button.disabled = true; button.textContent = tr('Submitting…'); say('Saving your response…');
     const controls = [...form.querySelectorAll('input, select, textarea')];
     controls.forEach(el => { el.disabled = true; });
     try {
@@ -121,7 +125,7 @@ export function buildTrainingEmail(payload) {
         say(error.message || 'Your response was not confirmed. Please try again.', true);
       }
     } finally {
-      busy = false; button.disabled = false; button.textContent = emailMode ? 'Prepare email enquiry' : 'Submit interest';
+      busy = false; button.disabled = false; button.textContent = tr(emailMode ? 'Prepare email enquiry' : 'Submit interest');
       controls.forEach(el => { el.disabled = false; });
     }
   });
