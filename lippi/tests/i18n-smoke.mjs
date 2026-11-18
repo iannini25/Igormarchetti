@@ -82,10 +82,10 @@ assert.ok(article.includes('data-site-header'),'AI article does not initialise t
 assert.ok(article.includes('<script defer src="/assets/site-shell.js"></script>'),'AI article is missing shared localization');
 assert.ok(article.includes('id="lippi-navigation"'),'AI article lacks picker insertion target');
 const articleVisibleText = article
-  .replace(/<script\\b[^>]*>[\\s\\S]*?<\\/script>/gi,'')
-  .replace(/<style\\b[^>]*>[\\s\\S]*?<\\/style>/gi,'')
+  .replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi,'')
+  .replace(/<style\b[^>]*>[\s\S]*?<\/style>/gi,'')
   .split(/<[^>]+>/)
-  .map(text=>text.replace(/&amp;/g,'&').replace(/\\s+/g,' ').trim())
+  .map(text=>text.replace(/&amp;/g,'&').replace(/\s+/g,' ').trim())
   .filter(text=>text.length>3);
 for (const source of new Set(articleVisibleText)) {
   assert.equal(sharedCopy[source]?.length,3,'Unlocalized AI article text: '+source);
