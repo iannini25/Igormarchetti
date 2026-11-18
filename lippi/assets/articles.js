@@ -5,18 +5,35 @@
   const button = form.querySelector('button[type="submit"]');
   const emailFallback = document.getElementById('newsletter-email-fallback');
   const emailDraft = document.getElementById('newsletter-email-draft');
-  const initialButton = button.textContent;
+  const initialButton = button.textContent.trim();
+  const tr = text => window.LippiI18n?.translate(text) || text;
+  let lastMessage = '', lastState = '';
+  const languageSelect = document.getElementById('newsletter-language');
+  if (languageSelect && !document.getElementById('newsletter-language-note')) {
+    const note = document.createElement('p');
+    note.id = 'newsletter-language-note';
+    note.className = 'newsletter-privacy';
+    note.textContent = tr('Newsletter emails are currently available in English, Portuguese and Spanish. The website can also be viewed in Italian.');
+    languageSelect.insertAdjacentElement('afterend',note);
+  }
   const noticeVersion = '2026-11-18';
   let busy = false;
   let registrationMode = 'checking';
   const update = (message, state = '') => {
-    status.textContent = message;
+    lastMessage = message; lastState = state;
+    status.textContent = tr(message);
     status.dataset.state = state;
   };
+  document.addEventListener('lippi:languagechange',()=>{
+    if(lastMessage) status.textContent = tr(lastMessage);
+    const note = document.getElementById('newsletter-language-note');
+    if(note) note.textContent = tr('Newsletter emails are currently available in English, Portuguese and Spanish. The website can also be viewed in Italian.');
+    if(registrationMode === 'email') button.textContent = tr('Prepare email request');
+  });
   const useEmailFallback = message => {
     registrationMode = 'email';
     button.disabled = false;
-    button.textContent = 'Prepare email request';
+    button.textContent = tr('Prepare email request');
     update(message || 'Online registration is unavailable. Enter your details and consent, then prepare an email request to send from your email app.');
   };
   const prepareEmail = payload => {
@@ -75,7 +92,7 @@
     }
     busy = true;
     button.disabled = true;
-    button.textContent = 'Saving your request…';
+    button.textContent = tr('Saving your request…');
     update('Saving your newsletter request…');
     const fields = [...form.querySelectorAll('input,select')];
     fields.forEach(field => { field.disabled = true; });
@@ -104,7 +121,7 @@
       }
     } finally {
       busy = false;
-      button.textContent = registrationMode === 'email' ? 'Prepare email request' : initialButton;
+      button.textContent = tr(registrationMode === 'email' ? 'Prepare email request' : initialButton);
     }
   });
   ready();
