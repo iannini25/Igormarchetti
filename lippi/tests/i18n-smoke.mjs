@@ -20,7 +20,7 @@ for (const locale of locales) {
   }
 }
 const independence = read('independence.html');
-const match = independence.match(/const t=(\\{[\\s\\S]*?\\});const s=/);
+const match = independence.match(/const t=(\{[\s\S]*?\});const s=/);
 assert.ok(match, 'Missing independence translation dictionary');
 const independentCopy = JSON.parse(match[1]);
 for(const locale of locales) {
@@ -30,7 +30,7 @@ for(const locale of locales) {
   }
 }
 const shell = read('assets/site-shell.js');
-const shellMatch = shell.match(/const words = (\\{[^\\n]+\\});\\n  const sourceText/);
+const shellMatch = shell.match(/const words = (\{[^\n]+\});\n  const sourceText/);
 assert.ok(shellMatch,'Shared language dictionary not found');
 const sharedCopy = JSON.parse(shellMatch[1]);
 for(const [source,translations] of Object.entries(sharedCopy)) {
@@ -44,7 +44,7 @@ assert.ok(shell.includes('lippi-language-picker'),'Shared picker missing');
 for (const file of ['assets/site-shell.js','assets/regulations.js','assets/articles.js','assets/founder-survey.js']) {
   new Script(read(file),{filename:file});
 }
-const independentScript = independence.match(/<script>([\\s\\S]*?)<\\/script>/);
+const independentScript = independence.match(/<script>([\s\S]*?)<\/script>/);
 assert.ok(independentScript,'Independence inline script missing');
 new Script(independentScript[1],{filename:'independence-inline'});
 console.log('Source-level localization checks passed for 4 languages; 7 regulatory explainers; independence page and '+Object.keys(sharedCopy).length+' curated shared translations. Browser tests still required.');
