@@ -74,6 +74,31 @@ const articleText = new Set(articleHtml.split(/<[^>]+>/).map(text=>text
 for(const text of articleText) {
   if (!articleNames.has(text)) assert.ok(sharedCopy[text], 'Unlocalized article text: '+text);
 }
+// Published long-form article uses the shared picker and must be complete in every locale.
+const article = read('ai-governance-fintech-web-summit-2026.html');
+const articlesIndex = read('articles.html');
+assert.ok(articlesIndex.includes('href="/ai-governance-fintech-web-summit-2026.html"'),'Articles index does not link to published article');
+assert.ok(article.includes('data-site-header'),'AI article does not initialise the shared language control');
+assert.ok(article.includes('<script defer src="/assets/site-shell.js"></script>'),'AI article is missing shared localization');
+assert.ok(article.includes('id="lippi-navigation"'),'AI article lacks picker insertion target');
+const articleVisibleText = article
+  .replace(/<script\\b[^>]*>[\\s\\S]*?<\\/script>/gi,'')
+  .replace(/<style\\b[^>]*>[\\s\\S]*?<\\/style>/gi,'')
+  .split(/<[^>]+>/)
+  .map(text=>text.replace(/&amp;/g,'&').replace(/\\s+/g,' ').trim())
+  .filter(text=>text.length>3);
+for (const source of new Set(articleVisibleText)) {
+  assert.equal(sharedCopy[source]?.length,3,'Unlocalized AI article text: '+source);
+}
+for(const key of [
+ 'AI Governance in Fintech: Five Practical Questions | Lippi FinTech Advisory',
+ 'Five practical questions fintech founders can ask about AI governance, accountability, data, monitoring and third-party risk, following Web Summit Lisbon 2026.',
+ 'A practical reflection on AI governance, risk and accountability for fintech teams following Web Summit Lisbon 2026.'
+]) assert.equal(sharedCopy[key]?.length,3,'Missing translated article metadata: '+key);
+for(const [locale,index] of [['pt',0],['es',1],['it',2]]) {
+  const statement=sharedCopy['Lippi shares practical perspectives on fintech risk, controls, governance and regulatory readiness. Advisory or training engagements are considered individually, subject to conflict-of-interest screening and any required employer approval. Fractional CRO services are not currently offered.']?.[index];
+  assert.ok(statement?.includes('CRO'), 'Missing fractional CRO exclusion in AI article '+locale);
+}
 const regulatoryPage = read('regulations.html');
 assert.ok(regulatoryPage.includes('<option value="it">Italiano</option>'),'Regulations picker lacks Italian');
 assert.ok(shell.includes('lippi-language-picker'),'Shared picker missing');
