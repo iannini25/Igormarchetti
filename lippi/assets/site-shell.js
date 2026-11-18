@@ -45,7 +45,7 @@
     return index < 0 ? value : (words[value] && words[value][index]) || value;
   };
   // Keep dynamically generated form statuses in the same language as the page.
-  window.LippiI18n = {translate:getTranslated,get language(){return lang;}};
+  window.LippiI18n = {translate:text=>getTranslated(text,lang),get language(){return lang;}};
   function translateMetadata(language) {
     const title = document.querySelector('title');
     if (title) {
