@@ -5,7 +5,8 @@
   const button = form.querySelector('button[type="submit"]');
   const emailFallback = document.getElementById('newsletter-email-fallback');
   const emailDraft = document.getElementById('newsletter-email-draft');
-  const initialButton = button.textContent.trim();
+  // Keep the English source label; the DOM may already be localized at script start.
+  const initialButton = 'Save my newsletter request';
   const tr = text => window.LippiI18n?.translate(text) || text;
   let lastMessage = '', lastState = '';
   const languageSelect = document.getElementById('newsletter-language');
