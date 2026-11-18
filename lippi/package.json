@@ -1,1 +1,14 @@
-{"name":"lippi-site","private":true,"type":"module","engines":{"node":"24.x"},"dependencies":{"pg":"^8.13.1"}}
+{
+  "name": "lippi-site",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": "24.x"
+  },
+  "dependencies": {
+    "pg": "^8.13.1"
+  },
+  "scripts": {
+    "test:i18n": "node tests/i18n-smoke.mjs"
+  }
+}
