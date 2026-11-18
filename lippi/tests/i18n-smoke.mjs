@@ -56,6 +56,24 @@ for(const file of ['assets/articles.js','assets/founder-survey.js']) {
 }
 await import('../assets/training.js'); // Module syntax and safe no-DOM import.
 assert.ok(read('assets/training.js').includes('lippi:languagechange'), 'Training form lacks language refresh');
+// Every translatable static text node on Articles must have PT/ES/IT copy.
+// Brand names, email, native language names and copyright remain unchanged.
+const articleHtml = read('articles.html')
+  .replace(/<script\\b[^>]*>[\\s\\S]*?<\\/script>/gi,'')
+  .replace(/<style\\b[^>]*>[\\s\\S]*?<\\/style>/gi,'')
+  .replace(/<!--[\\s\\S]*?-->/g,'');
+const articleNames = new Set([
+  'English','Português','Español','Lippi FinTech Advisory',
+  'lippifintech@igormarchetti.me','LinkedIn ↗',
+  '© 2026 Igor Marchetti · Lippi FinTech Advisory'
+]);
+const articleText = new Set(articleHtml.split(/<[^>]+>/).map(text=>text
+  .replace(/&amp;/g,'&').replace(/&nbsp;/g,' ').replace(/&#39;/g,"'")
+  .replace(/&rsquo;/g,'’').replace(/&ndash;/g,'–').replace(/&hellip;/g,'…').trim())
+  .filter(text=>text.length>3&&!/^[\\s\\d.,↗→↓·]+$/.test(text)));
+for(const text of articleText) {
+  if (!articleNames.has(text)) assert.ok(sharedCopy[text], 'Unlocalized article text: '+text);
+}
 const regulatoryPage = read('regulations.html');
 assert.ok(regulatoryPage.includes('<option value="it">Italiano</option>'),'Regulations picker lacks Italian');
 assert.ok(shell.includes('lippi-language-picker'),'Shared picker missing');
