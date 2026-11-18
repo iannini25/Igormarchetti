@@ -7,24 +7,51 @@ export const NEWSLETTER_CONSENT = 'I agree to receive Lippi articles and regulat
 const TABLE = 'public.lippi_newsletter_signups';
 const MAX_BODY_BYTES = 4096;
 const MAX_EXPORT_ROWS = 5000;
+const FAILURE_PHASE = Symbol('newsletterFailurePhase');
+const FAILURE_CODES = Symbol('newsletterFailureCodes');
+const SAFE_CODES = new Set([
+  '28P01','28000','3D000','42501','42P01','42601','53300','57P03','08001','08006',
+  'ENOTFOUND','EAI_AGAIN','ECONNREFUSED','ECONNRESET','ETIMEDOUT','ERR_INVALID_URL',
+  'SELF_SIGNED_CERT_IN_CHAIN','DEPTH_ZERO_SELF_SIGNED_CERT','CERT_HAS_EXPIRED',
+  'ERR_TLS_CERT_ALTNAME_INVALID','UNABLE_TO_VERIFY_LEAF_SIGNATURE','UNABLE_TO_GET_ISSUER_CERT_LOCALLY'
+]);
 let poolPromise;
 let schemaPromise;
 
+const safeCodes = error => {
+  const candidates = [error?.code, error?.cause?.code];
+  if (Array.isArray(error?.errors)) candidates.push(...error.errors.slice(0, 5).map(item => item?.code));
+  return [...new Set(candidates.filter(code => SAFE_CODES.has(code)))];
+};
+const storageFailure = (phase, codes = []) => {
+  // Retain only predefined identifiers, never messages, connection strings or hosts.
+  const failure = new Error('Newsletter storage unavailable.');
+  failure[FAILURE_PHASE] = phase;
+  failure[FAILURE_CODES] = [...new Set(codes.filter(code => SAFE_CODES.has(code)))].slice(0, 5);
+  return failure;
+};
+const healthIssue = error => {
+  const phase = ['configuration','connection','schema','check'].includes(error?.[FAILURE_PHASE]) ? error[FAILURE_PHASE] : 'check';
+  const codes = error?.[FAILURE_CODES] || safeCodes(error);
+  return `${phase}:${codes.length ? codes.join(',') : 'storage-unavailable'}`;
+};
+
 async function openPool() {
   const urls = String(process.env.SURVEY_DATABASE_URL || process.env.DATABASE_URL || '').split(/\s+/).filter(Boolean);
-  if (!urls.length) throw new Error('Newsletter storage is not configured');
-  let failure;
+  if (!urls.length) throw storageFailure('configuration');
+  const failures = [];
   for (const connectionString of urls) {
-    const candidate = new pg.Pool({connectionString, ssl:{rejectUnauthorized:false}, max:2, idleTimeoutMillis:10000, connectionTimeoutMillis:6000});
+    let candidate;
     try {
+      candidate = new pg.Pool({connectionString, ssl:{rejectUnauthorized:false}, max:2, idleTimeoutMillis:10000, connectionTimeoutMillis:6000});
       await candidate.query('SELECT 1');
       return candidate;
     } catch (error) {
-      failure = error;
-      await candidate.end().catch(() => {});
+      failures.push(...safeCodes(error));
+      await candidate?.end().catch(() => {});
     }
   }
-  throw failure;
+  throw storageFailure('connection', failures);
 }
 
 const getPool = () => (poolPromise ??= openPool().catch(error => { poolPromise = undefined; throw error; }));
@@ -32,7 +59,9 @@ const getPool = () => (poolPromise ??= openPool().catch(error => { poolPromise =
 async function initializeStorage() {
   const pool = await getPool();
   // A dedicated transaction serializes first-run schema creation across instances.
-  const client = await pool.connect();
+  let client;
+  try { client = await pool.connect(); }
+  catch (error) { throw storageFailure('connection', safeCodes(error)); }
   try {
     await client.query('BEGIN');
     await client.query('SELECT pg_advisory_xact_lock($1)', [181126011]);
@@ -48,7 +77,7 @@ async function initializeStorage() {
     await client.query('COMMIT');
   } catch (error) {
     await client.query('ROLLBACK').catch(() => {});
-    throw error;
+    throw storageFailure('schema', safeCodes(error));
   } finally {
     client.release();
   }
@@ -129,12 +158,12 @@ const keyIsValid = (req, env) => {
 export function createNewsletterHandlers({store = newsletterStore, env = process.env, rate = takeRate} = {}) {
   const health = async (req, res) => {
     if (req.method !== 'GET' && req.method !== 'HEAD') return reply(res, 405, {error:'Method not allowed.'}, {Allow:'GET, HEAD'});
-    if (!acceptedOrigins(env).size) return reply(res, 503, {ready:false});
+    if (!acceptedOrigins(env).size) return reply(res, 503, {ready:false}, {'X-Lippi-Health-Issue':'configuration:origin-unavailable'});
     try {
       await store.health();
       return reply(res, 200, req.method === 'HEAD' ? '' : {ready:true, notice_version:NEWSLETTER_NOTICE_VERSION});
-    } catch {
-      return reply(res, 503, req.method === 'HEAD' ? '' : {ready:false});
+    } catch (error) {
+      return reply(res, 503, req.method === 'HEAD' ? '' : {ready:false}, {'X-Lippi-Health-Issue':healthIssue(error)});
     }
   };
 
