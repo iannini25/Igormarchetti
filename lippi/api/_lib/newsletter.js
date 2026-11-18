@@ -56,8 +56,14 @@ async function openPool() {
 
 const getPool = () => (poolPromise ??= openPool().catch(error => { poolPromise = undefined; throw error; }));
 
-async function initializeStorage() {
-  const pool = await getPool();
+export async function initializeNewsletterStorage(pool) {
+  // A provisioned table must work with a runtime role that cannot create tables.
+  try {
+    await pool.query(`SELECT email, language, requested_at, consent_recorded_at, notice_version, consent_text, status FROM ${TABLE} LIMIT 0`);
+    return pool;
+  } catch (error) {
+    if (error?.code !== '42P01') throw storageFailure('schema', safeCodes(error));
+  }
   // A dedicated transaction serializes first-run schema creation across instances.
   let client;
   try { client = await pool.connect(); }
@@ -84,7 +90,7 @@ async function initializeStorage() {
   return pool;
 }
 
-const storage = () => (schemaPromise ??= initializeStorage().catch(error => { schemaPromise = undefined; throw error; }));
+const storage = () => (schemaPromise ??= getPool().then(initializeNewsletterStorage).catch(error => { schemaPromise = undefined; throw error; }));
 
 const newsletterStore = {
   async health() {

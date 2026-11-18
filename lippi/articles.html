@@ -57,7 +57,7 @@
 
     <section class="articles-newsletter" id="newsletter" aria-labelledby="newsletter-title">
       <div class="articles-wrap newsletter-layout">
-        <div class="newsletter-intro"><p class="articles-eyebrow">The Lippi newsletter</p><h2 id="newsletter-title">A considered<br>monthly read.</h2><p>The planned Lippi newsletter will bring together selected articles, verified regulatory developments and practical questions for fintech teams.</p><p class="newsletter-note">Register your interest below. Your request is saved for Igor; this website does not send an automatic confirmation email.</p></div>
+        <div class="newsletter-intro"><p class="articles-eyebrow">The Lippi newsletter</p><h2 id="newsletter-title">A considered<br>monthly read.</h2><p>The planned Lippi newsletter will bring together selected articles, verified regulatory developments and practical questions for fintech teams.</p><p class="newsletter-note">Register your interest below. If online registration is unavailable, prepare an email request to send from your email app. This website does not send an automatic confirmation email.</p></div>
         <div class="newsletter-panel">
           <form id="newsletter-form" aria-describedby="newsletter-privacy newsletter-status">
             <div class="newsletter-field"><label for="newsletter-email">Your email address</label><input id="newsletter-email" name="email" type="email" autocomplete="email" inputmode="email" placeholder="you@company.com" maxlength="254" required></div>
@@ -67,6 +67,7 @@
             <button class="articles-button newsletter-submit" type="submit" disabled>Save my newsletter request <span aria-hidden="true">→</span></button>
           </form>
           <p id="newsletter-status" class="newsletter-status" role="status" aria-live="polite">Checking that newsletter registration is available…</p>
+          <div id="newsletter-email-fallback" hidden><p class="newsletter-status">Review the draft in your email app and select Send to make your request. Preparing a draft does not send an email or save an online registration.</p><a id="newsletter-email-draft" class="articles-button" href="mailto:lippifintech@igormarchetti.me">Open email draft <span aria-hidden="true">↗</span></a></div>
           <noscript><p class="newsletter-status">Enable JavaScript to register here, or <a href="mailto:lippifintech@igormarchetti.me?subject=Lippi%20newsletter%20request">email Igor with your newsletter request</a>.</p></noscript>
           <p id="newsletter-privacy" class="newsletter-privacy">Lippi uses your email address, preferred language and consent record to manage this newsletter. To unsubscribe or request deletion, email <a href="mailto:lippifintech@igormarchetti.me?subject=Lippi%20newsletter%20privacy%20request">lippifintech@igormarchetti.me</a>. No payment is required. Consent notice: 18 November 2026.</p>
           <p class="newsletter-direct"><a href="mailto:lippifintech@igormarchetti.me?subject=Lippi%20newsletter%20request">Prefer to contact Igor directly? Send an email ↗</a></p>

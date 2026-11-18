@@ -24,6 +24,8 @@ const db0=async()=>{
 };
 const pool=()=>(poolPromise??=db0().catch(e=>{poolPromise=undefined;throw e;}));
 const db=()=>({query:async(...a)=>(await pool()).query(...a)});
+// Readiness checks the actual existing table without returning any response data.
+export const checkStorage=()=>db().query(`SELECT id FROM public.lippi_survey_responses LIMIT 0`);
 const digest=v=>createHash('sha256').update(v).digest();
 export const csvCell=value=>{let s=String(value??'');if(/^[\s]*[=+@-]/.test(s)) s="'"+s;return '"'+s.replaceAll('"','""')+'"';};
 export const redact=v=>v.replace(/\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b/gi,'[email removed]').replace(/(?:https?:\/\/|www\.)\S+/gi,'[URL removed]').replace(/(?:\+\d[\d ()-]{7,}\d|\b\d{10,15}\b)/g,'[phone-like number removed]');

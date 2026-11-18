@@ -4,13 +4,14 @@ import {Readable} from 'node:stream';
 import {readFileSync} from 'node:fs';
 import {createTrainingService} from '../api/_lib/training-interest.js';
 import {createTrainingDatabase} from '../api/_lib/training-database.js';
+import {buildTrainingEmail} from '../assets/training.js';
 
 const env = {PUBLIC_ORIGIN: 'https://lippi.igormarchetti.me', SURVEY_DATABASE_URL: 'postgresql://test', SURVEY_ADMIN_KEY: 'test-owner-key-'.repeat(4)};
 const valid = () => ({
   submission_id: '98765432-4321-4234-8123-123456789abc', survey_version: 'training-v1', notice_version: '2026-11-17',
   target_markets: ['brazil', 'ireland'], priority: 'all', budget: '200_299', format: 'online', language: 'english', contact_opt_in: false, website: ''
 });
-function database() {
+function database({exists = true} = {}) {
   const rows = new Map(), calls = [];
   let available = true;
   const db = {
@@ -20,7 +21,7 @@ function database() {
       calls.push({sql, params});
       if (!available) throw new Error('database unavailable with private details');
       if (sql.startsWith('SELECT pg_advisory_xact_lock')) return {rows: [], rowCount: 1};
-      if (sql.startsWith('CREATE ')) return {rows: [], rowCount: 0};
+      if (sql.startsWith('CREATE ')) { if (sql.startsWith('CREATE TABLE')) exists = true; return {rows: [], rowCount: 0}; }
       if (sql.startsWith('DELETE ')) {
         for (const [id, row] of rows) if (new Date(row.created_at) < Date.now() - 90 * 86400000) rows.delete(id);
         return {rows: [], rowCount: 0};
@@ -31,7 +32,10 @@ function database() {
         rows.set(id, {id, created_at: new Date().toISOString(), survey_version, notice_version, payload: JSON.parse(payload)});
         return {rows: [{id}], rowCount: 1};
       }
-      if (sql.includes('LIMIT 0')) return {rows: [], rowCount: 0};
+      if (sql.includes('LIMIT 0')) {
+        if (!exists) throw Object.assign(new Error('table not provisioned'), {code: '42P01'});
+        return {rows: [], rowCount: 0};
+      }
       if (sql.includes('WHERE id=$1')) return {rows: rows.has(params[0]) ? [rows.get(params[0])] : []};
       if (sql.includes('ORDER BY created_at DESC')) return {rows: [...rows.values()]};
       throw new Error('Unexpected query: ' + sql);
@@ -232,11 +236,12 @@ test('database transactions use one checked-out connection and release it after 
 });
 
 test('concurrent cold instances serialize schema creation with a transaction lock; each instance initializes once', async () => {
-  let locked = false, activeDdl = 0, maxActiveDdl = 0, tableCreates = 0, indexCreates = 0, releasedClients = 0;
+  let locked = false, exists = false, activeDdl = 0, maxActiveDdl = 0, tableCreates = 0, indexCreates = 0, releasedClients = 0;
   const waiters = [];
   class Pool {
     async query(sql) {
       assert.ok(sql === 'SELECT 1' || sql.startsWith('DELETE ') || sql.includes('LIMIT 0'), 'DDL must use its dedicated transaction connection');
+      if (sql.includes('LIMIT 0') && !exists) throw Object.assign(new Error('table not provisioned'), {code: '42P01'});
       return {rows: [], rowCount: 0};
     }
     async connect() {
@@ -263,6 +268,7 @@ test('concurrent cold instances serialize schema creation with a transaction loc
             return {rows: []};
           }
           if (sql === 'COMMIT' || sql === 'ROLLBACK') {
+            if (sql === 'COMMIT') exists = true;
             if (holdsLock) { holdsLock = false; if (waiters.length) waiters.shift()(); else locked = false; }
             inTransaction = false;
             return {rows: []};
@@ -285,7 +291,7 @@ test('concurrent cold instances serialize schema creation with a transaction loc
 });
 
 test('schema preparation can retry after a failed transaction', async () => {
-  const db = database();
+  const db = database({exists: false});
   let attempts = 0;
   const service = createTrainingService({query: db.query, env, transaction: async work => {
     attempts++;
@@ -295,4 +301,102 @@ test('schema preparation can retry after a failed transaction', async () => {
   assert.equal((await call(service.health, request(null, {method: 'GET'}))).status, 503);
   assert.equal((await call(service.health, request(null, {method: 'GET'}))).status, 200);
   assert.equal(attempts, 2);
+});
+
+test('owner-provisioned tables work for a runtime role without CREATE privileges', async () => {
+  const db = database();
+  let transactionAttempts = 0;
+  const service = createTrainingService({query: db.query, env, transaction: async () => {
+    transactionAttempts++;
+    throw Object.assign(new Error('CREATE permission denied'), {code: '42501'});
+  }});
+  assert.equal((await call(service.health, request(null, {method: 'GET'}))).status, 200);
+  assert.equal((await call(service.submit, request(valid()))).status, 201);
+  assert.equal(transactionAttempts, 0);
+  assert.equal(db.calls[0].sql, 'SELECT id,created_at,survey_version,notice_version,payload FROM public.lippi_training_interest LIMIT 0');
+  assert.equal(db.calls.some(({sql}) => sql.startsWith('CREATE ')), false);
+});
+
+test('schema probing only attempts DDL for undefined_table, never permission, column or connection failures', async () => {
+  for (const code of ['42501', '42703', 'ECONNRESET', undefined]) {
+    let transactionAttempts = 0;
+    const service = createTrainingService({env, query: async () => { throw Object.assign(new Error('private details'), {code}); }, transaction: async () => { transactionAttempts++; }});
+    const response = await call(service.health, request(null, {method: 'GET'}));
+    assert.equal(response.status, 503);
+    assert.equal(transactionAttempts, 0);
+    assert.equal(response.body.includes('private details'), false);
+  }
+  const db = database({exists: false});
+  let transactionAttempts = 0;
+  const service = createTrainingService({env, query: db.query, transaction: async work => { transactionAttempts++; return db.transaction(work); }});
+  assert.equal((await call(service.health, request(null, {method: 'GET'}))).status, 200);
+  assert.equal(transactionAttempts, 1);
+  assert.equal(db.calls.filter(({sql}) => sql.startsWith('CREATE ')).length, 2);
+});
+
+test('email enquiries retain all answers with a fixed destination and encoded body, without implying a saved response', () => {
+  const payload = {...valid(), priority: 'tools', home_market: 'Ireland', business_model: 'Payments & e-money', comment: 'Licensing?\nPlease compare Brazil & Ireland.', referral: 'Dublin event', email: 'omit-me@example.com'};
+  const draft = buildTrainingEmail(payload);
+  const url = new URL(draft.mailto);
+  assert.equal(url.protocol, 'mailto:');
+  assert.equal(url.pathname, 'lippifintech@igormarchetti.me');
+  assert.equal(url.searchParams.get('subject'), 'Lippi paid training pilot enquiry');
+  assert.deepEqual([...url.searchParams.keys()], ['subject', 'body']);
+  assert.equal(url.searchParams.get('body'), draft.body);
+  for (const answer of ['Brazil, Ireland', 'RegTech, cybersecurity and AI tools', 'EUR 200–299', 'Live online', 'English', 'Ireland', 'Payments & e-money', payload.comment, 'Dublin event', 'Contact me about pilot dates, format and pricing: No']) assert.ok(draft.body.includes(answer), answer);
+  assert.equal(draft.body.includes('omit-me@example.com'), false);
+  assert.equal(/answers have been saved|response received/i.test(draft.body), false);
+  const optedIn = buildTrainingEmail({...payload, contact_opt_in: true, email: 'reply@example.com'});
+  assert.ok(optedIn.body.includes('Preferred contact email: reply@example.com'));
+  assert.ok(optedIn.body.includes('Contact me about pilot dates, format and pricing: Yes'));
+});
+
+test('unavailable survey enables a validated email draft without submitting, opening or claiming success', async () => {
+  const savedGlobals = {document: globalThis.document, fetch: globalThis.fetch, FormData: globalThis.FormData};
+  const events = new Map(), calls = [];
+  const element = (properties = {}) => ({hidden: false, disabled: false, value: '', textContent: '', addEventListener() {}, classList: {toggle() {}}, ...properties});
+  const button = element({disabled: true}), status = element(), optIn = element({checked: false}), email = element(), contact = element({hidden: true});
+  const draftPanel = element({hidden: true}), draftText = element(), success = element({hidden: true});
+  let focused = false, clicked = false;
+  const draftLink = element({focus() { focused = true; }, click() { clicked = true; }, removeAttribute(name) { delete this[name]; }});
+  const market = element({checked: true, setCustomValidity() {}});
+  const values = {...valid(), home_market: 'Ireland', business_model: 'Payments', comment: 'Help compare markets', referral: ''};
+  let validForm = false;
+  const form = element({
+    addEventListener(name, handler) { events.set(name, handler); },
+    querySelector() { return button; },
+    querySelectorAll(selector) { return selector.includes('target_markets') ? [market] : []; },
+    reportValidity() { return validForm; }
+  });
+  const nodes = {'training-interest-form': form, 'training-status': status, 'contact-opt-in': optIn, 'training-email': email, 'contact-details': contact, 'training-email-fallback': draftPanel, 'training-email-link': draftLink, 'training-email-text': draftText, 'training-success': success};
+  try {
+    globalThis.document = {getElementById(id) { return nodes[id] || null; }};
+    globalThis.fetch = async url => { calls.push(url); return {ok: false, status: 503, json: async () => ({ready: false})}; };
+    globalThis.FormData = class { get(name) { return values[name] ?? ''; } getAll(name) { return values[name] || []; } };
+    await import('../assets/training.js?email-fallback-test');
+    await new Promise(resolve => setImmediate(resolve));
+    assert.equal(button.disabled, false);
+    assert.equal(button.textContent, 'Prepare email enquiry');
+    await events.get('submit')({preventDefault() {}});
+    assert.equal(draftPanel.hidden, true, 'invalid form must not prepare a draft');
+    validForm = true;
+    await events.get('submit')({preventDefault() {}});
+    assert.equal(draftPanel.hidden, false);
+    assert.equal(new URL(draftLink.href).pathname, 'lippifintech@igormarchetti.me');
+    assert.ok(draftText.value.includes('Help compare markets'));
+    assert.equal(success.hidden, true);
+    assert.equal(form.hidden, false);
+    assert.equal(focused, true);
+    assert.equal(clicked, false);
+    assert.deepEqual(calls, ['/api/training-interest/health']);
+    assert.ok(status.textContent.includes('Nothing has been sent by this page.'));
+    events.get('input')();
+    assert.equal(draftPanel.hidden, true, 'editing answers invalidates the old email draft');
+    assert.equal(draftLink.href, undefined);
+  } finally {
+    for (const [key, value] of Object.entries(savedGlobals)) { if (value === undefined) delete globalThis[key]; else globalThis[key] = value; }
+  }
+  const html = readFileSync(new URL('../training.html', import.meta.url), 'utf8');
+  assert.match(html, /<script src="\/assets\/training\.js" type="module"><\/script>/);
+  assert.ok(html.includes('press Send yourself'));
 });

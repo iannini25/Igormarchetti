@@ -14,7 +14,7 @@
   <link rel="stylesheet" href="/assets/training.css">
   <link rel="stylesheet" href="/assets/site-shell.css">
   <script src="/assets/site-shell.js" defer></script>
-  <script src="/assets/training.js" defer></script>
+  <script src="/assets/training.js" type="module"></script>
 <meta name="lippi-release" content="2026-11-18-integrated">
 </head>
 <body>
@@ -95,6 +95,12 @@
           <div class="contact-choice"><label><input type="checkbox" id="contact-opt-in" name="contact_opt_in"> I would like Lippi to contact me about pilot dates, format and pricing.</label><div id="contact-details" hidden><label for="training-email">Email for pilot information</label><input id="training-email" type="email" name="email" maxlength="254" autocomplete="email"></div></div>
           <div class="honey" aria-hidden="true"><label for="training-website">Leave this field empty</label><input id="training-website" name="website" tabindex="-1" autocomplete="off"></div>
           <button class="button" type="submit" disabled>Submit interest</button><p id="training-status" class="form-status" role="status" aria-live="polite">Connecting to the survey…</p>
+          <div id="training-email-fallback" class="notice" hidden>
+            <h3>Your email enquiry</h3>
+            <p>Your answers have not been confirmed as saved. Open the draft in your email app, review it, and press Send yourself. Your sender email address will be visible to Lippi when you send.</p>
+            <p><a id="training-email-link" class="text-link">Open email draft ↗</a></p>
+            <details><summary>View or copy the email text</summary><p>If your email app does not open, copy this text into an email to <a href="mailto:lippifintech@igormarchetti.me">lippifintech@igormarchetti.me</a>.</p><label for="training-email-text">Enquiry text</label><textarea id="training-email-text" rows="10" readonly></textarea></details>
+          </div>
           <noscript><p>JavaScript is needed to submit this form. You can also <a href="mailto:lippifintech@igormarchetti.me?subject=Training%20pilot%20interest">email your interest to Lippi</a>.</p></noscript>
         </form>
         <div id="training-success" tabindex="-1" hidden><span class="tag">Response received</span><h3>Thank you for helping shape the pilot.</h3><p>Your answers have been saved. If you requested contact, Lippi can follow up about dates, format and pricing.</p><p class="reference">Your response reference:<br><code id="training-reference"></code></p><p>This is an expression of interest. No payment or booking has been made.</p><a href="#programme" class="text-link">Return to the programme ↑</a></div>

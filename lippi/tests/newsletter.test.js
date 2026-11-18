@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {Readable} from 'node:stream';
-import {createNewsletterHandlers, NEWSLETTER_NOTICE_VERSION} from '../api/_lib/newsletter.js';
+import {createNewsletterHandlers, initializeNewsletterStorage, NEWSLETTER_NOTICE_VERSION} from '../api/_lib/newsletter.js';
 
 const origin = 'https://lippi.igormarchetti.me';
 const adminKey = 'private-test-key-not-for-production-1234567890';
@@ -124,4 +124,29 @@ test('admin export retains consent evidence and CSV guards spreadsheet formula i
   assert.ok(csv.output.includes('"\'=evil@example.com"'));
   assert.equal(csv.headers['Cache-Control'], 'no-store');
   assert.equal((await call(handlers.admin, {...options, url:'/api/newsletter/admin?format=html'})).code, 400);
+});
+
+test('an existing usable newsletter table needs no DDL or privileged connection', async () => {
+  let reads = 0;
+  const pool = {query:async () => {reads++; return {rows:[]};}, connect:async () => {throw new Error('DDL must not run');}};
+  assert.equal(await initializeNewsletterStorage(pool), pool);
+  assert.equal(reads, 1);
+});
+
+test('only a missing table triggers initialization; insufficient permissions do not trigger DDL', async () => {
+  let connections = 0;
+  const denied = {query:async () => {throw Object.assign(new Error('private database details'), {code:'42501'});}, connect:async () => {connections++;}};
+  await assert.rejects(initializeNewsletterStorage(denied));
+  assert.equal(connections, 0);
+  const statements = [];
+  let released = false;
+  const missing = {
+    query:async () => {throw Object.assign(new Error('missing'), {code:'42P01'});},
+    connect:async () => ({query:async sql => {statements.push(sql);}, release:() => {released = true;}})
+  };
+  assert.equal(await initializeNewsletterStorage(missing), missing);
+  assert.equal(statements[0], 'BEGIN');
+  assert.equal(statements.at(-1), 'COMMIT');
+  assert.ok(statements.some(sql => sql.includes('CREATE TABLE IF NOT EXISTS')));
+  assert.equal(released, true);
 });

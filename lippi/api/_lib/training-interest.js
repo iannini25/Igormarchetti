@@ -109,18 +109,27 @@ export function createTrainingService({query, transaction, env = process.env, ta
   };
   const configured = () => Boolean(acceptedOrigins().size && (env.SURVEY_DATABASE_URL || env.DATABASE_URL) && (env.SURVEY_ADMIN_KEY || '').length >= 32);
   const prepare = async () => {
-    schemaPromise ??= transaction(async schemaQuery => {
-      // The transaction holds one connection and serializes DDL across cold instances.
-      await schemaQuery('SELECT pg_advisory_xact_lock($1)', [181126012]);
-      await schemaQuery(`CREATE TABLE IF NOT EXISTS ${TABLE} (
-        id UUID PRIMARY KEY,
-        created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
-        survey_version TEXT NOT NULL DEFAULT 'training-v1',
-        notice_version TEXT NOT NULL DEFAULT '2026-11-17',
-        payload JSONB NOT NULL CHECK (jsonb_typeof(payload) = 'object')
-      )`);
-      await schemaQuery(`CREATE INDEX IF NOT EXISTS lippi_training_interest_created_at_idx ON ${TABLE} (created_at)`);
-    }).catch(error => { schemaPromise = undefined; throw error; });
+    schemaPromise ??= (async () => {
+      try {
+        // Owner-provisioned tables must work with a runtime role that cannot create schema objects.
+        await query(`SELECT id,created_at,survey_version,notice_version,payload FROM ${TABLE} LIMIT 0`);
+        return;
+      } catch (error) {
+        if (error?.code !== '42P01') throw error;
+      }
+      await transaction(async schemaQuery => {
+        // The transaction holds one connection and serializes DDL across cold instances.
+        await schemaQuery('SELECT pg_advisory_xact_lock($1)', [181126012]);
+        await schemaQuery(`CREATE TABLE IF NOT EXISTS ${TABLE} (
+          id UUID PRIMARY KEY,
+          created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+          survey_version TEXT NOT NULL DEFAULT 'training-v1',
+          notice_version TEXT NOT NULL DEFAULT '2026-11-17',
+          payload JSONB NOT NULL CHECK (jsonb_typeof(payload) = 'object')
+        )`);
+        await schemaQuery(`CREATE INDEX IF NOT EXISTS lippi_training_interest_created_at_idx ON ${TABLE} (created_at)`);
+      });
+    })().catch(error => { schemaPromise = undefined; throw error; });
     await schemaPromise;
   };
   const purge = () => query(`DELETE FROM ${TABLE} WHERE created_at < now() - interval '90 days'`);
