@@ -99,6 +99,18 @@ for(const [locale,index] of [['pt',0],['es',1],['it',2]]) {
   const statement=sharedCopy['Lippi shares practical perspectives on fintech risk, controls, governance and regulatory readiness. Advisory or training engagements are considered individually, subject to conflict-of-interest screening and any required employer approval. Fractional CRO services are not currently offered.']?.[index];
   assert.ok(statement?.includes('CRO'), 'Missing fractional CRO exclusion in AI article '+locale);
 }
+// Training selects keep their underlying values; visible options are localized.
+assert.ok(shell.includes("picker && node.parentElement?.closest('option')"),'Regulatory filter options must remain owned by regulations.js');
+const trainingOptions = [...read('training.html').matchAll(/<option\b[^>]*>([\s\S]*?)<\/option>/gi)]
+  .map(match=>match[1].replace(/<[^>]+>/g,'').replace(/&amp;/g,'&').trim());
+for(const option of new Set(trainingOptions)) {
+  if (option !== 'English') assert.equal(sharedCopy[option]?.length,3,'Missing training option translation: '+option);
+}
+for (const page of ['index.html','training.html']) {
+  for (const match of read(page).matchAll(/placeholder="([^"]+)"/g)) {
+    assert.equal(sharedCopy[match[1]]?.length,3,'Missing '+page+' placeholder translation: '+match[1]);
+  }
+}
 const regulatoryPage = read('regulations.html');
 assert.ok(regulatoryPage.includes('<option value="it">Italiano</option>'),'Regulations picker lacks Italian');
 assert.ok(shell.includes('lippi-language-picker'),'Shared picker missing');
