@@ -1,9 +1,10 @@
 import {createHash, timingSafeEqual} from 'node:crypto';
+import {readBody, RequestError} from './json-body.js';
 
 export const SURVEY_VERSION = 'training-v1';
 export const NOTICE_VERSION = '2026-11-17';
 const TABLE = 'public.lippi_training_interest';
-const MAX_BYTES = 16 * 1024;
+
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 const MARKETS = new Set(['brazil', 'ireland', 'portugal', 'uk', 'unsure']);
 const OPTIONS = {
@@ -32,9 +33,7 @@ const response = (res, status, data, extra = {}) => {
   });
   res.end(typeof data === 'string' ? data : JSON.stringify(data));
 };
-class RequestError extends Error {
-  constructor(status, message) { super(message); this.status = status; }
-}
+
 
 export function validateSubmission(data) {
   if (!data || Array.isArray(data) || typeof data !== 'object') throw new RequestError(400, 'Invalid submission.');
@@ -65,28 +64,7 @@ export function validateSubmission(data) {
   return {id: data.submission_id.toLowerCase(), payload};
 }
 
-async function readBody(req) {
-  const declared = Number(req.headers['content-length']);
-  if (Number.isFinite(declared) && declared > MAX_BYTES) throw new RequestError(413, 'Your submission is too long.');
-  let raw;
-  // Vercel can provide a parsed body. Also support native Node request streams.
-  if (req.body !== undefined) {
-    raw = Buffer.isBuffer(req.body) ? req.body : Buffer.from(typeof req.body === 'string' ? req.body : JSON.stringify(req.body));
-    if (raw.byteLength > MAX_BYTES) throw new RequestError(413, 'Your submission is too long.');
-  } else {
-    let size = 0;
-    const chunks = [];
-    for await (const chunk of req) {
-      const buffer = Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk);
-      size += buffer.byteLength;
-      if (size > MAX_BYTES) throw new RequestError(413, 'Your submission is too long.');
-      chunks.push(buffer);
-    }
-    raw = Buffer.concat(chunks);
-  }
-  try { return JSON.parse(raw.toString('utf8')); }
-  catch { throw new RequestError(400, 'The submission could not be read.'); }
-}
+
 
 export function createTrainingService({query, transaction, env = process.env, takeRate = () => true}) {
   if (typeof query !== 'function') throw new Error('A database query function is required.');

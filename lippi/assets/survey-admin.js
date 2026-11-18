@@ -14,6 +14,17 @@
   for(const row of data.responses){
    const article=document.createElement('article');article.className='card';
    const meta=document.createElement('p');meta.className='response-date';meta.textContent=new Date(row.created_at).toLocaleString()+' · Reference '+row.id;article.append(meta);
+   const contact=document.createElement('p');
+   contact.className='response';
+   if(row.work_email){
+    const link=document.createElement('a');
+    link.href='mailto:'+encodeURIComponent(row.work_email);
+    link.textContent=row.work_email;
+    contact.append(row.contact_name+' · '+row.fintech_name+' · ',link);
+   } else {
+    contact.textContent='Earlier anonymous response';
+   }
+   article.append(contact);
    for(const [field,label] of [['milestone_risk','1. Milestone and risk'],['control_gap','2. Control gaps and previous efforts'],['support_needed','3. Desired support and constraints']]){
     const h=document.createElement('h2'),p=document.createElement('p');h.textContent=label;p.className='response';p.textContent=row[field];article.append(h,p);
    }responses.append(article);

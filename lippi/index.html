@@ -263,8 +263,10 @@ article[id]{scroll-margin-top:110px}
 .survey-field{margin-bottom:26px}.survey-field label{font-size:16px;line-height:1.5;font-weight:750;display:block;color:var(--navy)}
 .survey-number{display:inline-flex;align-items:center;justify-content:center;background:var(--teal);color:white;width:25px;height:25px;border-radius:50%;font-size:13px;margin-right:4px}
 .survey-hint{font-size:13px;line-height:1.5;color:var(--muted);margin:9px 0 12px}
-.survey-field textarea{display:block;width:100%;font:15px/1.55 Inter,Arial,sans-serif;color:var(--ink);background:#fcfefd;border:1px solid #97aaa6;border-radius:8px;padding:13px;resize:vertical;min-height:116px}
-.survey-field textarea:focus-visible,.survey-submit:focus-visible,.survey-success:focus-visible{outline:3px solid #c97c00;outline-offset:3px}
+.survey-contact{border:0;padding:0;margin:0 0 24px;min-width:0}.survey-contact legend{padding:0;margin:0 0 14px;font-size:18px;font-weight:750}.survey-contact .survey-field{margin-bottom:14px}
+#survey-mail-draft[hidden]{display:none}
+.survey-field input,.survey-field textarea{display:block;width:100%;font:15px/1.55 Inter,Arial,sans-serif;color:var(--ink);background:#fcfefd;border:1px solid #97aaa6;border-radius:8px;padding:13px}.survey-field textarea{resize:vertical;min-height:116px}
+.survey-field input:focus-visible,.survey-field textarea:focus-visible,.survey-submit:focus-visible,.survey-success:focus-visible{outline:3px solid #c97c00;outline-offset:3px}
 .survey-field textarea::placeholder{color:#667972}
 .survey-count{display:block;text-align:right;color:var(--muted);font-size:11px;margin-top:5px}
 .survey-submit{border:0;font:750 15px/1.5 Inter,Arial,sans-serif;cursor:pointer;width:100%}
@@ -524,14 +526,22 @@ section{padding:104px 0}
 <div class="survey-intro">
 <div class="label">3-minute founder survey</div>
 <h3 id="founder-survey-heading">Tell me what’s getting in the way.</h3>
-<p class="intro">Tell me what’s holding your fintech back. Your answers help me build useful services.</p>
+<p class="intro">Tell me what your fintech is working on. I’ll use your work email to follow up about the challenges you share.</p>
 <p class="survey-promise"><strong>About 3 minutes.</strong><br>Three questions. Short answers welcome.</p>
-<p>No name or email required.</p>
-<p class="survey-privacy" id="survey-privacy">Please leave out personal, customer or confidential information. Lippi uses your answers to understand founders’ challenges and improve its services. This includes AI analysis after removing identifying details. Answers are not published and stay in the survey database for up to 90 days. Taking part is optional.</p>
-<p class="survey-privacy">Questions or want your answers deleted? Email <a href="mailto:lippifintech@igormarchetti.me">lippifintech@igormarchetti.me</a> with your response reference.</p>
+<p class="survey-privacy" id="survey-privacy">Your name, fintech name and work email are used to respond to this enquiry. Survey records are kept for up to 90 days. Lippi may analyse the three answers to improve its services. The contact fields are excluded from the AI analysis export. Please leave customer and confidential information out of your answers.</p>
+<p class="survey-privacy">Questions or want your survey record deleted? Email <a href="mailto:lippifintech@igormarchetti.me">lippifintech@igormarchetti.me</a> with your response reference.</p>
 </div>
 <div class="survey-panel">
-<form id="founder-survey-form" aria-describedby="survey-privacy">
+<form id="founder-survey-form" method="post" action="/api/founder-survey" aria-describedby="survey-privacy">
+<fieldset class="survey-contact">
+<legend>Your contact details</legend>
+<div class="survey-field"><label for="founder-name">Your name</label>
+<input id="founder-name" name="contact_name" type="text" autocomplete="name" maxlength="120" required></div>
+<div class="survey-field"><label for="founder-company">Fintech name</label>
+<input id="founder-company" name="fintech_name" type="text" autocomplete="organization" maxlength="180" required></div>
+<div class="survey-field"><label for="founder-email">Work email</label>
+<input id="founder-email" name="work_email" type="email" autocomplete="email" maxlength="254" required></div>
+</fieldset>
 <div class="survey-field">
 <label for="survey-milestone"><span class="survey-number">1</span> What’s your next milestone, and what could stop you reaching it?</label>
 <p class="survey-hint" id="survey-milestone-hint">Think about licensing, launch, a banking partner or your first customers.</p>
@@ -552,13 +562,14 @@ section{padding:104px 0}
 </div>
 <div class="survey-trap" aria-hidden="true"><label for="survey-website">Leave this blank</label><input id="survey-website" name="website" type="text" tabindex="-1" autocomplete="off"></div>
 <button class="btn survey-submit" type="submit" disabled>Submit survey</button>
-<p class="survey-hint">Answer all three questions, then select Submit survey to send your answers.</p>
-<noscript><p>Please enable JavaScript to submit the survey.</p></noscript>
+<p class="survey-hint">All fields are required. Igor may email you about this enquiry.</p>
+<noscript><p>To contact Igor directly, email <a href="mailto:lippifintech@igormarchetti.me">lippifintech@igormarchetti.me</a> with your name, fintech name and enquiry.</p></noscript>
 </form>
+<a id="survey-mail-draft" class="text-link" hidden>Open my email draft</a>
 <p id="survey-status" class="survey-status" role="status" aria-live="polite">Checking the survey is ready…</p>
 <div id="survey-success" class="survey-success" tabindex="-1" hidden>
 <div class="label">Response saved</div><h3>Thank you for sharing.</h3>
-<p>Your answers will help me focus on what founders need.</p>
+<p>Thank you for telling me about your fintech. I can follow up using the work email you provided.</p>
 <p class="survey-hint">Keep this reference to ask for your answers to be deleted:<br><span id="survey-reference"></span></p>
 <a class="btn" href="https://calendly.com/igormarchettilippi/30min" target="_blank" rel="noopener noreferrer">Let’s Talk</a>
 <p class="survey-hint">Booking a conversation is optional.</p>
