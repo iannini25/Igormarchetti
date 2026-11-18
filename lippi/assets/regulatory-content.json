@@ -379,7 +379,8 @@
     "en": {
       "eyebrow": "Regulatory intelligence",
       "title": "Understand the rules. Decide what comes next.",
-      "intro": "Practical explainers for fintech and payments teams across the EU and UK. Find the status, the business question and the official sources behind each topic.",
+      "intro": "Lippi draws on experience in the European Union, the UK and Brazil. These seven explainers cover EU and UK rules for fintech and payments teams, with links to official sources.",
+      "marketExperience": "Experience across the European Union, the UK and Brazil.",
       "checked": "Reviewed",
       "focus": "In focus",
       "focus1": "Payments reform",
@@ -409,7 +410,8 @@
     "pt": {
       "eyebrow": "Inteligência regulatória",
       "title": "Entenda as regras. Defina o próximo passo.",
-      "intro": "Explicações práticas para equipes de fintech e pagamentos na UE e no Reino Unido. Consulte o estágio de cada tema, a questão de negócio e as fontes oficiais.",
+      "intro": "A Lippi reúne experiência na União Europeia, no Reino Unido e no Brasil. Estes sete guias apresentam regras da União Europeia e do Reino Unido para fintechs e equipes de pagamentos, com links para fontes oficiais.",
+      "marketExperience": "Experiência na União Europeia, no Reino Unido e no Brasil.",
       "checked": "Revisado em",
       "focus": "Em destaque",
       "focus1": "Reforma dos pagamentos",
@@ -439,7 +441,8 @@
     "es": {
       "eyebrow": "Inteligencia regulatoria",
       "title": "Comprenda las reglas. Decida el siguiente paso.",
-      "intro": "Explicaciones prácticas para equipos de fintech y pagos de la UE y el Reino Unido. Consulte el estado, la cuestión empresarial y las fuentes oficiales de cada tema.",
+      "intro": "Lippi cuenta con experiencia en la Unión Europea, el Reino Unido y Brasil. Estas siete guías explican normas de la Unión Europea y del Reino Unido para fintechs y equipos de pagos, con enlaces a fuentes oficiales.",
+      "marketExperience": "Experiencia en la Unión Europea, el Reino Unido y Brasil.",
       "checked": "Revisado el",
       "focus": "En foco",
       "focus1": "Reforma de pagos",
