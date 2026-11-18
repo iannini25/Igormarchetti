@@ -1,60 +1,109 @@
 {
- "cleanUrls": false,
- "functions": {
-  "api/**/*.js": {
-   "includeFiles": "api/_lib/analysis-prompt.txt"
-  }
- },
- "rewrites": [
-  {
-   "source": "/api/founder-survey/admin/:path",
-   "destination": "/api/founder-survey/admin?path=:path"
-  }
- ],
- "headers": [
-  {
-   "source": "/(.*)",
-   "headers": [
-    {
-     "key": "X-Content-Type-Options",
-     "value": "nosniff"
-    },
-    {
-     "key": "Referrer-Policy",
-     "value": "strict-origin-when-cross-origin"
-    },
-    {
-     "key": "Permissions-Policy",
-     "value": "camera=(), microphone=(), geolocation=()"
-    },
-    {
-     "key": "X-Frame-Options",
-     "value": "SAMEORIGIN"
+  "cleanUrls": false,
+  "functions": {
+    "api/**/*.js": {
+      "includeFiles": "api/_lib/analysis-prompt.txt"
     }
-   ]
   },
-  {
-   "source": "/survey-admin.html",
-   "headers": [
+  "rewrites": [
     {
-     "key": "X-Robots-Tag",
-     "value": "noindex, nofollow"
+      "source": "/api/founder-survey/admin/:path",
+      "destination": "/api/founder-survey/admin?path=:path"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=()"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "SAMEORIGIN"
+        }
+      ]
     },
     {
-     "key": "Cache-Control",
-     "value": "no-store"
-    }
-   ]
-  },
-  {
-   "source": "/api/(.*)",
-   "headers": [
+      "source": "/survey-admin.html",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "no-store"
+        }
+      ]
+    },
     {
-     "key": "Cache-Control",
-     "value": "no-store"
+      "source": "/api/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-store"
+        }
+      ]
+    },
+    {
+      "source": "/training-admin.html",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "no-store"
+        }
+      ]
+    },
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Lippi-Release",
+          "value": "2026-11-18-integrated"
+        }
+      ]
     }
-   ]
-  }
- ],
- "trailingSlash": false
+  ],
+  "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/training",
+      "destination": "/training.html",
+      "permanent": true
+    },
+    {
+      "source": "/regulatory",
+      "destination": "/regulations.html",
+      "permanent": true
+    },
+    {
+      "source": "/regulations",
+      "destination": "/regulations.html",
+      "permanent": true
+    },
+    {
+      "source": "/articles",
+      "destination": "/articles.html",
+      "permanent": true
+    },
+    {
+      "source": "/newsletter",
+      "destination": "/articles.html#newsletter",
+      "permanent": true
+    }
+  ]
 }

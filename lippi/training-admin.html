@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Training interest responses | Lippi</title>
+  <style>
+    :root{color-scheme:light;font-family:Inter,ui-sans-serif,system-ui,-apple-system,sans-serif;color:#183447;background:#f4f8f7}*{box-sizing:border-box}body{margin:0}main{width:min(1080px,100%);margin:44px auto;padding:0 24px 48px}h1{font-size:clamp(30px,5vw,44px);line-height:1.12;color:#0d2637}h2{font-size:21px}p{line-height:1.6}.eyebrow{font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:750;color:#137c75}.muted,.meta{color:#506672}.meta{font-size:13px;overflow-wrap:anywhere}.card{padding:24px;background:white;border:1px solid #d9e5e1;border-radius:16px;margin:20px 0}#login{max-width:580px}label{display:block;font-weight:700;margin-bottom:8px}input{width:100%;padding:14px;border:1px solid #98aca9;border-radius:8px;font:inherit}button{font:inherit;font-weight:650;padding:12px 17px;border:1px solid #137c75;border-radius:8px;background:#137c75;color:white;cursor:pointer}button.secondary{background:white;color:#137c75}button:disabled{opacity:.55;cursor:wait}.bar{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}a{color:#0c625c}.error{color:#9c2727}#status{min-height:25px}dl{display:grid;grid-template-columns:minmax(130px,190px) 1fr;gap:10px 20px}dt{font-weight:650}dd{margin:0;white-space:pre-wrap;overflow-wrap:anywhere}[hidden]{display:none!important}:focus-visible{outline:3px solid #bf770e;outline-offset:4px}@media(max-width:580px){main{padding:0 18px 32px}.card{padding:20px}dl{grid-template-columns:1fr;gap:4px}dd{margin-bottom:12px}}
+  </style>
+  <script src="/assets/training-admin.js" defer></script>
+</head>
+<body>
+<main>
+  <p class="eyebrow">Lippi FinTech Advisory · Owner access</p>
+  <h1>Training interest responses</h1>
+  <p class="muted">Review programme preferences, budgets and requests for a reply.</p>
+  <form id="login" class="card">
+    <label for="admin-key">Private access key</label>
+    <input id="admin-key" type="password" autocomplete="off" minlength="32" required>
+    <div class="bar"><button type="submit">Open responses</button></div>
+    <p class="muted">Your key stays in memory and is cleared when you sign out or reload this page.</p>
+  </form>
+  <p id="status" role="status" aria-live="polite"></p>
+  <section id="dashboard" hidden>
+    <div class="card">
+      <h2 id="count">Responses</h2>
+      <div class="bar">
+        <button id="refresh" type="button">Refresh</button>
+        <button data-export="export.csv" type="button" class="secondary">Download CSV</button>
+        <button data-export="export.json" type="button" class="secondary">Download JSON</button>
+        <button id="logout" type="button" class="secondary">Sign out</button>
+      </div>
+      <p class="muted">Budgets are in EUR per attendee for all four two-hour online workshops over four weeks. An email address appears only when the participant requested a reply. This form does not subscribe anyone to a newsletter.</p>
+      <p class="muted">The service removes responses older than 90 days when it is accessed. Treat downloaded copies as private and manage their retention separately.</p>
+    </div>
+    <div id="responses"></div>
+  </section>
+  <p><a href="/training.html">Return to the training programme</a></p>
+</main>
+</body>
+</html>
