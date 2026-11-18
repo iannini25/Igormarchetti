@@ -318,6 +318,14 @@ section{padding:104px 0}
 .hero .actions {align-items:center;gap:20px}
 .hero .actions .hero-link {margin:0;padding:10px 0}
 .topic-directory {background:var(--paper);padding:64px 0}
+.topic-body .project-offer {margin:0;padding:0;border:0}
+.fee-list {max-width:780px}
+.fee-list article {padding:16px 0;border-bottom:1px solid #d4e3de}
+.fee-list h4 {margin:0;display:flex;justify-content:space-between;gap:8px 20px;flex-wrap:wrap;font-size:18px}
+.fee-list h4 span {color:var(--teal);white-space:nowrap}
+.fee-list p,.interim-note p {margin:6px 0;color:var(--muted)}
+.interim-note {margin-top:26px}
+.interim-note .text-link {margin:0}
 .topic-directory h2 {margin:0 0 24px}
 .topic-filters {display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
 .topic-filters[hidden], .topic-row[hidden] {display:none}
@@ -469,78 +477,36 @@ section{padding:104px 0}
 <div class="topic-body">
 <section class="alt" id="engagement">
 <div class="wrap">
-<div class="label">Ways to work together</div>
-<h3>A focused project or an interim role.</h3>
-<p class="intro">We agree the work, results, timing and fees before we start.</p>
-<div class="grid engagement-grid">
-<article class="card role-card" id="senior-roles">
-<div class="card-kicker">Join your team</div>
-<h3>Interim risk leadership</h3>
-<p>Need experienced risk support in your team? I’m available for senior interim roles.</p>
-<p>I support risk leaders, challenge decisions, improve controls and prepare clear board reports.</p>
-<p class="location-note">Based in Dublin. Open to remote work from Ireland.</p>
-<a class="text-link" href="https://igormarchetti.me/" target="_blank" rel="noopener noreferrer">View my professional profile ↗</a>
-</article>
-<article class="card" id="project-support">
-<div class="card-kicker">Solve a specific problem</div>
-<h3>Focused projects</h3>
-<p>I help founders and their teams solve a clear risk, controls or payments challenge.</p>
-<p>Review risks, fix control gaps, simplify reporting or strengthen supplier checks.</p>
-<p class="location-note">You know what’s included and what it costs before we start.</p>
-<a class="text-link" href="#contact">Discuss your project →</a>
-</article>
-</div>
 <div class="project-offer" id="pricing" aria-labelledby="pricing-heading">
-<div class="label">Services &amp; prices</div>
-<h3 id="pricing-heading">Start with the support you need.</h3>
-<p class="intro">Working towards a licence, your first customers or a banking partner? Choose a starting point.</p>
-<div class="pricing-grid">
-<article class="pricing-card" aria-labelledby="diagnostic-heading">
-<p class="pricing-kicker">Find your priorities</p>
-<h4 id="diagnostic-heading">Initial review</h4>
-<p class="pricing-amount">€1,500 <span>fixed fee</span></p>
-<p>Find your main gaps and where to focus your time and budget.</p>
-<ul><li>One conversation with the founder</li><li>A limited review of documents we agree</li><li>A short list of priorities and a follow-up call</li></ul>
-<p class="pricing-effort">About two days of work.</p>
-<a class="btn outline pricing-cta" href="https://calendly.com/igormarchettilippi/30min" target="_blank" rel="noopener noreferrer" aria-label="Let’s Talk about an initial review, opens Calendly in a new tab">Let’s Talk</a>
+<h3 id="pricing-heading">Advisory fees</h3>
+<div class="fee-list">
+<article aria-labelledby="diagnostic-heading">
+<h4 id="diagnostic-heading">Initial review <span>€1,500</span></h4>
+<p>A conversation, a review of agreed documents and a short list of risks to tackle first.</p>
 </article>
-<article class="pricing-card pricing-featured" aria-labelledby="review-heading">
-<p class="pricing-kicker">Build your action plan</p>
-<h4 id="review-heading">Risk &amp; controls review</h4>
-<p class="pricing-amount">€3,000 <span>fixed fee</span></p>
-<p>Review one business area and get a clear plan to improve its controls.</p>
-<ul><li>The gaps that matter most</li><li>Clear actions and suggested owners</li><li>A 90-day plan and a discussion with your leadership team</li></ul>
-<p class="pricing-effort">About five days of work, usually over two weeks.</p>
-<a class="btn pricing-cta" href="https://calendly.com/igormarchettilippi/30min" target="_blank" rel="noopener noreferrer" aria-label="Let’s Talk about a risk and controls review, opens Calendly in a new tab">Let’s Talk</a>
+<article aria-labelledby="review-heading">
+<h4 id="review-heading">Risk and controls review <span>€3,000</span></h4>
+<p>A review of one business area, with priority gaps, suggested owners and a 90-day action plan.</p>
 </article>
-<article class="pricing-card" aria-labelledby="implementation-heading">
-<p class="pricing-kicker">Put the plan into practice</p>
-<h4 id="implementation-heading">Implementation support</h4>
-<p class="pricing-amount">€2,400 <span>per month</span></p>
-<p>Work with me to put your plan into practice and track progress.</p>
-<ul><li>Four days of support each month</li><li>Help completing actions and keeping your risk register up to date</li><li>Progress updates for your team</li></ul>
-<p class="pricing-effort">We agree priorities and availability each month. Extra work is priced separately.</p>
-<a class="btn outline pricing-cta" href="https://calendly.com/igormarchettilippi/30min" target="_blank" rel="noopener noreferrer" aria-label="Let’s Talk about implementation support, opens Calendly in a new tab">Let’s Talk</a>
+<article id="project-support" aria-labelledby="implementation-heading">
+<h4 id="implementation-heading">Implementation support <span>By quotation</span></h4>
+<p>Choose the actions you want help with. We agree the work, fee and dates before you book. Saturday sessions are possible by arrangement.</p>
 </article>
 </div>
-<p class="pricing-tax">Prices are in euro, plus VAT where applicable. Fixed fees cover the work agreed below.</p>
-<h4 class="review-outputs-heading">What you get from the €3,000 review</h4>
-<ol class="deliverables">
-<li><strong>What to fix first</strong><span>The key gaps in your controls and supporting evidence.</span></li>
-<li><strong>Who does what</strong><span>Actions and suggested owners, ready for your team to agree.</span></li>
-<li><strong>Your next 90 days</strong><span>A practical plan that fits your priorities and available time.</span></li>
-</ol>
+<p class="pricing-tax">Review fees are fixed for the agreed scope. VAT applies where relevant.</p>
 <details class="pricing-scope">
-<summary>What’s included, timing &amp; payment</summary>
+<summary>Review scope and payment terms</summary>
 <div>
-<p><strong>The €3,000 review.</strong> One legal entity, one jurisdiction and one agreed business area. Up to three interviews, agreed documents, one leadership discussion and one feedback round.</p>
-<p><strong>Before launch.</strong> I review your planned controls and readiness. Testing controls in use needs real operating evidence and a separate agreement.</p>
-<p><strong>Timing.</strong> Usually two weeks once the documents and people are available. The initial review covers a smaller agreed area and a short gap summary.</p>
-<p><strong>Putting the plan into practice.</strong> The review includes your plan; carrying out the actions is separate work. Monthly support covers four days, up to 32 hours total. This includes delivery, meetings and agreed email support.</p>
-<p><strong>Payment.</strong> Fixed fees: 50% upfront and 50% on delivery. Monthly support is paid in advance. We agree any extra work or travel costs first.</p>
-<p><strong>Other work.</strong> Full licence applications, regulator correspondence and extensive policy writing are scoped and priced separately. Legal and tax advice are not included. Support does not guarantee a licence or acceptance by customers.</p>
+<p>The €3,000 review covers one entity, one jurisdiction and one business area. It includes up to three interviews, agreed documents, one leadership discussion and one feedback round.</p>
+<p>For a pre-launch business, I assess planned controls. Testing controls already in use or implementing changes can be quoted separately.</p>
+<p>Fixed-fee reviews are payable 50% upfront and 50% on delivery. We agree dates and any additional costs in advance.</p>
+<p>Licence applications, regulator correspondence and extensive policy writing are scoped separately. Legal and tax advice are outside the scope of these reviews.</p>
 </div>
 </details>
+</div>
+<div class="interim-note" id="senior-roles">
+<h3>Looking for interim risk leadership?</h3>
+<p>For a separately scoped role, <a class="text-link" href="https://igormarchetti.me/" target="_blank" rel="noopener noreferrer">view my professional profile</a> or <a class="text-link" href="#contact">get in touch</a> to discuss availability.</p>
 </div>
 <p class="fine">Before starting, we agree written terms, availability and how to address any conflicts of interest.</p>
 </div>
