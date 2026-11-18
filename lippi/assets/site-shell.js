@@ -18,7 +18,7 @@
   document.addEventListener('click', event => {
     if (!event.target.closest('[data-site-header]')) setOpen(false);
   });
-  matchMedia('(min-width: 781px)').addEventListener('change', event => { if (event.matches) setOpen(false); });
+  matchMedia('(min-width: 1101px)').addEventListener('change', event => { if (event.matches) setOpen(false); });
 })();
 
 /* Shared progressive localization. English remains the source; unmapped text remains in English.
@@ -65,6 +65,8 @@
     });
     const ownLabel = document.querySelector('.lippi-language-picker > span');
     if (ownLabel) ownLabel.textContent = labels[lang];
+    const ownSelect = document.getElementById('lippi-language');
+    if (ownSelect) ownSelect.setAttribute('aria-label',labels[lang]);
     try { localStorage.setItem('lippi-language',lang); } catch {}
   }
   if (!picker) {
