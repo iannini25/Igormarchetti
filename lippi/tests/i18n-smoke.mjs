@@ -286,4 +286,21 @@ for (const path of ['/survey-admin.html','/training-admin.html']) {
     'Admin-only path exposed in sitemap: '+path);
 }
 
+
+// Guard accessibility text as well as visible copy: regression-protect image
+// alternatives, form placeholders and aria-labels on all six public pages.
+// Proper names and example email addresses intentionally stay unchanged.
+const unchangedAttributeValues = new Set(['Igor Marchetti Lippi','you@company.com']);
+for(const page of [
+  'index.html','training.html','regulations.html','articles.html',
+  'independence.html','ai-governance-fintech-web-summit-2026.html'
+]) {
+  for(const match of read(page).matchAll(/\b(?:aria-label|placeholder|alt|title)="([^"]+)"/g)) {
+    const value = deEntity(match[1]).trim();
+    if(!value || unchangedAttributeValues.has(value)) continue;
+    assert.equal(sharedCopy[value]?.length,3,
+      page+' missing PT/ES/IT accessible/form attribute copy: '+value);
+  }
+}
+
 console.log('Source-level localization checks passed for 4 languages; 7 regulatory explainers; independence page and '+Object.keys(sharedCopy).length+' curated shared translations. Home/training copy audited: '+JSON.stringify(contentAudit)+'. Browser tests still required.');
