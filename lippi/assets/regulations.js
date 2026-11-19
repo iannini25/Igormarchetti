@@ -15,6 +15,12 @@
     return response.json();
   }).catch(error => { dataPromise = undefined; throw error; });
   const countLabels = {en:'explainers shown',pt:'temas exibidos',es:'temas mostrados',it:'schede visualizzate'};
+  const translationLoadError = {
+    en:'The translation could not be loaded. Please try again. The explainers remain available below.',
+    pt:'Não foi possível carregar a tradução. Tente novamente. Os conteúdos continuam disponíveis abaixo.',
+    es:'No se pudo cargar la traducción. Vuelve a intentarlo. Las fichas siguen disponibles a continuación.',
+    it:'Impossibile caricare la traduzione. Riprova. Le schede rimangono disponibili qui sotto.'
+  };
   function filter() {
     const needle = search.value.trim().toLocaleLowerCase();
     let visible = 0;
@@ -74,7 +80,7 @@
     const requestedLanguage = language.value;
     translate(requestedLanguage).catch(() => {
       language.value = currentLanguage;
-      count.textContent = 'The translation could not be loaded. Please try again. The explainers remain available below.';
+      count.textContent = translationLoadError[currentLanguage];
     });
   });
   document.querySelector('.reg-language').hidden = false;
