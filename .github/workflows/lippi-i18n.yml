@@ -1,0 +1,35 @@
+name: Lippi localization checks
+
+on:
+  pull_request:
+    paths:
+      - 'lippi/**'
+      - '.github/workflows/lippi-i18n.yml'
+  push:
+    branches:
+      - main
+    paths:
+      - 'lippi/**'
+      - '.github/workflows/lippi-i18n.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  source-localization:
+    name: Lippi four-language source checks
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: lippi
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Run localization smoke tests
+        run: npm run test:i18n
