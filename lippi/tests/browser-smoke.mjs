@@ -1,5 +1,5 @@
 /** Chromium-based, local-only QA: public pages, language selection and mobile navigation.
- * Run with a static server at 127.0.0.1:8765 and npm install --no-save playwright.
+ * Run with a static server at 127.0.0.1:8765, installed Playwright JS, and system Google Chrome.
  * This is NOT a production deployment or live-site verification.
  */
 import assert from 'node:assert/strict';
@@ -15,7 +15,7 @@ const publicPaths = new Set(pages);
 const englishHeadings = new Map();
 const results = [];
 const failures = [];
-const browser = await chromium.launch({headless:true});
+const browser = await chromium.launch({channel:'chrome',headless:true});
 
 async function checkPage(context,route,lang,htmlLang,device) {
   const page = await context.newPage();
