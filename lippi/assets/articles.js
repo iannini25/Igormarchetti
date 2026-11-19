@@ -20,6 +20,7 @@
   const noticeVersion = '2026-11-18';
   let busy = false;
   let registrationMode = 'checking';
+  let pendingDraftPayload = null;
   const update = (message, state = '') => {
     lastMessage = message; lastState = state;
     status.textContent = tr(message);
@@ -30,6 +31,7 @@
     const note = document.getElementById('newsletter-language-note');
     if(note) note.textContent = tr('Newsletter emails are currently available in English, Portuguese and Spanish. The website can also be viewed in Italian.');
     if(registrationMode === 'email') button.textContent = tr('Prepare email request');
+    if(pendingDraftPayload && !emailFallback.hidden) renderEmail(pendingDraftPayload);
   });
   const useEmailFallback = message => {
     registrationMode = 'email';
@@ -37,22 +39,27 @@
     button.textContent = tr('Prepare email request');
     update(message || 'Online registration is unavailable. Enter your details and consent, then prepare an email request to send from your email app.');
   };
-  const prepareEmail = payload => {
+  const renderEmail = payload => {
     const language = {en:'English', pt:'Português', es:'Español'}[payload.language];
-    if (!language || payload.consent !== true) {
+    if (!language || payload.consent !== true) return false;
+    const body = [
+      tr('Hello Igor,'), '',
+      tr('Please add me to the Lippi newsletter list.'), '',
+      tr('Email address:') + ' ' + payload.email,
+      tr('Preferred language: ') + language, '',
+      tr('I agree to receive Lippi articles and regulatory updates by email. I can withdraw my consent at any time by emailing lippifintech@igormarchetti.me.'),
+      tr('Consent notice version:') + ' ' + noticeVersion, '',
+      tr('Thank you.')
+    ].join('\n');
+    emailDraft.href = `mailto:lippifintech@igormarchetti.me?subject=${encodeURIComponent(tr('Lippi newsletter request'))}&body=${encodeURIComponent(body)}`;
+    return true;
+  };
+  const prepareEmail = payload => {
+    if (!renderEmail(payload)) {
       update('Please choose a preferred language and confirm your consent.', 'error');
       return;
     }
-    const body = [
-      'Hello Igor,', '',
-      'Please add me to the Lippi newsletter list.', '',
-      `Email address: ${payload.email}`,
-      `Preferred language: ${language}`, '',
-      'I agree to receive Lippi articles and regulatory updates by email. I can withdraw my consent at any time by emailing lippifintech@igormarchetti.me.',
-      `Consent notice version: ${noticeVersion}`, '',
-      'Thank you.'
-    ].join('\n');
-    emailDraft.href = `mailto:lippifintech@igormarchetti.me?subject=${encodeURIComponent('Lippi newsletter request')}&body=${encodeURIComponent(body)}`;
+    pendingDraftPayload = payload;
     emailFallback.hidden = false;
     update('Your email draft is ready. Open it below, review it and select Send in your email app. Nothing is sent automatically.');
     emailDraft.focus();
@@ -71,7 +78,7 @@
     }
   }
 
-  form.addEventListener('input', () => { emailFallback.hidden = true; });
+  form.addEventListener('input', () => { pendingDraftPayload = null; emailFallback.hidden = true; });
 
   form.addEventListener('submit', async event => {
     event.preventDefault();
