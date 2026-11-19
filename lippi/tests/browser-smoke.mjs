@@ -13,6 +13,7 @@ const pages = [
 const locales = { en:'en', pt:'pt-BR', es:'es', it:'it' };
 const publicPaths = new Set(pages);
 const englishHeadings = new Map();
+const englishMetadata = new Map();
 const results = [];
 const failures = [];
 const browser = await chromium.launch({channel:'chrome',headless:true});
@@ -36,7 +37,30 @@ async function checkPage(context,route,lang,htmlLang,device) {
     );
     const heading = (await page.locator('h1').first().textContent())?.trim();
     assert.ok(heading?.length,route+' has no visible heading');
+    // Check the real browser DOM, not just source strings. English is the default;
+    // localized titles and descriptions should change with the requested locale.
+    const metadata = await page.evaluate(() => ({
+      title: document.title.trim(),
+      description: document.querySelector('meta[name="description"]')?.content?.trim() || '',
+      canonical: document.querySelector('link[rel="canonical"]')?.href || ''
+    }));
+    assert.ok(metadata.title,route+' has no document title');
+    assert.ok(metadata.description,route+' has no meta description');
+    assert.equal(new URL(metadata.canonical).pathname,route,
+      'Canonical URL should identify the current public page');
+    assert.equal(await page.locator('main').count(),1,route+' must have one main landmark');
+    assert.equal(await page.locator('img:not([alt])').count(),0,
+      route+' has an image without alternative text');
     if (device === 'desktop') {
+      if (lang === 'en') englishMetadata.set(route,metadata);
+      else {
+        const original = englishMetadata.get(route);
+        assert.ok(original,'English baseline missing for '+route);
+        assert.notEqual(metadata.title,original.title,
+          route+' title remains English in '+lang);
+        assert.notEqual(metadata.description,original.description,
+          route+' description remains English in '+lang);
+      }
       if (lang === 'en') englishHeadings.set(route,heading);
       else assert.notEqual(heading,englishHeadings.get(route),
         route+' heading still appears in English for '+lang);
@@ -142,5 +166,5 @@ if(failures.length) {
   for(const message of failures) console.error('FAILED: '+message);
   process.exitCode=1;
 } else {
-  console.log('Passed localized content, selection, public links, safeguard copy, and mobile menu smoke checks. NOT live-site verification.');
+  console.log('Passed localized content, browser metadata, main landmarks, image alt attributes, public links, safeguards and mobile menu smoke checks. NOT live-site verification.');
 }
