@@ -884,7 +884,16 @@ section{padding:104px 0}
   const rows = [...directory.querySelectorAll('.topic-row')];
   const status = directory.querySelector('.topic-status');
 
+  let currentTopic = 'all';
+  const countLabels = {
+    en: ['1 topic shown', 'topics shown'],
+    pt: ['1 tema exibido', 'temas exibidos'],
+    es: ['1 tema mostrado', 'temas mostrados'],
+    it: ['1 argomento visualizzato', 'argomenti visualizzati']
+  };
+
   function filterTopics(topic) {
+    currentTopic = topic;
     for (const button of buttons) {
       button.setAttribute('aria-pressed', String(button.dataset.filter === topic));
     }
@@ -892,8 +901,11 @@ section{padding:104px 0}
       row.hidden = topic !== 'all' && row.dataset.topic !== topic;
     }
     const count = rows.filter(row => !row.hidden).length;
-    status.textContent = count === 1 ? '1 topic shown' : count + ' topics shown';
+    const locale = window.LippiI18n?.language || 'en';
+    const labels = countLabels[locale] || countLabels.en;
+    status.textContent = count === 1 ? labels[0] : count + ' ' + labels[1];
   }
+  document.addEventListener('lippi:languagechange', () => filterTopics(currentTopic));
 
   function revealFragment(hash) {
     const target = document.getElementById(hash.slice(1));

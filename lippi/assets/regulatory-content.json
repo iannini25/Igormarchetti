@@ -10,35 +10,41 @@
       "topicLabel": {
         "en": "Operational resilience",
         "pt": "Resiliência operacional",
-        "es": "Resiliencia operativa"
+        "es": "Resiliencia operativa",
+        "it": "Resilienza operativa"
       },
       "territory": "EU",
       "status": "applicable",
       "statusLabel": {
         "en": "Applicable",
         "pt": "Em aplicação",
-        "es": "Aplicable"
+        "es": "Aplicable",
+        "it": "Applicabile"
       },
       "featured": true,
       "title": {
         "en": "DORA: keeping financial services running",
         "pt": "DORA: manter os serviços financeiros funcionando",
-        "es": "DORA: mantener operativos los servicios financieros"
+        "es": "DORA: mantener operativos los servicios financieros",
+        "it": "DORA: garantire la continuità dei servizi finanziari"
       },
       "summary": {
         "en": "DORA has applied since 17 January 2025. It brings together requirements for technology risk, ICT incidents, resilience testing and ICT suppliers for financial entities within its scope.",
         "pt": "O DORA é aplicável desde 17 de janeiro de 2025. Reúne requisitos sobre riscos de tecnologia, incidentes de TIC, testes de resiliência e fornecedores de TIC para as entidades financeiras abrangidas.",
-        "es": "DORA se aplica desde el 17 de enero de 2025. Reúne requisitos sobre riesgos tecnológicos, incidentes de TIC, pruebas de resiliencia y proveedores de TIC para las entidades financieras incluidas en su ámbito."
+        "es": "DORA se aplica desde el 17 de enero de 2025. Reúne requisitos sobre riesgos tecnológicos, incidentes de TIC, pruebas de resiliencia y proveedores de TIC para las entidades financieras incluidas en su ámbito.",
+        "it": "DORA si applica dal 17 gennaio 2025. Riunisce i requisiti sul rischio informatico, sugli incidenti ICT, sui test di resilienza e sui fornitori ICT per le entità finanziarie che rientrano nel suo ambito."
       },
       "action": {
         "en": "Link each relevant requirement to an owner, a control and evidence. Start with your ICT risk assessment, incident process, test results and supplier register.",
         "pt": "Ligue cada requisito relevante a um responsável, um controle e suas evidências. Comece pela avaliação de riscos de TIC, pelo processo de incidentes, pelos testes e pelo cadastro de fornecedores.",
-        "es": "Vincule cada requisito relevante con un responsable, un control y sus evidencias. Empiece por la evaluación de riesgos de TIC, el proceso de incidentes, los resultados de pruebas y el registro de proveedores."
+        "es": "Vincule cada requisito relevante con un responsable, un control y sus evidencias. Empiece por la evaluación de riesgos de TIC, el proceso de incidentes, los resultados de pruebas y el registro de proveedores.",
+        "it": "Collega ciascun requisito pertinente a un responsabile, un controllo e un'evidenza documentale. Inizia dalla valutazione del rischio ICT, dalla gestione degli incidenti, dai risultati dei test e dal registro dei fornitori."
       },
       "applicability": {
         "en": "Check the entity types, exclusions and proportionality provisions. A technology supplier and a regulated payment institution do not have identical duties.",
         "pt": "Verifique os tipos de entidade, as exclusões e as regras de proporcionalidade. Um fornecedor de tecnologia e uma instituição de pagamento regulada não têm obrigações idênticas.",
-        "es": "Compruebe los tipos de entidad, las exclusiones y las reglas de proporcionalidad. Un proveedor tecnológico y una entidad de pago regulada no tienen obligaciones idénticas."
+        "es": "Compruebe los tipos de entidad, las exclusiones y las reglas de proporcionalidad. Un proveedor tecnológico y una entidad de pago regulada no tienen obligaciones idénticas.",
+        "it": "Verifica le tipologie di entità, le esclusioni e il principio di proporzionalità. Un fornitore tecnologico e un istituto di pagamento regolamentato non hanno obblighi identici."
       },
       "sources": [
         {
@@ -60,35 +66,41 @@
       "topicLabel": {
         "en": "Financial crime",
         "pt": "Crimes financeiros",
-        "es": "Delitos financieros"
+        "es": "Delitos financieros",
+        "it": "Criminalità finanziaria"
       },
       "territory": "EU",
       "status": "current-and-transition",
       "statusLabel": {
         "en": "Current duties and transition",
         "pt": "Obrigações atuais e transição",
-        "es": "Obligaciones actuales y transición"
+        "es": "Obligaciones actuales y transición",
+        "it": "Obblighi attuali e transizione"
       },
       "featured": true,
       "title": {
         "en": "AML/CFT and AMLA: who sets the rules?",
         "pt": "Prevenção à lavagem de dinheiro e AMLA: quem define as regras?",
-        "es": "Prevención del blanqueo y AMLA: ¿quién establece las reglas?"
+        "es": "Prevención del blanqueo y AMLA: ¿quién establece las reglas?",
+        "it": "AML/CFT e AMLA: chi stabilisce le regole?"
       },
       "summary": {
         "en": "AMLA is the EU authority for anti-money laundering and countering terrorist financing. Existing duties continue; the new AML Regulation generally applies from 10 July 2027, while AMLA's direct supervision of selected entities begins in 2028.",
         "pt": "A AMLA é a autoridade europeia de prevenção à lavagem de dinheiro e ao financiamento do terrorismo. As obrigações atuais continuam; o novo regulamento AMLR será, em geral, aplicável a partir de 10 de julho de 2027, e a supervisão direta de entidades selecionadas pela AMLA começa em 2028.",
-        "es": "AMLA es la autoridad europea de prevención del blanqueo de capitales y de la financiación del terrorismo. Las obligaciones actuales continúan; el nuevo reglamento AMLR se aplicará, en general, desde el 10 de julio de 2027, y la supervisión directa de entidades seleccionadas por AMLA comenzará en 2028."
+        "es": "AMLA es la autoridad europea de prevención del blanqueo de capitales y de la financiación del terrorismo. Las obligaciones actuales continúan; el nuevo reglamento AMLR se aplicará, en general, desde el 10 de julio de 2027, y la supervisión directa de entidades seleccionadas por AMLA comenzará en 2028.",
+        "it": "AMLA è l'autorità dell'UE per la lotta al riciclaggio e al finanziamento del terrorismo. Gli obblighi vigenti restano applicabili; il nuovo regolamento antiriciclaggio si applicherà in generale dal 10 luglio 2027, mentre la vigilanza diretta di AMLA su determinati soggetti inizierà nel 2028."
       },
       "action": {
         "en": "Review customer due diligence, beneficial ownership, transaction monitoring and escalation. Record which new requirements affect your business and who will implement them.",
         "pt": "Revise a identificação e diligência de clientes, o beneficiário final, o monitoramento de transações e o encaminhamento de alertas. Registre quais novos requisitos afetam o negócio e quem irá implementá-los.",
-        "es": "Revise la diligencia debida de clientes, la titularidad real, la monitorización de operaciones y la gestión de alertas. Registre qué nuevos requisitos afectan al negocio y quién los implantará."
+        "es": "Revise la diligencia debida de clientes, la titularidad real, la monitorización de operaciones y la gestión de alertas. Registre qué nuevos requisitos afectan al negocio y quién los implantará.",
+        "it": "Rivedi l'adeguata verifica della clientela, la titolarità effettiva, il monitoraggio delle operazioni e le procedure di escalation. Registra quali nuovi requisiti riguardano l'attività e chi li attuerà."
       },
       "applicability": {
         "en": "AMLA will not directly supervise every fintech. AMLR has sector exceptions; the new AML Directive has phased national transposition dates.",
         "pt": "A AMLA não supervisionará diretamente todas as fintechs. O AMLR tem exceções setoriais; a nova diretiva de prevenção à lavagem de dinheiro prevê prazos graduais de transposição nacional.",
-        "es": "AMLA no supervisará directamente a todas las fintech. AMLR incluye excepciones sectoriales; la nueva directiva de prevención del blanqueo tiene plazos escalonados de transposición nacional."
+        "es": "AMLA no supervisará directamente a todas las fintech. AMLR incluye excepciones sectoriales; la nueva directiva de prevención del blanqueo tiene plazos escalonados de transposición nacional.",
+        "it": "AMLA non vigilerà direttamente su tutte le fintech. Il regolamento AML prevede eccezioni settoriali; la nuova direttiva antiriciclaggio ha scadenze differenziate per il recepimento nazionale."
       },
       "sources": [
         {
@@ -118,35 +130,41 @@
       "topicLabel": {
         "en": "Privacy and data",
         "pt": "Privacidade e dados",
-        "es": "Privacidad y datos"
+        "es": "Privacidad y datos",
+        "it": "Privacy e dati"
       },
       "territory": "EU",
       "status": "applicable",
       "statusLabel": {
         "en": "Applicable",
         "pt": "Em aplicação",
-        "es": "Aplicable"
+        "es": "Aplicable",
+        "it": "Applicabile"
       },
       "featured": true,
       "title": {
         "en": "GDPR: understand and protect personal data",
         "pt": "GDPR: entender e proteger os dados pessoais",
-        "es": "RGPD: comprender y proteger los datos personales"
+        "es": "RGPD: comprender y proteger los datos personales",
+        "it": "GDPR: comprendere e proteggere i dati personali"
       },
       "summary": {
         "en": "GDPR governs personal-data processing within its scope. It can also cover businesses outside the EU when they offer goods or services to people in the EU or monitor their behaviour there.",
         "pt": "O GDPR rege o tratamento de dados pessoais dentro de seu âmbito. Também pode abranger empresas de fora da UE que ofereçam produtos ou serviços a pessoas na UE ou monitorem o comportamento delas nesse território.",
-        "es": "El RGPD regula el tratamiento de datos personales dentro de su ámbito. También puede incluir empresas de fuera de la UE que ofrezcan bienes o servicios a personas en la UE o monitoricen su comportamiento allí."
+        "es": "El RGPD regula el tratamiento de datos personales dentro de su ámbito. También puede incluir empresas de fuera de la UE que ofrezcan bienes o servicios a personas en la UE o monitoricen su comportamiento allí.",
+        "it": "Il GDPR disciplina il trattamento dei dati personali nel proprio ambito di applicazione. Può riguardare anche imprese extra-UE che offrono beni o servizi a persone nell'UE o ne monitorano il comportamento."
       },
       "action": {
         "en": "Map your data, purpose, lawful basis, access and retention. Keep evidence of privacy information, processor arrangements, security and breach handling; assess when an impact assessment is required.",
         "pt": "Mapeie os dados, a finalidade, a base legal, os acessos e os prazos de retenção. Mantenha evidências dos avisos de privacidade, dos contratos com operadores, da segurança e da gestão de violações; avalie quando um relatório de impacto é necessário.",
-        "es": "Identifique los datos, la finalidad, la base jurídica, los accesos y los plazos de conservación. Mantenga evidencias de la información de privacidad, los acuerdos con encargados, la seguridad y la gestión de brechas; evalúe cuándo se necesita una evaluación de impacto."
+        "es": "Identifique los datos, la finalidad, la base jurídica, los accesos y los plazos de conservación. Mantenga evidencias de la información de privacidad, los acuerdos con encargados, la seguridad y la gestión de brechas; evalúe cuándo se necesita una evaluación de impacto.",
+        "it": "Mappa dati, finalità, basi giuridiche, accessi e tempi di conservazione. Conserva evidenze su informative, rapporti con i responsabili del trattamento, sicurezza e gestione delle violazioni; valuta quando è necessaria una valutazione d'impatto."
       },
       "applicability": {
         "en": "Assess establishment and targeting, rather than nationality alone. UK data-protection requirements need a separate assessment.",
         "pt": "Avalie o estabelecimento e o direcionamento das atividades, não apenas a nacionalidade das pessoas. Os requisitos de proteção de dados do Reino Unido precisam de análise própria.",
-        "es": "Evalúe el establecimiento y la orientación de las actividades, no solo la nacionalidad de las personas. Los requisitos de protección de datos del Reino Unido necesitan un análisis separado."
+        "es": "Evalúe el establecimiento y la orientación de las actividades, no solo la nacionalidad de las personas. Los requisitos de protección de datos del Reino Unido necesitan un análisis separado.",
+        "it": "Valuta lo stabilimento e il mercato cui ci si rivolge, non soltanto la nazionalità. I requisiti britannici sulla protezione dei dati richiedono una valutazione distinta."
       },
       "sources": [
         {
@@ -172,36 +190,42 @@
       "topicLabel": {
         "en": "Payments",
         "pt": "Pagamentos",
-        "es": "Pagos"
+        "es": "Pagos",
+        "it": "Pagamenti"
       },
       "territory": "EU",
       "status": "pending-final-adoption",
       "statusLabel": {
         "en": "Awaiting Parliament's second reading",
         "pt": "Aguardando segunda leitura no Parlamento",
-        "es": "Pendiente de segunda lectura del Parlamento"
+        "es": "Pendiente de segunda lectura del Parlamento",
+        "it": "In attesa della seconda lettura del Parlamento"
       },
       "featured": true,
       "sourceDate": "2026-11-12",
       "title": {
         "en": "PSD3 and PSR: prepare for payments reform",
         "pt": "PSD3 e PSR: preparar a reforma dos pagamentos",
-        "es": "PSD3 y PSR: prepararse para la reforma de pagos"
+        "es": "PSD3 y PSR: prepararse para la reforma de pagos",
+        "it": "PSD3 e PSR: prepararsi alla riforma dei pagamenti"
       },
       "summary": {
         "en": "The payments reform package has an agreed negotiated text, but both official Parliament dossiers still await second reading on 18 November 2026. Prepare for changes without presenting PSD3 or PSR as already applicable replacement rules.",
         "pt": "O pacote de reforma dos pagamentos tem um texto acordado nas negociações, mas os dois processos oficiais ainda aguardam segunda leitura no Parlamento em 18 de novembro de 2026. Prepare as mudanças sem apresentar PSD3 ou PSR como regras substitutas já aplicáveis.",
-        "es": "El paquete de reforma de pagos cuenta con un texto acordado en las negociaciones, pero ambos expedientes oficiales siguen pendientes de segunda lectura del Parlamento a 18 de noviembre de 2026. Prepare los cambios sin presentar PSD3 o PSR como normas sustitutivas ya aplicables."
+        "es": "El paquete de reforma de pagos cuenta con un texto acordado en las negociaciones, pero ambos expedientes oficiales siguen pendientes de segunda lectura del Parlamento a 18 de noviembre de 2026. Prepare los cambios sin presentar PSD3 o PSR como normas sustitutivas ya aplicables.",
+        "it": "Il pacchetto di riforma dei pagamenti dispone di un testo negoziato concordato, ma al 18 novembre 2026 entrambi i dossier ufficiali del Parlamento attendono ancora la seconda lettura. Prepara i cambiamenti senza presentare PSD3 o PSR come norme sostitutive già applicabili."
       },
       "action": {
         "en": "Maintain a change log for authorisation, safeguarding, fraud prevention and customer protection. Recheck the final law and its application dates before committing a delivery deadline.",
         "pt": "Mantenha um registro das mudanças em autorização, proteção dos recursos de clientes, prevenção à fraude e defesa do consumidor. Confira a lei final e suas datas de aplicação antes de fixar prazos de entrega.",
-        "es": "Mantenga un registro de cambios en autorización, salvaguarda de fondos, prevención del fraude y protección del cliente. Compruebe la ley definitiva y sus fechas de aplicación antes de fijar plazos de ejecución."
+        "es": "Mantenga un registro de cambios en autorización, salvaguarda de fondos, prevención del fraude y protección del cliente. Compruebe la ley definitiva y sus fechas de aplicación antes de fijar plazos de ejecución.",
+        "it": "Mantieni un registro delle modifiche su autorizzazione, tutela dei fondi, prevenzione delle frodi e protezione dei clienti. Ricontrolla il testo definitivo e le date di applicazione prima di fissare scadenze operative."
       },
       "applicability": {
         "en": "Relevant to payment and e-money business models. Continue to assess current PSD2 and national requirements during the legislative transition.",
         "pt": "Relevante para modelos de negócio de pagamentos e moeda eletrônica. Continue avaliando os requisitos atuais da PSD2 e da legislação nacional durante a transição legislativa.",
-        "es": "Relevante para modelos de negocio de pagos y dinero electrónico. Continúe evaluando los requisitos actuales de PSD2 y de la legislación nacional durante la transición legislativa."
+        "es": "Relevante para modelos de negocio de pagos y dinero electrónico. Continúe evaluando los requisitos actuales de PSD2 y de la legislación nacional durante la transición legislativa.",
+        "it": "Pertinente per i modelli di attività nei pagamenti e nella moneta elettronica. Durante la transizione legislativa continua a verificare PSD2 e gli obblighi nazionali vigenti."
       },
       "sources": [
         {
@@ -227,36 +251,42 @@
       "topicLabel": {
         "en": "AI governance",
         "pt": "Governança de IA",
-        "es": "Gobernanza de IA"
+        "es": "Gobernanza de IA",
+        "it": "Governance dell'IA"
       },
       "territory": "EU",
       "status": "phased-application",
       "statusLabel": {
         "en": "Phased application",
         "pt": "Aplicação por etapas",
-        "es": "Aplicación por fases"
+        "es": "Aplicación por fases",
+        "it": "Applicazione graduale"
       },
       "featured": true,
       "sourceDate": "2026-07-27",
       "title": {
         "en": "EU AI Act: classify the use, then plan the controls",
         "pt": "AI Act: classificar o uso e planejar os controles",
-        "es": "Ley de IA: clasificar el uso y planificar los controles"
+        "es": "Ley de IA: clasificar el uso y planificar los controles",
+        "it": "AI Act dell'UE: classificare l'uso e pianificare i controlli"
       },
       "summary": {
         "en": "The AI Act applies in phases and was amended by the AI Omnibus in July 2026. The amended high-risk timetable is 2 December 2027 for Annex III systems and 2 August 2028 for systems linked to Annex I regulated products; other provisions already apply.",
         "pt": "O AI Act se aplica por etapas e foi alterado pelo AI Omnibus em julho de 2026. O calendário atualizado para alto risco é 2 de dezembro de 2027 para sistemas do Anexo III e 2 de agosto de 2028 para sistemas ligados a produtos regulados do Anexo I; outras disposições já são aplicáveis.",
-        "es": "La Ley de IA se aplica por fases y fue modificada por el Ómnibus de IA en julio de 2026. El calendario actualizado de alto riesgo es el 2 de diciembre de 2027 para sistemas del Anexo III y el 2 de agosto de 2028 para sistemas vinculados a productos regulados del Anexo I; otras disposiciones ya se aplican."
+        "es": "La Ley de IA se aplica por fases y fue modificada por el Ómnibus de IA en julio de 2026. El calendario actualizado de alto riesgo es el 2 de diciembre de 2027 para sistemas del Anexo III y el 2 de agosto de 2028 para sistemas vinculados a productos regulados del Anexo I; otras disposiciones ya se aplican.",
+        "it": "L'AI Act si applica per fasi ed è stato modificato dall'AI Omnibus nel luglio 2026. Le nuove scadenze per i sistemi ad alto rischio sono il 2 dicembre 2027 per l'allegato III e il 2 agosto 2028 per i sistemi legati ai prodotti regolamentati dell'allegato I; altre disposizioni sono già applicabili."
       },
       "action": {
         "en": "Keep an AI inventory with intended use, accountable owner and legal classification. Assess relevant transparency, oversight and testing duties, and support staff AI literacy with evidence of practical measures.",
         "pt": "Mantenha um inventário de IA com finalidade prevista, responsável e classificação jurídica. Avalie os deveres relevantes de transparência, supervisão e testes, e desenvolva a capacitação em IA da equipe com evidências de medidas práticas.",
-        "es": "Mantenga un inventario de IA con finalidad prevista, responsable y clasificación jurídica. Evalúe los deberes relevantes de transparencia, supervisión y pruebas, y apoye la alfabetización en IA del personal con evidencias de medidas prácticas."
+        "es": "Mantenga un inventario de IA con finalidad prevista, responsable y clasificación jurídica. Evalúe los deberes relevantes de transparencia, supervisión y pruebas, y apoye la alfabetización en IA del personal con evidencias de medidas prácticas.",
+        "it": "Mantieni un inventario dei sistemi di IA con finalità prevista, responsabile e classificazione giuridica. Valuta gli obblighi pertinenti di trasparenza, supervisione umana e test, e sostieni l'alfabetizzazione del personale sull'IA con misure pratiche documentate."
       },
       "applicability": {
         "en": "Purpose, role and specific provisions matter. An internal low, moderate or high risk rating is not a legal classification; a workshop does not certify compliance.",
         "pt": "A finalidade, o papel da empresa e as disposições específicas importam. Uma nota interna de risco baixo, moderado ou alto não é uma classificação jurídica; um workshop não certifica conformidade.",
-        "es": "Importan la finalidad, el papel de la empresa y las disposiciones específicas. Una calificación interna de riesgo bajo, moderado o alto no es una clasificación jurídica; un taller no certifica el cumplimiento."
+        "es": "Importan la finalidad, el papel de la empresa y las disposiciones específicas. Una calificación interna de riesgo bajo, moderado o alto no es una clasificación jurídica; un taller no certifica el cumplimiento.",
+        "it": "Contano la finalità, il ruolo e le singole disposizioni. Una classificazione interna del rischio come basso, medio o alto non equivale a una classificazione giuridica; un workshop non certifica la conformità."
       },
       "sources": [
         {
@@ -282,35 +312,41 @@
       "topicLabel": {
         "en": "Crypto-assets",
         "pt": "Criptoativos",
-        "es": "Criptoactivos"
+        "es": "Criptoactivos",
+        "it": "Cripto-attività"
       },
       "territory": "EU",
       "status": "applicable",
       "statusLabel": {
         "en": "Applicable; assess crypto scope",
         "pt": "Em aplicação; avaliar o âmbito de criptoativos",
-        "es": "Aplicable; evaluar el ámbito de criptoactivos"
+        "es": "Aplicable; evaluar el ámbito de criptoactivos",
+        "it": "Applicabile; verificare l'ambito cripto"
       },
       "featured": false,
       "title": {
         "en": "MiCA: when the product involves crypto-assets",
         "pt": "MiCA: quando o produto envolve criptoativos",
-        "es": "MiCA: cuando el producto incluye criptoactivos"
+        "es": "MiCA: cuando el producto incluye criptoactivos",
+        "it": "MiCA: quando il prodotto riguarda le cripto-attività"
       },
       "summary": {
         "en": "MiCA regulates crypto-asset activities within its scope. National transitional arrangements for existing crypto-asset service providers have ended by November 2026; the EU-wide maximum transition ended on 1 July 2026.",
         "pt": "O MiCA regula as atividades com criptoativos dentro de seu âmbito. Em novembro de 2026, os regimes nacionais de transição para prestadores existentes já terminaram; o prazo máximo de transição na UE terminou em 1º de julho de 2026.",
-        "es": "MiCA regula las actividades con criptoactivos dentro de su ámbito. En noviembre de 2026, los regímenes nacionales de transición para proveedores existentes ya han finalizado; el plazo máximo de transición en la UE terminó el 1 de julio de 2026."
+        "es": "MiCA regula las actividades con criptoactivos dentro de su ámbito. En noviembre de 2026, los regímenes nacionales de transición para proveedores existentes ya han finalizado; el plazo máximo de transición en la UE terminó el 1 de julio de 2026.",
+        "it": "MiCA disciplina le attività connesse alle cripto-attività che rientrano nel suo ambito. Entro novembre 2026 sono terminati i regimi transitori nazionali per i prestatori di servizi già operanti; il termine massimo di transizione nell'UE è scaduto il 1° luglio 2026."
       },
       "action": {
         "en": "Classify the asset and service before choosing an authorisation route. Check the provider's permission, customer-asset arrangements, complaints, disclosures and operational controls.",
         "pt": "Classifique o ativo e o serviço antes de definir a via de autorização. Verifique a permissão do prestador, a proteção dos ativos de clientes, as reclamações, as informações divulgadas e os controles operacionais.",
-        "es": "Clasifique el activo y el servicio antes de elegir la vía de autorización. Compruebe los permisos del proveedor, la protección de activos de clientes, las reclamaciones, la información publicada y los controles operativos."
+        "es": "Clasifique el activo y el servicio antes de elegir la vía de autorización. Compruebe los permisos del proveedor, la protección de activos de clientes, las reclamaciones, la información publicada y los controles operativos.",
+        "it": "Classifica l'attività e il servizio prima di scegliere un percorso autorizzativo. Verifica le autorizzazioni del prestatore, la gestione degli asset dei clienti, i reclami, le informative e i controlli operativi."
       },
       "applicability": {
         "en": "This topic is relevant where crypto-asset or stablecoin exposure exists. Some already regulated financial entities can use an Article 60 notification route for specified services.",
         "pt": "Este tema é relevante quando há exposição a criptoativos ou stablecoins. Algumas entidades financeiras já reguladas podem usar a notificação prevista no Artigo 60 para serviços específicos.",
-        "es": "Este tema es relevante cuando existe exposición a criptoactivos o stablecoins. Algunas entidades financieras ya reguladas pueden utilizar la notificación del artículo 60 para servicios específicos."
+        "es": "Este tema es relevante cuando existe exposición a criptoactivos o stablecoins. Algunas entidades financieras ya reguladas pueden utilizar la notificación del artículo 60 para servicios específicos.",
+        "it": "Tema rilevante quando esistono esposizioni a cripto-attività o stablecoin. Alcune entità finanziarie già regolamentate possono avvalersi della procedura di notifica dell'articolo 60 per determinati servizi."
       },
       "sources": [
         {
@@ -332,36 +368,42 @@
       "topicLabel": {
         "en": "Payments",
         "pt": "Pagamentos",
-        "es": "Pagos"
+        "es": "Pagos",
+        "it": "Pagamenti"
       },
       "territory": "UK",
       "status": "applicable",
       "statusLabel": {
         "en": "Applicable",
         "pt": "Em aplicação",
-        "es": "Aplicable"
+        "es": "Aplicable",
+        "it": "Applicabile"
       },
       "featured": true,
       "sourceDate": "2026-05-07",
       "title": {
         "en": "UK payments: safeguarding customer funds",
         "pt": "Pagamentos no Reino Unido: proteção dos recursos de clientes",
-        "es": "Pagos en el Reino Unido: salvaguarda de fondos de clientes"
+        "es": "Pagos en el Reino Unido: salvaguarda de fondos de clientes",
+        "it": "Pagamenti nel Regno Unito: tutela dei fondi dei clienti"
       },
       "summary": {
         "en": "UK payment and e-money firms have their own safeguarding regime. The FCA's Supplementary Regime took effect on 7 May 2026, strengthening records, oversight, reporting and other protections for relevant customer funds.",
         "pt": "As instituições de pagamento e moeda eletrônica do Reino Unido têm um regime próprio de proteção dos recursos de clientes. O regime suplementar da FCA entrou em vigor em 7 de maio de 2026, reforçando registros, supervisão, reportes e outras proteções para os recursos abrangidos.",
-        "es": "Las entidades de pago y dinero electrónico del Reino Unido tienen su propio régimen de salvaguarda. El régimen suplementario de la FCA entró en vigor el 7 de mayo de 2026 y refuerza los registros, la supervisión, la información al regulador y otras protecciones de los fondos pertinentes."
+        "es": "Las entidades de pago y dinero electrónico del Reino Unido tienen su propio régimen de salvaguarda. El régimen suplementario de la FCA entró en vigor el 7 de mayo de 2026 y refuerza los registros, la supervisión, la información al regulador y otras protecciones de los fondos pertinentes.",
+        "it": "Gli istituti di pagamento e di moneta elettronica del Regno Unito sono soggetti a un proprio regime di salvaguardia dei fondi. Il regime supplementare della FCA è entrato in vigore il 7 maggio 2026, rafforzando registrazioni, supervisione, segnalazioni e altre tutele dei fondi pertinenti."
       },
       "action": {
         "en": "Identify relevant funds, accountable oversight and reconciliation controls. Review reporting, audit applicability and resolution information against the current FCA rules.",
         "pt": "Identifique os recursos abrangidos, a responsabilidade pela supervisão e os controles de conciliação. Revise os reportes, a aplicabilidade de auditoria e as informações para encerramento ordenado segundo as regras atuais da FCA.",
-        "es": "Identifique los fondos pertinentes, la responsabilidad de supervisión y los controles de conciliación. Revise la información al regulador, la aplicabilidad de auditorías y la documentación para una resolución ordenada según las normas actuales de la FCA."
+        "es": "Identifique los fondos pertinentes, la responsabilidad de supervisión y los controles de conciliación. Revise la información al regulador, la aplicabilidad de auditorías y la documentación para una resolución ordenada según las normas actuales de la FCA.",
+        "it": "Identifica i fondi interessati, i responsabili della supervisione e i controlli di riconciliazione. Rivedi segnalazioni, applicabilità degli audit e informazioni per la risoluzione secondo le norme FCA vigenti."
       },
       "applicability": {
         "en": "Check the firm's permission and activity. The UK framework is separate from EU PSD3/PSR; requirements and exemptions vary by institution.",
         "pt": "Verifique a autorização e a atividade da instituição. O regime britânico é separado da PSD3/PSR da UE; requisitos e exceções variam conforme a instituição.",
-        "es": "Compruebe la autorización y la actividad de la entidad. El régimen británico es independiente de PSD3/PSR de la UE; los requisitos y las excepciones varían según la entidad."
+        "es": "Compruebe la autorización y la actividad de la entidad. El régimen británico es independiente de PSD3/PSR de la UE; los requisitos y las excepciones varían según la entidad.",
+        "it": "Verifica autorizzazione e attività dell'impresa. Il quadro britannico è distinto da PSD3/PSR nell'UE; obblighi ed esenzioni variano in base all'istituto."
       },
       "sources": [
         {
@@ -468,6 +510,37 @@
       "ctaText": "Hable sobre su modelo de negocio, los requisitos que pueden aplicarse y los controles que su equipo necesita priorizar.",
       "cta": "Hable con Igor",
       "training": "Explore los talleres prácticos"
+    },
+    "it": {
+      "eyebrow": "Aggiornamenti normativi",
+      "title": "Comprendere le norme. Decidere i prossimi passi.",
+      "intro": "Lippi si avvale dell'esperienza maturata nell'Unione europea, nel Regno Unito e in Brasile. Queste sette schede illustrano norme dell'UE e del Regno Unito per fintech e operatori dei pagamenti, con collegamenti alle fonti ufficiali.",
+      "marketExperience": "Esperienza nell'Unione europea, nel Regno Unito e in Brasile.",
+      "checked": "Verificato il",
+      "focus": "In evidenza",
+      "focus1": "Riforma dei pagamenti",
+      "focus1text": "PSD3 e PSR sono ancora in attesa della seconda lettura del Parlamento. Pianifica il cambiamento e verifica le date definitive.",
+      "focus2": "Attuazione dell'IA",
+      "focus2text": "Un calendario per fasi. Collega gli obblighi al tuo ruolo, all'utilizzo previsto e alle disposizioni applicabili.",
+      "topics": "Sette temi per la tua agenda dei rischi",
+      "topicsIntro": "Parti dalle norme pertinenti ai tuoi servizi, clienti e mercati. Le azioni suggerite di seguito sono l'interpretazione operativa di Lippi.",
+      "language": "Lingua",
+      "search": "Cerca le schede",
+      "placeholder": "Cerca DORA, frodi, IA o fondi dei clienti",
+      "topic": "Tema",
+      "territory": "Giurisdizione",
+      "all": "Tutti",
+      "reset": "Azzera filtri",
+      "count": "schede visualizzate",
+      "none": "Nessuna scheda corrisponde ai filtri. Prova un altro argomento oppure cancella la ricerca.",
+      "action": "Un prossimo passo concreto",
+      "scope": "Verifica l'ambito di applicazione",
+      "sources": "Fonti ufficiali",
+      "note": "Questa è una panoramica editoriale verificata il 18 novembre 2026, non un aggiornamento legale in tempo reale. Norme, orientamenti e scadenze possono cambiare. Consulta le fonti ufficiali collegate prima di agire su requisiti specifici della tua impresa.",
+      "ctaTitle": "Trasforma una domanda normativa in un piano.",
+      "ctaText": "Parliamo del tuo modello di business, dei requisiti potenzialmente applicabili e dei controlli che il tuo team dovrebbe prioritizzare.",
+      "cta": "Parla con Igor",
+      "training": "Scopri i workshop pratici"
     }
   }
 }

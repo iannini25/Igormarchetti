@@ -5,45 +5,63 @@ const enquiryLabels = {
   online: 'Live online', hybrid: 'Hybrid', in_person: 'In person', english: 'English', portuguese: 'Portuguese'
 };
 
-export function buildTrainingEmail(payload) {
-  const label = value => enquiryLabels[value] || String(value || 'Not specified');
+export function buildTrainingEmail(payload, translate = text => text) {
+  // Keep English as the default for backward compatibility and automated use.
+  // The public fallback form passes the active website translator instead.
+  const label = value => translate(enquiryLabels[value] || String(value || 'Not specified'));
   const lines = [
-    'Hello Igor,', '', 'Here are my interests in the Lippi paid training pilot:', '',
-    'Target markets: ' + payload.target_markets.map(label).join(', '),
-    'Workshop priority: ' + label(payload.priority),
-    'Budget per attendee for all four two-hour online workshops: ' + label(payload.budget),
-    'Preferred format: ' + label(payload.format),
-    'Preferred language: ' + label(payload.language)
+    translate('Hello Igor,'), '', translate('Here are my interests in the Lippi paid training pilot:'), '',
+    translate('Target markets: ') + payload.target_markets.map(label).join(', '),
+    translate('Workshop priority: ') + label(payload.priority),
+    translate('Budget per attendee for all four two-hour online workshops: ') + label(payload.budget),
+    translate('Preferred format: ') + label(payload.format),
+    translate('Preferred language: ') + label(payload.language)
   ];
   for (const [field, title] of [['home_market', 'Current market'], ['business_model', 'Business model'], ['comment', 'What the programme should help me do'], ['referral', 'How I heard about Lippi']]) {
-    if (payload[field]) lines.push(title + ': ' + payload[field]);
+    if (payload[field]) lines.push(translate(title) + ': ' + payload[field]);
   }
-  lines.push('Contact me about pilot dates, format and pricing: ' + (payload.contact_opt_in ? 'Yes' : 'No'));
-  if (payload.contact_opt_in && payload.email) lines.push('Preferred contact email: ' + payload.email);
-  lines.push('', 'This is an enquiry about the paid pilot; it does not confirm a booking or price.');
+  lines.push(translate('Contact me about pilot dates, format and pricing: ') + translate(payload.contact_opt_in ? 'Yes' : 'No'));
+  if (payload.contact_opt_in && payload.email) lines.push(translate('Preferred contact email: ') + payload.email);
+  lines.push('', translate('This is an enquiry about the paid pilot; it does not confirm a booking or price.'));
   const body = lines.join('\n');
   return {
     body,
-    mailto: 'mailto:lippifintech@igormarchetti.me?subject=' + encodeURIComponent('Lippi paid training pilot enquiry') + '&body=' + encodeURIComponent(body)
+    mailto: 'mailto:lippifintech@igormarchetti.me?subject=' +
+      encodeURIComponent(translate('Lippi paid training pilot enquiry')) + '&body=' + encodeURIComponent(body)
   };
 }
 
 (() => {
   if (typeof document === 'undefined') return;
   const sample = document.getElementById('sample-question');
+  const answer = document.getElementById('sample-answer');
+  const trSample = text => window.LippiI18n?.translate(text) || text;
+  let selectedAnswer = null;
+  function renderAnswer() {
+    if (!selectedAnswer || !answer) return;
+    answer.textContent = trSample(selectedAnswer === 'business' ? 'Yes. ' : 'The business or service owner should lead. ') +
+      trSample('Management owns the operational response and corrective actions. Risk and compliance guide, monitor and challenge. Internal audit provides independent assurance. The board oversees the response and holds management accountable.');
+    answer.hidden = false;
+  }
   sample?.addEventListener('submit', event => {
     event.preventDefault();
     if (!sample.reportValidity()) return;
-    const selected = new FormData(sample).get('owner');
-    const answer = document.getElementById('sample-answer');
-    answer.textContent = (selected === 'business' ? 'Yes. ' : 'The business or service owner should lead. ') + 'Management owns the operational response and corrective actions. Risk and compliance guide, monitor and challenge. Internal audit provides independent assurance. The board oversees the response and holds management accountable.';
-    answer.hidden = false;
+    selectedAnswer = new FormData(sample).get('owner');
+    renderAnswer();
   });
+  document.addEventListener('lippi:languagechange', renderAnswer);
 
   const form = document.getElementById('training-interest-form');
   if (!form) return;
   const button = form.querySelector('button[type="submit"]');
   const status = document.getElementById('training-status');
+  const tr = text => window.LippiI18n?.translate(text) || text;
+  let lastMessage = '', lastError = false;
+  document.addEventListener('lippi:languagechange', () => {
+    if (lastMessage) status.textContent = tr(lastMessage);
+    if (!busy) button.textContent = tr(emailMode ? 'Prepare email enquiry' : 'Submit interest');
+    if (pendingDraftPayload && !draftPanel.hidden) updateDraft(pendingDraftPayload);
+  });
   const optIn = document.getElementById('contact-opt-in');
   const email = document.getElementById('training-email');
   const contact = document.getElementById('contact-details');
@@ -52,18 +70,29 @@ export function buildTrainingEmail(payload) {
   const draftText = document.getElementById('training-email-text');
   const marketFields = [...form.querySelectorAll('[name="target_markets"]')];
   let ready = false, emailMode = false, busy = false, submissionId = null, sentBody = null;
-  const say = (message, error = false) => { status.textContent = message; status.classList.toggle('error', error); };
+  let pendingDraftPayload = null;
+  const updateDraft = payload => {
+    const draft = buildTrainingEmail(payload, tr);
+    draftLink.href = draft.mailto;
+    draftText.value = draft.body;
+  };
+  const say = (message, error = false) => { lastMessage=message;lastError=error;status.textContent = tr(message); status.classList.toggle('error', error); };
   const useEmailFallback = () => {
-    ready = false; emailMode = true; button.disabled = false; button.textContent = 'Prepare email enquiry';
+    ready = false; emailMode = true; button.disabled = false; button.textContent = tr('Prepare email enquiry');
     say('Online registration is temporarily unavailable. You can prepare an email enquiry using your answers.');
   };
   const prepareEmail = payload => {
-    const draft = buildTrainingEmail(payload);
-    draftLink.href = draft.mailto; draftText.value = draft.body; draftPanel.hidden = false;
+    pendingDraftPayload = payload;
+    updateDraft(payload);
+    draftPanel.hidden = false;
     say('Email draft prepared. Open it below, review it in your email app, and send it yourself. Nothing has been sent by this page.');
     draftLink.focus();
   };
-  const clearDraft = () => { draftPanel.hidden = true; draftLink.removeAttribute('href'); };
+  const clearDraft = () => {
+    pendingDraftPayload = null;
+    draftPanel.hidden = true;
+    draftLink.removeAttribute('href');
+  };
   form.addEventListener('input', clearDraft);
   form.addEventListener('change', clearDraft);
   optIn.addEventListener('change', () => { contact.hidden = !optIn.checked; email.required = optIn.checked; if (!optIn.checked) email.value = ''; });
@@ -82,7 +111,7 @@ export function buildTrainingEmail(payload) {
   form.addEventListener('submit', async event => {
     event.preventDefault();
     if ((!ready && !emailMode) || busy) return;
-    marketFields[0].setCustomValidity(marketFields.some(f => f.checked) ? '' : 'Please select at least one market, or Still exploring.');
+    marketFields[0].setCustomValidity(marketFields.some(f => f.checked) ? '' : tr('Please select at least one market, or Still exploring.'));
     if (!form.reportValidity()) return;
     const data = new FormData(form);
     const payload = {
@@ -96,7 +125,7 @@ export function buildTrainingEmail(payload) {
     if (emailMode) { prepareEmail(payload); return; }
     const serialised = JSON.stringify(payload);
     if (sentBody !== serialised) { submissionId = crypto.randomUUID(); sentBody = serialised; }
-    busy = true; button.disabled = true; button.textContent = 'Submitting…'; say('Saving your response…');
+    busy = true; button.disabled = true; button.textContent = tr('Submitting…'); say('Saving your response…');
     const controls = [...form.querySelectorAll('input, select, textarea')];
     controls.forEach(el => { el.disabled = true; });
     try {
@@ -121,7 +150,7 @@ export function buildTrainingEmail(payload) {
         say(error.message || 'Your response was not confirmed. Please try again.', true);
       }
     } finally {
-      busy = false; button.disabled = false; button.textContent = emailMode ? 'Prepare email enquiry' : 'Submit interest';
+      busy = false; button.disabled = false; button.textContent = tr(emailMode ? 'Prepare email enquiry' : 'Submit interest');
       controls.forEach(el => { el.disabled = false; });
     }
   });

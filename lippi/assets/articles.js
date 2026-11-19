@@ -5,36 +5,61 @@
   const button = form.querySelector('button[type="submit"]');
   const emailFallback = document.getElementById('newsletter-email-fallback');
   const emailDraft = document.getElementById('newsletter-email-draft');
-  const initialButton = button.textContent;
+  // Keep the English source label; the DOM may already be localized at script start.
+  const initialButton = 'Save my newsletter request';
+  const tr = text => window.LippiI18n?.translate(text) || text;
+  let lastMessage = '', lastState = '';
+  const languageSelect = document.getElementById('newsletter-language');
+  if (languageSelect && !document.getElementById('newsletter-language-note')) {
+    const note = document.createElement('p');
+    note.id = 'newsletter-language-note';
+    note.className = 'newsletter-privacy';
+    note.textContent = tr('Newsletter emails are currently available in English, Portuguese and Spanish. The website can also be viewed in Italian.');
+    languageSelect.insertAdjacentElement('afterend',note);
+  }
   const noticeVersion = '2026-11-18';
   let busy = false;
   let registrationMode = 'checking';
+  let pendingDraftPayload = null;
   const update = (message, state = '') => {
-    status.textContent = message;
+    lastMessage = message; lastState = state;
+    status.textContent = tr(message);
     status.dataset.state = state;
   };
+  document.addEventListener('lippi:languagechange',()=>{
+    if(lastMessage) status.textContent = tr(lastMessage);
+    const note = document.getElementById('newsletter-language-note');
+    if(note) note.textContent = tr('Newsletter emails are currently available in English, Portuguese and Spanish. The website can also be viewed in Italian.');
+    if(registrationMode === 'email') button.textContent = tr('Prepare email request');
+    if(pendingDraftPayload && !emailFallback.hidden) renderEmail(pendingDraftPayload);
+  });
   const useEmailFallback = message => {
     registrationMode = 'email';
     button.disabled = false;
-    button.textContent = 'Prepare email request';
+    button.textContent = tr('Prepare email request');
     update(message || 'Online registration is unavailable. Enter your details and consent, then prepare an email request to send from your email app.');
   };
-  const prepareEmail = payload => {
+  const renderEmail = payload => {
     const language = {en:'English', pt:'Português', es:'Español'}[payload.language];
-    if (!language || payload.consent !== true) {
+    if (!language || payload.consent !== true) return false;
+    const body = [
+      tr('Hello Igor,'), '',
+      tr('Please add me to the Lippi newsletter list.'), '',
+      tr('Email address:') + ' ' + payload.email,
+      tr('Preferred language: ') + language, '',
+      tr('I agree to receive Lippi articles and regulatory updates by email. I can withdraw my consent at any time by emailing lippifintech@igormarchetti.me.'),
+      tr('Consent notice version:') + ' ' + noticeVersion, '',
+      tr('Thank you.')
+    ].join('\n');
+    emailDraft.href = `mailto:lippifintech@igormarchetti.me?subject=${encodeURIComponent(tr('Lippi newsletter request'))}&body=${encodeURIComponent(body)}`;
+    return true;
+  };
+  const prepareEmail = payload => {
+    if (!renderEmail(payload)) {
       update('Please choose a preferred language and confirm your consent.', 'error');
       return;
     }
-    const body = [
-      'Hello Igor,', '',
-      'Please add me to the Lippi newsletter list.', '',
-      `Email address: ${payload.email}`,
-      `Preferred language: ${language}`, '',
-      'I agree to receive Lippi articles and regulatory updates by email. I can withdraw my consent at any time by emailing lippifintech@igormarchetti.me.',
-      `Consent notice version: ${noticeVersion}`, '',
-      'Thank you.'
-    ].join('\n');
-    emailDraft.href = `mailto:lippifintech@igormarchetti.me?subject=${encodeURIComponent('Lippi newsletter request')}&body=${encodeURIComponent(body)}`;
+    pendingDraftPayload = payload;
     emailFallback.hidden = false;
     update('Your email draft is ready. Open it below, review it and select Send in your email app. Nothing is sent automatically.');
     emailDraft.focus();
@@ -53,7 +78,7 @@
     }
   }
 
-  form.addEventListener('input', () => { emailFallback.hidden = true; });
+  form.addEventListener('input', () => { pendingDraftPayload = null; emailFallback.hidden = true; });
 
   form.addEventListener('submit', async event => {
     event.preventDefault();
@@ -75,7 +100,7 @@
     }
     busy = true;
     button.disabled = true;
-    button.textContent = 'Saving your request…';
+    button.textContent = tr('Saving your request…');
     update('Saving your newsletter request…');
     const fields = [...form.querySelectorAll('input,select')];
     fields.forEach(field => { field.disabled = true; });
@@ -104,7 +129,7 @@
       }
     } finally {
       busy = false;
-      button.textContent = registrationMode === 'email' ? 'Prepare email request' : initialButton;
+      button.textContent = tr(registrationMode === 'email' ? 'Prepare email request' : initialButton);
     }
   });
   ready();

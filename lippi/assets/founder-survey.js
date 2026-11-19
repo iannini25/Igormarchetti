@@ -5,10 +5,13 @@
   const status = document.getElementById('survey-status');
   const success = document.getElementById('survey-success');
   const fields = [...form.querySelectorAll('textarea')];
+  const tr = text => window.LippiI18n?.translate(text) || text;
+  let lastMessage = '', lastError = false;
   let busy = false;
   let submissionId = null;
   const uuid = () => globalThis.crypto?.randomUUID?.() || 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => { const r=Math.random()*16|0; return (c==='x'?r:(r&3|8)).toString(16); });
-  const say = (message, error=false) => { status.textContent=message; status.classList.toggle('survey-error',error); };
+  const say = (message, error=false) => { lastMessage=message;lastError=error;status.textContent=tr(message);status.classList.toggle('survey-error',error); };
+  document.addEventListener('lippi:languagechange',()=>{if(lastMessage)status.textContent=tr(lastMessage);});
   for (const field of fields) {
     const count = document.getElementById(field.id+'-count');
     field.addEventListener('input',()=> { count.textContent=field.value.length+' / 1,000'; field.setCustomValidity(''); });
@@ -28,9 +31,9 @@
   form.addEventListener('submit',async event=> {
     event.preventDefault();
     if (busy || submit.disabled) return;
-    for (const field of fields) field.setCustomValidity(field.value.trim().length<5?'Please add a short answer of at least 5 characters.':'');
+    for (const field of fields) field.setCustomValidity(field.value.trim().length<5?tr('Please add a short answer of at least 5 characters.'):'');
     if (!form.reportValidity()) return;
-    busy=true; submit.disabled=true; submit.textContent='Sending…';
+    busy=true; submit.disabled=true; submit.textContent=tr('Sending…');
     fields.forEach(field=>field.readOnly=true);
     submissionId ||= uuid();
     const body={submission_id:submissionId,survey_version:'founder-v1',notice_version:'2026-11-06',milestone_risk:fields[0].value.trim(),control_gap:fields[1].value.trim(),support_needed:fields[2].value.trim(),website:form.elements.website.value};
@@ -45,7 +48,7 @@
     } catch(error) {
       say(error.name==='TimeoutError'?'The connection timed out. Your answers are still here; please retry.':error.message || 'Your answers were not confirmed. Please try again.',true);
       submit.disabled=false; fields.forEach(field=>field.readOnly=false);
-    } finally { busy=false;submit.textContent='Submit survey'; }
+    } finally { busy=false;submit.textContent=tr('Submit survey'); }
   });
   available();
 })();
