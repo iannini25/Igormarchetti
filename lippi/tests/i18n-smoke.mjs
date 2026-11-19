@@ -54,7 +54,7 @@ assert.ok(shell.includes('translateMetadata(lang)'), 'Page title and metadata no
 for(const file of ['assets/articles.js','assets/founder-survey.js']) {
   assert.ok(read(file).includes('lippi:languagechange'), 'Dynamic messages do not update for '+file);
 }
-await import('../assets/training.js'); // Module syntax and safe no-DOM import.
+const trainingModule = await import('../assets/training.js'); // Module syntax and safe no-DOM import.
 assert.ok(read('assets/training.js').includes('lippi:languagechange'), 'Training form lacks language refresh');
 // Every translatable static text node on Articles must have PT/ES/IT copy.
 // Brand names, email, native language names and copyright remain unchanged.
@@ -164,5 +164,35 @@ for(const file of ['index.html','training.html','articles.html','ai-governance-f
        file+' metadata missing PT/ES/IT copy: '+value);
   }
 }
+
+
+const enquirySample = {
+  target_markets:['brazil','ireland'], priority:'grc', budget:'100_199',
+  format:'online', language:'portuguese', home_market:'São Paulo',
+  business_model:'Payments', comment:'Governance', referral:'Website',
+  contact_opt_in:true, email:'founder@example.com'
+};
+for(const [language,i] of [['en',-1],['pt',0],['es',1],['it',2]]) {
+  const tr = key => i === -1 ? key : (sharedCopy[key]?.[i] || key);
+  const draft = trainingModule.buildTrainingEmail(enquirySample,tr);
+  assert.ok(draft.body.startsWith(tr('Hello Igor,')),language+' email greeting did not localize');
+  assert.ok(draft.body.includes(tr('Target markets: ')),language+' email market label did not localize');
+  assert.ok(draft.body.includes(tr('This is an enquiry about the paid pilot; it does not confirm a booking or price.')),
+    language+' email disclaimer did not localize');
+  assert.ok(draft.body.includes('founder@example.com'),'Contact email missing from generated draft');
+  assert.ok(draft.mailto.startsWith('mailto:lippifintech@igormarchetti.me?subject='),
+    language+' email link missing');
+}
+const newsletter = read('assets/articles.js');
+for(const key of [
+  'Please add me to the Lippi newsletter list.',
+  'I agree to receive Lippi articles and regulatory updates by email. I can withdraw my consent at any time by emailing lippifintech@igormarchetti.me.',
+  'Consent notice version:','Lippi newsletter request'
+]) {
+  assert.equal(sharedCopy[key]?.length,3,'Newsletter draft untranslated: '+key);
+  assert.ok(newsletter.includes('tr(\''+key+'\')'),'Newsletter draft not wired to translation: '+key);
+}
+assert.ok(read('index.html').includes("document.addEventListener('lippi:languagechange', () => filterTopics(currentTopic))"),
+  'Homepage filter count not refreshed after a language change');
 
 console.log('Source-level localization checks passed for 4 languages; 7 regulatory explainers; independence page and '+Object.keys(sharedCopy).length+' curated shared translations. Home/training copy audited: '+JSON.stringify(contentAudit)+'. Browser tests still required.');
