@@ -228,7 +228,7 @@ try {
     await page.locator('#lang').selectOption('pt');
     await page.waitForFunction(() => document.documentElement.lang==='pt-BR');
     assert.equal(new URL(page.url()).searchParams.get('lang'),'pt');
-    assert.equal(new URL(await page.locator('nav a').getAttribute('href'),origin).searchParams.get('lang'),'pt');
+    assert.equal(new URL(await page.locator('#lippi-navigation a').first().getAttribute('href'),origin).searchParams.get('lang'),'pt');
     await page.goto(origin+'/',{waitUntil:'load'});
     await page.waitForFunction(() =>
       document.documentElement.lang==='pt-BR' && document.querySelector('#lippi-language')?.value==='pt');

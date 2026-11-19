@@ -1,6 +1,6 @@
-/* Lippi design refresh — shared layer for every page.
-   Keeps the original palette (navy #0d2637, teal #137c75, mint #b4e6d5, paper #f2f7f5).
-   Changes only presentation: type, spacing, surfaces and motion hooks. No content lives here. */
+/* Lippi design refresh: shared layer for every page.
+   Original palette kept (navy #0d2637, teal #137c75, mint #b4e6d5, paper #f2f7f5).
+   Presentation only: type, spacing, navigation, language menu, icons, footer and motion hooks. */
 
 :root{
   --navy:#0d2637;--navy-2:#0a1f2d;--navy-3:#15384a;
@@ -13,44 +13,107 @@
   --ease:cubic-bezier(.2,.8,.2,1);
   --shadow-1:0 1px 2px #0d263708,0 8px 24px #0d26370a;
   --shadow-2:0 2px 4px #0d26370d,0 22px 48px #0d263718;
+  --header-h:76px;
 }
 
 body{font-family:var(--body);color:var(--ink);background:#fbfdfc;text-rendering:optimizeLegibility}
-h1,h2,h3,h4{font-family:var(--display);color:inherit;text-wrap:balance}
+h1,h2,h3,h4{font-family:var(--display);text-wrap:balance}
 p{text-wrap:pretty}
 ::selection{background:var(--mint);color:var(--navy)}
+:focus-visible{outline:3px solid #c97c00;outline-offset:3px}
+.lippi-visually-hidden{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 
-/* ---------- scroll progress (element injected by lippi-motion.js) ---------- */
+/* ---------- scroll progress (injected by lippi-motion.js) ---------- */
 .lippi-progress{position:fixed;left:0;top:0;height:3px;width:100%;z-index:60;pointer-events:none;
   background:linear-gradient(90deg,var(--teal),var(--mint));transform:scaleX(0);transform-origin:0 50%}
 
-/* ---------- header ---------- */
-.lippi-header{background:rgba(251,253,252,.86);border-bottom:1px solid transparent;box-shadow:none;
+/* ---------- header: one layout on every page ---------- */
+[data-site-header]{position:sticky;top:0;z-index:40}
+.lippi-header{background:rgba(251,253,252,.88);border-bottom:1px solid transparent;box-shadow:none;font:600 14px/1.5 var(--display);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
   transition:background-color .3s var(--ease),border-color .3s var(--ease),box-shadow .3s var(--ease)}
-.lippi-header-inner{min-height:76px}
-.is-scrolled .lippi-header{background:rgba(251,253,252,.94);border-bottom-color:var(--line);box-shadow:0 10px 30px #0d26370d}
-.lippi-brand img{transition:transform .3s var(--ease)}
-.lippi-nav{position:relative}
-.lippi-nav a{font-family:var(--display);font-weight:600;border-bottom:0!important;position:relative}
-.lippi-nav a:not(.lippi-book)::after{content:"";position:absolute;left:0;right:0;bottom:2px;height:2px;border-radius:2px;
-  background:var(--teal);transform:scaleX(0);transform-origin:0 50%;transition:transform .3s var(--ease)}
-.lippi-nav a:not(.lippi-book):hover::after,.lippi-nav a[aria-current="page"]::after{transform:scaleX(1)}
-.lippi-nav .lippi-book{display:inline-flex;align-items:center;gap:10px;padding:7px 7px 7px 18px!important;background:var(--navy);border-color:var(--navy);
-  transition:background-color .25s var(--ease),transform .25s var(--ease)}
-.lippi-nav .lippi-book span{display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--mint);color:var(--navy);
-  transition:transform .3s var(--ease)}
-.lippi-nav .lippi-book:hover{background:var(--teal);border-color:var(--teal)}
-.lippi-nav .lippi-book:hover span{transform:rotate(45deg)}
+.is-scrolled .lippi-header{background:rgba(251,253,252,.96);border-bottom-color:var(--line);box-shadow:0 10px 30px #0d26370d}
+.lippi-header-inner{max-width:1240px;min-height:var(--header-h);padding:12px 28px;gap:24px}
+.lippi-brand img{width:170px}
+.lippi-header .lippi-nav{display:flex;align-items:center;justify-content:flex-end;gap:6px;flex-wrap:nowrap}
+/* breadcrumb on the long-form article */
+.article-back{display:inline-flex;align-items:center;gap:8px;margin-bottom:28px;color:var(--teal)!important;font:650 14px/1 var(--display);text-decoration:none}
+.article-back::before{content:"";width:16px;height:16px;background:currentColor;-webkit-mask:var(--lp-ic-right) center/contain no-repeat;mask:var(--lp-ic-right) center/contain no-repeat;transform:scaleX(-1)}
+.article-back:hover{color:var(--navy)!important}
+.lippi-header .lippi-nav>a:not(.lippi-book){position:relative;display:inline-flex;align-items:center;min-height:44px;padding:0 14px;border-radius:999px;
+  border:0;color:var(--navy);font-weight:600;transition:color .2s var(--ease),background-color .2s var(--ease)}
+.lippi-header .lippi-nav>a:not(.lippi-book):hover{background:var(--paper);color:var(--teal)}
+.lippi-header .lippi-nav>a[aria-current="page"]{background:var(--mint-2);color:var(--teal-2)}
+.lippi-header .lippi-nav .lippi-book{display:inline-flex;align-items:center;gap:10px;min-height:44px;margin-left:6px;padding:5px 5px 5px 18px;border-radius:999px;
+  background:var(--navy);border:1px solid var(--navy);color:#fff;font-weight:600;transition:background-color .25s var(--ease),border-color .25s var(--ease)}
+.lippi-header .lippi-nav .lippi-book .lp-ic{display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--mint);
+  -webkit-mask:none;mask:none;position:relative;transition:transform .35s var(--ease)}
+.lippi-header .lippi-nav .lippi-book .lp-ic::after{content:"";width:16px;height:16px;background:var(--navy);-webkit-mask:var(--lp-ic-up-right) center/contain no-repeat;mask:var(--lp-ic-up-right) center/contain no-repeat}
+.lippi-header .lippi-nav .lippi-book:hover{background:var(--teal);border-color:var(--teal)}
+.lippi-header .lippi-nav .lippi-book:hover .lp-ic{transform:rotate(45deg)}
+/* the native pickers stay in the page (scripts and tests drive them); the designed menu replaces them visually */
+.lp-native-language{position:absolute!important;width:1px!important;height:1px!important;margin:0!important;padding:0!important;overflow:hidden!important;
+  clip:rect(0 0 0 0)!important;clip-path:inset(50%)!important;white-space:nowrap!important;border:0!important}
+
+/* ---------- language menu ---------- */
+.lp-lang{position:relative;margin-left:4px}
+.lp-lang-button{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 12px 0 12px;border-radius:999px;border:1px solid var(--line-2);
+  background:#fff;color:var(--navy);font:600 13.5px/1 var(--display);letter-spacing:.02em;cursor:pointer;
+  transition:border-color .2s var(--ease),background-color .2s var(--ease),box-shadow .2s var(--ease)}
+.lp-lang-button:hover{border-color:var(--teal);box-shadow:0 0 0 4px #137c7514}
+.lp-lang-button .lp-ic{font-size:18px;color:var(--teal)}
+.lp-lang-button .lp-lang-chevron{font-size:15px;color:var(--muted);transition:transform .3s var(--ease)}
+.lp-lang-button[aria-expanded="true"]{border-color:var(--teal);background:var(--paper)}
+.lp-lang-button[aria-expanded="true"] .lp-lang-chevron{transform:rotate(180deg)}
+.lp-lang-menu{position:absolute;right:0;top:calc(100% + 10px);z-index:50;min-width:210px;margin:0;padding:6px;list-style:none;
+  background:#fff;border:1px solid var(--line);border-radius:var(--r-md);box-shadow:0 24px 50px #0d263726,0 2px 6px #0d26370f;
+  transform-origin:100% 0;opacity:0;transform:translateY(-6px) scale(.98);pointer-events:none;visibility:hidden;
+  transition:opacity .2s var(--ease),transform .25s var(--ease),visibility 0s linear .25s}
+.lp-lang.is-open .lp-lang-menu{opacity:1;transform:none;pointer-events:auto;visibility:visible;transition:opacity .2s var(--ease),transform .25s var(--ease)}
+.lp-lang-menu li{display:flex;align-items:center;gap:12px;min-height:44px;padding:0 12px;border-radius:10px;cursor:pointer;color:var(--ink);font:500 14.5px/1.2 var(--body)}
+.lp-lang-menu li:hover,.lp-lang-menu li.is-active{background:var(--paper)}
+.lp-lang-code{display:grid;place-items:center;width:30px;height:24px;border-radius:6px;background:var(--paper-2);color:var(--teal-2);font:700 11px/1 var(--display);letter-spacing:.06em}
+.lp-lang-menu li[aria-selected="true"]{color:var(--teal-2);font-weight:600}
+.lp-lang-menu li[aria-selected="true"] .lp-lang-code{background:var(--teal);color:#fff}
+.lp-lang-menu li .lp-ic{margin-left:auto;font-size:16px;color:var(--teal);opacity:0}
+.lp-lang-menu li[aria-selected="true"] .lp-ic{opacity:1}
+
+/* ---------- links get the same icon language everywhere ---------- */
+.text-link{display:inline-flex;align-items:center;gap:8px;text-decoration:none;color:var(--teal);font:650 15px/1.5 var(--display);
+  background:linear-gradient(currentColor,currentColor) 0 100%/100% 1px no-repeat;padding-bottom:2px;transition:background-size .35s var(--ease),color .2s}
+.text-link::after{content:"";flex:none;width:15px;height:15px;background:currentColor;-webkit-mask:var(--lp-ic-right) center/contain no-repeat;mask:var(--lp-ic-right) center/contain no-repeat;transition:transform .3s var(--ease)}
+.text-link[target="_blank"]::after{-webkit-mask-image:var(--lp-ic-up-right);mask-image:var(--lp-ic-up-right)}
+.text-link[href^="#"]::after{-webkit-mask-image:var(--lp-ic-down);mask-image:var(--lp-ic-down)}
+.text-link:hover{background-size:0 1px;color:var(--navy)}
+.text-link:hover::after{transform:translateX(3px)}
+.text-link[target="_blank"]:hover::after{transform:translate(2px,-2px)}
+.text-link[href^="#"]:hover::after{transform:translateY(3px)}
 
 /* ---------- footer ---------- */
-.lippi-footer{position:relative;overflow:hidden;background:var(--navy-2);padding-top:72px}
+.lippi-footer{position:relative;overflow:hidden;background:var(--navy-2);padding:80px 0 28px;text-align:left;border-top:0;font:400 14.5px/1.65 var(--body)}
 .lippi-footer::before{content:"";position:absolute;inset:0;pointer-events:none;
   background-image:linear-gradient(#ffffff08 1px,transparent 1px),linear-gradient(90deg,#ffffff08 1px,transparent 1px);background-size:48px 48px;
-  mask-image:linear-gradient(180deg,#000,transparent 85%)}
-.lippi-footer-inner{position:relative}
-.lippi-footer strong{font-family:var(--display);font-size:24px}
-.lippi-footer-links a{position:relative}
+  -webkit-mask-image:linear-gradient(180deg,#000,transparent 85%);mask-image:linear-gradient(180deg,#000,transparent 85%)}
+.lippi-footer::after{content:"";position:absolute;right:-120px;top:-160px;width:420px;height:420px;border-radius:50%;pointer-events:none;
+  background:radial-gradient(circle,#137c7540,transparent 70%)}
+.lippi-footer-inner{position:relative;z-index:1;max-width:1240px;padding:0 28px}
+.lippi-footer-top{grid-template-columns:1.1fr 1fr;gap:56px}
+.lippi-footer-logo{display:block;width:200px;aspect-ratio:3440/900;background:var(--mint);
+  -webkit-mask:url(/logo.svg) left center/contain no-repeat;mask:url(/logo.svg) left center/contain no-repeat;transition:opacity .2s}
+.lippi-footer-logo:hover{opacity:.85}
+.lippi-footer p{color:#bed3cd;margin:18px 0 22px}
+.lippi-footer-social{display:flex;gap:10px;margin-bottom:14px}
+.lippi-footer-social a{display:grid;place-items:center;width:44px;height:44px;border-radius:50%;border:1px solid #ffffff2b;color:#e4f0eb;
+  transition:background-color .25s var(--ease),color .25s var(--ease),border-color .25s var(--ease),transform .25s var(--ease)}
+.lippi-footer-social a:hover{background:var(--mint);border-color:var(--mint);color:var(--navy);transform:translateY(-2px);text-decoration:none}
+.lippi-footer-social svg{width:19px;height:19px}
+.lippi-footer-email{color:var(--mint)!important;font-weight:500}
+.lippi-footer-links{display:grid;grid-template-columns:repeat(2,minmax(0,max-content));justify-content:end;gap:6px 48px}
+.lippi-footer-links a{display:inline-flex;align-items:center;min-height:40px;color:#e4f0eb;font:500 14.5px/1.4 var(--display)}
 .lippi-footer a:hover{text-decoration:none;color:var(--mint)}
+.lippi-footer-bottom{border-top-color:#ffffff1f;align-items:center;gap:10px 28px}
+.lippi-footer-bottom p{margin:0 auto 0 0;color:#9fb9b2}
+.lippi-footer-bottom a{color:#bed3cd}
 
 /* ---------- pointer spotlight on cards (class added by lippi-motion.js) ---------- */
 .lippi-spot{position:relative;isolation:isolate}
@@ -58,13 +121,45 @@ p{text-wrap:pretty}
   background:radial-gradient(260px circle at var(--mx,50%) var(--my,50%),#b4e6d533,transparent 70%);transition:opacity .35s var(--ease)}
 .lippi-spot:hover::after{opacity:1}
 
-/* ---------- shared reveal hooks (only active when motion.js marks <html>) ---------- */
+/* ---------- reveal hooks (active only when lippi-motion.js marks <html>) ---------- */
 .lippi-motion [data-reveal]{opacity:0;transform:translate3d(0,22px,0);transition:opacity .8s var(--ease),transform .8s var(--ease)}
 .lippi-motion [data-reveal].is-in{opacity:1;transform:none}
 
-@media (prefers-reduced-motion:reduce){
+/* ---------- mobile "show more" for long passages (added by lippi-motion.js) ---------- */
+.lp-clamp{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;overflow:hidden}
+.lp-more{display:inline-flex;align-items:center;gap:6px;margin:6px 0 4px;padding:8px 0;min-height:40px;border:0;background:none;cursor:pointer;
+  color:var(--teal);font:650 14px/1 var(--display)}
+.lp-more .lp-ic{transition:transform .3s var(--ease)}
+.lp-more[aria-expanded="true"] .lp-ic{transform:rotate(180deg)}
+
+/* ---------- tablet and mobile navigation ---------- */
+@media(max-width:1100px){
+  .lippi-header-inner{flex-wrap:wrap;gap:12px;padding:12px 20px;min-height:68px}
+  .lippi-brand img{width:150px}
+  .lippi-menu-button{display:inline-flex;min-height:44px;border-radius:999px;padding:0 16px;border-color:var(--line-2);font:600 14px/1 var(--display);color:var(--navy)}
+  .lippi-js .lippi-header .lippi-nav{display:none;width:100%}
+  .lippi-js .lippi-header .lippi-nav.is-open{display:flex;flex-direction:column;align-items:stretch;gap:4px;padding:10px 0 14px;border-top:1px solid var(--line);
+    animation:lp-menu-in .3s var(--ease)}
+  .lippi-js .lippi-header .lippi-nav>a:not(.lippi-book){padding:0 14px;min-height:48px}
+  .lippi-js .lippi-header .lippi-nav .lippi-book{justify-content:space-between;margin:8px 0 0}
+  .lp-lang{margin:4px 0 0}
+  .lp-lang-button{width:100%;justify-content:flex-start;min-height:48px}
+  .lp-lang-button .lp-lang-chevron{margin-left:auto}
+  .lp-lang-menu{position:static;transform:none;min-width:0;margin-top:6px;box-shadow:none;display:none}
+  .lp-lang.is-open .lp-lang-menu{display:block}
+  .lippi-footer-top{grid-template-columns:1fr;gap:36px}
+  .lippi-footer-links{justify-content:start}
+}
+@keyframes lp-menu-in{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+@media(max-width:560px){
+  .lippi-footer{padding-top:56px}
+  .lippi-footer-links{grid-template-columns:1fr 1fr;gap:0 20px}
+  .lippi-footer-bottom{flex-direction:column;align-items:flex-start;gap:6px}
+}
+
+@media(prefers-reduced-motion:reduce){
   .lippi-motion [data-reveal]{opacity:1;transform:none;transition:none}
   .lippi-progress{display:none}
-  *,*::before,*::after{transition-duration:.01ms!important;animation-duration:.01ms!important}
+  *,*::before,*::after{transition-duration:.01ms!important;animation-duration:.01ms!important;animation-iteration-count:1!important}
 }
-@media (hover:none){.lippi-nav .lippi-book:hover span{transform:none}}
+@media(hover:none){.lippi-header .lippi-nav .lippi-book:hover .lp-ic{transform:none}.text-link:hover::after{transform:none}}
