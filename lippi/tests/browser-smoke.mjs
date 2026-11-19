@@ -42,7 +42,13 @@ async function checkPage(context,route,lang,htmlLang,device) {
     const metadata = await page.evaluate(() => ({
       title: document.title.trim(),
       description: document.querySelector('meta[name="description"]')?.content?.trim() || '',
-      canonical: document.querySelector('link[rel="canonical"]')?.href || ''
+      canonical: document.querySelector('link[rel="canonical"]')?.href || '',
+      social: Object.fromEntries(
+        ['og:title','og:description','twitter:title','twitter:description','og:locale']
+          .map(key => [key, document.querySelector(
+            key.startsWith('og:') ? 'meta[property="'+key+'"]' : 'meta[name="'+key+'"]'
+          )?.content || null])
+      )
     }));
     assert.ok(metadata.title,route+' has no document title');
     assert.ok(metadata.description,route+' has no meta description');
@@ -60,6 +66,20 @@ async function checkPage(context,route,lang,htmlLang,device) {
           route+' title remains English in '+lang);
         assert.notEqual(metadata.description,original.description,
           route+' description remains English in '+lang);
+        for (const key of ['og:title','og:description','twitter:title','twitter:description']) {
+          if (original.social[key] === null) continue; // This page has no such tag.
+          assert.ok(metadata.social[key],route+' '+key+' is empty in '+lang);
+          assert.notEqual(metadata.social[key],original.social[key],
+            route+' '+key+' remains English in '+lang);
+          assert.equal(metadata.social[key],
+            key.endsWith('title') ? metadata.title : metadata.description,
+            route+' '+key+' differs from localized page metadata in '+lang);
+        }
+        if (original.social['og:locale'] !== null) {
+          assert.equal(metadata.social['og:locale'],
+            {pt:'pt_BR',es:'es_ES',it:'it_IT'}[lang],
+            route+' Open Graph locale not updated for '+lang);
+        }
       }
       if (lang === 'en') englishHeadings.set(route,heading);
       else assert.notEqual(heading,englishHeadings.get(route),
