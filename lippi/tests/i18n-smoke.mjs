@@ -117,7 +117,7 @@ for(const key of [
  'A practical reflection on AI governance, risk and accountability for fintech teams following Web Summit Lisbon 2026.'
 ]) assert.equal(sharedCopy[key]?.length,3,'Missing translated article metadata: '+key);
 for(const [locale,index] of [['pt',0],['es',1],['it',2]]) {
-  const statement=sharedCopy['Lippi shares practical perspectives on fintech risk, controls, governance and regulatory readiness. Advisory or training engagements are considered individually, subject to conflict-of-interest screening and any required employer approval. Fractional CRO services are not currently offered.']?.[index];
+  const statement=sharedCopy['Lippi FinTech Advisory is an independent project alongside my professional career. Any employment responsibilities come first. I assess actual, potential and perceived conflicts of interest for every proposed consulting or training engagement, obtain written employer approval where required, and decline work that could interfere with my employment. Fractional CRO services are not currently offered.']?.[index];
   assert.ok(statement?.includes('CRO'), 'Missing fractional CRO exclusion in AI article '+locale);
 }
 // Training selects keep their underlying values; visible options are localized.
