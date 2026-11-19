@@ -9,6 +9,7 @@
     "pg": "^8.13.1"
   },
   "scripts": {
-    "test:i18n": "node tests/i18n-smoke.mjs"
+    "test:i18n": "node tests/i18n-smoke.mjs",
+    "test:browser": "node tests/browser-smoke.mjs"
   }
 }
