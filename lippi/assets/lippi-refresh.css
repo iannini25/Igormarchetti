@@ -1,0 +1,70 @@
+/* Lippi design refresh — shared layer for every page.
+   Keeps the original palette (navy #0d2637, teal #137c75, mint #b4e6d5, paper #f2f7f5).
+   Changes only presentation: type, spacing, surfaces and motion hooks. No content lives here. */
+
+:root{
+  --navy:#0d2637;--navy-2:#0a1f2d;--navy-3:#15384a;
+  --teal:#137c75;--teal-2:#0f6862;--mint:#b4e6d5;--mint-2:#dff3ec;
+  --paper:#f2f7f5;--paper-2:#e8f1ee;--ink:#152b37;--muted:#4f6470;
+  --line:#d6e4df;--line-2:#c2d7d0;
+  --display:"Plus Jakarta Sans",system-ui,sans-serif;
+  --body:"Inter",system-ui,sans-serif; /* kit-allow: body-font */
+  --r-lg:22px;--r-md:16px;--r-sm:10px;
+  --ease:cubic-bezier(.2,.8,.2,1);
+  --shadow-1:0 1px 2px #0d263708,0 8px 24px #0d26370a;
+  --shadow-2:0 2px 4px #0d26370d,0 22px 48px #0d263718;
+}
+
+body{font-family:var(--body);color:var(--ink);background:#fbfdfc;text-rendering:optimizeLegibility}
+h1,h2,h3,h4{font-family:var(--display);color:inherit;text-wrap:balance}
+p{text-wrap:pretty}
+::selection{background:var(--mint);color:var(--navy)}
+
+/* ---------- scroll progress (element injected by lippi-motion.js) ---------- */
+.lippi-progress{position:fixed;left:0;top:0;height:3px;width:100%;z-index:60;pointer-events:none;
+  background:linear-gradient(90deg,var(--teal),var(--mint));transform:scaleX(0);transform-origin:0 50%}
+
+/* ---------- header ---------- */
+.lippi-header{background:rgba(251,253,252,.86);border-bottom:1px solid transparent;box-shadow:none;
+  transition:background-color .3s var(--ease),border-color .3s var(--ease),box-shadow .3s var(--ease)}
+.lippi-header-inner{min-height:76px}
+.is-scrolled .lippi-header{background:rgba(251,253,252,.94);border-bottom-color:var(--line);box-shadow:0 10px 30px #0d26370d}
+.lippi-brand img{transition:transform .3s var(--ease)}
+.lippi-nav{position:relative}
+.lippi-nav a{font-family:var(--display);font-weight:600;border-bottom:0!important;position:relative}
+.lippi-nav a:not(.lippi-book)::after{content:"";position:absolute;left:0;right:0;bottom:2px;height:2px;border-radius:2px;
+  background:var(--teal);transform:scaleX(0);transform-origin:0 50%;transition:transform .3s var(--ease)}
+.lippi-nav a:not(.lippi-book):hover::after,.lippi-nav a[aria-current="page"]::after{transform:scaleX(1)}
+.lippi-nav .lippi-book{display:inline-flex;align-items:center;gap:10px;padding:7px 7px 7px 18px!important;background:var(--navy);border-color:var(--navy);
+  transition:background-color .25s var(--ease),transform .25s var(--ease)}
+.lippi-nav .lippi-book span{display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--mint);color:var(--navy);
+  transition:transform .3s var(--ease)}
+.lippi-nav .lippi-book:hover{background:var(--teal);border-color:var(--teal)}
+.lippi-nav .lippi-book:hover span{transform:rotate(45deg)}
+
+/* ---------- footer ---------- */
+.lippi-footer{position:relative;overflow:hidden;background:var(--navy-2);padding-top:72px}
+.lippi-footer::before{content:"";position:absolute;inset:0;pointer-events:none;
+  background-image:linear-gradient(#ffffff08 1px,transparent 1px),linear-gradient(90deg,#ffffff08 1px,transparent 1px);background-size:48px 48px;
+  mask-image:linear-gradient(180deg,#000,transparent 85%)}
+.lippi-footer-inner{position:relative}
+.lippi-footer strong{font-family:var(--display);font-size:24px}
+.lippi-footer-links a{position:relative}
+.lippi-footer a:hover{text-decoration:none;color:var(--mint)}
+
+/* ---------- pointer spotlight on cards (class added by lippi-motion.js) ---------- */
+.lippi-spot{position:relative;isolation:isolate}
+.lippi-spot::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:-1;opacity:0;
+  background:radial-gradient(260px circle at var(--mx,50%) var(--my,50%),#b4e6d533,transparent 70%);transition:opacity .35s var(--ease)}
+.lippi-spot:hover::after{opacity:1}
+
+/* ---------- shared reveal hooks (only active when motion.js marks <html>) ---------- */
+.lippi-motion [data-reveal]{opacity:0;transform:translate3d(0,22px,0);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.lippi-motion [data-reveal].is-in{opacity:1;transform:none}
+
+@media (prefers-reduced-motion:reduce){
+  .lippi-motion [data-reveal]{opacity:1;transform:none;transition:none}
+  .lippi-progress{display:none}
+  *,*::before,*::after{transition-duration:.01ms!important;animation-duration:.01ms!important}
+}
+@media (hover:none){.lippi-nav .lippi-book:hover span{transform:none}}
