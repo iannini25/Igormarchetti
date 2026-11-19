@@ -29,6 +29,27 @@ for(const locale of locales) {
     assert.ok(independentCopy[locale]?.[field]?.trim(),'Missing independence '+locale+'.'+field);
   }
 }
+// Regression checks for an English-first, shareable, conflict-safe release.
+for (const page of [
+  'index.html','training.html','regulations.html','articles.html',
+  'independence.html','ai-governance-fintech-web-summit-2026.html'
+]) {
+  assert.match(read(page),/<html\\b[^>]*\\blang="en"/i,'English must remain the HTML default on '+page);
+}
+const independenceGuardrails = {
+  en: {approval:/in writing/i,scope:/fractional CRO roles/i},
+  pt: {approval:/por escrito/i,scope:/CRO fracionado/i},
+  es: {approval:/por escrito/i,scope:/CRO fraccional/i},
+  it: {approval:/per iscritto/i,scope:/CRO frazionale/i}
+};
+for (const [locale,guardrails] of Object.entries(independenceGuardrails)) {
+  assert.match(independentCopy[locale].approval,guardrails.approval,
+    'Missing written employer-approval requirement: '+locale);
+  assert.match(independentCopy[locale].scope,guardrails.scope,
+    'Missing exclusion of fractional CRO roles: '+locale);
+}
+assert.ok(independence.includes("history.replaceState(null,'',shareUrl)"),
+  'Independence page must preserve its locale in a shareable URL');
 const shell = read('assets/site-shell.js');
 const shellMatch = shell.match(/const words = (\{[^\n]+\});\n  const sourceText/);
 assert.ok(shellMatch,'Shared language dictionary not found');
@@ -114,6 +135,8 @@ for (const page of ['index.html','training.html']) {
 const regulatoryPage = read('regulations.html');
 assert.ok(regulatoryPage.includes('<option value="it">Italiano</option>'),'Regulations picker lacks Italian');
 const regulatoryRuntime = read('assets/regulations.js');
+assert.ok(regulatoryRuntime.includes("history.replaceState(null,'',shareUrl)"),
+  'Regulatory page must preserve its locale in a shareable URL');
 assert.ok(regulatoryRuntime.includes('translationLoadError[currentLanguage]'),
   'Regulatory translation failure notice must follow the active language');
 for(const locale of locales) {
