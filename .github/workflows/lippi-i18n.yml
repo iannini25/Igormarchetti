@@ -36,7 +36,7 @@ jobs:
 
   browser-localization:
     name: Lippi local desktop and mobile Chromium checks
-    # Playwright 1.56 Chromium is supported on Ubuntu 24.04; latest is 26.04.
+    # Use the browser preinstalled on GitHub-hosted Ubuntu 24.04.
     runs-on: ubuntu-24.04
     timeout-minutes: 20
     defaults:
@@ -49,10 +49,8 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '24'
-      - name: Install test-only browser
-        run: |
-          npm install --no-save --package-lock=false playwright@1.56.1
-          npx playwright install --with-deps chromium
+      - name: Install Playwright test client
+        run: npm install --no-save --package-lock=false playwright@1.56.1
       - name: Test six pages in four languages on desktop and mobile
         run: |
           python3 -m http.server 8765 --bind 127.0.0.1 > /tmp/lippi-http.log 2>&1 &
