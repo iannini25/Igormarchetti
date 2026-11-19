@@ -71,9 +71,14 @@ async function checkPage(context,route,lang,htmlLang,device) {
           assert.ok(metadata.social[key],route+' '+key+' is empty in '+lang);
           assert.notEqual(metadata.social[key],original.social[key],
             route+' '+key+' remains English in '+lang);
-          assert.equal(metadata.social[key],
-            key.endsWith('title') ? metadata.title : metadata.description,
-            route+' '+key+' differs from localized page metadata in '+lang);
+          // The Open Graph summary may intentionally differ from the SEO
+          // description (or the social title from the browser tab title).
+          // Only require equality when the English originals were equal.
+          const pageField = key.endsWith('title') ? 'title' : 'description';
+          if (original.social[key] === original[pageField]) {
+            assert.equal(metadata.social[key],metadata[pageField],
+              route+' '+key+' does not follow localized '+pageField+' in '+lang);
+          }
         }
         if (original.social['og:locale'] !== null) {
           assert.equal(metadata.social['og:locale'],
