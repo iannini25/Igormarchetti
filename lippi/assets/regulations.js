@@ -74,6 +74,11 @@
     document.querySelector('meta[property="og:title"]')?.setAttribute('content',document.title);
     document.querySelector('meta[property="og:description"]')?.setAttribute('content',labels.intro);
     try { localStorage.setItem('lippi-language',lang); } catch {}
+    // Keep the selected language in the shareable URL, as on other public pages.
+    const shareUrl = new URL(location.href);
+    if (lang === 'en') shareUrl.searchParams.delete('lang');
+    else shareUrl.searchParams.set('lang',lang);
+    history.replaceState(null,'',shareUrl);
     filter();
   }
   language.addEventListener('change', () => {
