@@ -202,4 +202,18 @@ for(const key of [
 assert.ok(read('index.html').includes("document.addEventListener('lippi:languagechange', () => filterTopics(currentTopic))"),
   'Homepage filter count not refreshed after a language change');
 
+// Keep every public Lippi content page discoverable without exposing admin routes.
+const sitemap = read('sitemap.xml');
+for (const path of [
+  '/', '/training.html', '/regulations.html', '/articles.html',
+  '/independence.html', '/ai-governance-fintech-web-summit-2026.html'
+]) {
+  assert.ok(sitemap.includes('<loc>https://lippi.igormarchetti.me' + path + '</loc>'),
+    'Public page missing from sitemap: '+path);
+}
+for (const path of ['/survey-admin.html','/training-admin.html']) {
+  assert.ok(!sitemap.includes('<loc>https://lippi.igormarchetti.me'+path+'</loc>'),
+    'Admin-only path exposed in sitemap: '+path);
+}
+
 console.log('Source-level localization checks passed for 4 languages; 7 regulatory explainers; independence page and '+Object.keys(sharedCopy).length+' curated shared translations. Home/training copy audited: '+JSON.stringify(contentAudit)+'. Browser tests still required.');
