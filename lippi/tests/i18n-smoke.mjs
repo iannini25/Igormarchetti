@@ -143,6 +143,53 @@ for(const locale of locales) {
   assert.ok(regulatoryRuntime.includes('    '+locale+':'),
     'Missing '+locale+' regulatory translation failure notice');
 }
+// Locale-aware public links must be shareable without rewriting API, downloads,
+// external URLs or page anchors. Repeated language switches must be reversible.
+const linkStart = shell.indexOf('  const publicPages = new Set(');
+const linkEnd = shell.indexOf('  function apply(language)',linkStart);
+assert.ok(linkStart > 0 && linkEnd > linkStart,'Shared internal-link localization is missing');
+const linkSection = shell.slice(linkStart,linkEnd);
+const makeLink = href => ({
+  href,
+  getAttribute(name) { assert.equal(name,'href'); return this.href; },
+  setAttribute(name,value) { assert.equal(name,'href'); this.href = value; }
+});
+const testLinks = [
+  makeLink('/training.html#modules'),
+  makeLink('/articles.html?ref=nav'),
+  makeLink('/independence.html'),
+  makeLink('/api/newsletter/health'),
+  makeLink('/downloads/brochure.pdf'),
+  makeLink('https://example.com/training.html'),
+  makeLink('//example.com/articles.html'),
+  makeLink('#top')
+];
+const linkSnapshots = new Script(
+  'const originalLinkHref = new WeakMap();\n'+linkSection+
+  "\n['it','en','pt'].map(language => { syncInternalLinks(language); return links.map(link => link.href); });",
+  {filename:'lippi-public-link-localization'}
+).runInNewContext({
+  document:{querySelectorAll:()=>testLinks},
+  location:{origin:'https://lippi.igormarchetti.me'},
+  links:testLinks,
+  URL
+});
+assert.equal(linkSnapshots[0][0],'/training.html?lang=it#modules');
+assert.equal(linkSnapshots[0][1],'/articles.html?ref=nav&lang=it');
+assert.equal(linkSnapshots[0][2],'/independence.html?lang=it');
+assert.equal(linkSnapshots[1][0],'/training.html#modules','English should restore the original link');
+assert.equal(linkSnapshots[1][1],'/articles.html?ref=nav');
+assert.equal(linkSnapshots[2][0],'/training.html?lang=pt#modules');
+for (const snapshot of linkSnapshots) {
+  assert.deepEqual([...snapshot.slice(3)],testLinks.slice(3).map(link=>link.href),
+    'Only public page routes should receive a locale parameter');
+}
+assert.ok(shell.includes('syncInternalLinks(lang);'),'Language updates must refresh public links');
+assert.ok(independence.includes("document.querySelector('nav a').setAttribute('href',l==='en'?'/':'/?lang='+l)"),
+  'Independence return link must preserve language');
+assert.ok(independence.includes("if(!t[init])try{init=localStorage.getItem('lippi-language')}"),
+  'Independence page must reject invalid locale parameters and use a saved language');
+
 assert.ok(shell.includes('lippi-language-picker'),'Shared picker missing');
 for (const file of ['assets/site-shell.js','assets/regulations.js','assets/articles.js','assets/founder-survey.js']) {
   new Script(read(file),{filename:file});
