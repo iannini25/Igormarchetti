@@ -120,4 +120,49 @@ for (const file of ['assets/site-shell.js','assets/regulations.js','assets/artic
 const independentScript = independence.match(/<script>([\s\S]*?)<\/script>/);
 assert.ok(independentScript,'Independence inline script missing');
 new Script(independentScript[1],{filename:'independence-inline'});
-console.log('Source-level localization checks passed for 4 languages; 7 regulatory explainers; independence page and '+Object.keys(sharedCopy).length+' curated shared translations. Browser tests still required.');
+
+// Public homepage and training copy must never fall back to untranslated English.
+// Names, brand marks, email addresses and qualifications intentionally remain unchanged.
+const unchangedNames = new Set([
+ 'Igor Marchetti Lippi','lippifintech@igormarchetti.me',
+ 'Fiserv / AIB Merchant Services','Elavon / U.S. Bank',
+ 'J.P. Morgan Merchant Services','Worldpay & Barclaycard',
+ 'Planet','Tyl by NatWest',
+ '© 2026 Igor Marchetti Lippi · Lippi FinTech Advisory',
+ 'Central Bank of Ireland','Banco de Portugal','Banco Central do Brasil'
+]);
+const deEntity = value => value
+  .replace(/&amp;/g,'&').replace(/&nbsp;/g,' ')
+  .replace(/&#39;/g,"'").replace(/&rsquo;/g,'’')
+  .replace(/&mdash;/g,'—').replace(/\s+/g,' ').trim();
+const contentAudit = {};
+for (const file of ['index.html','training.html']) {
+  const html = read(file)
+    .replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi,'')
+    .replace(/<style\b[^>]*>[\s\S]*?<\/style>/gi,'')
+    .replace(/<!--[\s\S]*?-->/g,'');
+  const visible = [...new Set(html.split(/<[^>]+>/).map(deEntity)
+    .filter(value=>value.length>3 && !/^[\d\s\-\.%€@\/]+$/.test(value)))];
+  for(const value of visible) {
+    if (unchangedNames.has(value)) continue;
+    assert.equal(sharedCopy[value]?.length,3,
+      file+' text is missing PT/ES/IT copy: '+value);
+  }
+  contentAudit[file] = {total:visible.length,localized:visible.filter(value=>sharedCopy[value]).length,
+    unchanged:visible.filter(value=>unchangedNames.has(value)).length};
+}
+// Titles, description and open-graph snippets on shared-shell pages must translate.
+for(const file of ['index.html','training.html','articles.html','ai-governance-fintech-web-summit-2026.html']) {
+  const html = read(file);
+  const candidates = [
+    ...[...html.matchAll(/<title>([\s\S]*?)<\/title>/gi)].map(match=>match[1]),
+    ...[...html.matchAll(/<meta\s+(?:name="description"|property="og:title"|property="og:description"|name="twitter:title"|name="twitter:description")\s+content="([^"]+)"/gi)].map(match=>match[1])
+  ];
+  for(const raw of new Set(candidates)) {
+    const value = deEntity(raw);
+    assert.equal(sharedCopy[value]?.length,3,
+       file+' metadata missing PT/ES/IT copy: '+value);
+  }
+}
+
+console.log('Source-level localization checks passed for 4 languages; 7 regulatory explainers; independence page and '+Object.keys(sharedCopy).length+' curated shared translations. Home/training copy audited: '+JSON.stringify(contentAudit)+'. Browser tests still required.');
