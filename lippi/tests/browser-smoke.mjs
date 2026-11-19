@@ -44,7 +44,7 @@ async function checkPage(context,route,lang,htmlLang,device) {
       description: document.querySelector('meta[name="description"]')?.content?.trim() || '',
       canonical: document.querySelector('link[rel="canonical"]')?.href || '',
       social: Object.fromEntries(
-        ['og:title','og:description','twitter:title','twitter:description','og:locale']
+        ['og:title','og:description','twitter:title','twitter:description','og:image:alt','twitter:image:alt','og:locale']
           .map(key => [key, document.querySelector(
             key.startsWith('og:') ? 'meta[property="'+key+'"]' : 'meta[name="'+key+'"]'
           )?.content || null])
@@ -66,7 +66,7 @@ async function checkPage(context,route,lang,htmlLang,device) {
           route+' title remains English in '+lang);
         assert.notEqual(metadata.description,original.description,
           route+' description remains English in '+lang);
-        for (const key of ['og:title','og:description','twitter:title','twitter:description']) {
+        for (const key of ['og:title','og:description','twitter:title','twitter:description','og:image:alt','twitter:image:alt']) {
           if (original.social[key] === null) continue; // This page has no such tag.
           assert.ok(metadata.social[key],route+' '+key+' is empty in '+lang);
           assert.notEqual(metadata.social[key],original.social[key],
