@@ -141,7 +141,25 @@ async function checkPage(context,route,lang,htmlLang,device) {
       assert.match(await page.locator('[data-key="scope"]').textContent(),/CRO/i,
         'Fractional CRO exclusion is missing in '+lang);
     }
+    if (route === '/') {
+      const advisory = page.locator('section[aria-labelledby="advisory-offer"] a');
+      const workshops = page.locator('section[aria-labelledby="training-offer"] a');
+      assert.ok(await advisory.isVisible() && await workshops.isVisible(),
+        'Both offers must be visible on the homepage');
+      assert.equal(await advisory.getAttribute('href'), 'https://calendly.com/igormarchettilippi/30min');
+      assert.equal(new URL(await workshops.getAttribute('href'), origin).pathname, '/training.html');
+      const first = await advisory.locator('..').boundingBox();
+      const second = await workshops.locator('..').boundingBox();
+      assert.ok(device === 'mobile' ? second.y >= first.y + first.height - 1 : Math.abs(first.y - second.y) < 1,
+        'Offers should stack on mobile and sit side by side on desktop');
+    }
     if (route === '/training.html') {
+      for (const id of ['course-contents', 'sample']) {
+        assert.ok(await page.locator('.hero a[href="#'+id+'"]').isVisible());
+        assert.equal(await page.locator('#'+id).count(), 1);
+      }
+      const advisoryUrl = new URL(await page.locator('section[aria-labelledby="consulting-support-heading"] a').getAttribute('href'), origin);
+      assert.equal(advisoryUrl.pathname + advisoryUrl.hash, '/#services');
       assert.equal(await page.locator('#training-interest-form').count(),1,
         'Training enquiry form is missing');
     }

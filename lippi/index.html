@@ -416,6 +416,27 @@ section{padding:104px 0}
 .consulting-path .actions{align-items:center}
 .consulting-path .actions .text-link{margin:0}
 @media(max-width:780px){.credentials-grid,.audience-grid{grid-template-columns:1fr;gap:18px}.credentials-summary,.consulting-path{padding:32px 0}.discovery-questions ol{columns:1}.consulting-path .grid.three{grid-template-columns:1fr}.hero .hero-service-note{font-size:15px}}
+.hero-offers {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+.hero-offers > section {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: .6rem;
+  padding: 1rem 0 0;
+  border-top: 1px solid #85b8aa;
+}
+.hero-offers h2 { margin: 0; color: white; font-size: 1.3rem; line-height: 1.25; }
+.hero-offers p { margin: 0 0 .35rem; font-size: 1rem; line-height: 1.5; }
+.hero-offers a { margin-top: auto; }
+.hero-offers .hero-link { display: inline-flex; align-items: center; min-height: 44px; }
+@media (max-width: 780px) {
+  .hero-offers { grid-template-columns: 1fr; gap: 1rem; }
+}
 </style>
 </head>
 <body>
@@ -425,13 +446,19 @@ section{padding:104px 0}
 <header class="hero" id="top">
 <div class="wrap hero-grid">
 <div>
-<div class="eyebrow">Payments &amp; fintech consulting · EU &amp; Brazil</div>
-<h1>Risk and compliance consulting for fintechs.</h1>
-<p>I’m Igor Marchetti Lippi. I help payments and fintech businesses entering or expanding in the EU or Brazil put practical controls, responsibilities and reporting in place.</p>
-<p class="hero-service-note">Start with a free 30-minute needs analysis. Then agree a costed project with clear deliverables.</p>
-<div class="actions">
-<a class="btn light" href="https://calendly.com/igormarchettilippi/30min" target="_blank" rel="noopener noreferrer">Book a free needs analysis</a>
-<a class="hero-link" href="#services">See how I can help ↓</a>
+<h1>Risk and compliance for fintechs.</h1>
+<p>I’m Igor Marchetti Lippi. I help payments teams manage risk as they enter or expand in the EU or Brazil.</p>
+<div class="hero-offers">
+  <section aria-labelledby="advisory-offer">
+    <h2 id="advisory-offer">Advisory projects</h2>
+    <p>I work with your team on a live issue. For a critical supplier, we can review the evidence, assign owners and build an oversight checklist you can use.</p>
+    <a class="btn light" href="https://calendly.com/igormarchettilippi/30min" target="_blank" rel="noopener noreferrer">Book a free advisory call</a>
+  </section>
+  <section aria-labelledby="training-offer">
+    <h2 id="training-offer">Team training</h2>
+    <p>Your team practises a skill in a workshop. In one exercise, you work through a fictional supplier outage and decide who should respond and when to escalate.</p>
+    <a class="hero-link" href="/training.html">Explore the workshops</a>
+  </section>
 </div>
 </div>
 <figure class="portrait">
@@ -470,7 +497,7 @@ section{padding:104px 0}
 <section class="consulting-path alt" id="services" aria-labelledby="services-heading">
 <div class="wrap">
 <div class="label">3 · How I can help</div><p class="scope-note" id="independence">Lippi operates through defined, independent projects. The founder may also hold full-time employment; each advisory or training engagement is screened for conflicts and accepted only when any required employer permission is in place. <a href="/independence.html">Read our independence and conflicts statement</a>.</p>
-<h2 id="services-heading">A clear first conversation. A defined project.</h2>
+<h2 id="services-heading">How an advisory project works</h2>
 <p class="intro">Start with the problem you need to solve. If there is a fit, I propose a manageable piece of work with specific outputs and a price agreed before delivery begins.</p>
 <div class="grid three">
 <article class="card"><div class="card-kicker">01 · Understand</div><h3>Free needs analysis</h3><p>A 30-minute conversation about your business, target market, current controls and priorities.</p><p class="service-output"><strong>You leave with:</strong> a clearer priority and an agreed next step. No obligation to proceed.</p></article>
