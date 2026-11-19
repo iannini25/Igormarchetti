@@ -14,6 +14,7 @@ const locales = { en:'en', pt:'pt-BR', es:'es', it:'it' };
 const publicPaths = new Set(pages);
 const englishHeadings = new Map();
 const englishMetadata = new Map();
+const englishStructuredData = new Map();
 const results = [];
 const failures = [];
 const browser = await chromium.launch({channel:'chrome',headless:true});
@@ -50,6 +51,38 @@ async function checkPage(context,route,lang,htmlLang,device) {
           )?.content || null])
       )
     }));
+    // The homepage also exposes Schema.org JSON-LD to search engines.
+    // Validate human-readable metadata, language tags and reversible service
+    // descriptions in the rendered document (not just the source dictionary).
+    if (route === '/') {
+      const graph = await page.evaluate(() => JSON.parse(
+        document.querySelector('script[type="application/ld+json"]').textContent
+      )['@graph']);
+      const byType = type => graph.find(item => item['@type'] === type);
+      assert.equal(byType('WebSite').inLanguage,htmlLang,
+        'WebSite structured-data locale disagrees with page language');
+      assert.equal(byType('WebPage').inLanguage,htmlLang,
+        'WebPage structured-data locale disagrees with page language');
+      assert.equal(byType('WebPage').description,metadata.description,
+        'WebPage structured-data description not synchronized');
+      assert.equal(byType('Organization').description,metadata.description,
+        'Organization structured-data description not synchronized');
+      const services = graph.filter(item => item['@type'] === 'Service');
+      assert.equal(services.length,3,'Homepage should retain three scoped offerings');
+      if (device === 'desktop') {
+        if (lang === 'en') englishStructuredData.set(route,services);
+        else {
+          const original = englishStructuredData.get(route);
+          assert.ok(original,'Missing English structured-data baseline');
+          for (let i = 0; i < services.length; i++) {
+            for (const field of ['name','description','serviceType']) {
+              assert.notEqual(services[i][field],original[i][field],
+                lang+' homepage service '+i+' '+field+' was left in English');
+            }
+          }
+        }
+      }
+    }
     assert.ok(metadata.title,route+' has no document title');
     assert.ok(metadata.description,route+' has no meta description');
     assert.equal(new URL(metadata.canonical).pathname,route,
