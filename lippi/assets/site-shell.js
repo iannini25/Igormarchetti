@@ -33,6 +33,7 @@
   const sourceText = new WeakMap();
   const sourceAttribute = new WeakMap();
   const sourceMeta = new WeakMap();
+  const originalLinkHref = new WeakMap();
   const header = document.querySelector('[data-site-header]');
   if (!header) return;
   const picker = document.getElementById('reg-language');
@@ -59,11 +60,31 @@
     const ogLocale = document.querySelector('meta[property="og:locale"]');
     if(ogLocale) ogLocale.setAttribute('content',({en:'en_IE',pt:'pt_BR',es:'es_ES',it:'it_IT'})[language]);
   }
+  // Preserve the selected locale on internal public-page links. Keep API,
+  // downloads, external destinations and anchors without a path unchanged.
+  const publicPages = new Set([
+    '/', '/index.html', '/training.html', '/regulations.html',
+    '/articles.html', '/independence.html',
+    '/ai-governance-fintech-web-summit-2026.html'
+  ]);
+  function syncInternalLinks(language) {
+    for (const link of document.querySelectorAll('a[href]')) {
+      if (!originalLinkHref.has(link)) originalLinkHref.set(link,link.getAttribute('href'));
+      const original = originalLinkHref.get(link);
+      if (!original?.startsWith('/') || original.startsWith('//')) continue;
+      const target = new URL(original,location.origin);
+      if (!publicPages.has(target.pathname)) continue;
+      if (language === 'en') target.searchParams.delete('lang');
+      else target.searchParams.set('lang',language);
+      link.setAttribute('href',target.pathname + target.search + target.hash);
+    }
+  }
   function apply(language) {
     if (!locales.includes(language)) return;
     lang = language;
     document.documentElement.lang = {en:'en',pt:'pt-BR',es:'es',it:'it'}[lang];
     translateMetadata(lang);
+    syncInternalLinks(lang);
     const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
     let node;
     while ((node = walker.nextNode())) {
