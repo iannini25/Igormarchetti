@@ -99,7 +99,7 @@ async function founderSurvey(locale) {
       assert.ok(body.support_needed.length>=5);
       return response(route,{saved:true,id:body.submission_id});
     });
-    await page.goto(url('/',locale),{waitUntil:'load'});
+    await page.goto(url('/survey.html',locale),{waitUntil:'load'});
     await localeReady(page,locale);
     await page.locator('#founder-survey-form').evaluate(el=>{
       for(let parent=el.parentElement;parent;parent=parent.parentElement)

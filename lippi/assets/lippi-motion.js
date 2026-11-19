@@ -81,7 +81,7 @@
   // Mirrors site-shell.js on pages that run their own translation (independence):
   // public page links carry ?lang= so the chosen language follows the visitor.
   var PUBLIC_PAGES = ['/', '/index.html', '/training.html', '/regulations.html', '/articles.html', '/independence.html',
-    '/ai-governance-fintech-web-summit-2026.html'];
+    '/ai-governance-fintech-web-summit-2026.html', '/survey.html'];
   function keepLanguageInLinks() {
     var select = document.getElementById('lang');
     if (!select) return;
@@ -276,7 +276,7 @@
       track.appendChild(item);
     });
     band.appendChild(track);
-    hero.insertAdjacentElement('afterend', band);
+    hero.appendChild(band);
   }
 
   function addProcessPath() {
@@ -420,7 +420,15 @@
     });
   }
 
+  // The survey moved to its own page; keep old shared links working.
+  function redirectOldSurveyLink() {
+    if (location.hash !== '#founder-survey' || document.getElementById('founder-survey')) return false;
+    location.replace('/survey.html' + location.search);
+    return true;
+  }
+
   function init() {
+    if (redirectOldSurveyLink()) return;
     setUpScrollState();
     ensureMenu();
     setUpLanguageMenu();

@@ -65,12 +65,13 @@ article:hover>.lp-tile,section:hover>.lp-tile{transform:translateY(-3px) rotate(
 .portrait .lp-seal .lp-ic{font-size:26px}
 @keyframes lp-spin{to{transform:rotate(360deg)}}
 
-/* regulation marquee (decorative, aria-hidden) */
-.lp-marquee{position:relative;z-index:1;margin-top:-1px;padding:20px 0;background:var(--navy-2);border-top:1px solid #ffffff14;overflow:hidden;
-  -webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
-.lp-marquee-track{display:flex;width:max-content;gap:0;animation:lp-marquee 48s linear infinite}
-.lp-marquee span{display:inline-flex;align-items:center;gap:26px;padding-right:26px;color:#9fc4bb;font:600 15px/1 var(--display);letter-spacing:.08em;white-space:nowrap}
-.lp-marquee span::after{content:"";width:6px;height:6px;border-radius:50%;background:var(--teal)}
+/* regulation marquee (decorative, aria-hidden): lives inside the hero, so its faded edges
+   reveal the same dark field instead of the page background */
+.hero:has(.lp-marquee){padding-bottom:0}
+.lp-marquee{position:relative;margin-top:96px;padding:22px 0;border-top:1px solid #ffffff17;overflow:hidden;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)}
+.lp-marquee-track{display:flex;width:max-content;animation:lp-marquee 52s linear infinite}
+.lp-marquee span{display:inline-block;padding-right:64px;color:#a9cbc3;font:600 15px/1 var(--display);letter-spacing:.1em;white-space:nowrap}
 .lp-marquee:hover .lp-marquee-track{animation-play-state:paused}
 @keyframes lp-marquee{to{transform:translate3d(-50%,0,0)}}
 
@@ -240,11 +241,6 @@ article:hover>.lp-tile,section:hover>.lp-tile{transform:translateY(-3px) rotate(
 #experience .card:hover{background:#ffffff12;border-color:#b4e6d566;box-shadow:none}
 #experience .card h3{color:#fff}
 
-.founder-survey{background:var(--paper);border-top:0}
-.survey-panel{border-radius:var(--r-lg);box-shadow:var(--shadow-1);border-color:var(--line)}
-.survey-field textarea{border-radius:var(--r-sm);border-color:var(--line-2);background:#fbfdfc;transition:border-color .2s,box-shadow .2s}
-.survey-field textarea:focus{border-color:var(--teal);box-shadow:0 0 0 4px #137c751f;outline:0}
-.survey-number{background:var(--navy)}
 
 /* ---------------- contact ---------------- */
 .contact{position:relative;overflow:hidden;isolation:isolate;padding:128px 0;
@@ -294,7 +290,8 @@ article:hover>.lp-tile,section:hover>.lp-tile{transform:translateY(-3px) rotate(
   .portrait .lp-seal{left:-14px;top:24px;width:76px;height:76px}
   .portrait .lp-seal svg{inset:5px;width:66px;height:66px}
   .portrait .lp-seal .lp-ic{font-size:20px}
-  .lp-marquee{padding:14px 0}
+  .lp-marquee{margin-top:64px;padding:16px 0}
+  .lp-marquee span{padding-right:40px;font-size:13.5px}
   #latest-ai-article .wrap{margin:0 16px;padding:22px;border-radius:0 0 var(--r-md) var(--r-md)}
   .audience-section{text-align:left}
   .requirement{grid-template-columns:1fr}

@@ -235,33 +235,7 @@ article[id]{scroll-margin-top:110px}
 @media(max-width:800px){.pricing-grid{grid-template-columns:1fr}.pricing-card{padding:26px}.pricing-featured{padding:25px}.pricing-amount span{display:inline-block;margin-left:8px}.pricing-card .pricing-effort{margin-top:0}}
 @media(max-width:650px){#pricing{scroll-margin-top:260px}}
 
-/* Embedded founder survey, 6 November 2026. */
-.founder-survey{background:#eaf4f1;border-top:1px solid #cbded8}
-.survey-layout{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.2fr);gap:56px;align-items:start}
-.survey-intro h2{font-size:clamp(32px,3.6vw,43px)}
-.survey-promise{font-size:18px;color:var(--teal);margin:28px 0 16px}
-.survey-privacy{font-size:13px;color:var(--muted);line-height:1.65}
-.survey-privacy a{text-decoration:underline;overflow-wrap:anywhere}
-.survey-panel{min-width:0;border-radius:18px;border:1px solid #cbded8;background:white;padding:32px}
-.survey-field{margin-bottom:26px}.survey-field label{font-size:16px;line-height:1.5;font-weight:750;display:block;color:var(--navy)}
-.survey-number{display:inline-flex;align-items:center;justify-content:center;background:var(--teal);color:white;width:25px;height:25px;border-radius:50%;font-size:13px;margin-right:4px}
-.survey-hint{font-size:13px;line-height:1.5;color:var(--muted);margin:9px 0 12px}
-.survey-field textarea{display:block;width:100%;font:15px/1.55 Inter,Arial,sans-serif;color:var(--ink);background:#fcfefd;border:1px solid #97aaa6;border-radius:8px;padding:13px;resize:vertical;min-height:116px}
-.survey-field textarea:focus-visible,.survey-submit:focus-visible,.survey-success:focus-visible{outline:3px solid #c97c00;outline-offset:3px}
-.survey-field textarea::placeholder{color:#667972}
-.survey-count{display:block;text-align:right;color:var(--muted);font-size:11px;margin-top:5px}
-.survey-submit{border:0;font:750 15px/1.5 Inter,Arial,sans-serif;cursor:pointer;width:100%}
-.survey-submit:disabled{opacity:.55;cursor:not-allowed}
-.survey-status{font-size:14px;color:var(--muted);margin:12px 0 0;min-height:22px}
-.survey-error{color:#a12a2a}.survey-success{padding:16px 0}.survey-success h3{font-size:27px;margin:14px 0}
-.survey-success[hidden],#founder-survey-form[hidden]{display:none!important}
-#survey-reference{overflow-wrap:anywhere;font-family:monospace;font-size:12px}
-.survey-trap{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(100%);white-space:nowrap}
-#founder-survey{scroll-margin-top:110px}
 .summit-survey-link{display:block;text-decoration:underline;text-underline-offset:4px;font-weight:700;margin-top:20px}
-@media(max-width:1100px){#founder-survey{scroll-margin-top:190px}}
-@media(max-width:800px){.survey-layout{grid-template-columns:1fr;gap:26px}.survey-panel{padding:24px}}
-@media(max-width:650px){#founder-survey{scroll-margin-top:210px}}
 
 /* Prominent survey buttons in the hero and Web Summit section. */
 .btn.survey-cta{background:var(--mint);color:var(--navy);border:1px solid var(--mint)}
@@ -744,59 +718,7 @@ section{padding:104px 0}
 <a class="topic-row topic-link" data-topic="learn" href="/training.html">Explore optional training and course contents <span class="lp-ic" data-ic="up-right" aria-hidden="true"></span></a>
 <a class="topic-row topic-link" data-topic="learn" href="/regulations.html">Look up a regulatory update <span class="lp-ic" data-ic="up-right" aria-hidden="true"></span></a>
 <a class="topic-row topic-link" data-topic="learn" href="/articles.html">Read fintech articles <span class="lp-ic" data-ic="up-right" aria-hidden="true"></span></a>
-<details class="topic-row" data-topic="advisory">
-<summary>Tell Lippi what my fintech needs</summary>
-<div class="topic-body">
-<section id="founder-survey" class="founder-survey" aria-labelledby="founder-survey-heading">
-<div class="wrap survey-layout">
-<div class="survey-intro">
-<div class="label">3-minute founder survey</div>
-<h3 id="founder-survey-heading">Tell me what’s getting in the way.</h3>
-<p class="intro">Tell me what’s holding your fintech back. Your answers help me build useful services.</p>
-<p class="survey-promise"><strong>About 3 minutes.</strong><br>Three questions. No name or email required.</p>
-<p>Prefer to talk through your fintech’s next step?</p>
-<a class="btn" href="https://calendly.com/igormarchettilippi/30min" target="_blank" rel="noopener noreferrer">Book a free needs analysis</a>
-<p class="survey-privacy" id="survey-privacy">Please leave out personal, customer or confidential information. Lippi uses your answers to understand founders’ challenges and improve its services. This includes AI analysis after removing identifying details. Answers are not published and stay in the survey database for up to 90 days. Taking part is optional.</p>
-<p class="survey-privacy">Questions or want your answers deleted? Email <a href="mailto:lippifintech@igormarchetti.me">lippifintech@igormarchetti.me</a> with your response reference.</p>
-</div>
-<div class="survey-panel">
-<form id="founder-survey-form" aria-describedby="survey-privacy">
-<div class="survey-field">
-<label for="survey-milestone"><span class="survey-number">1</span> What’s your next milestone, and what could stop you reaching it?</label>
-<p class="survey-hint" id="survey-milestone-hint">Think about licensing, launch, a banking partner or your first customers.</p>
-<textarea id="survey-milestone" name="milestone_risk" rows="4" required minlength="5" maxlength="1000" aria-describedby="survey-milestone-hint survey-milestone-count" placeholder="Our next milestone is… The main risk is…"></textarea>
-<span class="survey-count" id="survey-milestone-count">0 / 1,000</span>
-</div>
-<div class="survey-field">
-<label for="survey-controls"><span class="survey-number">2</span> Which controls worry you most, and what have you tried so far?</label>
-<p class="survey-hint" id="survey-controls-hint">For example: customer checks, fraud prevention, supplier checks or keeping your service running.</p>
-<textarea id="survey-controls" name="control_gap" rows="4" required minlength="5" maxlength="1000" aria-describedby="survey-controls-hint survey-controls-count" placeholder="We’re worried about… We’ve tried…"></textarea>
-<span class="survey-count" id="survey-controls-count">0 / 1,000</span>
-</div>
-<div class="survey-field">
-<label for="survey-support"><span class="survey-number">3</span> What help would make the biggest difference over the next 90 days?</label>
-<p class="survey-hint" id="survey-support-hint">Tell me the result you want and what’s stopping your team today.</p>
-<textarea id="survey-support" name="support_needed" rows="4" required minlength="5" maxlength="1000" aria-describedby="survey-support-hint survey-support-count" placeholder="We need help with… What’s stopping us is…"></textarea>
-<span class="survey-count" id="survey-support-count">0 / 1,000</span>
-</div>
-<div class="survey-trap" aria-hidden="true"><label for="survey-website">Leave this blank</label><input id="survey-website" name="website" type="text" tabindex="-1" autocomplete="off"></div>
-<button class="btn survey-submit" type="submit" disabled>Submit survey</button>
-<p class="survey-hint">Answer all three questions, then select Submit survey to send your answers.</p>
-<noscript><p>Please enable JavaScript to submit the survey.</p></noscript>
-</form>
-<p id="survey-status" class="survey-status" role="status" aria-live="polite">Checking the survey is ready…</p>
-<div id="survey-success" class="survey-success" tabindex="-1" hidden>
-<div class="label">Response saved</div><h3>Thank you for sharing.</h3>
-<p>Your answers will help me focus on what founders need.</p>
-<p class="survey-hint">Keep this reference to ask for your answers to be deleted:<br><span id="survey-reference"></span></p>
-<a class="btn" href="https://calendly.com/igormarchettilippi/30min" target="_blank" rel="noopener noreferrer">Book a free needs analysis</a>
-<p class="survey-hint">Booking a conversation is optional.</p>
-</div>
-</div>
-</div>
-</section>
-</div>
-</details>
+<a class="topic-row topic-link" data-topic="advisory" href="/survey.html">Tell Lippi what my fintech needs <span class="lp-ic" data-ic="up-right" aria-hidden="true"></span></a>
 <details class="topic-row" data-topic="about">
 <summary>Meet Igor and see his experience</summary>
 <div class="topic-body">
@@ -880,13 +802,12 @@ section{padding:104px 0}
 <h3 id="lisbon-heading">Keep the conversation going.</h3>
 <p>We met in Lisbon? Let’s turn the conversation into practical next steps for your fintech.</p>
 <a class="btn" href="https://calendly.com/igormarchettilippi/30min" target="_blank" rel="noopener noreferrer">Book a free needs analysis</a>
-<a class="btn survey-cta summit-survey-link" href="#founder-survey">Take the 3-minute survey</a>
+<a class="btn survey-cta summit-survey-link" href="/survey.html">Take the 3-minute survey</a>
 </aside>
 </div>
 </section>
 </main>
-<div data-site-footer><footer class="lippi-footer"><div class="lippi-footer-inner"><div class="lippi-footer-top"><div><a class="lippi-footer-logo" href="/" aria-label="Lippi FinTech Advisory home"></a><strong class="lippi-visually-hidden">Lippi FinTech Advisory</strong><p>Risk and compliance consulting for fintech teams.<br>Helping fintechs enter and expand in European and Brazilian markets.</p><div class="lippi-footer-social"><a href="https://www.linkedin.com/in/igormarchetti/" target="_blank" rel="noopener noreferrer" aria-label="Igor Marchetti Lippi on LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.95v5.66H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0Z"/></svg></a><a href="mailto:lippifintech@igormarchetti.me" aria-label="Email Lippi FinTech Advisory"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M3.5 6.5h17v11h-17zM4 7l8 6 8-6"/></svg></a></div><a class="lippi-footer-email" href="mailto:lippifintech@igormarchetti.me">lippifintech@igormarchetti.me</a></div><div class="lippi-footer-links"><a href="/#services">Advisory services</a><a href="/training.html">Training</a><a href="/regulations.html">Regulatory updates</a><a href="/articles.html">Articles</a><a href="/articles.html#newsletter">Newsletter</a><a href="/#about">About Igor</a><a href="/#founder-survey">Founder survey</a></div></div><div class="lippi-footer-bottom"><p>© 2026 Igor Marchetti Lippi · Lippi FinTech Advisory</p><a href="/#scope">Advisory scope</a><a href="/independence.html">Independence &amp; conflicts</a></div></div></footer></div><!-- /site-footer -->
-<script src="/assets/founder-survey.js" defer></script>
+<div data-site-footer><footer class="lippi-footer"><div class="lippi-footer-inner"><div class="lippi-footer-top"><div><a class="lippi-footer-logo" href="/" aria-label="Lippi FinTech Advisory home"></a><strong class="lippi-visually-hidden">Lippi FinTech Advisory</strong><p>Risk and compliance consulting for fintech teams.<br>Helping fintechs enter and expand in European and Brazilian markets.</p><div class="lippi-footer-social"><a href="https://www.linkedin.com/in/igormarchetti/" target="_blank" rel="noopener noreferrer" aria-label="Igor Marchetti Lippi on LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.95v5.66H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0Z"/></svg></a><a href="mailto:lippifintech@igormarchetti.me" aria-label="Email Lippi FinTech Advisory"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M3.5 6.5h17v11h-17zM4 7l8 6 8-6"/></svg></a></div><a class="lippi-footer-email" href="mailto:lippifintech@igormarchetti.me">lippifintech@igormarchetti.me</a></div><div class="lippi-footer-links"><a href="/#services">Advisory services</a><a href="/training.html">Training</a><a href="/regulations.html">Regulatory updates</a><a href="/articles.html">Articles</a><a href="/articles.html#newsletter">Newsletter</a><a href="/#about">About Igor</a><a href="/survey.html">Founder survey</a></div></div><div class="lippi-footer-bottom"><p>© 2026 Igor Marchetti Lippi · Lippi FinTech Advisory</p><a href="/#scope">Advisory scope</a><a href="/independence.html">Independence &amp; conflicts</a></div></div></footer></div><!-- /site-footer -->
 
 <script>
 (() => {
@@ -946,5 +867,6 @@ section{padding:104px 0}
 </script>
 <script src="/assets/site-shell.js" defer></script>
 <script src="/assets/lippi-motion.js" defer></script>
+<script src="/assets/lippi-select.js" defer></script>
 </body>
 </html>

@@ -1,0 +1,67 @@
+/* Founder survey page. Same palette as the homepage hero: the intro sits on the dark field,
+   the form is a white card beside it (stacked on phones). */
+
+.survey-page{background:var(--paper)}
+.founder-survey{position:relative;isolation:isolate;overflow:hidden;padding:96px 0 112px;
+  background:linear-gradient(160deg,#0a1f2d 0%,#0d2637 55%,#0f3a3d 100%);color:#fff}
+.founder-survey::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background-image:linear-gradient(#ffffff0a 1px,transparent 1px),linear-gradient(90deg,#ffffff0a 1px,transparent 1px);background-size:56px 56px;
+  -webkit-mask-image:radial-gradient(ellipse at 20% 20%,#000 10%,transparent 75%);mask-image:radial-gradient(ellipse at 20% 20%,#000 10%,transparent 75%)}
+.founder-survey::after{content:"";position:absolute;z-index:-1;left:-10%;bottom:-30%;width:680px;height:680px;border-radius:50%;pointer-events:none;
+  background:radial-gradient(circle,#137c7566 0%,transparent 65%)}
+.survey-page .wrap{max-width:1180px;margin:auto;padding:0 28px}
+.survey-layout{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:64px;align-items:start}
+.survey-intro{position:sticky;top:calc(var(--header-h) + 32px)}
+.survey-intro .label{display:inline-flex;align-items:center;gap:10px;padding:8px 14px;border-radius:999px;background:#ffffff12;border:1px solid #ffffff24;
+  color:var(--mint);font:700 12px/1 var(--display);letter-spacing:.14em;text-transform:uppercase}
+.survey-intro h1{font:600 clamp(36px,4.4vw,58px)/1.05 var(--display);letter-spacing:-.04em;margin:22px 0 18px;color:#fff}
+.survey-intro .intro{font-size:18px;line-height:1.65;color:#cfe3dd;margin:0}
+.survey-promise{display:flex;flex-direction:column;gap:4px;margin:28px 0 22px;padding:18px 20px;border-radius:var(--r-md);background:#ffffff0d;border:1px solid #ffffff1f;
+  font-size:16px;color:#cfe3dd;line-height:1.55}
+.survey-promise strong{font:650 20px/1.2 var(--display);color:var(--mint)}
+.survey-intro>p:not(.intro):not(.survey-promise):not(.survey-privacy){color:#cfe3dd;margin:0 0 14px}
+.survey-intro .btn{display:inline-flex;align-items:center;gap:10px;min-height:50px;padding:6px 22px;border-radius:999px;background:#fff;color:var(--navy);
+  font:650 15px/1.2 var(--display);text-decoration:none;transition:background-color .25s var(--ease),transform .25s var(--ease)}
+.survey-intro .btn:hover{background:var(--mint);transform:translateY(-2px)}
+.survey-privacy{font-size:13px;color:#9fbab3;line-height:1.65;margin:22px 0 0}
+.survey-privacy+.survey-privacy{margin-top:10px}
+.survey-privacy a{color:var(--mint);text-decoration:underline;text-underline-offset:3px;overflow-wrap:anywhere}
+.survey-intro .lp-more{color:var(--mint)}
+
+.survey-panel{min-width:0;border-radius:var(--r-lg);background:#fff;color:var(--ink);padding:36px;box-shadow:0 40px 90px #00111a59}
+.survey-field{margin-bottom:28px}
+.survey-field label{display:flex;gap:12px;align-items:flex-start;font:650 17px/1.45 var(--display);color:var(--navy)}
+.survey-number{flex:none;display:inline-grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--navy);color:var(--mint);font:700 13px/1 var(--display);margin-top:-2px}
+.survey-hint{font-size:13.5px;line-height:1.55;color:var(--muted);margin:8px 0 12px 42px}
+.survey-field textarea{display:block;width:100%;min-height:120px;resize:vertical;padding:14px 16px;border:1px solid var(--line-2);border-radius:var(--r-sm);
+  background:#fbfdfc;color:var(--ink);font:15px/1.6 var(--body);transition:border-color .2s var(--ease),box-shadow .2s var(--ease)}
+.survey-field textarea::placeholder{color:#667972}
+.survey-field textarea:focus{outline:0;border-color:var(--teal);box-shadow:0 0 0 4px #137c751f}
+.survey-count{display:block;text-align:right;color:var(--muted);font-size:12px;margin-top:6px}
+.survey-trap{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(100%);white-space:nowrap}
+.survey-submit{display:flex;align-items:center;justify-content:center;width:100%;min-height:54px;border:0;border-radius:999px;background:var(--teal);color:#fff;
+  font:700 16px/1.2 var(--display);cursor:pointer;transition:background-color .25s var(--ease),transform .25s var(--ease)}
+.survey-submit:hover:not(:disabled){background:var(--navy);transform:translateY(-2px)}
+.survey-submit:disabled{opacity:.5;cursor:not-allowed}
+.survey-submit:focus-visible,.survey-success:focus-visible{outline:3px solid #c97c00;outline-offset:3px}
+.survey-panel form>.survey-hint{margin-left:0;text-align:center}
+.survey-status{font-size:14px;color:var(--muted);margin:12px 0 0;min-height:22px;text-align:center}
+.survey-error{color:#a12a2a}
+.survey-success{padding:8px 0}
+.survey-success .label{color:var(--teal);font:700 12px/1 var(--display);letter-spacing:.14em;text-transform:uppercase}
+.survey-success h3{font:650 28px/1.2 var(--display);color:var(--navy);margin:14px 0}
+.survey-success .btn{display:inline-flex;min-height:50px;align-items:center;padding:6px 22px;border-radius:999px;background:var(--teal);color:#fff;font:650 15px/1.2 var(--display);text-decoration:none}
+.survey-success[hidden],#founder-survey-form[hidden]{display:none!important}
+#survey-reference{overflow-wrap:anywhere;font-family:ui-monospace,monospace;font-size:12px}
+
+@media(max-width:900px){
+  .founder-survey{padding:56px 0 72px}
+  .survey-layout{grid-template-columns:1fr;gap:36px}
+  .survey-intro{position:static}
+}
+@media(max-width:560px){
+  .survey-page .wrap{padding:0 16px}
+  .survey-panel{padding:22px 18px}
+  .survey-hint{margin-left:0}
+  .survey-field label{font-size:16px}
+}

@@ -8,7 +8,7 @@ import { chromium } from 'playwright';
 const origin = process.env.LIPPI_TEST_ORIGIN || 'http://127.0.0.1:8765';
 const pages = [
   '/', '/training.html', '/regulations.html', '/articles.html',
-  '/independence.html', '/ai-governance-fintech-web-summit-2026.html'
+  '/independence.html', '/ai-governance-fintech-web-summit-2026.html', '/survey.html'
 ];
 const locales = { en:'en', pt:'pt-BR', es:'es', it:'it' };
 const publicPaths = new Set(pages);
@@ -237,7 +237,7 @@ try {
     await context.close();
   }
 } finally { await browser.close(); }
-console.log('Local Chromium coverage: '+results.length+'/48 page-language-device combinations.');
+console.log('Local Chromium coverage: '+results.length+'/56 page-language-device combinations.');
 if(failures.length) {
   for(const message of failures) console.error('FAILED: '+message);
   process.exitCode=1;
