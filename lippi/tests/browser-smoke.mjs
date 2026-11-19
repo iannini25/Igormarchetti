@@ -100,6 +100,42 @@ try {
       } finally { await context.close(); }
     }
   }
+  // Exercise changes through the actual pickers, then traverse pages without
+  // query parameters to verify persisted preferences and regulator-page parity.
+  const context = await browser.newContext({viewport:{width:1280,height:800}});
+  const page = await context.newPage();
+  try {
+    await page.goto(origin+'/',{waitUntil:'load'});
+    await page.locator('#lippi-language').selectOption('it');
+    await page.waitForFunction(() => document.documentElement.lang==='it');
+    assert.equal(new URL(page.url()).searchParams.get('lang'),'it');
+    const trainingHref = await page.locator('a[href^="/training.html"]').first().getAttribute('href');
+    assert.equal(new URL(trainingHref,origin).searchParams.get('lang'),'it');
+
+    await page.goto(origin+'/training.html',{waitUntil:'load'});
+    await page.waitForFunction(() =>
+      document.documentElement.lang==='it' && document.querySelector('#lippi-language')?.value==='it');
+    await page.goto(origin+'/regulations.html',{waitUntil:'load'});
+    await page.waitForFunction(() => document.querySelector('#reg-language')?.value==='it');
+    await page.locator('#reg-language').selectOption('es');
+    await page.waitForFunction(() =>
+      document.documentElement.lang==='es' && document.querySelector('#reg-language')?.value==='es');
+    assert.equal(new URL(page.url()).searchParams.get('lang'),'es');
+
+    await page.goto(origin+'/independence.html',{waitUntil:'load'});
+    await page.waitForFunction(() =>
+      document.documentElement.lang==='es' && document.querySelector('#lang')?.value==='es');
+    await page.locator('#lang').selectOption('pt');
+    await page.waitForFunction(() => document.documentElement.lang==='pt-BR');
+    assert.equal(new URL(page.url()).searchParams.get('lang'),'pt');
+    assert.equal(new URL(await page.locator('nav a').getAttribute('href'),origin).searchParams.get('lang'),'pt');
+    await page.goto(origin+'/',{waitUntil:'load'});
+    await page.waitForFunction(() =>
+      document.documentElement.lang==='pt-BR' && document.querySelector('#lippi-language')?.value==='pt');
+    console.log('Locale switching and persisted preference: passed across home, training, regulations and independence.');
+  } finally {
+    await context.close();
+  }
 } finally { await browser.close(); }
 console.log('Local Chromium coverage: '+results.length+'/48 page-language-device combinations.');
 if(failures.length) {
