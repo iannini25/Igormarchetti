@@ -113,6 +113,13 @@ for (const page of ['index.html','training.html']) {
 }
 const regulatoryPage = read('regulations.html');
 assert.ok(regulatoryPage.includes('<option value="it">Italiano</option>'),'Regulations picker lacks Italian');
+const regulatoryRuntime = read('assets/regulations.js');
+assert.ok(regulatoryRuntime.includes('translationLoadError[currentLanguage]'),
+  'Regulatory translation failure notice must follow the active language');
+for(const locale of locales) {
+  assert.ok(regulatoryRuntime.includes('    '+locale+':'),
+    'Missing '+locale+' regulatory translation failure notice');
+}
 assert.ok(shell.includes('lippi-language-picker'),'Shared picker missing');
 for (const file of ['assets/site-shell.js','assets/regulations.js','assets/articles.js','assets/founder-survey.js']) {
   new Script(read(file),{filename:file});
