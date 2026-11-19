@@ -116,7 +116,7 @@
         throw Object.assign(new Error(result.error || 'We could not save your request. Please try again or email Igor.'), {httpStatus:response.status});
       }
       form.hidden = true;
-      update('Thank you — your newsletter request and consent have been saved. No automatic confirmation email is sent. You can unsubscribe at any time by emailing Igor.', 'success');
+      update('Thank you. Your newsletter request and consent have been saved. No automatic confirmation email is sent. You can unsubscribe at any time by emailing Igor.', 'success');
       status.setAttribute('tabindex', '-1');
       status.focus();
     } catch (error) {

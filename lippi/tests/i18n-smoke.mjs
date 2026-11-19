@@ -68,7 +68,7 @@ for(const key of [
   'Online registration is temporarily unavailable. You can prepare an email enquiry using your answers.',
   'Please select at least one market, or Still exploring.',
   'Saving your newsletter request…',
-  'Thank you — your newsletter request and consent have been saved. No automatic confirmation email is sent. You can unsubscribe at any time by emailing Igor.'
+  'Thank you. Your newsletter request and consent have been saved. No automatic confirmation email is sent. You can unsubscribe at any time by emailing Igor.'
 ]) assert.equal(sharedCopy[key]?.length,3,'Missing PT/ES/IT dynamic copy: '+key);
 assert.ok(shell.includes('window.LippiI18n'), 'Forms need the shared translation interface');
 assert.ok(shell.includes('translateMetadata(lang)'), 'Page title and metadata not localized');
