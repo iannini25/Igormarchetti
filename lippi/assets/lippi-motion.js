@@ -220,7 +220,7 @@
   /* ---------- icons ---------- */
   var TILE_MAP = [
     ['.hero-offers > section', ['briefcase', 'users'], true],
-    ['.credentials-grid > article', ['building', 'card', 'cap']],
+    ['.credentials-grid > article', ['building', 'card', 'globe', 'cap']],
     ['.audience-grid > article', ['globe', 'compass']],
     ['.consulting-path .grid.three > .card', ['search', 'file-check', 'box']],
     ['.fee-list > article', ['chat', 'file-check', 'box', 'layers']]
@@ -380,7 +380,7 @@
     else removeReadMore();
   }
 
-  var SWIPE_ROWS = '.credentials-grid, .audience-grid, .consulting-path .grid.three, #experience .grid, .case-studies, .fee-list, .service-faq';
+  var SWIPE_ROWS = '.audience-grid, .consulting-path .grid.three, #experience .grid, .case-studies, .fee-list, .service-faq';
   function addSwipeDots() {
     document.querySelectorAll(SWIPE_ROWS).forEach(function (row) {
       if (row.nextElementSibling && row.nextElementSibling.classList.contains('lp-dots')) return;

@@ -9,7 +9,28 @@
 .lippi-header .training-shortcut:hover{background:#0d504b;color:white}
 @media(max-width:1100px){.lippi-header .training-shortcut{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 14px;margin-left:auto}.lippi-header-inner{gap:8px}.lippi-header .lippi-menu-button{margin-left:0}}
 @media(max-width:420px){.lippi-header-inner{padding-inline:12px}.lippi-brand img{width:clamp(76px,28vw,116px)}.lippi-header .lippi-menu-button{padding-inline:10px}.lippi-header .training-shortcut{padding-inline:11px}}
-.credentials-grid .experience-companies{margin:10px 0;padding-inline-start:1.2rem;color:#fff;font-size:1rem;line-height:1.5}
+#credentials-heading {
+  grid-column: 1 / -1;
+  max-width: none;
+  text-wrap: pretty;
+}
+#credentials .credentials-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: stretch;
+  margin-block-start: 24px;
+}
+#credentials .credentials-grid > article { grid-column: auto; }
+#credentials .experience-companies {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 10.5rem), 1fr));
+  gap: 4px 22px;
+  margin: 0;
+  padding-inline-start: 1.1rem;
+  color: inherit;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+#credentials .experience-companies + p { margin-top: 12px; }
 @media(max-width:780px){#credentials .credentials-grid{display:grid;grid-template-columns:minmax(0,1fr);grid-auto-flow:row;grid-auto-columns:auto;overflow:visible;margin-inline:0;padding-inline:0;scroll-snap-type:none}#credentials .credentials-grid>article{min-width:0;width:auto}}
 
 :root {
