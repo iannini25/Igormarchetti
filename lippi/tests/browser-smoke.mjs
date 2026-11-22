@@ -147,6 +147,8 @@ async function checkPage(context,route,lang,htmlLang,device) {
       assert.ok(await training.isVisible(),'Training must remain visible on both layouts');
       assert.equal(await page.locator('.steps > li').count(),4);
       assert.equal(await page.locator('.experience-companies > li').count(),10);
+      assert.equal(await page.locator('.steps > li[data-reveal]').count(),0,
+        'Reduced-motion visitors should see the steps immediately');
       const portrait = await page.locator('.founder-identity img').boundingBox();
       assert.ok(portrait.width <= (device === 'mobile' ? 64 : 84));
       assert.equal(await page.locator('.portrait .lp-seal').count(),1);
@@ -224,6 +226,12 @@ try {
   const page = await context.newPage();
   try {
     await page.goto(origin+'/',{waitUntil:'load'});
+    const lastStep = page.locator('.steps > li').last();
+    assert.equal(await page.locator('.steps > li[data-reveal]').count(),4);
+    assert.equal(await page.locator('.menu-group > details[data-reveal]').count(),6);
+    assert.equal(await lastStep.evaluate(el => getComputedStyle(el).opacity),'0');
+    await lastStep.scrollIntoViewIfNeeded();
+    await page.waitForFunction(() => getComputedStyle(document.querySelector('.steps > li:last-child')).opacity === '1');
     await page.locator('#lippi-language').selectOption('it');
     await page.waitForFunction(() => document.documentElement.lang==='it');
     assert.equal(new URL(page.url()).searchParams.get('lang'),'it');

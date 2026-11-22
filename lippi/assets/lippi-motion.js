@@ -301,7 +301,11 @@
     if (reduceMotion || !('IntersectionObserver' in window)) return;
     root.classList.add('lippi-motion');
     var seen = new Set();
-    REVEAL_GROUPS.forEach(function (selector) {
+    var groups = homeEffects ? REVEAL_GROUPS.concat([
+      '#resources .copy', '.menu-group > h3', '.menu-group > .topic-row',
+      '.steps > li', '#enquiry > summary'
+    ]) : REVEAL_GROUPS;
+    groups.forEach(function (selector) {
       document.querySelectorAll(selector).forEach(function (el) {
         if (seen.has(el)) return;
         seen.add(el);

@@ -90,3 +90,13 @@
 @media (prefers-reduced-motion: reduce) {
   .hero .lp-seal svg { animation: none; }
 }
+
+/* Keyboard navigation and printing must expose content immediately. */
+.lippi-motion [data-reveal]:focus-within {
+  opacity: 1;
+  transform: none;
+  transition: none;
+}
+@media print {
+  .lippi-motion [data-reveal] { opacity: 1; transform: none; transition: none; }
+}
