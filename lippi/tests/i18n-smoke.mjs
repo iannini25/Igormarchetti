@@ -269,8 +269,8 @@ for(const key of [
   assert.equal(sharedCopy[key]?.length,3,'Newsletter draft untranslated: '+key);
   assert.ok(newsletter.includes('tr(\''+key+'\')'),'Newsletter draft not wired to translation: '+key);
 }
-assert.ok(read('index.html').includes("document.addEventListener('lippi:languagechange', () => filterTopics(currentTopic))"),
-  'Homepage filter count not refreshed after a language change');
+assert.ok(read('assets/advisory-enquiry.js').includes("document.addEventListener('lippi:languagechange'"),
+  'The prepared advisory message must refresh when the visitor changes language');
 
 // Keep every public Lippi content page discoverable without exposing admin routes.
 const sitemap = read('sitemap.xml');

@@ -142,16 +142,25 @@ async function checkPage(context,route,lang,htmlLang,device) {
         'Fractional CRO exclusion is missing in '+lang);
     }
     if (route === '/') {
-      const advisory = page.locator('section[aria-labelledby="advisory-offer"] a');
-      const workshops = page.locator('section[aria-labelledby="training-offer"] a');
-      assert.ok(await advisory.isVisible() && await workshops.isVisible(),
-        'Both offers must be visible on the homepage');
-      assert.equal(await advisory.getAttribute('href'), 'https://calendly.com/igormarchettilippi/30min');
-      assert.equal(new URL(await workshops.getAttribute('href'), origin).pathname, '/training.html');
-      const first = await advisory.locator('..').boundingBox();
-      const second = await workshops.locator('..').boundingBox();
+      const training = page.locator('[data-site-header] a[href^="/training.html"]');
+      assert.equal(await training.count(),1);
+      assert.ok(await training.isVisible(),'Training must remain visible on both layouts');
+      assert.equal(await page.locator('.steps > li').count(),4);
+      assert.equal(await page.locator('.experience-companies > li').count(),10);
+      const offers = page.locator('.hero-offers > section');
+      const first = await offers.nth(0).boundingBox();
+      const second = await offers.nth(1).boundingBox();
       assert.ok(device === 'mobile' ? second.y >= first.y + first.height - 1 : Math.abs(first.y - second.y) < 1,
         'Offers should stack on mobile and sit side by side on desktop');
+      await page.locator('#open-enquiry').click();
+      assert.equal(await page.locator('.question-grid label').count(),10);
+      await page.locator('#q1').selectOption({index:1});
+      for (const id of ['q3','q4','q9']) await page.locator('#'+id).fill('Example & test');
+      await page.locator('#enquiry-form button[type="submit"]').click();
+      const email = new URL(await page.locator('#send-email').getAttribute('href'));
+      assert.equal(email.protocol,'mailto:');
+      assert.equal(email.pathname,'lippifintech@igormarchetti.me');
+      assert.ok(email.searchParams.get('body').includes('Example & test'));
     }
     if (route === '/training.html') {
       for (const id of ['course-contents', 'sample']) {
