@@ -219,7 +219,7 @@
 
   /* ---------- icons ---------- */
   var TILE_MAP = [
-    ['.hero-offers > section', ['briefcase', 'users'], true],
+    ['.hero-offers > section', ['users', 'briefcase', 'calendar'], true],
     ['.credentials-grid > article', ['building', 'card', 'globe', 'cap']],
     ['.audience-grid > article', ['globe', 'compass']],
     ['.consulting-path .grid.three > .card', ['search', 'file-check', 'box']],
