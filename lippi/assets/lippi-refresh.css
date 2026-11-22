@@ -124,31 +124,7 @@ p{text-wrap:pretty}
 .text-link[target="_blank"]:hover::after{transform:translate(2px,-2px)}
 .text-link[href^="#"]:hover::after{transform:translateY(3px)}
 
-/* ---------- footer ---------- */
-.lippi-footer{position:relative;overflow:hidden;background:var(--navy-2);padding:80px 0 28px;text-align:left;border-top:0;font:400 14.5px/1.65 var(--body)}
-.lippi-footer::before{content:"";position:absolute;inset:0;pointer-events:none;
-  background-image:linear-gradient(#ffffff08 1px,transparent 1px),linear-gradient(90deg,#ffffff08 1px,transparent 1px);background-size:48px 48px;
-  -webkit-mask-image:linear-gradient(180deg,#000,transparent 85%);mask-image:linear-gradient(180deg,#000,transparent 85%)}
-.lippi-footer::after{content:"";position:absolute;right:-120px;top:-160px;width:420px;height:420px;border-radius:50%;pointer-events:none;
-  background:radial-gradient(circle,#137c7540,transparent 70%)}
-.lippi-footer-inner{position:relative;z-index:1;max-width:1240px;padding:0 28px}
-.lippi-footer-top{grid-template-columns:1.1fr 1fr;gap:56px}
-.lippi-footer-logo{display:block;width:200px;aspect-ratio:4/1;background:var(--mint);
-  -webkit-mask:url(/logo.svg) left center/contain no-repeat;mask:url(/logo.svg) left center/contain no-repeat;transition:opacity .2s}
-.lippi-footer-logo:hover{opacity:.85}
-.lippi-footer p{color:#bed3cd;margin:18px 0 22px}
-.lippi-footer-social{display:flex;gap:10px;margin-bottom:14px}
-.lippi-footer-social a{display:grid;place-items:center;width:44px;height:44px;border-radius:50%;border:1px solid #ffffff2b;color:#e4f0eb;
-  transition:background-color .25s var(--ease),color .25s var(--ease),border-color .25s var(--ease),transform .25s var(--ease)}
-.lippi-footer-social a:hover{background:var(--mint);border-color:var(--mint);color:var(--navy);transform:translateY(-2px);text-decoration:none}
-.lippi-footer-social svg{width:19px;height:19px}
-.lippi-footer-email{color:var(--mint)!important;font-weight:500}
-.lippi-footer-links{display:grid;grid-template-columns:repeat(2,minmax(0,max-content));justify-content:end;gap:6px 48px}
-.lippi-footer-links a{display:inline-flex;align-items:center;min-height:40px;color:#e4f0eb;font:500 14.5px/1.4 var(--display)}
-.lippi-footer a:hover{text-decoration:none;color:var(--mint)}
-.lippi-footer-bottom{border-top-color:#ffffff1f;align-items:center;gap:10px 28px}
-.lippi-footer-bottom p{margin:0 auto 0 0;color:#9fb9b2}
-.lippi-footer-bottom a{color:#bed3cd}
+
 
 /* ---------- pointer spotlight on cards (class added by lippi-motion.js) ---------- */
 .lippi-spot{position:relative;isolation:isolate}
@@ -182,14 +158,9 @@ p{text-wrap:pretty}
   .lp-lang-button .lp-lang-chevron{margin-left:auto}
   .lp-lang-menu{position:static;transform:none;min-width:0;margin-top:6px;box-shadow:none;display:none}
   .lp-lang.is-open .lp-lang-menu{display:block}
-  .lippi-footer-top{grid-template-columns:1fr;gap:36px}
-  .lippi-footer-links{justify-content:start}
 }
 @keyframes lp-menu-in{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
 @media(max-width:560px){
-  .lippi-footer{padding-top:56px}
-  .lippi-footer-links{grid-template-columns:1fr 1fr;gap:0 20px}
-  .lippi-footer-bottom{flex-direction:column;align-items:flex-start;gap:6px}
 }
 
 @media(prefers-reduced-motion:reduce){

@@ -1,8 +1,15 @@
 /** Dependency-free source-level checks; run with npm run test:i18n from lippi/. */
 import assert from 'node:assert/strict';
-import {readFileSync} from 'node:fs';
+import {readdirSync,readFileSync} from 'node:fs';
 import {Script} from 'node:vm';
 const read = path => readFileSync(new URL('../' + path,import.meta.url),'utf8');
+const footerTemplate = read('../scripts/lippi-footer.html').trim();
+for (const file of readdirSync(new URL('../',import.meta.url)).filter(name => name.endsWith('.html'))) {
+  const page = read(file);
+  const footers = page.match(/<footer\b[^>]*>[\s\S]*?<\/footer>/g);
+  assert.deepEqual(footers,[footerTemplate],file+' must contain the shared footer exactly once');
+  assert.ok(page.includes('href="/assets/lippi-footer.css"'),file+' is missing the footer stylesheet');
+}
 const locales = ['en','pt','es','it'];
 const translatedFields = ['topicLabel','statusLabel','title','summary','action','applicability'];
 const independenceFields = ['title','intro','screen','approval','scope','security','end'];

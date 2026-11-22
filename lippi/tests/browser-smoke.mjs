@@ -231,6 +231,25 @@ try {
     ['desktop',{width:1366,height:900}],
     ['mobile',{width:390,height:844}]
   ]) {
+    // A separate homepage footer previously drifted from the public and admin layouts.
+    const footerPage = await browser.newPage({viewport,reducedMotion:'reduce'});
+    try {
+      for (const route of [...pages,'/survey-admin.html','/training-admin.html']) {
+        await footerPage.goto(origin+route,{waitUntil:'load'});
+        const footer = footerPage.locator('footer.lippi-footer');
+        assert.equal(await footer.count(),1,route+' has a missing or duplicate footer');
+        const layout = await footer.evaluate(element => ({
+          background:getComputedStyle(element).backgroundColor,
+          columns:getComputedStyle(element.querySelector('.lippi-footer-links')).gridTemplateColumns,
+          mask:getComputedStyle(element.querySelector('.lippi-footer-logo')).maskImage,
+          fits:element.scrollWidth <= element.clientWidth
+        }));
+        assert.equal(layout.background,'rgb(10, 31, 45)',route+' footer colour');
+        assert.equal(layout.columns.split(' ').length,2,route+' footer columns on '+device);
+        assert.match(layout.mask,/logo\.svg/,route+' footer wordmark');
+        assert.ok(layout.fits,route+' footer overflows on '+device);
+      }
+    } finally { await footerPage.close(); }
     for (const [lang,htmlLang] of Object.entries(locales)) {
       const context = await browser.newContext({viewport,reducedMotion:'reduce'});
       try {
