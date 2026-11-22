@@ -30,7 +30,8 @@
   gap: var(--home-gap);
 }
 .hero .home-intro { grid-area: intro; }
-.hero .home-intro .market-intro { margin: 0 0 18px; }
+.hero .home-intro .market-intro { margin: 0 0 10px; }
+.hero .home-intro .home-audience { margin: 0 0 18px; font-size: 1rem; }
 .hero .home-intro .hero-hours { margin-bottom: 5px; }
 .hero .founder-profile { grid-area: founder; max-width: none; margin: 0; }
 .hero .hero-offers {
