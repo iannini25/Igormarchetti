@@ -183,6 +183,22 @@ async function checkPage(context,route,lang,htmlLang,device) {
         assert.ok(await page.locator('.hero a[href="#'+id+'"]').isVisible());
         assert.equal(await page.locator('#'+id).count(), 1);
       }
+      const outline = page.locator('#programme details');
+      const sample = page.locator('#sample details');
+      assert.equal(await outline.evaluate(el => el.open),false);
+      assert.equal(await sample.evaluate(el => el.open),false);
+      await page.locator('#course-contents a[href="#module-grc"]').click();
+      assert.ok(await outline.evaluate(el => el.open));
+      await outline.locator('summary').click();
+      await page.locator('.hero a[href="#sample"]').click();
+      assert.ok(await sample.evaluate(el => el.open));
+      await page.locator('#sample-question input[value="business"]').check();
+      await page.locator('#sample-question button').click();
+      assert.ok(await page.locator('#sample-answer').isVisible());
+      assert.ok(await sample.locator('.participant-materials').isVisible());
+      await sample.locator('summary').click();
+      assert.equal(await sample.locator('.participant-materials').isVisible(),false);
+      assert.ok(await page.locator('#format .schedule').isVisible());
       const advisoryUrl = new URL(await page.locator('section[aria-labelledby="consulting-support-heading"] a').getAttribute('href'), origin);
       assert.equal(advisoryUrl.pathname + advisoryUrl.hash, '/#services');
       assert.equal(await page.locator('#training-interest-form').count(),1,

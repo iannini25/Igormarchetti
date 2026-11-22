@@ -7,7 +7,10 @@
 .pilot-interest { padding-block: clamp(2rem, 5vw, 3.5rem); border-bottom: 1px solid var(--line); }
 .pilot-interest h2 { margin-bottom: .75rem; }
 .pilot-interest .wrap > p { max-width: 68ch; }
-.pilot-enquiry > summary { width: fit-content; cursor: pointer; padding: .65rem 1rem; border-radius: .5rem; background: var(--teal); color: white; font-weight: 700; }
-.pilot-enquiry > summary:focus-visible { outline: 3px solid #2b8eb6; outline-offset: 4px; }
-.pilot-enquiry[open] > summary { margin-bottom: 1.5rem; }
-.pilot-enquiry .notice { align-self: start; }
+.training-disclosure > summary { width: fit-content; cursor: pointer; padding: .65rem 1rem; border-radius: .5rem; background: var(--teal); color: white; font-weight: 700; }
+.training-disclosure > summary:focus-visible { outline: 3px solid #2b8eb6; outline-offset: 4px; }
+.training-disclosure[open] > summary { margin-bottom: 1.5rem; }
+.training-disclosure .notice { align-self: start; }
+
+#programme, #sample { padding-block: clamp(2rem, 5vw, 3.5rem); }
+.training-disclosure > p:first-of-type { max-width: 72ch; }

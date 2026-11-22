@@ -33,6 +33,20 @@ export function buildTrainingEmail(payload, translate = text => text) {
 
 (() => {
   if (typeof document === 'undefined') return;
+  function openLinkedSection(hash) {
+    const target = document.getElementById(hash.slice(1));
+    if (!target) return;
+    const details = target.closest('details.training-disclosure') ||
+      target.querySelector('details.training-disclosure');
+    if (details) details.open = true;
+  }
+  document.addEventListener('click', event => {
+    const link = event.target.closest('a[href^="#"]');
+    if (link) openLinkedSection(link.hash);
+  });
+  window.addEventListener('hashchange', () => openLinkedSection(location.hash));
+  openLinkedSection(location.hash);
+
   const sample = document.getElementById('sample-question');
   const answer = document.getElementById('sample-answer');
   const trSample = text => window.LippiI18n?.translate(text) || text;
