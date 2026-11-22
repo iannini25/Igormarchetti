@@ -147,6 +147,15 @@ async function checkPage(context,route,lang,htmlLang,device) {
       assert.ok(await training.isVisible(),'Training must remain visible on both layouts');
       assert.equal(await page.locator('.steps > li').count(),4);
       assert.equal(await page.locator('.experience-companies > li').count(),10);
+      const portrait = await page.locator('.founder-identity img').boundingBox();
+      assert.ok(portrait.width <= (device === 'mobile' ? 64 : 84));
+      assert.equal(await page.locator('.portrait .lp-seal').count(),1);
+      const serviceCards = await page.locator('.hero-offers').boundingBox();
+      for (const selector of ['.menu-grid','.steps','.credentials-grid']) {
+        const row = await page.locator(selector).boundingBox();
+        assert.ok(Math.abs(row.x - serviceCards.x) < 2, selector+' left margin');
+        assert.ok(Math.abs(row.width - serviceCards.width) < 2, selector+' width');
+      }
       const offers = page.locator('.hero-offers > section');
       const first = await offers.nth(0).boundingBox();
       const second = await offers.nth(1).boundingBox();

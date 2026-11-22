@@ -3,6 +3,7 @@
 // four-language translation in site-shell.js keeps owning every visible sentence.
 (function () {
   'use strict';
+  var homeEffects = document.currentScript.hasAttribute('data-home-effects');
   var root = document.documentElement;
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
@@ -428,6 +429,12 @@
   }
 
   function init() {
+    if (homeEffects) {
+      addPortraitSeal();
+      setUpReveals();
+      animateAccordions();
+      return;
+    }
     if (redirectOldSurveyLink()) return;
     setUpScrollState();
     ensureMenu();

@@ -11,3 +11,82 @@
 @media(max-width:420px){.lippi-header-inner{padding-inline:12px}.lippi-brand img{width:clamp(76px,28vw,116px)}.lippi-header .lippi-menu-button{padding-inline:10px}.lippi-header .training-shortcut{padding-inline:11px}}
 .credentials-grid .experience-companies{margin:10px 0;padding-inline-start:1.2rem;color:#fff;font-size:1rem;line-height:1.5}
 @media(max-width:780px){#credentials .credentials-grid{display:grid;grid-template-columns:minmax(0,1fr);grid-auto-flow:row;grid-auto-columns:auto;overflow:visible;margin-inline:0;padding-inline:0;scroll-snap-type:none}#credentials .credentials-grid>article{min-width:0;width:auto}}
+
+:root {
+  --home-gap: clamp(16px, 2vw, 28px);
+  --home-gutter: clamp(18px, 3vw, 32px);
+  --home-card-pad: clamp(18px, 2vw, 26px);
+}
+.lippi-header-inner, .wrap {
+  width: 100%;
+  max-width: 1180px;
+  padding-inline: var(--home-gutter);
+}
+.hero .hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+  grid-template-areas: "intro founder" "offers offers";
+  align-items: start;
+  gap: var(--home-gap);
+}
+.hero .home-intro { grid-area: intro; }
+.hero .home-intro .market-intro { margin: 0 0 18px; }
+.hero .home-intro .hero-hours { margin-bottom: 5px; }
+.hero .founder-profile { grid-area: founder; max-width: none; margin: 0; }
+.hero .hero-offers {
+  grid-area: offers;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--home-gap);
+  margin: 0;
+}
+.hero .hero-offers > section, .steps > li, #credentials .credentials-grid > article {
+  padding: var(--home-card-pad);
+  border-radius: 16px;
+}
+.hero .hero-offers > section > p:last-child { margin-bottom: 0; }
+.hero .founder-profile .portrait {
+  position: relative;
+  display: block;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: var(--home-card-pad);
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+}
+.founder-identity { display: flex; align-items: center; gap: 12px; padding-right: 54px; }
+.hero .founder-identity img {
+  width: 84px;
+  height: 84px;
+  flex: none;
+  margin: 0;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center;
+}
+.hero .founder-identity strong { color: #102e3b; font-size: 19px; line-height: 1.25; }
+.hero .portrait figcaption { margin: 12px 0 0; padding: 0; border: 0; }
+.hero .portrait figcaption span { margin: 0; }
+.hero .portrait figcaption span + span { margin-top: 8px; }
+.hero .founder-profile .lp-seal {
+  display: grid; left: auto; top: var(--home-card-pad); right: var(--home-card-pad);
+  width: 48px; height: 48px; box-shadow: none;
+}
+.hero .founder-profile .lp-seal svg { inset: 3px; width: 42px; height: 42px; }
+.hero .founder-profile .lp-seal .lp-ic { margin: 0; font-size: 14px; }
+.menu-grid, .steps, .question-grid, #credentials .credentials-grid { gap: var(--home-gap); }
+.menu-group > h3 { margin: 0 0 12px; }
+.menu-group > details:last-child { margin-bottom: 0; }
+.steps { align-items: stretch; }
+.steps .card-kicker { display: block; }
+.steps > li { margin: 0; }
+@media (max-width: 780px) {
+  .hero .hero-grid { grid-template-columns: minmax(0,1fr); grid-template-areas: "intro" "offers" "founder"; }
+  .hero .hero-offers, .menu-grid, .steps, .question-grid { grid-template-columns: minmax(0,1fr); }
+  .hero .founder-identity img { width: 64px; height: 64px; }
+  #credentials .credentials-grid { grid-template-columns: minmax(0,1fr) !important; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero .lp-seal svg { animation: none; }
+}
