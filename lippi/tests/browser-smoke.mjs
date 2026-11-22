@@ -159,10 +159,15 @@ async function checkPage(context,route,lang,htmlLang,device) {
         assert.ok(Math.abs(row.width - serviceCards.width) < 2, selector+' width');
       }
       const offers = page.locator('.hero-offers > section');
+      assert.equal(await offers.count(),3,'Training, advisory and hours each need their own card');
+      assert.equal(await offers.nth(2).locator('.hero-hours').count(),1);
+      const hours = await offers.nth(2).boundingBox();
       const first = await offers.nth(0).boundingBox();
       const second = await offers.nth(1).boundingBox();
       assert.ok(device === 'mobile' ? second.y >= first.y + first.height - 1 : Math.abs(first.y - second.y) < 1,
         'Offers should stack on mobile and sit side by side on desktop');
+      assert.ok(device === 'mobile' ? hours.y >= second.y + second.height - 1 : Math.abs(hours.y - first.y) < 1,
+        'The hours card should align with the service cards');
       await page.locator('#open-enquiry').click();
       assert.equal(await page.locator('.question-grid label').count(),10);
       await page.locator('#q1').selectOption({index:1});

@@ -113,6 +113,9 @@
   .hero .lp-seal svg { animation: none; }
 }
 
+/* Start offscreen cards in their hidden state before their entrance animation. */
+.lippi-motion [data-reveal]:not(.is-in) { transition: none; }
+
 /* Keyboard navigation and printing must expose content immediately. */
 .lippi-motion [data-reveal]:focus-within {
   opacity: 1;
