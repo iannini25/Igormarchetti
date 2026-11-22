@@ -61,7 +61,7 @@ for(const [source,translations] of Object.entries(sharedCopy)) {
 }
 // Dynamic form states and metadata must be represented in the shared dictionary.
 for(const key of [
-  'Articles & Newsletter | Lippi FinTech Advisory',
+  'Articles & Newsletter | Lippi',
   'Latest article and upcoming perspectives.',
   'Newsletter emails are currently available in English, Portuguese and Spanish. The website can also be viewed in Italian.',
   'Ready when you are. All three questions are required.',
@@ -84,9 +84,9 @@ const articleHtml = read('articles.html')
   .replace(/<style\b[^>]*>[\s\S]*?<\/style>/gi,'')
   .replace(/<!--[\s\S]*?-->/g,'');
 const articleNames = new Set([
-  'English','Português','Español','Lippi FinTech Advisory',
+  'English','Português','Español','Lippi',
   'lippifintech@igormarchetti.me','LinkedIn ↗',
-  '© 2026 Igor Marchetti · Lippi FinTech Advisory'
+  '© 2026 Igor Marchetti · Lippi'
 ]);
 const articleText = new Set(articleHtml.split(/<[^>]+>/).map(text=>text
   .replace(/&amp;/g,'&').replace(/&nbsp;/g,' ').replace(/&#39;/g,"'")
@@ -112,12 +112,12 @@ for (const source of new Set(articleVisibleText)) {
   assert.equal(sharedCopy[source]?.length,3,'Unlocalized AI article text: '+source);
 }
 for(const key of [
- 'AI Governance in Fintech: Five Practical Questions | Lippi FinTech Advisory',
+ 'AI Governance in Fintech: Five Practical Questions | Lippi',
  'Five practical questions fintech founders can ask about AI governance, accountability, data, monitoring and third-party risk, following Web Summit Lisbon 2026.',
  'A practical reflection on AI governance, risk and accountability for fintech teams following Web Summit Lisbon 2026.'
 ]) assert.equal(sharedCopy[key]?.length,3,'Missing translated article metadata: '+key);
 for(const [locale,index] of [['pt',0],['es',1],['it',2]]) {
-  const statement=sharedCopy['Lippi FinTech Advisory is an independent project alongside my professional career. Any employment responsibilities come first. I assess actual, potential and perceived conflicts of interest for every proposed consulting or training engagement, obtain written employer approval where required, and decline work that could interfere with my employment. Fractional CRO services are not currently offered.']?.[index];
+  const statement=sharedCopy['Lippi is an independent project alongside my professional career. Any employment responsibilities come first. I assess actual, potential and perceived conflicts of interest for every proposed consulting or training engagement, obtain written employer approval where required, and decline work that could interfere with my employment. Fractional CRO services are not currently offered.']?.[index];
   assert.ok(statement?.includes('CRO'), 'Missing fractional CRO exclusion in AI article '+locale);
 }
 // Training selects keep their underlying values; visible options are localized.
@@ -205,7 +205,7 @@ const unchangedNames = new Set([
  'Fiserv / AIB Merchant Services','Elavon / U.S. Bank',
  'J.P. Morgan Merchant Services','Worldpay & Barclaycard',
  'Planet','Tyl by NatWest',
- '© 2026 Igor Marchetti Lippi · Lippi FinTech Advisory',
+ '© 2026 Igor Marchetti Lippi · Lippi',
  'Central Bank of Ireland','Banco de Portugal','Banco Central do Brasil'
 ]);
 const deEntity = value => value

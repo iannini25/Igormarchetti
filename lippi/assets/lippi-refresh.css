@@ -133,7 +133,7 @@ p{text-wrap:pretty}
   background:radial-gradient(circle,#137c7540,transparent 70%)}
 .lippi-footer-inner{position:relative;z-index:1;max-width:1240px;padding:0 28px}
 .lippi-footer-top{grid-template-columns:1.1fr 1fr;gap:56px}
-.lippi-footer-logo{display:block;width:200px;aspect-ratio:3440/900;background:var(--mint);
+.lippi-footer-logo{display:block;width:200px;aspect-ratio:4/1;background:var(--mint);
   -webkit-mask:url(/logo.svg) left center/contain no-repeat;mask:url(/logo.svg) left center/contain no-repeat;transition:opacity .2s}
 .lippi-footer-logo:hover{opacity:.85}
 .lippi-footer p{color:#bed3cd;margin:18px 0 22px}

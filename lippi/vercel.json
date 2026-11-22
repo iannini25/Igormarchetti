@@ -104,6 +104,11 @@
       "source": "/newsletter",
       "destination": "/articles.html#newsletter",
       "permanent": true
+    },
+    {
+      "source": "/assets/lippi-fintech-advisory-logo.png",
+      "destination": "/assets/lippi-logo.png",
+      "permanent": true
     }
   ]
 }

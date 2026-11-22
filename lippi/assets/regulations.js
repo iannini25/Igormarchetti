@@ -69,7 +69,7 @@
     currentLanguage = lang;
     language.value = lang;
     document.documentElement.lang = {en:'en',pt:'pt-BR',es:'es',it:'it'}[lang];
-    document.title = labels.title + ' | Lippi FinTech Advisory';
+    document.title = labels.title + ' | Lippi';
     document.querySelector('meta[name="description"]')?.setAttribute('content',labels.intro);
     document.querySelector('meta[property="og:title"]')?.setAttribute('content',document.title);
     document.querySelector('meta[property="og:description"]')?.setAttribute('content',labels.intro);

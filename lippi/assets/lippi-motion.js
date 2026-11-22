@@ -257,7 +257,7 @@
     seal.className = 'lp-seal';
     seal.setAttribute('aria-hidden', 'true');
     seal.innerHTML = '<svg viewBox="0 0 100 100"><defs><path id="lp-seal-path" d="M50 50m-38 0a38 38 0 1 1 76 0a38 38 0 1 1-76 0"/></defs>' +
-      '<text><textPath href="#lp-seal-path">LIPPI FINTECH ADVISORY · DUBLIN · </textPath></text></svg>';
+      '<text><textPath href="#lp-seal-path">LIPPI</textPath></text></svg>';
     seal.appendChild(icon('shield'));
     portrait.appendChild(seal);
   }
