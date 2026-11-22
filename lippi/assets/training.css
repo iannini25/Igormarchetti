@@ -3,3 +3,11 @@
 .tools-followup{padding-top:20px;border-top:1px solid var(--line);margin:0;font-size:14px}
 
 .training-subnav{display:flex;gap:24px;flex-wrap:wrap;padding-top:15px;padding-bottom:15px;font-size:13px;font-weight:700;color:var(--teal)}.training-subnav a{text-decoration:none}.training-subnav a:hover{text-decoration:underline}.participant-materials{border-top:1px solid var(--line);padding-top:24px;margin-top:30px}.participant-materials h3{font-size:21px;margin-bottom:9px}.participant-materials p{color:var(--muted);font-size:15px;margin-bottom:10px}@media(max-width:480px){.training-subnav{gap:12px 20px;font-size:12px}}
+
+.pilot-interest { padding-block: clamp(2rem, 5vw, 3.5rem); border-bottom: 1px solid var(--line); }
+.pilot-interest h2 { margin-bottom: .75rem; }
+.pilot-interest .wrap > p { max-width: 68ch; }
+.pilot-enquiry > summary { width: fit-content; cursor: pointer; padding: .65rem 1rem; border-radius: .5rem; background: var(--teal); color: white; font-weight: 700; }
+.pilot-enquiry > summary:focus-visible { outline: 3px solid #2b8eb6; outline-offset: 4px; }
+.pilot-enquiry[open] > summary { margin-bottom: 1.5rem; }
+.pilot-enquiry .notice { align-self: start; }

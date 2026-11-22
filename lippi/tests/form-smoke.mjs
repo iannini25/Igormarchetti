@@ -64,6 +64,7 @@ async function training(locale) {
     await page.goto(url('/training.html',locale),{waitUntil:'load'});
     await localeReady(page,locale);
     await page.waitForFunction(() => !document.querySelector('#training-interest-form button[type="submit"]').disabled);
+    await page.locator('#interest summary').first().click();
     await page.locator('input[name="target_markets"][value="ireland"]').check();
     await page.locator('#training-priority').selectOption('licensing');
     await page.locator('#training-budget').selectOption('under100');
