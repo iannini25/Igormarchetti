@@ -30,43 +30,29 @@
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to main content</a>
-<div data-site-header data-current-page=""><header class="lippi-header"><div class="lippi-header-inner"><a class="lippi-brand" href="/" aria-label="Lippi home"><img src="/logo.svg" alt="Lippi" width="1120" height="280"></a><button class="lippi-menu-button" type="button" aria-expanded="false" aria-controls="lippi-navigation"><span class="lippi-menu-icon" aria-hidden="true"></span>Menu</button><nav class="lippi-nav" id="lippi-navigation" aria-label="Main navigation"><a href="/">Home</a><a href="/training.html">Training</a><a href="/regulations.html">Regulatory</a><a href="/articles.html">Articles</a><a class="lippi-book" href="https://calendly.com/igormarchettilippi/20min" target="_blank" rel="noopener noreferrer">Free initial call <span class="lp-ic" data-ic="up-right" aria-hidden="true"></span></a></nav></div></header></div><!-- /site-header -->
+<div data-site-header data-current-page=""><header class="lippi-header"><div class="lippi-header-inner"><a class="lippi-brand" href="/" aria-label="Lippi home"><img src="/logo.svg" alt="Lippi" width="1120" height="280"></a><button class="lippi-menu-button" type="button" aria-expanded="false" aria-controls="lippi-navigation"><span class="lippi-menu-icon" aria-hidden="true"></span>Menu</button><nav class="lippi-nav" id="lippi-navigation" aria-label="Main navigation"><a href="/">Home</a><a href="/training.html">Training</a><a href="/regulations.html">Regulatory</a><a href="/articles.html">Articles</a><a  class="lippi-book" href="/survey.html">Take the company survey</a></nav></div></header></div><!-- /site-header -->
 <main id="main" class="survey-page">
 <section id="founder-survey" class="founder-survey" aria-labelledby="founder-survey-heading">
 <div class="wrap survey-layout">
 <div class="survey-intro">
-<div class="label">3-minute founder survey</div>
-<h1 id="founder-survey-heading">Tell me what’s getting in the way.</h1>
-<p class="intro">Which GRC challenge is your team facing? Your answers help shape Lippi’s training, platforms and services.</p>
-<p class="survey-promise"><strong>About 3 minutes.</strong><br>Three questions. No name or email required.</p>
-<p>Prefer to talk through your fintech’s next step?</p>
-<a class="btn" href="https://calendly.com/igormarchettilippi/20min" target="_blank" rel="noopener noreferrer">Book a free needs analysis</a>
-<p class="survey-privacy" id="survey-privacy">Please leave out personal, customer or confidential information. Lippi uses your answers to understand founders’ challenges and improve its services. This includes AI analysis after removing identifying details. Answers are not published and stay in the survey database for up to 90 days. Taking part is optional.</p>
+<div class="label">Pre-launch research</div><h1 id="founder-survey-heading">Company needs survey</h1><p class="intro">Lippi is in pre-launch. We’re gathering feedback from 100 companies to decide which training and advisory topics would be most useful.</p><p class="survey-promise">Ten questions. One response per company. No name or email required.</p><p class="survey-privacy" id="survey-privacy">Participation is optional. Choose the closest answer for your company. Responses are saved directly to our private research database. We may use AI to summarise aggregate trends.</p>
 <p class="survey-privacy">Questions or want your answers deleted? Email <a href="mailto:lippifintech@igormarchetti.me">lippifintech@igormarchetti.me</a> with your response reference.</p>
 </div>
 <div class="survey-panel">
 <form id="founder-survey-form" aria-describedby="survey-privacy"><p><a href="/privacy.html">Privacy and cookies</a></p>
-<div class="survey-field">
-<label for="survey-milestone"><span class="survey-number">1</span> What’s your next milestone, and what could stop you reaching it?</label>
-<p class="survey-hint" id="survey-milestone-hint">Think about licensing, launch, a banking partner or your first customers.</p>
-<textarea id="survey-milestone" name="milestone_risk" rows="4" required minlength="5" maxlength="1000" aria-describedby="survey-milestone-hint survey-milestone-count" placeholder="Our next milestone is… The main risk is…"></textarea>
-<span class="survey-count" id="survey-milestone-count">0 / 1,000</span>
-</div>
-<div class="survey-field">
-<label for="survey-controls"><span class="survey-number">2</span> Which controls worry you most, and what have you tried so far?</label>
-<p class="survey-hint" id="survey-controls-hint">For example: customer checks, fraud prevention, supplier checks or keeping your service running.</p>
-<textarea id="survey-controls" name="control_gap" rows="4" required minlength="5" maxlength="1000" aria-describedby="survey-controls-hint survey-controls-count" placeholder="We’re worried about… We’ve tried…"></textarea>
-<span class="survey-count" id="survey-controls-count">0 / 1,000</span>
-</div>
-<div class="survey-field">
-<label for="survey-support"><span class="survey-number">3</span> What help would make the biggest difference over the next 90 days?</label>
-<p class="survey-hint" id="survey-support-hint">Tell me the result you want and what’s stopping your team today.</p>
-<textarea id="survey-support" name="support_needed" rows="4" required minlength="5" maxlength="1000" aria-describedby="survey-support-hint survey-support-count" placeholder="We need help with… What’s stopping us is…"></textarea>
-<span class="survey-count" id="survey-support-count">0 / 1,000</span>
-</div>
+<div class="survey-field"><label for="business">1. What kind of organisation are you answering for?</label><select id="business" name="business" required style="width:100%;padding:.7rem"><option value="">Choose one</option><option value="Financial services">Financial services</option><option value="Technology provider">Technology provider</option><option value="Professional services">Professional services</option><option value="Other">Other</option></select></div>
+<div class="survey-field"><label for="market">2. Which market is your current priority?</label><select id="market" name="market" required style="width:100%;padding:.7rem"><option value="">Choose one</option><option value="Ireland">Ireland</option><option value="UK">UK</option><option value="Other EU market">Other EU market</option><option value="Brazil">Brazil</option><option value="Other market">Other market</option></select></div>
+<div class="survey-field"><label for="milestone">3. What is your next business milestone?</label><select id="milestone" name="milestone" required style="width:100%;padding:.7rem"><option value="">Choose one</option><option value="Product launch">Product launch</option><option value="Market entry">Market entry</option><option value="Partner approval">Partner approval</option><option value="Audit or regulatory review">Audit or regulatory review</option><option value="Team development">Team development</option><option value="Other">Other</option></select></div>
+<div class="survey-field"><label for="problem">4. Which challenge most needs attention?</label><select id="problem" name="problem" required style="width:100%;padding:.7rem"><option value="">Choose one</option><option value="Risk ownership">Risk ownership</option><option value="Regulatory requirements">Regulatory requirements</option><option value="Control design or testing">Control design or testing</option><option value="Third-party oversight">Third-party oversight</option><option value="AI governance">AI governance</option><option value="Other">Other</option></select></div>
+<div class="survey-field"><label for="deadline">5. When do you need to make progress?</label><select id="deadline" name="deadline" required style="width:100%;padding:.7rem"><option value="">Choose one</option><option value="Within a month">Within a month</option><option value="In one to three months">In one to three months</option><option value="In four to six months">In four to six months</option><option value="Later or uncertain">Later or uncertain</option></select></div>
+<div class="survey-field"><label for="evidence">6. What evidence do you already have?</label><select id="evidence" name="evidence" required style="width:100%;padding:.7rem"><option value="">Choose one</option><option value="Documented controls and tests">Documented controls and tests</option><option value="Policies only">Policies only</option><option value="Informal practices">Informal practices</option><option value="Starting from scratch">Starting from scratch</option><option value="Unsure">Unsure</option></select></div>
+<div class="survey-field"><label for="tried">7. What has your team tried so far?</label><select id="tried" name="tried" required style="width:100%;padding:.7rem"><option value="">Choose one</option><option value="Internal review">Internal review</option><option value="External advice">External advice</option><option value="Training">Training</option><option value="Software or templates">Software or templates</option><option value="Nothing yet">Nothing yet</option><option value="Other">Other</option></select></div>
+<div class="survey-field"><label for="barrier">8. What is the main obstacle?</label><select id="barrier" name="barrier" required style="width:100%;padding:.7rem"><option value="">Choose one</option><option value="Time">Time</option><option value="Skills">Skills</option><option value="Ownership">Ownership</option><option value="Budget">Budget</option><option value="Understanding requirements">Understanding requirements</option><option value="Other">Other</option></select></div>
+<div class="survey-field"><label for="audience">9. Who most needs support?</label><select id="audience" name="audience" required style="width:100%;padding:.7rem"><option value="">Choose one</option><option value="Founders or leadership">Founders or leadership</option><option value="Risk or compliance">Risk or compliance</option><option value="Product or operations">Product or operations</option><option value="Several teams">Several teams</option><option value="Unsure">Unsure</option></select></div>
+<div class="survey-field"><label for="outcome">10. Which outcome would help most?</label><select id="outcome" name="outcome" required style="width:100%;padding:.7rem"><option value="">Choose one</option><option value="A practical workshop">A practical workshop</option><option value="A tested controls checklist">A tested controls checklist</option><option value="A risk assessment">A risk assessment</option><option value="A decision on market entry">A decision on market entry</option><option value="Clear roles and next steps">Clear roles and next steps</option><option value="Other">Other</option></select></div>
 <div class="survey-trap" aria-hidden="true"><label for="survey-website">Leave this blank</label><input id="survey-website" name="website" type="text" tabindex="-1" autocomplete="off"></div>
 <button class="btn survey-submit" type="submit" disabled>Submit survey</button>
-<p class="survey-hint">Answer all three questions, then select Submit survey to send your answers.</p>
+<p class="survey-hint">Answer all ten questions, then select Submit survey to send your answers.</p>
 <noscript><p>Please enable JavaScript to submit the survey.</p></noscript>
 </form>
 <p id="survey-status" class="survey-status" role="status" aria-live="polite">Checking the survey is ready…</p>
@@ -74,8 +60,7 @@
 <div class="label">Response saved</div><h3>Thank you for sharing.</h3>
 <p>Your answers will help me focus on what founders need.</p>
 <p class="survey-hint">Keep this reference to ask for your answers to be deleted:<br><span id="survey-reference"></span></p>
-<a class="btn" href="https://calendly.com/igormarchettilippi/20min" target="_blank" rel="noopener noreferrer">Book a free needs analysis</a>
-<p class="survey-hint">Booking a conversation is optional.</p>
+<a class="btn" href="/training.html#interest">Share your training preferences</a>
 </div>
 </div>
 </div>
@@ -92,7 +77,7 @@
 <a class="lippi-footer-email" href="mailto:lippifintech@igormarchetti.me">lippifintech@igormarchetti.me</a>
 </div>
 <div class="lippi-footer-links">
-<a class="lippi-footer-book" href="https://calendly.com/igormarchettilippi/20min" target="_blank" rel="noopener noreferrer" data-key="bookingCall">Free initial call</a>
+<a  class="lippi-footer-book" href="/survey.html">Take the company survey</a>
 <a href="/#services" data-key="footerLink0">Advisory services</a><a href="/training.html" data-key="footerLink1">Training</a><a href="/regulations.html" data-key="footerLink2">Regulatory updates</a><a href="/articles.html" data-key="footerLink3">Articles</a><a href="/articles.html#newsletter" data-key="footerLink4">Newsletter</a><a href="/#about" data-key="footerLink5">About Igor</a><a href="/survey.html" data-key="footerLink6">Founder survey</a>
 </div>
 </div>
