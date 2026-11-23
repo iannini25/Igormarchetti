@@ -253,5 +253,5 @@ export function companySummary(rows) {
       totals[key][choice] = (totals[key][choice] || 0) + 1;
     }
   }
-  return {completed_responses:rows.length, target_companies:100, counts:totals};
+  return {completed_responses:rows.length, target_companies:150, counts:totals};
 }
