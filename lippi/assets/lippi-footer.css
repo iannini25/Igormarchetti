@@ -23,6 +23,8 @@
 .lippi-footer a{color:#e4f0eb;text-decoration:none;text-underline-offset:4px}
 .lippi-footer a:hover{text-decoration:none;color:var(--mint)}
 .lippi-footer a:focus-visible{outline:3px solid #c97c00;outline-offset:5px}
+.lippi-footer-links .lippi-footer-book{grid-column:1/-1;justify-self:start;justify-content:center;min-height:44px;margin-bottom:6px;padding:0 18px;border-radius:999px;background:var(--mint);color:var(--navy);font-weight:700}
+.lippi-footer-links .lippi-footer-book:hover{background:#fff;color:var(--navy)}
 .lippi-footer-bottom{display:flex;flex-wrap:wrap;justify-content:space-between;margin-top:30px;padding-top:20px;border-top:1px solid #ffffff1f;font-size:12px;align-items:center;gap:10px 28px}
 .lippi-footer-bottom p{margin:0 auto 0 0;color:#9fb9b2}
 .lippi-footer-bottom a{color:#bed3cd}

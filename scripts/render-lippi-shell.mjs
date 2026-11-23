@@ -8,7 +8,7 @@ const pages = [
   ['independence.html','',false],['survey.html','',true]
 ];
 const navigation = [['home','/','Home'],['training','/training.html','Training'],['regulations','/regulations.html','Regulatory'],['articles','/articles.html','Articles']];
-const bookingUrl = 'https://calendly.com/igormarchettilippi/30min';
+const bookingUrl = 'https://calendly.com/igormarchettilippi/20min';
 const header = active => `<header class="lippi-header"><div class="lippi-header-inner"><a class="lippi-brand" href="/" aria-label="Lippi home"><img src="/logo.svg" alt="Lippi" width="1120" height="280"></a><button class="lippi-menu-button" type="button" aria-expanded="false" aria-controls="lippi-navigation"><span class="lippi-menu-icon" aria-hidden="true"></span>Menu</button><nav class="lippi-nav" id="lippi-navigation" aria-label="Main navigation">${navigation.map(([key,url,title])=>`<a href="${url}"${key===active?' aria-current="page"':''}>${title}</a>`).join('')}<a class="lippi-book" href="${bookingUrl}" target="_blank" rel="noopener noreferrer">Free initial call <span class="lp-ic" data-ic="up-right" aria-hidden="true"></span></a></nav></div></header>`;
 const footer = readFileSync(new URL('./lippi-footer.html', import.meta.url), 'utf8').trim();
 const footerOnly = process.argv.includes('--footers');
