@@ -59,12 +59,13 @@ export async function submit(req,res){
  let data;try{data=JSON.parse(Buffer.concat(chunks).toString('utf8'));}catch{return reply(res,400,{error:'The submission could not be read.'});}
  if(!data||Array.isArray(data)||typeof data!=='object') return reply(res,400,{error:'Invalid submission.'});
  if(data.website) return reply(res,400,{error:'The submission could not be accepted.'});
- const identified = data.survey_version === 'company-v3';
+ const combined = data.survey_version === 'company-v4';
+ const identified = combined || data.survey_version === 'company-v3';
  const company = identified || data.survey_version === 'company-v2';
- if(company ? data.notice_version !== (identified ? '2026-11-23-contact' : '2026-11-23') : (data.survey_version!==SURVEY_VERSION||data.notice_version!==NOTICE_VERSION)) return reply(res,400,{error:'Please refresh the page before submitting.'});
+ if(company ? data.notice_version !== (combined ? '2026-11-23-combined' : identified ? '2026-11-23-contact' : '2026-11-23') : (data.survey_version!==SURVEY_VERSION||data.notice_version!==NOTICE_VERSION)) return reply(res,400,{error:'Please refresh the page before submitting.'});
  if(typeof data.submission_id!=='string'||!/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(data.submission_id)) return reply(res,400,{error:'Invalid submission reference. Please refresh and try again.'});
  if(!company) for(const f of fields) if(typeof data[f]!=='string'||data[f].trim().length<5||data[f].length>1000) return reply(res,400,{error:'Please answer each question using between 5 and 1,000 characters.'});
- const answers=company ? packCompanyAnswers(data.answers) : fields.map(f=>data[f].trim()), id=data.submission_id.toLowerCase();
+ const answers=company ? packCompanyAnswers(data.answers, combined) : fields.map(f=>data[f].trim()), id=data.submission_id.toLowerCase();
  if (!answers) return reply(res,400,{error:'Please choose an answer for all ten questions.'});
  if (identified) {
    const identity = data.identity;
@@ -96,8 +97,8 @@ export async function admin(req,res,path){
  const known=['responses','export.json','export.csv','analysis-pack.json'];
  if(!known.includes(path)) return reply(res,404,{error:'Not found.'});
  const rows=await allRows(), q=Object.fromEntries(fields.map((f,i)=>[f,questions[i]]));
- const companyRows = rows.filter(r=>['company-v2','company-v3'].includes(r.survey_version));
- const organisations = new Set(companyRows.filter(r=>r.survey_version==='company-v3').map(r=>JSON.parse(r.milestone_risk).identity.company.normalize('NFKC').trim().toLowerCase().replace(/\s+/g,' ')));
+ const companyRows = rows.filter(r=>['company-v2','company-v3','company-v4'].includes(r.survey_version));
+ const organisations = new Set(companyRows.filter(r=>['company-v3','company-v4'].includes(r.survey_version)).map(r=>JSON.parse(r.milestone_risk).identity.company.normalize('NFKC').trim().toLowerCase().replace(/\s+/g,' ')));
  if(path==='responses') return reply(res,200,{count:rows.length,distinct_company_names:organisations.size,responses:rows});
  if(path==='export.json') return reply(res,200,{survey_version:SURVEY_VERSION,questions:q,responses:rows},{'Content-Disposition':'attachment; filename="lippi-survey-responses.json"'});
  if(path==='export.csv'){const keys=['id','created_at','survey_version','notice_version',...fields];

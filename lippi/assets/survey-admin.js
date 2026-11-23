@@ -15,7 +15,7 @@
   for(const row of data.responses){
    const article=document.createElement('article');article.className='card';
    const meta=document.createElement('p');meta.className='response-date';meta.textContent=new Date(row.created_at).toLocaleString()+' · Reference '+row.id;article.append(meta);
-   if (['company-v2','company-v3'].includes(row.survey_version)) {
+   if (['company-v2','company-v3','company-v4'].includes(row.survey_version)) {
      const {identity, ...answers} = Object.assign({}, ...[row.milestone_risk,row.control_gap,row.support_needed].map(value=>JSON.parse(value)));
      const heading=document.createElement('h2');
      heading.textContent=identity?.company || 'Company research response';
@@ -27,7 +27,7 @@
      }
      const brief=document.createElement('pre');
      brief.style.whiteSpace='pre-wrap';
-     brief.textContent=Object.entries(answers).map(([key,value])=>key+': '+value).join('\n');
+     brief.textContent=Object.entries(answers).filter(([,value])=>value!==null).map(([key,value])=>key+': '+value).join('\n');
      article.append(brief);
      responses.append(article);
      continue;
