@@ -6,7 +6,7 @@
   const emailFallback = document.getElementById('newsletter-email-fallback');
   const emailDraft = document.getElementById('newsletter-email-draft');
   // Keep the English source label; the DOM may already be localized at script start.
-  const initialButton = 'Save my newsletter request';
+  const initialButton = 'Subscribe';
   const tr = text => window.LippiI18n?.translate(text) || text;
   let lastMessage = '', lastState = '';
   const languageSelect = document.getElementById('newsletter-language');
@@ -37,7 +37,7 @@
     registrationMode = 'email';
     button.disabled = false;
     button.textContent = tr('Prepare email request');
-    update(message || 'Online registration is unavailable. Enter your details and consent, then prepare an email request to send from your email app.');
+    update(message || 'Online signup is temporarily unavailable. Try again later or use the form to request a subscription by email.');
   };
   const renderEmail = payload => {
     const language = {en:'English', pt:'Português', es:'Español'}[payload.language];
@@ -116,7 +116,7 @@
         throw Object.assign(new Error(result.error || 'We could not save your request. Please try again or email Igor.'), {httpStatus:response.status});
       }
       form.hidden = true;
-      update('Thank you. Your newsletter request and consent have been saved. No automatic confirmation email is sent. You can unsubscribe at any time by emailing Igor.', 'success');
+      update('Thank you. Your newsletter signup has been saved.', 'success');
       status.setAttribute('tabindex', '-1');
       status.focus();
     } catch (error) {
