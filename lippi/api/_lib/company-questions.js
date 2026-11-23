@@ -1,4 +1,3 @@
-// Fixed choices keep identifying free text out of the company needs survey.
 export const companyQuestions = [
   [
     "business",
@@ -235,14 +234,27 @@ export function packCompanyAnswers(answers, combined = false) {
   const questions = combined ? combinedQuestions : companyQuestions;
   if (!answers || typeof answers !== 'object' || Array.isArray(answers) ||
       Object.keys(answers).length !== questions.length) return null;
+  const entries = {};
   for (const [key, , choices] of questions) {
+    const answer = answers[key];
+    entries[key] = [[key, answer]];
+    if (combined && answer && typeof answer === 'object') {
+      const {choice, detail} = answer;
+      if (typeof choice !== 'string' || !/^Other\b/.test(choice) ||
+          !(choice === 'Other' || choices.includes(choice)) ||
+          typeof detail !== 'string' || !detail.trim() || detail.length > 160 ||
+          (answers.pilot === 'No' && ['topic','format','language','budget'].includes(key))) return null;
+      entries[key] = [[key, choice], [key + '_other', detail.trim()]];
+      continue;
+    }
+    if (combined && key === 'language' && answer === 'Unsure') continue;
     if (combined && answers.pilot === 'No' && ['topic','format','language','budget'].includes(key) && answers[key] === null) continue;
     if (!choices.includes(answers[key])) return null;
   }
   // Reuse the three existing research columns, grouped by company context,
   // controls and support. The version distinguishes these from legacy free text.
   return [questions.slice(0,3), questions.slice(3,7), questions.slice(7)]
-    .map(group => JSON.stringify(Object.fromEntries(group.map(([key]) => [key, answers[key]]))));
+    .map(group => JSON.stringify(Object.fromEntries(group.flatMap(([key]) => entries[key]))));
 }
 
 export function companySummary(rows) {
