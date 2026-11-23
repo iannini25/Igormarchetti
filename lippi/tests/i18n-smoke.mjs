@@ -3,7 +3,10 @@ import assert from 'node:assert/strict';
 import {readdirSync,readFileSync} from 'node:fs';
 import {Script} from 'node:vm';
 const read = path => readFileSync(new URL('../' + path,import.meta.url),'utf8');
+const footerEmail = 'lippi@igormarchetti.me';
 const footerTemplate = read('../scripts/lippi-footer.html').trim();
+assert.equal(footerTemplate.split('href="mailto:'+footerEmail+'"').length - 1,2);
+assert.ok(footerTemplate.includes('>'+footerEmail+'</a>'));
 for (const file of readdirSync(new URL('../',import.meta.url)).filter(name => name.endsWith('.html'))) {
   const page = read(file);
   const footers = page.match(/<footer\b[^>]*>[\s\S]*?<\/footer>/g);
@@ -92,7 +95,7 @@ const articleHtml = read('articles.html')
   .replace(/<!--[\s\S]*?-->/g,'');
 const articleNames = new Set([
   'English','Português','Español','Lippi',
-  'lippifintech@igormarchetti.me','LinkedIn ↗',
+  footerEmail,'lippifintech@igormarchetti.me','LinkedIn ↗',
   '© 2026 Igor Marchetti · Lippi'
 ]);
 const articleText = new Set(articleHtml.split(/<[^>]+>/).map(text=>text
@@ -116,6 +119,7 @@ const articleVisibleText = article
   .map(text=>text.replace(/&amp;/g,'&').replace(/\s+/g,' ').trim())
   .filter(text=>text.length>3);
 for (const source of new Set(articleVisibleText)) {
+  if (source === footerEmail) continue;
   assert.equal(sharedCopy[source]?.length,3,'Unlocalized AI article text: '+source);
 }
 for(const key of [
@@ -208,7 +212,7 @@ new Script(independentScript[1],{filename:'independence-inline'});
 // Public homepage and training copy must never fall back to untranslated English.
 // Names, brand marks, email addresses and qualifications intentionally remain unchanged.
 const unchangedNames = new Set([
- 'Igor Marchetti Lippi','lippifintech@igormarchetti.me',
+ 'Igor Marchetti Lippi',footerEmail,'lippifintech@igormarchetti.me',
  'Fiserv / AIB Merchant Services','Elavon / U.S. Bank',
  'J.P. Morgan Merchant Services','Worldpay & Barclaycard',
  'Planet','Tyl by NatWest',

@@ -199,8 +199,7 @@ async function checkPage(context,route,lang,htmlLang,device) {
       await sample.locator('summary').click();
       assert.equal(await sample.locator('.participant-materials').isVisible(),false);
       assert.ok(await page.locator('#format .schedule').isVisible());
-      const advisoryUrl = new URL(await page.locator('section[aria-labelledby="consulting-support-heading"] a').getAttribute('href'), origin);
-      assert.equal(advisoryUrl.pathname + advisoryUrl.hash, '/#services');
+      assert.equal(await page.locator('#consulting-support-heading').count(),0);
       assert.equal(await page.locator('#training-interest-form').count(),1,
         'Training enquiry form is missing');
     }
