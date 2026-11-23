@@ -11,9 +11,27 @@
   say('Loading responses…');
   const data=await (await api('responses')).json();
   responses.replaceChildren();document.getElementById('count').textContent=data.count+' '+(data.count===1?'response':'responses');
+  document.getElementById('count').textContent += ' · '+data.distinct_company_names+' distinct company names in retained responses';
   for(const row of data.responses){
    const article=document.createElement('article');article.className='card';
    const meta=document.createElement('p');meta.className='response-date';meta.textContent=new Date(row.created_at).toLocaleString()+' · Reference '+row.id;article.append(meta);
+   if (['company-v2','company-v3'].includes(row.survey_version)) {
+     const {identity, ...answers} = Object.assign({}, ...[row.milestone_risk,row.control_gap,row.support_needed].map(value=>JSON.parse(value)));
+     const heading=document.createElement('h2');
+     heading.textContent=identity?.company || 'Company research response';
+     article.append(heading);
+     if (identity) {
+       const contact=document.createElement('p');
+       contact.textContent=[identity.name, identity.follow_up ? 'Survey discussion permitted: '+identity.email : 'No follow-up permission'].filter(Boolean).join(' · ');
+       article.append(contact);
+     }
+     const brief=document.createElement('pre');
+     brief.style.whiteSpace='pre-wrap';
+     brief.textContent=Object.entries(answers).map(([key,value])=>key+': '+value).join('\n');
+     article.append(brief);
+     responses.append(article);
+     continue;
+   }
    for(const [field,label] of [['milestone_risk','1. Milestone and risk'],['control_gap','2. Control gaps and previous efforts'],['support_needed','3. Desired support and constraints']]){
     const h=document.createElement('h2'),p=document.createElement('p');h.textContent=label;p.className='response';p.textContent=row[field];article.append(h,p);
    }responses.append(article);

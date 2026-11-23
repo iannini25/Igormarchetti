@@ -7,6 +7,16 @@
   const fields = [...form.querySelectorAll('select')];
   const tr = text => window.LippiI18n?.translate(text) || text;
   let lastMessage = '', lastError = false;
+  const followUp = form.elements.follow_up;
+  const email = form.elements.contact_email;
+  function updateFollowUp() {
+    email.disabled = !followUp.checked;
+    email.required = followUp.checked;
+    document.getElementById('follow-up-field').hidden = !followUp.checked;
+    if (email.disabled) email.value = '';
+  }
+  followUp.addEventListener('change', updateFollowUp);
+  updateFollowUp();
   let busy = false;
   let submissionId = null;
   const uuid = () => globalThis.crypto?.randomUUID?.() || 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => { const r=Math.random()*16|0; return (c==='x'?r:(r&3|8)).toString(16); });
@@ -31,7 +41,7 @@
     busy=true; submit.disabled=true; submit.textContent=tr('Sending…');
     fields.forEach(field=>field.disabled=true);
     submissionId ||= uuid();
-    const body={submission_id:submissionId,survey_version:'company-v2',notice_version:'2026-11-23',answers:Object.fromEntries(fields.map(field=>[field.name,field.value])),website:form.elements.website.value};
+    const body={submission_id:submissionId,survey_version:'company-v3',notice_version:'2026-11-23-contact',identity:{company:form.elements.company_name.value.trim(),name:form.elements.participant_name.value.trim(),follow_up:followUp.checked,email:followUp.checked?email.value.trim():''},answers:Object.fromEntries(fields.map(field=>[field.name,field.value])),website:form.elements.website.value};
     say('Saving your answers…');
     try {
       const response=await fetch('/api/founder-survey',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body),signal:AbortSignal.timeout(15000)});

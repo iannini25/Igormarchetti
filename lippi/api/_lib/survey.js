@@ -59,12 +59,25 @@ export async function submit(req,res){
  let data;try{data=JSON.parse(Buffer.concat(chunks).toString('utf8'));}catch{return reply(res,400,{error:'The submission could not be read.'});}
  if(!data||Array.isArray(data)||typeof data!=='object') return reply(res,400,{error:'Invalid submission.'});
  if(data.website) return reply(res,400,{error:'The submission could not be accepted.'});
- const company = data.survey_version === 'company-v2';
- if(company ? data.notice_version !== '2026-11-23' : (data.survey_version!==SURVEY_VERSION||data.notice_version!==NOTICE_VERSION)) return reply(res,400,{error:'Please refresh the page before submitting.'});
+ const identified = data.survey_version === 'company-v3';
+ const company = identified || data.survey_version === 'company-v2';
+ if(company ? data.notice_version !== (identified ? '2026-11-23-contact' : '2026-11-23') : (data.survey_version!==SURVEY_VERSION||data.notice_version!==NOTICE_VERSION)) return reply(res,400,{error:'Please refresh the page before submitting.'});
  if(typeof data.submission_id!=='string'||!/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(data.submission_id)) return reply(res,400,{error:'Invalid submission reference. Please refresh and try again.'});
  if(!company) for(const f of fields) if(typeof data[f]!=='string'||data[f].trim().length<5||data[f].length>1000) return reply(res,400,{error:'Please answer each question using between 5 and 1,000 characters.'});
  const answers=company ? packCompanyAnswers(data.answers) : fields.map(f=>data[f].trim()), id=data.submission_id.toLowerCase();
  if (!answers) return reply(res,400,{error:'Please choose an answer for all ten questions.'});
+ if (identified) {
+   const identity = data.identity;
+   if (!identity || typeof identity.company !== 'string' || !identity.company.trim() || identity.company.length > 120 ||
+       typeof identity.name !== 'string' || identity.name.length > 80 || typeof identity.follow_up !== 'boolean' ||
+       typeof identity.email !== 'string' || identity.email.length > 254 ||
+       (identity.follow_up ? !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(identity.email) : identity.email !== '')) {
+     return reply(res,400,{error:'Check the company name and follow-up details.'});
+   }
+   const context = JSON.parse(answers[0]);
+   context.identity = {company:identity.company.trim(),name:identity.name.trim(),follow_up:identity.follow_up,email:identity.email.trim()};
+   answers[0] = JSON.stringify(context);
+ }
  await purge();
  const ins=await db().query(`INSERT INTO ${T}(id,survey_version,notice_version,milestone_risk,control_gap,support_needed) VALUES($1,$2,$3,$4,$5,$6) ON CONFLICT (id) DO NOTHING RETURNING id`,[id,data.survey_version,data.notice_version,...answers]);
  if(ins.rowCount) return reply(res,201,{saved:true,id:data.submission_id});
@@ -83,16 +96,19 @@ export async function admin(req,res,path){
  const known=['responses','export.json','export.csv','analysis-pack.json'];
  if(!known.includes(path)) return reply(res,404,{error:'Not found.'});
  const rows=await allRows(), q=Object.fromEntries(fields.map((f,i)=>[f,questions[i]]));
- if(path==='responses') return reply(res,200,{count:rows.length,responses:rows});
+ const companyRows = rows.filter(r=>['company-v2','company-v3'].includes(r.survey_version));
+ const organisations = new Set(companyRows.filter(r=>r.survey_version==='company-v3').map(r=>JSON.parse(r.milestone_risk).identity.company.normalize('NFKC').trim().toLowerCase().replace(/\s+/g,' ')));
+ if(path==='responses') return reply(res,200,{count:rows.length,distinct_company_names:organisations.size,responses:rows});
  if(path==='export.json') return reply(res,200,{survey_version:SURVEY_VERSION,questions:q,responses:rows},{'Content-Disposition':'attachment; filename="lippi-survey-responses.json"'});
  if(path==='export.csv'){const keys=['id','created_at','survey_version','notice_version',...fields];
   return reply(res,200,'\uFEFF'+[keys,...rows.map(r=>keys.map(k=>r[k]))].map(r=>r.map(csvCell).join(',')).join('\r\n'),{'Content-Type':'text/csv; charset=utf-8','Content-Disposition':'attachment; filename="lippi-survey-responses.csv"'});}
  return reply(res,200,{
   review_before_upload:'Email addresses, URLs and some phone-like numbers are masked. Names and other identifiers may remain. Review all free text before uploading to an AI service. No responses have been sent to an AI provider by this website.',
-  company_research:companySummary(rows.filter(r=>r.survey_version==='company-v2')),
+  company_research:{...companySummary(companyRows), distinct_company_names:organisations.size},
+  drafting_guidance:'Use aggregate company trends to draft workshop outlines and sample advisory options for internal review. This export does not authorise contacting respondents or sending proposals.',
   analysis_prompt:readFileSync(new URL('./analysis-prompt.txt',import.meta.url),'utf8'),
   questions:q,
-  responses:rows.filter(r=>r.survey_version!=='company-v2').map(r=>({response_id:r.id,date:r.created_at.slice(0,10),...Object.fromEntries(fields.map(f=>[f,redact(r[f])]))}))
+  responses:rows.filter(r=>r.survey_version==='founder-v1').map(r=>({response_id:r.id,date:r.created_at.slice(0,10),...Object.fromEntries(fields.map(f=>[f,redact(r[f])]))}))
  },{'Content-Disposition':'attachment; filename="lippi-survey-ai-analysis-pack.json"'});
 }
 export const guard=fn=>async(req,res)=>{try{await fn(req,res);}catch(e){console.error('survey error',e?.code||e?.name);if(!res.headersSent) reply(res,500,{error:'We could not save or retrieve the response. Please try again.'});else res.end();}};
