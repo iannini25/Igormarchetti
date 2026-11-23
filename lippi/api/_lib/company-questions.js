@@ -195,13 +195,15 @@ export const combinedQuestions = [
   ],
   [
     "format",
-    "Which format would suit your team?",
+    "Which Saturday session would suit your team best?",
     [
-      "Live online",
-      "In person",
-      "Hybrid",
-      "Unsure"
-    ]
+  "Live online",
+  "In person",
+  "Team-building offsite at a hotel",
+  "Market-entry strategy offsite",
+  "Hybrid",
+  "Unsure"
+]
   ],
   [
     "language",
