@@ -7,6 +7,7 @@ const footerEmail = 'lippi@igormarchetti.me';
 const footerTemplate = read('../scripts/lippi-footer.html').trim();
 assert.equal(footerTemplate.split('href="mailto:'+footerEmail+'"').length - 1,2);
 assert.ok(footerTemplate.includes('>'+footerEmail+'</a>'));
+assert.doesNotMatch(footerTemplate, /href="\/#services"|>Advisory services<\/a>/i);
 for (const file of readdirSync(new URL('../',import.meta.url)).filter(name => name.endsWith('.html'))) {
   const page = read(file);
   const footers = page.match(/<footer\b[^>]*>[\s\S]*?<\/footer>/g);
