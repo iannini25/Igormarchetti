@@ -2,8 +2,8 @@ import pg from 'pg';
 import {createHash, timingSafeEqual} from 'node:crypto';
 import {reply, takeRate, csvCell} from './survey.js';
 
-export const NEWSLETTER_NOTICE_VERSION = '2026-11-18';
-export const NEWSLETTER_CONSENT = 'I agree to receive Lippi articles and regulatory updates by email. I can withdraw my consent at any time by emailing lippifintech@igormarchetti.me.';
+export const NEWSLETTER_NOTICE_VERSION = '2026-11-24';
+export const NEWSLETTER_CONSENT = 'I agree to receive Lippi articles and regulatory updates by email. I can withdraw my consent at any time by emailing lippi@igormarchetti.me.';
 const TABLE = 'public.lippi_newsletter_signups';
 const MAX_BODY_BYTES = 4096;
 const MAX_EXPORT_ROWS = 5000;
@@ -191,7 +191,7 @@ export function createNewsletterHandlers({store = newsletterStore, env = process
       // Acknowledges durable storage only. No email is sent by this endpoint.
       return reply(res, 201, {saved:true, status:'requested'});
     } catch {
-      return reply(res, 503, {saved:false, error:'We could not save your request. Please try again or email lippifintech@igormarchetti.me.'});
+      return reply(res, 503, {saved:false, error:'We could not save your request. Please try again or email lippi@igormarchetti.me.'});
     }
   };
 

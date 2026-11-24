@@ -339,7 +339,7 @@ test('email enquiries retain all answers with a fixed destination and encoded bo
   const draft = buildTrainingEmail(payload);
   const url = new URL(draft.mailto);
   assert.equal(url.protocol, 'mailto:');
-  assert.equal(url.pathname, 'lippifintech@igormarchetti.me');
+  assert.equal(url.pathname, 'lippi@igormarchetti.me');
   assert.equal(url.searchParams.get('subject'), 'Lippi paid training pilot enquiry');
   assert.deepEqual([...url.searchParams.keys()], ['subject', 'body']);
   assert.equal(url.searchParams.get('body'), draft.body);
@@ -382,7 +382,7 @@ test('unavailable survey enables a validated email draft without submitting, ope
     validForm = true;
     await events.get('submit')({preventDefault() {}});
     assert.equal(draftPanel.hidden, false);
-    assert.equal(new URL(draftLink.href).pathname, 'lippifintech@igormarchetti.me');
+    assert.equal(new URL(draftLink.href).pathname, 'lippi@igormarchetti.me');
     assert.ok(draftText.value.includes('Help compare markets'));
     assert.equal(success.hidden, true);
     assert.equal(form.hidden, false);

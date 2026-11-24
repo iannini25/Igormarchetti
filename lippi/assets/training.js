@@ -26,7 +26,7 @@ export function buildTrainingEmail(payload, translate = text => text) {
   const body = lines.join('\n');
   return {
     body,
-    mailto: 'mailto:lippifintech@igormarchetti.me?subject=' +
+    mailto: 'mailto:lippi@igormarchetti.me?subject=' +
       encodeURIComponent(translate('Lippi paid training pilot enquiry')) + '&body=' + encodeURIComponent(body)
   };
 }

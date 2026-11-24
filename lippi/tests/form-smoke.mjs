@@ -42,7 +42,7 @@ async function newsletter(locale) {
     await page.locator('#newsletter-form button[type="submit"]').click();
     assert.equal(await page.locator('#newsletter-email-fallback').isVisible(),true);
     const draft=await page.locator('#newsletter-email-draft').getAttribute('href');
-    assert.ok(draft?.startsWith('mailto:lippifintech@igormarchetti.me?'));
+    assert.ok(draft?.startsWith('mailto:lippi@igormarchetti.me?'));
     const parsed=new URL(draft);
     assert.ok(parsed.searchParams.get('body')?.includes('testing@example.org'));
     assert.ok(parsed.searchParams.get('subject')?.trim());
@@ -74,7 +74,7 @@ async function training(locale) {
     await page.locator('#training-interest-form button[type="submit"]').click();
     assert.equal(await page.locator('#training-email-fallback').isVisible(),true);
     const href=await page.locator('#training-email-link').getAttribute('href');
-    assert.ok(href?.startsWith('mailto:lippifintech@igormarchetti.me?'));
+    assert.ok(href?.startsWith('mailto:lippi@igormarchetti.me?'));
     const parsed=new URL(href);
     assert.ok(parsed.searchParams.get('body')?.length>80);
     assert.ok(parsed.searchParams.get('subject')?.trim());

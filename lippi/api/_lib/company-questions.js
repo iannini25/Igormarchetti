@@ -34,7 +34,7 @@ export const companyQuestions = [
   ],
   [
     "problem",
-    "Which challenge most needs attention?",
+    "Which governance, risk or compliance problem are you facing?",
     [
       "Risk ownership",
       "Regulatory requirements",
@@ -150,7 +150,7 @@ export const combinedQuestions = [
   ],
   [
     "problem",
-    "Which challenge most needs attention?",
+    "Which governance, risk or compliance problem are you facing?",
     [
       "Risk ownership",
       "Regulatory requirements",

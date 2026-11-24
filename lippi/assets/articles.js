@@ -17,7 +17,7 @@
     note.textContent = tr('Newsletter emails are currently available in English, Portuguese and Spanish. The website can also be viewed in Italian.');
     languageSelect.insertAdjacentElement('afterend',note);
   }
-  const noticeVersion = '2026-11-18';
+  const noticeVersion = '2026-11-24';
   let busy = false;
   let registrationMode = 'checking';
   let pendingDraftPayload = null;
@@ -47,11 +47,11 @@
       tr('Please add me to the Lippi newsletter list.'), '',
       tr('Email address:') + ' ' + payload.email,
       tr('Preferred language: ') + language, '',
-      tr('I agree to receive Lippi articles and regulatory updates by email. I can withdraw my consent at any time by emailing lippifintech@igormarchetti.me.'),
+      tr('I agree to receive Lippi articles and regulatory updates by email. I can withdraw my consent at any time by emailing lippi@igormarchetti.me.'),
       tr('Consent notice version:') + ' ' + noticeVersion, '',
       tr('Thank you.')
     ].join('\n');
-    emailDraft.href = `mailto:lippifintech@igormarchetti.me?subject=${encodeURIComponent(tr('Lippi newsletter request'))}&body=${encodeURIComponent(body)}`;
+    emailDraft.href = `mailto:lippi@igormarchetti.me?subject=${encodeURIComponent(tr('Lippi newsletter request'))}&body=${encodeURIComponent(body)}`;
     return true;
   };
   const prepareEmail = payload => {

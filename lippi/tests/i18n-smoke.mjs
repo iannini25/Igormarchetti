@@ -95,7 +95,7 @@ const articleHtml = read('articles.html')
   .replace(/<!--[\s\S]*?-->/g,'');
 const articleNames = new Set([
   'English','Português','Español','Lippi',
-  footerEmail,'lippifintech@igormarchetti.me','LinkedIn ↗',
+  footerEmail,'LinkedIn ↗',
   '© 2026 Igor Marchetti · Lippi'
 ]);
 const articleText = new Set(articleHtml.split(/<[^>]+>/).map(text=>text
@@ -212,7 +212,7 @@ new Script(independentScript[1],{filename:'independence-inline'});
 // Public homepage and training copy must never fall back to untranslated English.
 // Names, brand marks, email addresses and qualifications intentionally remain unchanged.
 const unchangedNames = new Set([
- 'Igor Marchetti Lippi',footerEmail,'lippifintech@igormarchetti.me',
+ 'Igor Marchetti Lippi',footerEmail,
  'Fiserv / AIB Merchant Services','Elavon / U.S. Bank',
  'J.P. Morgan Merchant Services','Worldpay & Barclaycard',
  'Planet','Tyl by NatWest',
@@ -268,13 +268,13 @@ for(const [language,i] of [['en',-1],['pt',0],['es',1],['it',2]]) {
   assert.ok(draft.body.includes(tr('This is an enquiry about the paid pilot; it does not confirm a booking or price.')),
     language+' email disclaimer did not localize');
   assert.ok(draft.body.includes('founder@example.com'),'Contact email missing from generated draft');
-  assert.ok(draft.mailto.startsWith('mailto:lippifintech@igormarchetti.me?subject='),
+  assert.ok(draft.mailto.startsWith('mailto:lippi@igormarchetti.me?subject='),
     language+' email link missing');
 }
 const newsletter = read('assets/articles.js');
 for(const key of [
   'Please add me to the Lippi newsletter list.',
-  'I agree to receive Lippi articles and regulatory updates by email. I can withdraw my consent at any time by emailing lippifintech@igormarchetti.me.',
+  'I agree to receive Lippi articles and regulatory updates by email. I can withdraw my consent at any time by emailing lippi@igormarchetti.me.',
   'Consent notice version:','Lippi newsletter request'
 ]) {
   assert.equal(sharedCopy[key]?.length,3,'Newsletter draft untranslated: '+key);

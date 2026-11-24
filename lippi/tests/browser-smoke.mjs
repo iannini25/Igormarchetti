@@ -175,7 +175,7 @@ async function checkPage(context,route,lang,htmlLang,device) {
       await page.locator('#enquiry-form button[type="submit"]').click();
       const email = new URL(await page.locator('#send-email').getAttribute('href'));
       assert.equal(email.protocol,'mailto:');
-      assert.equal(email.pathname,'lippifintech@igormarchetti.me');
+      assert.equal(email.pathname,'lippi@igormarchetti.me');
       assert.ok(email.searchParams.get('body').includes('Example & test'));
     }
     if (route === '/training.html') {

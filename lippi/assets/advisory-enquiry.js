@@ -2,7 +2,7 @@
   const form = document.getElementById('enquiry-form');
   const enquiry = document.getElementById('enquiry');
   const message = document.getElementById('mail');
-  const recipient = 'lippifintech@igormarchetti.me';
+  const recipient = 'lippi@igormarchetti.me';
   const translate = key => window.LippiI18n?.translate(key) || key;
 
   function renderEmail() {
