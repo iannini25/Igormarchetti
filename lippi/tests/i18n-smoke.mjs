@@ -213,7 +213,7 @@ new Script(independentScript[1],{filename:'independence-inline'});
 // Public homepage and training copy must never fall back to untranslated English.
 // Names, brand marks, email addresses and qualifications intentionally remain unchanged.
 const unchangedNames = new Set([
- 'Igor Marchetti Lippi',footerEmail,
+ 'Igor Marchetti Azevedo','Igor Marchetti Lippi',footerEmail,
  'Fiserv / AIB Merchant Services','Elavon / U.S. Bank',
  'J.P. Morgan Merchant Services','Worldpay & Barclaycard',
  'Planet','Tyl by NatWest',
