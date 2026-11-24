@@ -414,28 +414,92 @@ section{padding:104px 0}
 @media(max-width:760px){.pilot-hero,.pilot-grid{grid-template-columns:minmax(0,1fr)}.pilot-hero{gap:24px}.pilot-portrait{justify-self:start;display:flex;align-items:center;gap:14px;max-width:none}.pilot-portrait img{width:68px;height:68px;border-radius:50%;object-fit:cover}.pilot-portrait figcaption{margin:0}.pilot-feedback{display:block}.pilot-feedback a{margin-top:6px}.pilot-grid{gap:24px}}
 
 </style>
+<style id="three-home-blocks">
+body{background:#f3f7f6}
+.three-blocks{max-width:1180px;margin:auto;padding:clamp(14px,2.5vw,32px) clamp(12px,2.6vw,32px);display:grid;gap:clamp(14px,1.7vw,24px)}
+.three-blocks>.home-block{border-radius:20px;border:1px solid #cbdad5;overflow:hidden;scroll-margin-top:24px}
+.three-blocks>.hero{padding:0;border-color:#173b43}
+.three-blocks .home-block>.wrap{max-width:none;padding:clamp(22px,3.8vw,50px);width:100%}
+.three-blocks #pilot,.three-blocks #feedback{padding:0}
+.three-blocks .block-number{display:block;color:#12695f;font:700 .92rem/1.3 var(--display);font-variant-numeric:tabular-nums;letter-spacing:.09em;margin-bottom:12px}
+.three-blocks .hero .block-number{color:#a6e5d1}
+.three-blocks .pilot-hero{column-gap:clamp(22px,5vw,62px);row-gap:28px}
+.three-blocks .hero h1{margin:0 0 14px}.three-blocks .pilot-portrait{max-width:180px}
+.three-blocks #credentials{grid-column:1/-1;border-top:1px solid #42616b;padding:20px 0 0;width:100%;color:#fff}
+.three-blocks #credentials-heading{font:650 clamp(1.1rem,2vw,1.4rem)/1.32 var(--display);color:#fff;letter-spacing:-.025em;margin:0;text-wrap:pretty}
+.three-blocks .hero #credentials .proof-line{color:#d1e5df;font-size:1rem;margin:8px 0 0;max-width:78ch}
+.three-blocks .career-detail summary{color:#a6e5d1;font-size:1rem;font-weight:650;cursor:pointer;min-height:44px;align-content:center;padding:8px 0}
+.three-blocks #credentials .credentials-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));margin:12px 0;gap:12px}
+.three-blocks #credentials article{color:#ecf7f4;background:#153747;border:1px solid #42616b;padding:16px;border-radius:10px;box-shadow:none}
+.three-blocks #credentials article h3{color:#fff;font-size:1.05rem}
+.three-blocks #credentials article p,.three-blocks #credentials article ul{color:#d1e5df;font-size:1rem}
+.three-blocks #credentials .fine{color:#c6dcd7;margin:10px 0 0;font-size:.88rem}
+.three-blocks #pilot{border-top:4px solid #137c75}
+.three-blocks #feedback{background:#e9f4ef}
+.three-blocks .pilot-feedback{background:none;border:none;border-radius:0;padding:0}
+.three-blocks #feedback h2{font-size:clamp(1.55rem,2.8vw,2.25rem)}
+@media(max-width:760px){.three-blocks .pilot-hero{row-gap:18px}.three-blocks .pilot-portrait{max-width:none}.three-blocks #credentials .credentials-grid{grid-template-columns:1fr}.three-blocks .home-block>.wrap{padding:22px 18px}.three-blocks .hero h1{font-size:clamp(2rem,7.8vw,2.7rem)}}
+</style>
+<style id="profile-placement">
+.three-blocks .pilot-hero{grid-template-columns:minmax(0,1.2fr) minmax(275px,.88fr);align-items:start}
+.three-blocks .profile-column{min-width:0;background:#143543;border:1px solid #40616b;border-radius:15px;padding:clamp(17px,2.3vw,28px)}
+.three-blocks .profile-link-card{display:block;border-radius:8px;color:#fff;text-decoration:none}
+.three-blocks .profile-link-card .pilot-portrait{display:flex;align-items:center;gap:15px;max-width:none;width:100%;margin:0}
+.three-blocks .profile-link-card .pilot-portrait img{flex:none;width:clamp(64px,6vw,80px);height:clamp(64px,6vw,80px);border:1px solid #80aaab;border-radius:50%;object-fit:cover}
+.three-blocks .profile-link-card figcaption{margin:0;min-width:0}
+.three-blocks .profile-link-card strong{color:#fff;text-decoration:underline;text-decoration-color:#a6e5d1;text-underline-offset:4px}
+.three-blocks .profile-link-card:hover strong,.three-blocks .profile-link-card:focus-visible strong{color:#a6e5d1}
+.three-blocks .profile-column #credentials{margin-top:18px;padding-top:16px}
+.three-blocks .profile-column #credentials-heading{font-size:1.16rem;line-height:1.35;letter-spacing:-.015em}
+.three-blocks .profile-column #credentials .proof-line{font-size:1rem;line-height:1.52}
+.three-blocks .profile-column #credentials .credentials-grid{grid-template-columns:minmax(0,1fr);gap:10px}
+.three-blocks #feedback{border-top:4px solid #137c75}
+.three-blocks #feedback h2{font-size:clamp(1.95rem,3vw,2.7rem);line-height:1.13;margin:0 0 14px;max-width:25ch;color:var(--navy)}
+.three-blocks #feedback .pilot-text-link{padding:10px 18px;min-height:46px;border:1px solid #106b63;border-radius:999px;font:700 1rem/1.4 var(--display);text-decoration:none}
+.three-blocks #feedback .pilot-text-link:hover,.three-blocks #feedback .pilot-text-link:focus-visible{text-decoration:underline;text-underline-offset:4px}
+@media(max-width:760px){.three-blocks .pilot-hero{grid-template-columns:minmax(0,1fr)}.three-blocks .profile-column{padding:16px}.three-blocks .profile-column #credentials{margin-top:13px;padding-top:13px}}
+</style>
 </head>
 <body><a class="skip-link" href="#main">Skip to main content</a><div data-site-header data-current-page="home"><header class="lippi-header"><div class="lippi-header-inner" role="navigation" aria-label="Main navigation"><a class="lippi-brand" href="/" aria-label="Lippi home"><img src="/logo.svg" alt="Lippi" width="1120" height="280"></a><a class="training-shortcut" href="/training.html">Training</a><a class="lippi-appointment" href="https://calendly.com/igormarchettilippi/20min" target="_blank" rel="noopener noreferrer" data-key="appointment">Book an appointment</a><button class="lippi-menu-button" type="button" aria-expanded="false" aria-controls="lippi-navigation"><span class="lippi-menu-icon" aria-hidden="true"></span>Menu</button><div class="lippi-nav" id="lippi-navigation"><a href="/independence.html#scope">Advisory</a><a href="/regulations.html">Regulatory</a><a href="/articles.html">Articles</a><a href="#feedback">Workshop feedback</a></div></div></header></div><!-- /site-header -->
-<main id="main">
-<header class="hero" id="top">
+<main id="main" class="three-blocks">
+<header class="hero home-block" id="top" aria-labelledby="audience-heading">
   <div class="wrap pilot-hero" id="about">
     <div>
-      <h1>Who do you work with?</h1>
+      <h1 id="audience-heading"><span class="block-number" aria-hidden="true">01</span> Who do you work with?</h1>
       <p class="pilot-lead">I train founders, CEOs and teams at small and mid-sized tech companies, including fintechs, expanding into Brazil, the European Union or the UK.</p>
       <p class="pilot-bio">I’m Igor Marchetti Lippi. In my Saturday workshops, I share what I’ve learned over 25 years in payments, technology and risk across these markets.</p>
       <a class="pilot-button" href="#pilot">Explore the Saturday workshops</a>
     </div>
-    <figure class="pilot-portrait">
-      <img src="/assets/igor-marchetti-portrait.png" alt="Igor Marchetti Lippi" width="420" height="420">
+    <div class="profile-column">
+      <a class="profile-link-card" href="https://www.linkedin.com/in/igormarchetti/" target="_blank" rel="noopener noreferrer">
+        <figure class="pilot-portrait">
+      <img src="/assets/igor-marchetti-portrait.png" alt="" width="420" height="420">
       <figcaption><strong>Igor Marchetti Lippi</strong><span>Lippi founder · Dublin, Ireland</span></figcaption>
     </figure>
+      </a>
+      <div class="profile-proof" id="credentials">
+        <h2 id="credentials-heading">Corporate experience. Practical support for your team.</h2>
+        <p class="proof-line">At AIB Merchant Services / Fiserv, I spent nearly seven years working across credit, operational, regulatory and enterprise risk and controls.</p>
+        <details class="career-detail">
+          <summary>Explore my experience and qualifications</summary>
+          <div class="credentials-grid">
+<article><h3>Nearly 7 years at AIBMS / Fiserv</h3><p>2019 to 2026: Credit, Operational, Regulatory, and then Enterprise Risk and Controls. Risk and control assessments, outsourcing oversight, key risk indicators and senior management / Board reporting.</p></article>
+<article><h3>Payments &amp; technology</h3><ul class="experience-companies"><li>AIB Merchant Services (Fiserv)</li><li>Elavon (U.S. Bank)</li><li>Tyl by NatWest</li><li>J.P. Morgan</li><li>Worldpay</li><li>Barclaycard</li><li>Planet</li></ul></article>
+<article><h3>Experience in Brazil</h3><ul class="experience-companies"><li>CSU CardSystem</li><li>Orbitall</li><li>C&amp;A</li></ul><p>My work in Brazil included card processing and a consulting assignment for C&amp;A.</p></article>
+<article><h3>Relevant postgraduate study</h3><p>MSc Financial Services, UCD through IOB, First Class Honours.<br>MSc Management of Information Systems, Trinity College Dublin.</p></article>
+</div>
+
+<p class="fine">These are personal roles and assignments, not Lippi client engagements or endorsements.</p>
+        </details>
+      </div>
+    </div>
   </div>
 </header>
-<section id="pilot" aria-labelledby="pilot-title">
+<section class="home-block" id="pilot" aria-labelledby="pilot-title">
   <div class="wrap pilot-grid">
     <div>
-      <h2 id="pilot-title">Saturday GRC workshops for market expansion</h2>
-      <p>I offer a live online pilot in governance, risk and compliance (GRC). Using a fictional payments launch between Brazil and the EU, your team practises deciding which permissions to check, who owns each risk and what evidence a partner needs. UK comparisons are available.</p>
+      <h2 id="pilot-title"><span class="block-number" aria-hidden="true">02</span> Saturday GRC workshops for market expansion</h2>
+      <p>I offer a live online pilot in governance, risk and compliance (GRC). Using a fictional payments launch between Brazil and the EU, your team practices deciding which permissions to check, who owns each risk and what evidence a partner needs. UK comparisons are available.</p>
       <a class="pilot-button" href="/training.html#course-contents">View the training programme</a>
     </div>
     <div class="pilot-questions">
@@ -445,26 +509,14 @@ section{padding:104px 0}
     </div>
   </div>
 </section>
-<section id="feedback" aria-labelledby="feedback-title">
+<section class="home-block" id="feedback" aria-labelledby="feedback-title">
   <div class="wrap"><div class="pilot-feedback">
-    <div><h2 id="feedback-title">Which market-entry challenge should we practise?</h2>
+    <div><h2 id="feedback-title"><span class="block-number" aria-hidden="true">03</span> Which market-entry challenge should we practice?</h2>
     <p>What governance, risk or compliance question is holding up your expansion into Brazil, the EU or the UK? I’ll use your feedback to choose workshop topics and tailor the exercises.</p></div>
     <a class="pilot-text-link" href="/survey.html">Take the 3-minute survey</a>
   </div></div>
 </section>
-<section class="credentials-summary" id="credentials" aria-labelledby="credentials-heading">
-<div class="wrap">
-<h2 id="credentials-heading">Corporate experience. Practical support for your team.</h2>
-<div class="credentials-grid">
-<article><h3>Nearly 7 years at AIBMS / Fiserv</h3><p>2019 to 2026: Credit, Operational, Regulatory, and then Enterprise Risk and Controls. Risk and control assessments, outsourcing oversight, key risk indicators and senior management / Board reporting.</p></article>
-<article><h3>Payments &amp; technology</h3><ul class="experience-companies"><li>AIB Merchant Services (Fiserv)</li><li>Elavon (U.S. Bank)</li><li>Tyl by NatWest</li><li>J.P. Morgan</li><li>Worldpay</li><li>Barclaycard</li><li>Planet</li></ul></article>
-<article><h3>Experience in Brazil</h3><ul class="experience-companies"><li>CSU CardSystem</li><li>Orbitall</li><li>C&amp;A</li></ul><p>My work in Brazil included card processing and a consulting assignment for C&amp;A.</p></article>
-<article><h3>Relevant postgraduate study</h3><p>MSc Financial Services, UCD through IOB, First Class Honours.<br>MSc Management of Information Systems, Trinity College Dublin.</p></article>
-</div>
 
-<p class="fine">These are personal roles and assignments, not Lippi client engagements or endorsements.</p>
-</div>
-</section>
 </main><div data-site-footer>
 <footer class="lippi-footer"><div class="lippi-footer-inner">
 <div class="lippi-footer-top">
