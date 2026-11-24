@@ -462,21 +462,31 @@ body{background:#f3f7f6}
 <style id="lippi-introduction-style">
 .career-availability{
   display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;
-  gap:clamp(20px,4vw,52px);padding:clamp(22px,3.8vw,50px);
+  grid-template-areas:"intro qr" "actions qr";gap:16px clamp(20px,4vw,52px);padding:clamp(22px,3.8vw,50px);
   background:#e0f2ea;color:#12372f;border:1px solid #b5d6c8;border-radius:20px
 }
 .career-status{display:flex;align-items:center;gap:.6rem;margin:0;color:#135b46;font:700 .95rem/1.4 var(--display)}
 .career-status::before{content:"";width:.65rem;height:.65rem;flex:none;border-radius:50%;background:#167353}
 .career-availability h1{margin:.7rem 0;max-width:28ch;color:#102f33;font:650 clamp(1.85rem,3.4vw,3rem)/1.09 var(--display);letter-spacing:-.035em}
 .career-summary{margin:0;max-width:65ch;color:#294840;font-size:1rem;line-height:1.55}
-.career-actions{display:flex;flex-direction:column;align-items:center}
+.career-intro{grid-area:intro}
+.career-actions{grid-area:actions;display:flex;align-items:center;flex-wrap:wrap;gap:4px 18px}
+.career-qr{grid-area:qr;justify-self:center;display:grid;justify-items:center;gap:4px;color:#164f43;font-weight:650;text-decoration:underline;text-underline-offset:4px}
+.career-qr svg{display:block;width:148px;height:auto;border-radius:6px;box-shadow:0 0 0 1px #b5d6c8}
+.career-qr:focus-visible{outline:3px solid #164f43;outline-offset:5px}
 .career-download{display:inline-flex;align-items:center;justify-content:center;gap:.65rem;min-height:48px;padding:.8rem 1.35rem;border-radius:999px;background:#104d42;color:#fff;font:700 1rem/1.4 var(--display);text-align:center}
 .career-download:hover,.career-download:focus-visible{background:#0b3b32;color:#fff}
 .career-download svg{width:1.2em;height:1.2em;flex:none}
 .career-profile{display:inline-flex;align-items:center;min-height:44px;color:#164f43;font-weight:650;text-decoration:underline;text-underline-offset:4px}
 @media(max-width:760px){
-  .career-availability{grid-template-columns:minmax(0,1fr);gap:16px}
-  .career-actions{flex-direction:row;flex-wrap:wrap;justify-content:flex-start;gap:4px 18px}
+  .career-availability{grid-template-areas:"intro intro" "actions qr";gap:16px 12px}
+  .career-qr svg{width:111px}
+  .career-actions{align-items:flex-start;flex-direction:column}
+  .career-download{padding-inline:1rem}
+}
+@media(max-width:380px){
+  .career-availability{grid-template-columns:minmax(0,1fr);grid-template-areas:"intro" "actions" "qr"}
+  .career-qr{justify-self:start}
 }
 .lippi-introduction{padding:clamp(14px,2.5vw,28px) clamp(6px,2.4vw,28px) 8px}
 .lippi-introduction h2{margin:0 0 10px;color:var(--navy);font:650 clamp(1.85rem,3.25vw,2.7rem)/1.1 var(--display);letter-spacing:-.035em}
@@ -500,10 +510,10 @@ body{background:#f3f7f6}
 <body><a class="skip-link" href="#main">Skip to main content</a><div data-site-header data-current-page="home"><header class="lippi-header"><div class="lippi-header-inner" role="navigation" aria-label="Main navigation"><a class="lippi-brand" href="/" aria-label="Lippi home"><img src="/logo.svg" alt="Lippi" width="1120" height="280"></a><a class="training-shortcut" href="/training.html">Training</a><a class="lippi-appointment" href="https://calendly.com/igormarchettilippi/20min" target="_blank" rel="noopener noreferrer" data-key="appointment">Book an appointment</a><button class="lippi-menu-button" type="button" aria-expanded="false" aria-controls="lippi-navigation"><span class="lippi-menu-icon" aria-hidden="true"></span>Menu</button><div class="lippi-nav" id="lippi-navigation"><a href="/independence.html#scope">Advisory</a><a href="/regulations.html">Regulatory</a><a href="/articles.html">Articles</a><a href="#feedback">Workshop feedback</a></div></div></header></div><!-- /site-header -->
 <main id="main" class="three-blocks">
 <section class="career-availability" id="top" aria-labelledby="career-heading">
-  <div>
+  <div class="career-intro">
     <p class="career-status">Available immediately</p>
     <h1 id="career-heading">Permanent and interim roles in non-financial risk management</h1>
-    <p class="career-summary">I’m Igor Marchetti Lippi, based in Dublin. I have over 25 years’ experience in payments and technology. At AIB Merchant Services, I assessed controls, monitored risk indicators and reported emerging risks to the board.</p>
+    <p class="career-summary">I’m Igor Marchetti Lippi, based in Dublin. I have over 25 years’ experience in payments, risk and technology. At AIB Merchant Services, I assessed controls, monitored risk indicators and reported emerging risks to the board.</p>
   </div>
   <div class="career-actions">
     <a class="career-download" href="https://igormarchetti.me/Igor_Marchetti_CV.pdf?download=1" download="Igor_Marchetti_Lippi_CV.pdf">
@@ -512,6 +522,41 @@ body{background:#f3f7f6}
     </a>
     <a class="career-profile" href="https://igormarchetti.me/">View my profile</a>
   </div>
+  <a class="career-qr" href="https://www.linkedin.com/in/igormarchetti/" target="_blank" rel="noopener noreferrer" aria-label="Igor Marchetti Lippi on LinkedIn">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 37 37" width="148" height="148" aria-hidden="true" focusable="false" shape-rendering="crispEdges">
+      <rect width="37" height="37" fill="white"/>
+      <path fill="#12372f" d="M4 4h7v1h-7z M12 4h2v1h-2z M15 4h1v1h-1z M17 4h1v1h-1z M20 4h5v1h-5z M26 4h7v1h-7z
+        M4 5h1v1h-1z M10 5h1v1h-1z M12 5h1v1h-1z M15 5h1v1h-1z M18 5h1v1h-1z M20 5h1v1h-1z M22 5h1v1h-1z M26 5h1v1h-1z M32 5h1v1h-1z
+        M4 6h1v1h-1z M6 6h3v1h-3z M10 6h1v1h-1z M13 6h2v1h-2z M16 6h2v1h-2z M19 6h2v1h-2z M22 6h1v1h-1z M26 6h1v1h-1z M28 6h3v1h-3z M32 6h1v1h-1z
+        M4 7h1v1h-1z M6 7h3v1h-3z M10 7h1v1h-1z M12 7h4v1h-4z M17 7h3v1h-3z M21 7h1v1h-1z M26 7h1v1h-1z M28 7h3v1h-3z M32 7h1v1h-1z
+        M4 8h1v1h-1z M6 8h3v1h-3z M10 8h1v1h-1z M15 8h2v1h-2z M18 8h3v1h-3z M23 8h1v1h-1z M26 8h1v1h-1z M28 8h3v1h-3z M32 8h1v1h-1z
+        M4 9h1v1h-1z M10 9h1v1h-1z M14 9h5v1h-5z M20 9h1v1h-1z M22 9h2v1h-2z M26 9h1v1h-1z M32 9h1v1h-1z
+        M4 10h7v1h-7z M12 10h1v1h-1z M14 10h1v1h-1z M16 10h1v1h-1z M18 10h1v1h-1z M20 10h1v1h-1z M22 10h1v1h-1z M24 10h1v1h-1z M26 10h7v1h-7z
+        M12 11h4v1h-4z M19 11h1v1h-1z M21 11h3v1h-3z
+        M4 12h1v1h-1z M6 12h2v1h-2z M9 12h3v1h-3z M16 12h1v1h-1z M18 12h1v1h-1z M21 12h1v1h-1z M26 12h1v1h-1z M29 12h1v1h-1z M31 12h2v1h-2z
+        M4 13h1v1h-1z M6 13h1v1h-1z M8 13h2v1h-2z M11 13h2v1h-2z M14 13h1v1h-1z M18 13h1v1h-1z M20 13h4v1h-4z M25 13h4v1h-4z M32 13h1v1h-1z
+        M4 14h1v1h-1z M6 14h2v1h-2z M10 14h2v1h-2z M16 14h1v1h-1z M20 14h1v1h-1z M22 14h1v1h-1z M24 14h5v1h-5z M30 14h2v1h-2z
+        M9 15h1v1h-1z M11 15h1v1h-1z M13 15h5v1h-5z M20 15h1v1h-1z M22 15h1v1h-1z M24 15h1v1h-1z M26 15h3v1h-3z M32 15h1v1h-1z
+        M6 16h5v1h-5z M13 16h3v1h-3z M17 16h3v1h-3z M21 16h1v1h-1z M23 16h1v1h-1z M29 16h2v1h-2z
+        M5 17h1v1h-1z M8 17h1v1h-1z M13 17h2v1h-2z M19 17h2v1h-2z M23 17h1v1h-1z M26 17h2v1h-2z M30 17h3v1h-3z
+        M7 18h2v1h-2z M10 18h1v1h-1z M12 18h1v1h-1z M15 18h4v1h-4z M23 18h2v1h-2z M27 18h2v1h-2z M30 18h3v1h-3z
+        M4 19h1v1h-1z M6 19h2v1h-2z M11 19h3v1h-3z M16 19h1v1h-1z M19 19h2v1h-2z M27 19h2v1h-2z M31 19h1v1h-1z
+        M4 20h1v1h-1z M8 20h1v1h-1z M10 20h5v1h-5z M16 20h2v1h-2z M19 20h1v1h-1z M22 20h4v1h-4z M28 20h2v1h-2z M31 20h1v1h-1z
+        M5 21h1v1h-1z M7 21h2v1h-2z M11 21h1v1h-1z M13 21h1v1h-1z M19 21h1v1h-1z M21 21h1v1h-1z M24 21h1v1h-1z M27 21h1v1h-1z M29 21h3v1h-3z
+        M4 22h1v1h-1z M6 22h2v1h-2z M9 22h2v1h-2z M15 22h2v1h-2z M19 22h1v1h-1z M21 22h1v1h-1z M26 22h2v1h-2z M30 22h1v1h-1z
+        M6 23h1v1h-1z M8 23h2v1h-2z M11 23h4v1h-4z M19 23h1v1h-1z M21 23h1v1h-1z M26 23h1v1h-1z M30 23h1v1h-1z
+        M5 24h4v1h-4z M10 24h1v1h-1z M12 24h1v1h-1z M14 24h1v1h-1z M16 24h1v1h-1z M21 24h1v1h-1z M23 24h8v1h-8z
+        M12 25h1v1h-1z M16 25h2v1h-2z M20 25h3v1h-3z M24 25h1v1h-1z M28 25h5v1h-5z
+        M4 26h7v1h-7z M12 26h4v1h-4z M17 26h1v1h-1z M20 26h1v1h-1z M22 26h3v1h-3z M26 26h1v1h-1z M28 26h2v1h-2z M31 26h1v1h-1z
+        M4 27h1v1h-1z M10 27h1v1h-1z M12 27h2v1h-2z M16 27h4v1h-4z M22 27h1v1h-1z M24 27h1v1h-1z M28 27h2v1h-2z
+        M4 28h1v1h-1z M6 28h3v1h-3z M10 28h1v1h-1z M13 28h4v1h-4z M21 28h1v1h-1z M24 28h5v1h-5z M30 28h3v1h-3z
+        M4 29h1v1h-1z M6 29h3v1h-3z M10 29h1v1h-1z M12 29h3v1h-3z M18 29h3v1h-3z M23 29h3v1h-3z M28 29h2v1h-2z M32 29h1v1h-1z
+        M4 30h1v1h-1z M6 30h3v1h-3z M10 30h1v1h-1z M12 30h2v1h-2z M17 30h2v1h-2z M27 30h1v1h-1z M30 30h1v1h-1z M32 30h1v1h-1z
+        M4 31h1v1h-1z M10 31h1v1h-1z M15 31h4v1h-4z M20 31h1v1h-1z M24 31h4v1h-4z M29 31h1v1h-1z M31 31h1v1h-1z
+        M4 32h7v1h-7z M12 32h1v1h-1z M18 32h1v1h-1z M22 32h5v1h-5z M29 32h1v1h-1z M31 32h1v1h-1z"/>
+    </svg>
+    <span>LinkedIn</span>
+  </a>
 </section>
 <section class="lippi-introduction" aria-labelledby="lippi-intro-heading">
   <h2 id="lippi-intro-heading">Risk advisory for tech and financial services</h2>
