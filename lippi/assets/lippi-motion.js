@@ -263,8 +263,8 @@
   }
 
   var REGULATIONS = ['EU AI Act', 'GDPR', 'DORA', 'PSD2', 'PSD3', 'PSR', 'MiCA', 'AML/CFT', 'KYC', 'CDD', 'LGPD', 'PCI DSS', 'SOC 2'];
-  function addRegulationMarquee() {
-    var hero = document.querySelector('main > header.hero');
+  function addRegulationMarquee(host) {
+    var hero = host || document.querySelector('main > header.hero');
     if (!hero || document.querySelector('.lp-marquee')) return;
     var band = document.createElement('div');
     band.className = 'lp-marquee';
@@ -303,7 +303,11 @@
     var seen = new Set();
     var groups = homeEffects ? REVEAL_GROUPS.concat([
       '#resources .copy', '.menu-group > h3', '.menu-group > .topic-row',
-      '.steps > li', '#enquiry > summary'
+      '.steps > li', '#enquiry > summary',
+      '.pilot-hero > div:first-child > *', '.profile-link-card', '#credentials-heading',
+      '#credentials .proof-line', '#credentials .career-detail > summary',
+      '.pilot-grid > div:first-child > *', '.pilot-questions > details',
+      '.pilot-feedback > div > *', '.pilot-feedback > a'
     ]) : REVEAL_GROUPS;
     groups.forEach(function (selector) {
       document.querySelectorAll(selector).forEach(function (el) {
@@ -434,6 +438,11 @@
 
   function init() {
     if (homeEffects) {
+      var carousel = document.querySelector('[data-home-carousel]');
+      if (carousel) {
+        addRegulationMarquee(carousel.querySelector('.carousel-strip'));
+        carousel.hidden = false;
+      }
       addPortraitSeal();
       setUpReveals();
       animateAccordions();
