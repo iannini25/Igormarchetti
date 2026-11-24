@@ -15,7 +15,7 @@ const appointment = `<a class="lippi-appointment" href="${bookingUrl}" target="_
 function header(active) {
   const home = active === 'home';
   const links = home
-    ? [['advisory','#services','Advisory'], ...navigation.slice(2)]
+    ? [['advisory','/independence.html#scope','Advisory'], ...navigation.slice(2)]
     : navigation;
   const items = links.map(([key,url,title]) => `<a href="${url}"${key===active?' aria-current="page"':''}>${title}</a>`).join('');
   const survey = `<a class="lippi-book" href="/survey.html">${home ? 'Complete the survey' : 'Take the company survey'}</a>`;
