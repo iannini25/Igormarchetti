@@ -46,7 +46,7 @@
 .hero .hero-grid {
   display: grid;
   grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
-  grid-template-areas: "intro founder" "offers offers";
+  grid-template-areas: "intro founder" "offers founder";
   align-items: start;
   gap: var(--home-gap);
 }
@@ -57,7 +57,7 @@
 .hero .founder-profile { grid-area: founder; max-width: none; margin: 0; }
 .hero .hero-offers {
   grid-area: offers;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: minmax(0, 1fr);
   gap: var(--home-gap);
   margin: 0;
 }
