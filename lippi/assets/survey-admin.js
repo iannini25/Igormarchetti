@@ -27,7 +27,10 @@
      }
      const brief=document.createElement('pre');
      brief.style.whiteSpace='pre-wrap';
-     brief.textContent=Object.entries(answers).filter(([,value])=>value!==null).map(([key,value])=>key+': '+value).join('\n');
+     brief.textContent=Object.entries(answers).filter(([,value])=>value!==null).map(([key,value])=>{
+       const label = key === 'budget' && typeof value === 'string' ? value.replace(/(\d)\u2013(?=\d)/g, '$1-') : value;
+       return key + ': ' + label;
+     }).join('\n');
      article.append(brief);
      responses.append(article);
      continue;

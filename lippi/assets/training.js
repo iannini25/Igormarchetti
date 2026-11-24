@@ -1,7 +1,7 @@
 const enquiryLabels = {
   brazil: 'Brazil', ireland: 'Ireland', portugal: 'Portugal', uk: 'United Kingdom', unsure: 'Still exploring / not sure yet',
   licensing: 'Licensing and market choice', grc: 'GRC in practice', regulation: 'The main regulations', tools: 'RegTech, cybersecurity and AI tools', all: 'All four workshops',
-  under100: 'Less than EUR 100', '100_199': 'EUR 100–199', '200_299': 'EUR 200–299', '300_499': 'EUR 300–499', '500plus': 'EUR 500 or more', no_budget: 'No budget currently', not_interested: 'Not interested',
+  under100: 'Less than EUR 100', '100_199': 'EUR 100-199', '200_299': 'EUR 200-299', '300_499': 'EUR 300-499', '500plus': 'EUR 500 or more', no_budget: 'No budget currently', not_interested: 'Not interested',
   online: 'Live online', hybrid: 'Hybrid', in_person: 'In person', english: 'English', portuguese: 'Portuguese'
 };
 

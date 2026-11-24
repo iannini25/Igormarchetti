@@ -9,7 +9,7 @@
   const labels = {
     brazil: 'Brazil', ireland: 'Ireland', portugal: 'Portugal', uk: 'United Kingdom', unsure: 'Not sure yet',
     licensing: 'Licensing and market entry', grc: 'Governance, risk and controls', regulation: 'Main regulations', tools: 'RegTech, cybersecurity and AI tools', all: 'All four workshops',
-    under100: 'Under €100', '100_199': '€100–199', '200_299': '€200–299', '300_499': '€300–499', '500plus': '€500 or more', no_budget: 'No budget currently', not_interested: 'Not interested',
+    under100: 'Under €100', '100_199': '€100-199', '200_299': '€200-299', '300_499': '€300-499', '500plus': '€500 or more', no_budget: 'No budget currently', not_interested: 'Not interested',
     online: 'Online', hybrid: 'Hybrid', in_person: 'In person', english: 'English', portuguese: 'Portuguese'
   };
   const fields = [
@@ -22,8 +22,8 @@
   const display = (field, value) => {
     if (field === 'target_markets') return (value || []).map(item => labels[item] || item).join(', ');
     if (field === 'contact_opt_in') return value === true ? 'Yes' : 'No';
-    if (['priority', 'budget', 'format', 'language'].includes(field)) return labels[value] || value || '—';
-    return value || '—';
+    if (['priority', 'budget', 'format', 'language'].includes(field)) return labels[value] || value || '-';
+    return value || '-';
   };
   async function api(path) {
     const response = await fetch('/api/training-interest/admin?path=' + encodeURIComponent(path), {

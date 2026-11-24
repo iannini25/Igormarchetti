@@ -343,7 +343,7 @@ test('email enquiries retain all answers with a fixed destination and encoded bo
   assert.equal(url.searchParams.get('subject'), 'Lippi paid training pilot enquiry');
   assert.deepEqual([...url.searchParams.keys()], ['subject', 'body']);
   assert.equal(url.searchParams.get('body'), draft.body);
-  for (const answer of ['Brazil, Ireland', 'RegTech, cybersecurity and AI tools', 'EUR 200–299', 'Live online', 'English', 'Ireland', 'Payments & e-money', payload.comment, 'Dublin event', 'Contact me about pilot dates, format and pricing: No']) assert.ok(draft.body.includes(answer), answer);
+  for (const answer of ['Brazil, Ireland', 'RegTech, cybersecurity and AI tools', 'EUR 200-299', 'Live online', 'English', 'Ireland', 'Payments & e-money', payload.comment, 'Dublin event', 'Contact me about pilot dates, format and pricing: No']) assert.ok(draft.body.includes(answer), answer);
   assert.equal(draft.body.includes('omit-me@example.com'), false);
   assert.equal(/answers have been saved|response received/i.test(draft.body), false);
   const optedIn = buildTrainingEmail({...payload, contact_opt_in: true, email: 'reply@example.com'});
