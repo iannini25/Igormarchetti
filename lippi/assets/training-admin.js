@@ -55,7 +55,7 @@
     for (const row of data.responses) {
       const article = document.createElement('article'); article.className = 'card';
       const metadata = document.createElement('p'); metadata.className = 'meta';
-      metadata.textContent = new Date(row.created_at).toLocaleString() + ' · Reference ' + row.id;
+      metadata.textContent = new Date(row.created_at).toLocaleString('en-GB') + ' · Reference ' + row.id;
       const list = document.createElement('dl');
       for (const [field, label] of fields) {
         if (field === 'email' && !row.contact_opt_in) continue;

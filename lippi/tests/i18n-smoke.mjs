@@ -45,7 +45,7 @@ for (const page of [
   'index.html','training.html','regulations.html','articles.html',
   'independence.html','ai-governance-fintech-web-summit-2026.html'
 ]) {
-  assert.match(read(page),/<html\b[^>]*\blang="en"/i,'English must remain the HTML default on '+page);
+  assert.match(read(page),/<html\b[^>]*\blang="en-GB"/i,'British English must remain the HTML default on '+page);
 }
 const independenceGuardrails = {
   en: {approval:/in writing/i,scope:/fractional CRO roles/i},

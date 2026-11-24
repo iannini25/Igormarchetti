@@ -74,7 +74,7 @@
       const response=await fetch('/api/founder-survey/health',{cache:'no-store',signal:AbortSignal.timeout(10000)});
       const data=await response.json();
       if (!response.ok || data.ready!==true || data.survey_version!=='founder-v1') throw new Error();
-      submit.disabled=false; say('Ready when you are. Submit when you are ready.');
+      submit.disabled=false; say('The survey is ready.');
     } catch { say('The survey is temporarily unavailable. Please refresh this page and try again later.',true); }
   }
   form.addEventListener('submit',async event=> {

@@ -14,7 +14,7 @@
   document.getElementById('count').textContent += ' · '+data.distinct_company_names+' distinct company names in retained responses';
   for(const row of data.responses){
    const article=document.createElement('article');article.className='card';
-   const meta=document.createElement('p');meta.className='response-date';meta.textContent=new Date(row.created_at).toLocaleString()+' · Reference '+row.id;article.append(meta);
+   const meta=document.createElement('p');meta.className='response-date';meta.textContent=new Date(row.created_at).toLocaleString('en-GB')+' · Reference '+row.id;article.append(meta);
    if (['company-v2','company-v3','company-v4'].includes(row.survey_version)) {
      const {identity, ...answers} = Object.assign({}, ...[row.milestone_risk,row.control_gap,row.support_needed].map(value=>JSON.parse(value)));
      const heading=document.createElement('h2');

@@ -37,7 +37,7 @@
     registrationMode = 'email';
     button.disabled = false;
     button.textContent = tr('Prepare email request');
-    update(message || 'Online signup is temporarily unavailable. Try again later or use the form to request a subscription by email.');
+    update(message || 'Online registration is temporarily unavailable. Try again later or use the form to request a subscription by email.');
   };
   const renderEmail = payload => {
     const language = {en:'English', pt:'Português', es:'Español'}[payload.language];
@@ -116,7 +116,7 @@
         throw Object.assign(new Error(result.error || 'We could not save your request. Please try again or email Igor Marchetti Lippi.'), {httpStatus:response.status});
       }
       form.hidden = true;
-      update('Thank you. Your newsletter signup has been saved.', 'success');
+      update('Thank you. We’ve recorded your newsletter registration.', 'success');
       status.setAttribute('tabindex', '-1');
       status.focus();
     } catch (error) {

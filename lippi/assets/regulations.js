@@ -68,7 +68,7 @@
     search.placeholder = labels.placeholder;
     currentLanguage = lang;
     language.value = lang;
-    document.documentElement.lang = {en:'en',pt:'pt-BR',es:'es',it:'it'}[lang];
+    document.documentElement.lang = {en:'en-GB',pt:'pt-BR',es:'es',it:'it'}[lang];
     document.title = labels.title + ' | Lippi';
     document.querySelector('meta[name="description"]')?.setAttribute('content',labels.intro);
     document.querySelector('meta[property="og:title"]')?.setAttribute('content',document.title);

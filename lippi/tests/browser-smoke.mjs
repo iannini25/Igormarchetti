@@ -10,7 +10,7 @@ const pages = [
   '/', '/training.html', '/regulations.html', '/articles.html',
   '/independence.html', '/ai-governance-fintech-web-summit-2026.html', '/survey.html'
 ];
-const locales = { en:'en', pt:'pt-BR', es:'es', it:'it' };
+const locales = { en:'en-GB', pt:'pt-BR', es:'es', it:'it' };
 const publicPaths = new Set(pages);
 const englishHeadings = new Map();
 const englishMetadata = new Map();

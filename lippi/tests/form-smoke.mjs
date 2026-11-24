@@ -17,7 +17,7 @@ const response = (route,body,status=200) => route.fulfill({
 });
 async function localeReady(page,locale) {
   await page.waitForFunction(expected => document.documentElement.lang===expected,
-    locale==='pt'?'pt-BR':locale,{timeout:15000});
+    ({en:'en-GB',pt:'pt-BR'})[locale] || locale,{timeout:15000});
 }
 async function apiOffline(page) {
   // Never contact a backend during this test. More specific mocks override this.
