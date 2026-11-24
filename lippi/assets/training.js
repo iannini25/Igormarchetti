@@ -10,7 +10,7 @@ export function buildTrainingEmail(payload, translate = text => text) {
   // The public fallback form passes the active website translator instead.
   const label = value => translate(enquiryLabels[value] || String(value || 'Not specified'));
   const lines = [
-    translate('Hello Igor,'), '', translate('Here are my interests in the Lippi paid training pilot:'), '',
+    translate('Hello Igor Marchetti Lippi,'), '', translate('Here are my interests in the Lippi paid training pilot:'), '',
     translate('Target markets: ') + payload.target_markets.map(label).join(', '),
     translate('Workshop priority: ') + label(payload.priority),
     translate('Budget per attendee for all four two-hour online workshops: ') + label(payload.budget),

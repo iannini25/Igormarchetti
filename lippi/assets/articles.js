@@ -43,7 +43,7 @@
     const language = {en:'English', pt:'Português', es:'Español'}[payload.language];
     if (!language || payload.consent !== true) return false;
     const body = [
-      tr('Hello Igor,'), '',
+      tr('Hello Igor Marchetti Lippi,'), '',
       tr('Please add me to the Lippi newsletter list.'), '',
       tr('Email address:') + ' ' + payload.email,
       tr('Preferred language: ') + language, '',
@@ -113,7 +113,7 @@
       });
       const result = await response.json();
       if (!response.ok || result.saved !== true || result.status !== 'requested') {
-        throw Object.assign(new Error(result.error || 'We could not save your request. Please try again or email Igor.'), {httpStatus:response.status});
+        throw Object.assign(new Error(result.error || 'We could not save your request. Please try again or email Igor Marchetti Lippi.'), {httpStatus:response.status});
       }
       form.hidden = true;
       update('Thank you. Your newsletter signup has been saved.', 'success');
@@ -124,7 +124,7 @@
       if (!error.httpStatus || error.httpStatus >= 500) {
         useEmailFallback('We could not confirm online registration. You can prepare an email request below, then send it yourself from your email app.');
       } else {
-        update(error.message || 'We could not save your request. Please try again or email Igor.', 'error');
+        update(error.message || 'We could not save your request. Please try again or email Igor Marchetti Lippi.', 'error');
         button.disabled = false;
       }
     } finally {

@@ -79,7 +79,7 @@ for(const key of [
   'Online registration is temporarily unavailable. You can prepare an email enquiry using your answers.',
   'Please select at least one market, or Still exploring.',
   'Saving your newsletter request…',
-  'Thank you. Your newsletter request and consent have been saved. No automatic confirmation email is sent. You can unsubscribe at any time by emailing Igor.'
+  'Thank you. Your newsletter request and consent have been saved. No automatic confirmation email is sent. You can unsubscribe at any time by emailing Igor Marchetti Lippi.'
 ]) assert.equal(sharedCopy[key]?.length,3,'Missing PT/ES/IT dynamic copy: '+key);
 assert.ok(shell.includes('window.LippiI18n'), 'Forms need the shared translation interface');
 assert.ok(shell.includes('translateMetadata(lang)'), 'Page title and metadata not localized');
@@ -97,7 +97,7 @@ const articleHtml = read('articles.html')
 const articleNames = new Set([
   'English','Português','Español','Lippi',
   footerEmail,'LinkedIn ↗',
-  '© 2026 Igor Marchetti · Lippi'
+  '© 2026 Igor Marchetti Lippi · Lippi'
 ]);
 const articleText = new Set(articleHtml.split(/<[^>]+>/).map(text=>text
   .replace(/&amp;/g,'&').replace(/&nbsp;/g,' ').replace(/&#39;/g,"'")
@@ -213,7 +213,7 @@ new Script(independentScript[1],{filename:'independence-inline'});
 // Public homepage and training copy must never fall back to untranslated English.
 // Names, brand marks, email addresses and qualifications intentionally remain unchanged.
 const unchangedNames = new Set([
- 'Igor Marchetti Azevedo','Igor Marchetti Lippi',footerEmail,
+ 'Igor Marchetti Lippi',footerEmail,
  'Fiserv / AIB Merchant Services','Elavon / U.S. Bank',
  'J.P. Morgan Merchant Services','Worldpay & Barclaycard',
  'Planet','Tyl by NatWest',
@@ -264,7 +264,7 @@ const enquirySample = {
 for(const [language,i] of [['en',-1],['pt',0],['es',1],['it',2]]) {
   const tr = key => i === -1 ? key : (sharedCopy[key]?.[i] || key);
   const draft = trainingModule.buildTrainingEmail(enquirySample,tr);
-  assert.ok(draft.body.startsWith(tr('Hello Igor,')),language+' email greeting did not localize');
+  assert.ok(draft.body.startsWith(tr('Hello Igor Marchetti Lippi,')),language+' email greeting did not localize');
   assert.ok(draft.body.includes(tr('Target markets: ')),language+' email market label did not localize');
   assert.ok(draft.body.includes(tr('This is an enquiry about the paid pilot; it does not confirm a booking or price.')),
     language+' email disclaimer did not localize');
