@@ -9,7 +9,7 @@ function updateEnquiryLinks() {
   const publicDate = document.querySelector('[data-enquiry="public"]');
   if (publicDate) publicDate.href = email + encodeURIComponent(translate('Next public Lippi workshop'));
   const meetup = document.querySelector('[data-enquiry="meetup"]');
-  if (meetup) meetup.href = email + encodeURIComponent(translate('Brazil–Europe meetup for our members'));
+  if (meetup) meetup.href = email + encodeURIComponent(translate('Brazil-Europe meetup for our members'));
 }
 document.addEventListener('lippi:languagechange', updateEnquiryLinks);
 updateEnquiryLinks();
