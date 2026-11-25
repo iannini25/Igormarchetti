@@ -216,7 +216,15 @@ a { color: inherit; }
   align-items: end;
 }
 .hero-copy { grid-column: 1; grid-row: 1; }
-.portrait { grid-column: 2; grid-row: 1; margin: 0 0 -36px; position: relative; z-index: 1; }
+.portrait {
+  grid-column: 2;
+  grid-row: 1;
+  justify-self: end;
+  align-self: center;
+  width: min(100%, 280px);
+  margin: 0 0 24px;
+  position: relative;
+}
 .portrait::before {
   content: "";
   position: absolute;
@@ -227,14 +235,10 @@ a { color: inherit; }
   background: var(--brass);
 }
 .portrait img {
+  display: block;
   width: 100%;
   height: auto;
-  aspect-ratio: 3 / 4;
-  object-fit: cover;
-  object-position: 70% 16%;
-  display: block;
-  -webkit-mask-image: radial-gradient(closest-side at 62% 38%, #000 42%, transparent 100%);
-  mask-image: radial-gradient(closest-side at 62% 38%, #000 42%, transparent 100%);
+  border-radius: 12px;
 }
 .eyebrow {
   margin: 0 0 12px;
@@ -546,7 +550,10 @@ footer {
   }
   .portrait::before { display: none; }
   .portrait img {
+    border-radius: 0;
     aspect-ratio: 3 / 4;
+    object-fit: cover;
+    object-position: 70% 16%;
     -webkit-mask-image: linear-gradient(#000 0%, #000 78%, transparent 100%);
     mask-image: linear-gradient(#000 0%, #000 78%, transparent 100%);
   }
@@ -591,8 +598,6 @@ body{letter-spacing:.003em}
 .btn-cv::before{transition-duration:.5s;transition-timing-function:var(--ease)}
 .btn:hover{box-shadow:0 12px 26px -14px rgba(60,35,10,.55)}
 .links .cta{padding:0 20px}
-.portrait img{transition:transform 1.2s var(--ease),filter 1.2s var(--ease)}
-.portrait:hover img{transform:scale(1.06);filter:brightness(.94)}
 .proofbar{border-radius:var(--r);border:1px solid var(--line);background:color-mix(in srgb,#fff 35%,var(--paper));overflow:hidden}
 .proof{padding:22px 24px}
 .card,.role,.quote{transition:border-color .45s var(--ease),background-color .45s var(--ease)}
