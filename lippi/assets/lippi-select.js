@@ -1,6 +1,6 @@
 // Lippi designed dropdowns. Each native <select> stays in the page as the source of truth
 // (forms, validation, translation and page scripts keep using it); a designed button and
-// listbox mirror it. Language pickers are handled by lippi-motion.js.
+// listbox mirror it. Language pickers use a native select in the navigation.
 (function () {
   'use strict';
   var LANGUAGE_PICKERS = ['lippi-language', 'reg-language', 'lang'];

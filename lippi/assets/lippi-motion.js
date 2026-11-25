@@ -9,12 +9,7 @@
   var finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
   var phone = window.matchMedia('(max-width: 780px)');
 
-  var LANGUAGES = [
-    { code: 'en', name: 'English' }, { code: 'pt', name: 'Português' },
-    { code: 'es', name: 'Español' }, { code: 'it', name: 'Italiano' }
-  ];
   var UI = {
-    language: { en: 'Language', pt: 'Idioma', es: 'Idioma', it: 'Lingua' },
     more: { en: 'Show more', pt: 'Mostrar mais', es: 'Mostrar más', it: 'Mostra di più' },
     less: { en: 'Show less', pt: 'Mostrar menos', es: 'Mostrar menos', it: 'Mostra meno' }
   };
@@ -57,164 +52,6 @@
       if (!ticking) { ticking = true; requestAnimationFrame(update); }
     }, { passive: true });
     update();
-  }
-
-  /* ---------- mobile menu for pages that do not load site-shell.js ---------- */
-  function ensureMenu() {
-    if (root.classList.contains('lippi-js')) return;
-    var button = document.querySelector('.lippi-menu-button');
-    var nav = document.getElementById('lippi-navigation');
-    if (!button || !nav) return;
-    root.classList.add('lippi-js');
-    function setOpen(open) {
-      button.setAttribute('aria-expanded', String(open));
-      nav.classList.toggle('is-open', open);
-    }
-    button.addEventListener('click', function () { setOpen(button.getAttribute('aria-expanded') !== 'true'); });
-    document.addEventListener('keydown', function (event) {
-      if (event.key !== 'Escape' || button.getAttribute('aria-expanded') !== 'true') return;
-      setOpen(false);
-      button.focus();
-    });
-    keepLanguageInLinks();
-  }
-
-  // Mirrors site-shell.js on pages that run their own translation (independence):
-  // public page links carry ?lang= so the chosen language follows the visitor.
-  var PUBLIC_PAGES = ['/', '/index.html', '/training.html', '/regulations.html', '/articles.html', '/independence.html',
-    '/ai-governance-fintech-web-summit-2026.html', '/survey.html'];
-  function keepLanguageInLinks() {
-    var select = document.getElementById('lang');
-    if (!select) return;
-    function sync() {
-      var language = select.value || 'en';
-      document.querySelectorAll('a[href^="/"]:not([href^="//"])').forEach(function (link) {
-        if (!link.dataset.lpHref) link.dataset.lpHref = link.getAttribute('href');
-        var target = new URL(link.dataset.lpHref, location.origin);
-        if (PUBLIC_PAGES.indexOf(target.pathname) < 0) return;
-        if (language === 'en') target.searchParams.delete('lang');
-        else target.searchParams.set('lang', language);
-        link.setAttribute('href', target.pathname + target.search + target.hash);
-      });
-    }
-    select.addEventListener('change', sync);
-    sync();
-  }
-
-  /* ---------- designed language menu, bound to the page's own native select ---------- */
-  function findLanguageSelect() {
-    return document.getElementById('lippi-language') || document.getElementById('reg-language') || document.getElementById('lang');
-  }
-
-  function hideNativePicker(select) {
-    var wrapper = select.closest('.lippi-language-picker, .reg-language, .page-language') || select.parentElement;
-    wrapper.classList.add('lp-native-language');
-    wrapper.setAttribute('aria-hidden', 'true');
-    select.tabIndex = -1;
-  }
-
-  function buildLanguageMenu(select) {
-    var nav = document.getElementById('lippi-navigation');
-    if (!nav || nav.querySelector('.lp-lang')) return;
-    hideNativePicker(select);
-
-    var box = document.createElement('div');
-    box.className = 'lp-lang';
-    var button = document.createElement('button');
-    button.type = 'button';
-    button.className = 'lp-lang-button';
-    button.setAttribute('aria-haspopup', 'listbox');
-    button.setAttribute('aria-expanded', 'false');
-    var code = document.createElement('span');
-    button.append(icon('globe'), code, icon('chevron', 'lp-lang-chevron'));
-
-    var list = document.createElement('ul');
-    list.className = 'lp-lang-menu';
-    list.setAttribute('role', 'listbox');
-    list.tabIndex = -1;
-    LANGUAGES.forEach(function (language) {
-      var item = document.createElement('li');
-      item.setAttribute('role', 'option');
-      item.dataset.value = language.code;
-      item.lang = language.code;
-      var badge = document.createElement('span');
-      badge.className = 'lp-lang-code';
-      badge.textContent = language.code.toUpperCase();
-      item.append(badge, document.createTextNode(language.name), icon('check'));
-      list.appendChild(item);
-    });
-    box.append(button, list);
-    nav.insertBefore(box, nav.querySelector('.lippi-book'));
-
-    var items = Array.prototype.slice.call(list.children);
-    var activeIndex = 0;
-
-    function sync() {
-      var value = select.value || 'en';
-      code.textContent = value.toUpperCase();
-      var label = UI.language[currentLanguage()] + ': ' + (LANGUAGES.filter(function (l) { return l.code === value; })[0] || LANGUAGES[0]).name;
-      button.setAttribute('aria-label', label);
-      list.setAttribute('aria-label', UI.language[currentLanguage()]);
-      items.forEach(function (item, index) {
-        var selected = item.dataset.value === value;
-        item.setAttribute('aria-selected', String(selected));
-        if (selected) activeIndex = index;
-      });
-    }
-    function highlight(index) {
-      activeIndex = (index + items.length) % items.length;
-      items.forEach(function (item, i) { item.classList.toggle('is-active', i === activeIndex); });
-      list.setAttribute('aria-activedescendant', '');
-    }
-    function setOpen(open) {
-      box.classList.toggle('is-open', open);
-      button.setAttribute('aria-expanded', String(open));
-      if (open) { highlight(activeIndex); list.focus({ preventScroll: true }); }
-    }
-    function choose(index) {
-      var value = items[index].dataset.value;
-      setOpen(false);
-      button.focus({ preventScroll: true });
-      if (select.value === value) return;
-      select.value = value;
-      select.dispatchEvent(new Event('change', { bubbles: true }));
-      sync();
-    }
-
-    button.addEventListener('click', function () { setOpen(button.getAttribute('aria-expanded') !== 'true'); });
-    button.addEventListener('keydown', function (event) {
-      if (event.key === 'ArrowDown' || event.key === 'ArrowUp') { event.preventDefault(); setOpen(true); }
-    });
-    items.forEach(function (item, index) {
-      item.addEventListener('click', function () { choose(index); });
-      item.addEventListener('pointermove', function () { highlight(index); });
-    });
-    list.addEventListener('keydown', function (event) {
-      if (event.key === 'ArrowDown') { event.preventDefault(); highlight(activeIndex + 1); }
-      else if (event.key === 'ArrowUp') { event.preventDefault(); highlight(activeIndex - 1); }
-      else if (event.key === 'Home') { event.preventDefault(); highlight(0); }
-      else if (event.key === 'End') { event.preventDefault(); highlight(items.length - 1); }
-      else if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); choose(activeIndex); }
-      else if (event.key === 'Escape' || event.key === 'Tab') { setOpen(false); if (event.key === 'Escape') button.focus(); }
-    });
-    document.addEventListener('click', function (event) { if (!box.contains(event.target)) setOpen(false); });
-    select.addEventListener('change', sync);
-    document.addEventListener('lippi:languagechange', sync);
-    sync();
-  }
-
-  function setUpLanguageMenu() {
-    var select = findLanguageSelect();
-    if (select) { buildLanguageMenu(select); return; }
-    // site-shell.js may still be creating its picker; wait briefly for it.
-    var observer = new MutationObserver(function () {
-      var found = findLanguageSelect();
-      if (!found) return;
-      observer.disconnect();
-      buildLanguageMenu(found);
-    });
-    observer.observe(document.body, { childList: true, subtree: true });
-    setTimeout(function () { observer.disconnect(); }, 4000);
   }
 
   /* ---------- icons ---------- */
@@ -450,8 +287,6 @@
     }
     if (redirectOldSurveyLink()) return;
     setUpScrollState();
-    ensureMenu();
-    setUpLanguageMenu();
     addIcons();
     addPortraitSeal();
     addRegulationMarquee();

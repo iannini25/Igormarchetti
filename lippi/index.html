@@ -387,7 +387,7 @@ section{padding:104px 0}
 .research-invite a:focus-visible{outline:3px solid white;outline-offset:3px}
 @media(prefers-reduced-motion:no-preference){.research-invite b{animation:invite-arrow 1.4s ease-in-out 2}@keyframes invite-arrow{50%{transform:translateX(5px)}}}
 @media(max-width:600px){.research-invite>.wrap{align-items:stretch;flex-direction:column;gap:10px}}
-</style><link rel="stylesheet" href="/assets/appointment.css">
+</style>
 <style id="pilot-home">
 
 .pilot-hero{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(205px,.72fr);gap:clamp(28px,6vw,80px);align-items:center}
@@ -421,8 +421,6 @@ body{background:#f3f7f6}
 .three-blocks>.hero{padding:0;border-color:#173b43}
 .three-blocks .home-block>.wrap{max-width:none;padding:clamp(22px,3.8vw,50px);width:100%}
 .three-blocks #pilot,.three-blocks #feedback{padding:0}
-.three-blocks .block-number{display:block;color:#12695f;font:700 .92rem/1.3 var(--display);font-variant-numeric:tabular-nums;letter-spacing:.09em;margin-bottom:12px}
-.three-blocks .hero .block-number{color:#a6e5d1}
 .three-blocks .pilot-hero{column-gap:clamp(22px,5vw,62px);row-gap:28px}
 .three-blocks .hero h1{margin:0 0 14px}.three-blocks .pilot-portrait{max-width:180px}
 .three-blocks #credentials{grid-column:1/-1;border-top:1px solid #42616b;padding:20px 0 0;width:100%;color:#fff}
@@ -487,17 +485,31 @@ body{background:#f3f7f6}
 @media(max-width:520px){.home-carousel{gap:6px;padding-inline:14px}.home-carousel .lp-marquee span{padding-right:24px}}
 @media(prefers-reduced-motion:reduce){.home-carousel .carousel-control{display:none}.home-carousel .lp-marquee-track{animation:none}}
 </style>
+<link rel="stylesheet" href="/assets/site-navigation.css">
 </head>
-<body><a class="skip-link" href="#main">Skip to main content</a><div data-site-header data-current-page="home"><header class="lippi-header"><div class="lippi-header-inner" role="navigation" aria-label="Main navigation"><a class="lippi-brand" href="/" aria-label="Lippi home"><img src="/logo.svg" alt="Lippi" width="1120" height="280"></a><a class="training-shortcut" href="/training.html">Training</a><a class="lippi-appointment" href="https://calendly.com/igormarchettilippi/20min" target="_blank" rel="noopener noreferrer" data-key="appointment">Book an appointment</a><button class="lippi-menu-button" type="button" aria-expanded="false" aria-controls="lippi-navigation"><span class="lippi-menu-icon" aria-hidden="true"></span>Menu</button><div class="lippi-nav" id="lippi-navigation"><a href="/independence.html#scope">Advisory</a><a href="/regulations.html">Regulatory</a><a href="/articles.html">Articles</a><a href="#feedback">Workshop feedback</a></div></div></header></div><!-- /site-header -->
+<body><a class="skip-link" href="#main">Skip to main content</a><div data-site-header data-current-page="home">
+<header class="site-masthead"><nav class="site-bar" aria-label="Main navigation">
+  <a class="site-brand" href="/" aria-label="Lippi home" aria-current="page"><img src="/logo.svg" alt="Lippi" width="1120" height="280"></a>
+  <a class="site-link" href="/training.html">Training</a>
+  <button class="lippi-menu-button" type="button" aria-expanded="false" aria-controls="lippi-navigation"><span>Menu</span></button>
+  <div class="site-links" id="lippi-navigation">
+    <a class="site-link" href="/independence.html#scope">Advisory</a>
+    <a class="site-link" href="/regulations.html">Regulatory</a>
+    <a class="site-link" href="/articles.html">Articles</a>
+    <a class="site-link" href="/survey.html">Survey</a>
+  </div>
+  <a class="site-book" href="https://calendly.com/igormarchettilippi/20min" target="_blank" rel="noopener noreferrer">Book a call</a>
+</nav></header></div><!-- /site-header -->
 <main id="main" class="three-blocks">
 <section class="lippi-introduction" id="top" aria-labelledby="lippi-intro-heading">
   <h1 id="lippi-intro-heading">How Lippi works</h1>
   <p>Lippi is an independent risk advisory practice for technology and financial services companies. In live Saturday workshops, your team works through a fictional payments launch and takes away a worksheet to plan its own expansion.</p>
+  <nav class="section-index" aria-label="On this page"><a href="#audience-heading"><span class="index-number" aria-hidden="true">01</span> About Igor Marchetti Lippi</a><a href="#pilot"><span class="index-number" aria-hidden="true">02</span> Workshops</a><a href="#feedback"><span class="index-number" aria-hidden="true">03</span> Survey</a></nav>
 </section>
 <header class="hero home-block" aria-labelledby="audience-heading">
   <div class="wrap pilot-hero" id="about">
     <div>
-      <h2 id="audience-heading"><span class="block-number" aria-hidden="true">01</span> Who do you work with?</h2>
+      <h2 id="audience-heading"><span class="section-number" aria-hidden="true">01</span> Who do you work with?</h2>
       <p class="pilot-lead">I train founders, CEOs and teams at tech and financial services companies expanding into Brazil, the European Union or the UK.</p>
       <p class="pilot-bio">My Saturday workshops draw on over 25 years of experience in payments, technology and risk.</p>
       <a class="pilot-button" href="#pilot">Explore the Saturday workshops</a>
@@ -578,7 +590,7 @@ body{background:#f3f7f6}
 <section class="home-block" id="pilot" aria-labelledby="pilot-title">
   <div class="wrap pilot-grid">
     <div>
-      <h2 id="pilot-title"><span class="block-number" aria-hidden="true">02</span> Saturday GRC workshops for market expansion</h2>
+      <h2 id="pilot-title"><span class="section-number" aria-hidden="true">02</span> Saturday GRC workshops for market expansion</h2>
       <p>I offer a live online pilot in governance, risk and compliance (GRC). Your team puts GRC into practice by working through a fictional payments launch between Brazil and the EU. You decide which permissions to check, who owns each risk and what evidence a partner needs. UK comparisons are available.</p>
       <a class="pilot-button" href="/training.html#course-contents">View the training programme</a>
     </div>
@@ -591,7 +603,7 @@ body{background:#f3f7f6}
 </section>
 <section class="home-block" id="feedback" aria-labelledby="feedback-title">
   <div class="wrap"><div class="pilot-feedback">
-    <div><h2 id="feedback-title"><span class="block-number" aria-hidden="true">03</span> Which market-entry challenge would you like us to work through?</h2>
+    <div><h2 id="feedback-title"><span class="section-number" aria-hidden="true">03</span> Which market-entry challenge would you like us to work through?</h2>
     <p>What governance, risk or compliance question is holding up your expansion into Brazil, the EU or the UK? I’ll use your feedback to choose workshop topics and tailor the exercises.</p></div>
     <a class="pilot-text-link" href="/survey.html">Take the 3-minute survey</a>
   </div></div>

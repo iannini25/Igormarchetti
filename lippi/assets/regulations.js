@@ -88,7 +88,6 @@
       count.textContent = translationLoadError[currentLanguage];
     });
   });
-  document.querySelector('.reg-language').hidden = false;
   let requestedLanguage = new URLSearchParams(location.search).get('lang');
   if (!requestedLanguage) { try { requestedLanguage = localStorage.getItem('lippi-language'); } catch {} }
   if (requestedLanguage && requestedLanguage !== 'en') translate(requestedLanguage).catch(() => {});

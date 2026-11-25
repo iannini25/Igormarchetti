@@ -1,46 +1,9 @@
 :root{--navy:#0d2637;--teal:#137c75;--mint:#b4e6d5;--ink:#152b37;--muted:#596d78;--paper:#f2f7f5}
 html{scroll-padding-top:100px}body{margin:0;-webkit-font-smoothing:antialiased}*{box-sizing:border-box}
-[data-site-header]{position:sticky;top:0;z-index:30}
-.lippi-header{margin:0;padding:0;background:rgba(255,255,255,.97);border-bottom:1px solid #dce7e3;box-shadow:0 5px 25px #0d263706;color:var(--navy);font:600 14px/1.5 Inter,Arial,sans-serif;backdrop-filter:blur(16px)}
-.lippi-header-inner{max-width:1200px;padding:15px 24px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:28px;min-height:82px}
-.lippi-brand{display:block;flex:0 0 auto;line-height:0}.lippi-brand img{display:block;width:184px;height:auto;max-width:100%}
-.lippi-header .lippi-nav{display:flex;align-items:center;gap:25px;position:static;background:none;box-shadow:none;border:0;backdrop-filter:none;-webkit-backdrop-filter:none;padding:0;margin:0;z-index:auto}
-.lippi-nav a{color:var(--navy);text-decoration:none;padding:8px 0;white-space:nowrap;border-bottom:2px solid transparent;transition:color .15s,border-color .15s}
-.lippi-nav a:hover,.lippi-nav a[aria-current="page"]{color:var(--teal);border-bottom-color:var(--teal)}
-.lippi-nav .lippi-book{background:var(--teal);border:1px solid var(--teal);border-radius:999px;padding:12px 20px;color:white;line-height:1.3}
-.lippi-nav .lippi-book:hover{background:var(--navy);border-color:var(--navy);color:white}
-.lippi-menu-button{display:none;align-items:center;gap:8px;border:1px solid #a9c4bc;background:white;border-radius:8px;padding:9px 12px;color:var(--navy);font:700 14px/1.4 Inter,Arial,sans-serif;cursor:pointer}
-.lippi-menu-icon{width:17px;height:12px;display:inline-block;border-top:2px solid currentColor;border-bottom:2px solid currentColor;position:relative}.lippi-menu-icon:after{content:"";position:absolute;left:0;right:0;top:4px;border-top:2px solid currentColor}
-.lippi-header a:focus-visible,.lippi-header button:focus-visible{outline:3px solid #c97c00;outline-offset:5px}
-
-
-
-
-
 .lippi-resource-section{padding:76px 0 82px;background:#f2f7f5}.lippi-resource-heading{display:flex;align-items:flex-end;justify-content:space-between;gap:40px;margin-bottom:28px}.lippi-resource-heading h2{max-width:640px;margin-bottom:0}.lippi-resource-heading>p{max-width:330px;color:var(--muted);font-size:16px;margin:0 0 4px}
 .lippi-resource-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}.lippi-resource-card{display:flex;flex-direction:column;background:white;border:1px solid #d7e5df;border-radius:18px;padding:28px;min-width:0;box-shadow:0 5px 16px #0d263704;transition:transform .2s,box-shadow .2s}
 .lippi-resource-card:hover{transform:translateY(-3px);box-shadow:0 16px 35px #0d263710}.lippi-resource-number{font:700 13px/1.5 Inter,Arial,sans-serif;letter-spacing:.12em;color:var(--teal);margin:0 0 28px}.lippi-resource-card h3{font-size:25px;line-height:1.2;letter-spacing:-.03em;margin:0 0 14px}.lippi-resource-card>p{font-size:15px;line-height:1.65;color:var(--muted);margin:0 0 20px}.lippi-resource-meta{font-size:12px;font-weight:700;color:var(--teal);margin-top:auto;margin-bottom:12px}.lippi-resource-card a{display:flex;justify-content:space-between;align-items:center;gap:8px;color:var(--navy);font-weight:750;font-size:14px;border-top:1px solid #e1ebe6;padding-top:18px;text-decoration:none}.lippi-resource-card a:hover{color:var(--teal)}
-@media(max-width:920px){.lippi-header-inner{gap:18px}.lippi-header .lippi-nav{gap:17px}.lippi-brand img{width:160px}.lippi-nav .lippi-book{padding:11px 16px}.lippi-resource-heading{display:block}.lippi-resource-heading>p{max-width:650px;margin-top:18px}.lippi-resource-card{padding:24px}.lippi-resource-card h3{font-size:23px}}
-@media(max-width:780px){html{scroll-padding-top:90px}.lippi-header-inner{min-height:74px;flex-wrap:wrap;padding:14px 20px;gap:12px}.lippi-brand img{width:163px}.lippi-header .lippi-nav{width:100%;flex-wrap:wrap;gap:8px 24px;font-size:14px}.lippi-js .lippi-menu-button{display:inline-flex}.lippi-js .lippi-nav{display:none}.lippi-js .lippi-nav.is-open{display:flex;flex-direction:column;align-items:stretch;padding:8px 0 6px;gap:0}.lippi-js .lippi-nav a{padding:12px 6px}.lippi-js .lippi-nav .lippi-book{text-align:center;margin-top:12px;padding:13px 18px}.lippi-resource-grid{grid-template-columns:1fr}.lippi-resource-section{padding:56px 0}.lippi-resource-number{margin-bottom:16px}.lippi-resource-card h3{font-size:25px}}
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.lippi-resource-card,.lippi-nav a{transition:none}.lippi-resource-card:hover{transform:none}}
-@media(max-width:780px){.lippi-menu-button{min-height:44px}.lippi-nav a{min-height:44px}input:not([type="checkbox"]):not([type="radio"]),select,textarea{font-size:16px!important}}
-
-/* Compact, accessible language selector in the shared navigation. */
-.lippi-language-picker{display:inline-flex;align-items:center;gap:6px;color:var(--navy);font:600 12px/1.4 Inter,Arial,sans-serif}
-.lippi-language-picker>span{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
-.lippi-language-picker select{min-height:44px;width:102px;max-width:100%;padding:7px 8px;border:1px solid #a9c4bc;border-radius:8px;background:#fff;color:var(--navy);font:600 13px/1.4 Inter,Arial,sans-serif;cursor:pointer}
-.lippi-language-picker select:focus-visible{outline:3px solid #c97c00;outline-offset:3px}
-@media(max-width:780px){.lippi-js .lippi-language-picker{margin-top:12px;justify-content:space-between;padding:8px 6px}.lippi-language-picker>span{position:static;width:auto;height:auto;margin:0;overflow:visible;clip:auto;white-space:normal}.lippi-language-picker select{width:145px;font-size:16px}}
-
-/* Earlier hamburger breakpoint prevents long localized navigation links from overflowing on tablets. */
-@media(min-width:781px) and (max-width:1100px){
-  .lippi-header-inner{flex-wrap:wrap;gap:12px;padding:14px 20px}
-  .lippi-js .lippi-menu-button{display:inline-flex}
-  .lippi-js .lippi-nav{display:none;width:100%;gap:0}
-  .lippi-js .lippi-nav.is-open{display:flex;flex-direction:column;align-items:stretch;padding:8px 0 6px}
-  .lippi-js .lippi-nav a{padding:12px 6px}
-  .lippi-js .lippi-nav .lippi-book{text-align:center;margin-top:12px;padding:13px 18px}
-  .lippi-js .lippi-language-picker{margin-top:12px;justify-content:space-between;padding:8px 6px}
-  .lippi-js .lippi-language-picker>span{position:static;width:auto;height:auto;margin:0;overflow:visible;clip:auto;white-space:normal}
-  .lippi-js .lippi-language-picker select{width:145px;font-size:16px}
-}
+@media(max-width:920px){.lippi-resource-heading{display:block}.lippi-resource-heading>p{max-width:650px;margin-top:18px}.lippi-resource-card{padding:24px}.lippi-resource-card h3{font-size:23px}}
+@media(max-width:780px){html{scroll-padding-top:90px}.lippi-resource-grid{grid-template-columns:1fr}.lippi-resource-section{padding:56px 0}.lippi-resource-number{margin-bottom:16px}.lippi-resource-card h3{font-size:25px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.lippi-resource-card{transition:none}.lippi-resource-card:hover{transform:none}}
+@media(max-width:780px){input:not([type="checkbox"]):not([type="radio"]),select,textarea{font-size:16px!important}}

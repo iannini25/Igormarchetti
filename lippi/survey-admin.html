@@ -3,7 +3,20 @@
 </style><link rel="icon" type="image/png" href="/favicon.png">
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/lippi-footer.css">
-</head><body><main><p class="kicker">Lippi</p><h1>Founder survey responses</h1><p class="muted">Review answers and download them for analysis.</p><form id="login" class="card"><label for="admin-key">Private access key</label><input id="admin-key" type="password" autocomplete="off" required minlength="32"><div class="bar"><button type="submit">Open responses</button></div><p class="muted">Your key stays in memory for this session. It is cleared when you sign out or reload.</p></form><p id="status" role="status" aria-live="polite"></p><section id="dashboard" hidden><div class="card"><h2 id="count">Responses</h2><div class="bar"><button id="refresh" type="button">Refresh</button><button data-export="export.csv" type="button">Download CSV</button><button data-export="export.json" type="button">Download JSON</button><button data-export="analysis-pack.json" type="button">Export for AI analysis</button><button id="logout" type="button">Sign out</button></div><p class="muted">The AI export includes answers and analysis instructions. Some contact details are hidden automatically. Check for names or confidential information before sharing it with an AI service. This website does not send answers to AI services.</p><p class="muted">Answers stay in this database for up to 90 days. You manage any copies you download.</p></div><div id="responses"></div></section><p><a href="/#founder-survey">Return to the founder survey</a></p></main>
+<link rel="stylesheet" href="/assets/site-navigation.css">
+</head><body><a class="skip-link" href="#main">Skip to main content</a><div data-site-header data-current-page="admin" data-localise-header-only>
+<header class="site-masthead"><nav class="site-bar" aria-label="Main navigation">
+  <a class="site-brand" href="/" aria-label="Lippi home"><img src="/logo.svg" alt="Lippi" width="1120" height="280"></a>
+  <a class="site-link" href="/training.html">Training</a>
+  <button class="lippi-menu-button" type="button" aria-expanded="false" aria-controls="lippi-navigation"><span>Menu</span></button>
+  <div class="site-links" id="lippi-navigation">
+    <a class="site-link" href="/independence.html#scope">Advisory</a>
+    <a class="site-link" href="/regulations.html">Regulatory</a>
+    <a class="site-link" href="/articles.html">Articles</a>
+    <a class="site-link" href="/survey.html">Survey</a>
+  </div>
+  <a class="site-book" href="https://calendly.com/igormarchettilippi/20min" target="_blank" rel="noopener noreferrer">Book a call</a>
+</nav></header></div><!-- /site-header --><main id="main"><p class="kicker">Lippi</p><h1>Founder survey responses</h1><p class="muted">Review answers and download them for analysis.</p><form id="login" class="card"><label for="admin-key">Private access key</label><input id="admin-key" type="password" autocomplete="off" required minlength="32"><div class="bar"><button type="submit">Open responses</button></div><p class="muted">Your key stays in memory for this session. It is cleared when you sign out or reload.</p></form><p id="status" role="status" aria-live="polite"></p><section id="dashboard" hidden><div class="card"><h2 id="count">Responses</h2><div class="bar"><button id="refresh" type="button">Refresh</button><button data-export="export.csv" type="button">Download CSV</button><button data-export="export.json" type="button">Download JSON</button><button data-export="analysis-pack.json" type="button">Export for AI analysis</button><button id="logout" type="button">Sign out</button></div><p class="muted">The AI export includes answers and analysis instructions. Some contact details are hidden automatically. Check for names or confidential information before sharing it with an AI service. This website does not send answers to AI services.</p><p class="muted">Answers stay in this database for up to 90 days. You manage any copies you download.</p></div><div id="responses"></div></section><p><a href="/#founder-survey">Return to the founder survey</a></p></main>
 <div data-site-footer>
 <footer class="lippi-footer"><div class="lippi-footer-inner">
 <div class="lippi-footer-top">
@@ -25,4 +38,5 @@
 <a href="/independence.html#scope" data-key="footerLink7">Advisory scope</a><a href="/independence.html" data-key="footerLink8">Independence &amp; conflicts</a>
 </div>
 </div></footer>
-</div><!-- /site-footer --><script src="/assets/survey-admin.js" defer></script></body></html>
+</div><!-- /site-footer --><script src="/assets/survey-admin.js" defer></script><script defer src="/assets/site-shell.js"></script>
+</body></html>
