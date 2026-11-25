@@ -4,12 +4,12 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Events and workshops | Lippi</title>
-  <meta name="description" content="Explore Lippi’s two-hour market-entry workshop, see a sample launch plan and request a quote for your team.">
+  <meta name="description" content="Explore Lippi’s GRC workshops for teams and find dates, prices and registration for public events when bookings open.">
   <link rel="canonical" href="https://lippi.igormarchetti.me/events.html">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="en_GB">
   <meta property="og:title" content="Events and workshops | Lippi">
-  <meta property="og:description" content="Explore Lippi’s two-hour market-entry workshop, see a sample launch plan and request a quote for your team.">
+  <meta property="og:description" content="Explore Lippi’s GRC workshops for teams and find dates, prices and registration for public events when bookings open.">
   <meta property="og:url" content="https://lippi.igormarchetti.me/events.html">
   <meta property="og:image" content="https://lippi.igormarchetti.me/assets/lippi-social.png">
   <link rel="icon" href="/favicon.png">
@@ -34,37 +34,29 @@
   <main id="main" class="events-page">
     <h1>Events and workshops</h1>
     <section class="public-events" id="public-workshops" aria-labelledby="public-title">
-      <div><h2 id="public-title">Public workshops</h2><p>Coming soon. We’ll announce public workshop dates here.</p></div>
+      <div><h2 id="public-title">Public workshops</h2><p data-event-announcement>Coming soon. We’ll publish dates, ticket prices and a secure payment link here when bookings open.</p><ul class="ticket-list" data-event-tickets hidden></ul></div>
       <a class="event-text-link" data-enquiry="public" href="mailto:lippi@igormarchetti.me?subject=Next%20public%20Lippi%20workshop">Ask about the next date</a>
     </section>
     <section class="workshop-offer" id="team-workshop" aria-labelledby="workshop-title">
       <div class="workshop-description">
-        <p class="event-type">Private team workshop</p>
-        <h2 id="workshop-title">Plan your first sale in a new market</h2>
-        <p>Bring one product, one target market and the decision holding up your launch. Work through a fictional case with Igor, then use the worksheet to map your team’s next steps.</p>
+        <p class="event-type">Private GRC workshops</p>
+        <h2 id="workshop-title">Work through a risk with your team</h2>
+        <p>Bring a supplier, technology or compliance issue. Igor guides your team through a practical case. You leave with a named owner, a control to test and a record of the evidence you need.</p>
         <ul class="event-facts"><li>2 hours</li><li>Live online</li><li>Saturday by arrangement</li></ul>
-        <a class="sample-link" href="#sample-plan">See a sample launch plan</a>
+        <a class="sample-link" id="sample-plan" href="/training.html#sample">Try the sample exercise</a>
+        <a class="sample-link" href="/training.html#course-contents">View all four training modules</a>
         <p class="scope-line">For teams whose core business is outside payments. <a href="/independence.html#scope">Check the engagement scope</a></p>
       </div>
       <div class="team-quote" id="team-quote">
         <h3>Request a team quote</h3>
-        <p>Email me your product, target market, team size and preferred Saturday. I’ll reply with a proposed scope, date and team fee for you to review.</p>
-        <a class="quote-button" data-enquiry="team" href="mailto:lippi@igormarchetti.me?subject=Lippi%20team%20workshop%20quote">Email Igor for a quote</a>
+        <p>Tell Igor your GRC topic, team size and preferred Saturday. He’ll reply with a proposed scope, date and team fee.</p>
+        <a class="quote-button" data-enquiry="team" href="mailto:lippi@igormarchetti.me?subject=Lippi%20GRC%20workshop%20quote">Email Igor for a quote</a>
         <a class="event-text-link" href="https://calendly.com/igormarchettilippi/20min">Prefer to talk? Book a 20-minute call</a>
       </div>
     </section>
-    <section class="sample-plan" id="sample-plan" aria-labelledby="sample-title">
-      <p class="event-type">Sample launch plan</p>
-      <h2 id="sample-title">A Brazilian booking app wins interest from a Polish retailer. What happens next?</h2>
-      <p>Here’s how a software team could use the workshop worksheet. Each milestone has an owner and something the team can show a buyer.</p>
-      <ol class="launch-timeline">
-        <li><h3>Before making an offer</h3><p class="stage-owner">Founder</p><p>Compare selling directly with using a Polish reseller. Write down who would sign the contract, issue the invoice and support the retailer.</p></li>
-        <li><h3>Before signing the pilot</h3><p class="stage-owner">Commercial lead</p><p>Ask which security evidence the retailer will accept and whether it requires a certificate. Give the seller, buyer and service details to a tax adviser to check VAT before agreeing the price.</p></li>
-        <li><h3>Before taking a live booking</h3><p class="stage-owner">Product lead</p><p>Trace one customer booking from collection to storage. Record who can see the data, which supplier hosts it and which privacy questions still need an answer.</p></li>
-      </ol>
-      <p class="reference-links"><a href="https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/application-gdpr_en">European Commission guidance on GDPR</a><a href="https://europa.eu/youreurope/business/finance-and-tax/vat/cross-border-vat/">EU guidance on cross-border VAT</a></p>
-    </section>
   </main>
+  <!-- Add confirmed sessions here with titles (en, pt, es, it), startsAt (ISO with offset), timeZone, price (major currency units), currency and paymentUrl. -->
+  <script id="public-workshop-listings" type="application/json">[]</script>
 <div data-site-footer>
 <footer class="lippi-footer"><div class="lippi-footer-inner">
 <div class="lippi-footer-top">
@@ -89,5 +81,6 @@
 </div><!-- /site-footer -->
 <script defer src="/assets/event-enquiries.js"></script>
 <script defer src="/assets/site-shell.js"></script>
+<script defer src="/assets/event-tickets.js"></script>
 </body>
 </html>

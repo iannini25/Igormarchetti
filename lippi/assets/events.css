@@ -26,20 +26,15 @@ body { margin: 0; background: #f4f8f6; color: #102e39; font: 1rem/1.6 Inter, sys
 .scope-line a { color: inherit; }
 .sample-link { color: #b7ead8; }
 .events-page :is(a,button):focus-visible { outline: 3px solid #c15d0b; outline-offset: 3px; }
-.sample-plan { padding: clamp(2rem, 5vw, 4rem) 0; }
-.sample-plan h2 { max-width: 35ch; }
-.sample-plan > p:not(.event-type) { max-width: 73ch; }
-.launch-timeline { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); list-style: none; margin: 1.6rem 0 .4rem; padding: 0; }
-.launch-timeline li { position: relative; border-top: 2px solid #639d8c; padding: 1.4rem 1.4rem 0 0; }
-.launch-timeline li::before { position: absolute; content: ""; top: -.42rem; left: 0; width: .68rem; height: .68rem; border-radius: 50%; background: #14695c; }
-.launch-timeline .stage-owner { font-weight: 700; color: #0c645b; margin: .45rem 0; }
-.reference-links { display: flex; flex-wrap: wrap; gap: .15rem 1.35rem; font-size: .93rem; }
 .public-events { border-top: 1px solid #aecac0; display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1.1rem 0 1.65rem; }
 .public-events p { margin: .45rem 0 0; }
 @media (max-width: 46rem) {
-  .workshop-offer, .launch-timeline { grid-template-columns: minmax(0,1fr); }
-  .launch-timeline li { border: 0; border-left: 2px solid #639d8c; padding: 0 0 1rem 1.25rem; }
-  .launch-timeline li::before { top: .38rem; left: -.4rem; }
-  .launch-timeline li:last-child { padding-bottom: .1rem; }
+  .workshop-offer { grid-template-columns: minmax(0,1fr); }
   .public-events { align-items: flex-start; flex-direction: column; gap: .15rem; }
 }
+.sample-link { margin-inline-end: 1.2rem; }
+.ticket-list { padding: 0; list-style: none; }
+.ticket-list li { display: grid; gap: .35rem; border-top: 1px solid #aecac0; padding: 1rem 0; }
+.ticket-list a { justify-self: start; }
+
+.events-page [hidden] { display: none; }

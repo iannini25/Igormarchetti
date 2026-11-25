@@ -1,3 +1,4 @@
+import {execFileSync} from 'node:child_process';
 import {readFileSync, writeFileSync} from 'node:fs';
 import {fileURLToPath} from 'node:url';
 const directory = fileURLToPath(new URL('../lippi/', import.meta.url));
@@ -76,3 +77,5 @@ for (const [file, current, headerOnly] of pages) {
   }
   writeFileSync(path, html);
 }
+
+execFileSync('python3', [fileURLToPath(new URL('./render-lippi-brazil.py', import.meta.url))]);
