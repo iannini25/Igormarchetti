@@ -125,6 +125,9 @@
   outline: 3px solid #a64b00;
   outline-offset: 2px;
 }
+@media (min-width: 68.75rem) and (max-width: 76rem) {
+  .site-bar .site-link { padding-inline: .55rem; }
+}
 @media (max-width: 68.75rem) {
   .site-masthead .site-bar { flex-wrap: wrap; min-height: 3.75rem; gap: .35rem; }
   .site-bar .site-links { flex-wrap: wrap; }

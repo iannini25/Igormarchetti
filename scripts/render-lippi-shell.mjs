@@ -3,12 +3,13 @@ import {fileURLToPath} from 'node:url';
 const directory = fileURLToPath(new URL('../lippi/', import.meta.url));
 // Pages without a translated body still share the navigation and its language control.
 const pages = [
-  ['index.html', 'home'], ['training.html', 'training'], ['regulations.html', 'regulations'],
+  ['index.html', 'home'], ['training.html', 'training'], ['events.html', 'events'], ['regulations.html', 'regulations'],
   ['articles.html', 'articles'], ['ai-governance-fintech-web-summit-2026.html', 'article'],
   ['independence.html', 'advisory', true], ['survey.html', 'survey'],
   ['privacy.html', 'privacy', true], ['survey-admin.html', 'admin', true], ['training-admin.html', 'admin', true]
 ];
 const links = [
+  ['events', '/events.html', 'Events'],
   ['advisory', '/independence.html#scope', 'Advisory'],
   ['regulations', '/regulations.html', 'Regulatory'],
   ['articles', '/articles.html', 'Articles'],
