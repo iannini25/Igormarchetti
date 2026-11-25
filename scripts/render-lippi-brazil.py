@@ -76,7 +76,9 @@ class PortugueseHome(HTMLParser):
             else:
                 values['content'] = words.get(values['content'], values['content'])
         if tag == 'a' and 'href' in values:
-            if values.get('hreflang') == 'pt-BR':
+            if 'data-href-pt' in values:
+                values['href'] = values['data-href-pt']
+            elif values.get('hreflang') == 'pt-BR':
                 values.update({'href':'/?lang=en','lang':'en','hreflang':'en'})
             else:
                 values['href'] = localized_url(values['href'])

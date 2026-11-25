@@ -114,6 +114,10 @@
     for (const link of document.querySelectorAll('a[href]:not([hreflang])')) {
       if (!originalLinkHref.has(link)) originalLinkHref.set(link,link.getAttribute('href'));
       const original = originalLinkHref.get(link);
+      if (link.hasAttribute('data-href-pt')) {
+        link.setAttribute('href', link.getAttribute('data-href-' + language) || original);
+        continue;
+      }
       if (!original?.startsWith('/') || original.startsWith('//')) continue;
       const target = new URL(original,location.origin);
       if (!publicPages.has(target.pathname)) continue;

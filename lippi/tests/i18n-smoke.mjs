@@ -161,9 +161,10 @@ const linkStart = shell.indexOf('  const publicPages = new Set(');
 const linkEnd = shell.indexOf('  function apply(language)',linkStart);
 assert.ok(linkStart > 0 && linkEnd > linkStart,'Shared internal-link localization is missing');
 const linkSection = shell.slice(linkStart,linkEnd);
-const makeLink = href => ({
+const makeLink = (href, attributes = {}) => ({
   href,
-  getAttribute(name) { assert.equal(name,'href'); return this.href; },
+  hasAttribute(name) { return Object.hasOwn(attributes,name); },
+  getAttribute(name) { return name === 'href' ? this.href : attributes[name] ?? null; },
   setAttribute(name,value) { assert.equal(name,'href'); this.href = value; }
 });
 const testLinks = [
@@ -176,9 +177,19 @@ const testLinks = [
   makeLink('//example.com/articles.html'),
   makeLink('#top')
 ];
+const publicDownloads = [
+  ['index.html', 'Igor_Marchetti_Lippi_CV', 'https://igormarchetti.me/Igor_Marchetti_CV.pdf?download=1'],
+  ['training.html', 'lippi-programme-preview', '/downloads/lippi-programme-preview.pdf']
+];
+const unlocalisedLinkEnd = testLinks.length;
+for (const [page, , englishHref] of publicDownloads) {
+  const tag = read(page).match(/<a\b[^>]*\bdownload\b[^>]*>/g).find(tag => tag.includes('href="' + englishHref + '"'));
+  const attributes = Object.fromEntries([...tag.matchAll(/([\w-]+)="([^"]*)"/g)].map(match => [match[1],match[2]]));
+  testLinks.push(makeLink(attributes.href,attributes));
+}
 const linkSnapshots = new Script(
   'const originalLinkHref = new WeakMap();\n'+linkSection+
-  "\n['it','en','pt'].map(language => { syncInternalLinks(language); return links.map(link => link.href); });",
+  "\n['it','en','pt','es'].map(language => { syncInternalLinks(language); return links.map(link => link.href); });",
   {filename:'lippi-public-link-localization'}
 ).runInNewContext({
   document:{querySelectorAll:()=>testLinks},
@@ -193,8 +204,18 @@ assert.equal(linkSnapshots[1][0],'/training.html#modules','English should restor
 assert.equal(linkSnapshots[1][1],'/articles.html?ref=nav');
 assert.equal(linkSnapshots[2][0],'/training.html?lang=pt#modules');
 for (const snapshot of linkSnapshots) {
-  assert.deepEqual([...snapshot.slice(3)],testLinks.slice(3).map(link=>link.href),
+  assert.deepEqual([...snapshot.slice(3,unlocalisedLinkEnd)],testLinks.slice(3,unlocalisedLinkEnd).map(link=>link.href),
     'Only public page routes should receive a locale parameter');
+}
+for (const [i, lang] of ['it','en','pt-BR','es'].entries()) {
+  for (const [j, [, basename, englishHref]] of publicDownloads.entries()) {
+    const expected = lang === 'en' ? englishHref : '/downloads/' + basename + '-' + lang + '.pdf';
+    assert.equal(linkSnapshots[i][unlocalisedLinkEnd + j],expected,'Incorrect download for ' + lang);
+    if (expected.startsWith('/downloads/')) {
+      const pdf = readFileSync(new URL('..' + expected,import.meta.url));
+      assert.equal(pdf.toString('ascii',0,5),'%PDF-','Missing PDF at ' + expected);
+    }
+  }
 }
 assert.ok(shell.includes('syncInternalLinks(lang);'),'Language updates must refresh public links');
 assert.ok(independence.includes("document.querySelector('nav a').setAttribute('href',l==='en'?'/':'/?lang='+l)"),
