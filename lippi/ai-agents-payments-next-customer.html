@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AI Agents, Payments and the Next Customer | Lippi</title>
+<meta name="description" content="A practical look at AI agents making purchases, customer permission, spending limits and accountability in payments.">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<link rel="canonical" href="https://lippi.igormarchetti.me/ai-agents-payments-next-customer.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AI Agents, Payments and the Next Customer">
+<meta property="og:description" content="When an AI agent purchases for a customer, clear permission, spending limits and practical controls matter.">
+<meta property="og:url" content="https://lippi.igormarchetti.me/ai-agents-payments-next-customer.html">
+<meta property="og:image" content="https://lippi.igormarchetti.me/assets/lippi-social.png">
+<link rel="stylesheet" href="/assets/site-shell.css">
+<script defer src="/assets/site-shell.js"></script>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f7f8fb;color:#18283b;font:17px/1.7 system-ui,-apple-system,Segoe UI,sans-serif}.article{max-width:840px;margin:auto;padding:64px 24px 88px}.eyebrow{font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:#526a82;font-weight:700}h1{font-size:clamp(2.1rem,5vw,3.5rem);line-height:1.15;letter-spacing:-.035em;margin:12px 0 24px}h2{font-size:1.48rem;line-height:1.3;margin-top:38px}p{margin:0 0 18px}.lead{font-size:1.25rem;color:#35485d}.byline,.note{font-size:.91rem;color:#53657a}.article a{color:#125d9b}.article ul{padding-left:24px}.article li{margin:10px 0}.cta{border-top:1px solid #dce2e9;margin-top:44px;padding-top:26px}.site-nav{padding:16px 24px;background:#fff;border-bottom:1px solid #e2e7ed}.site-nav-inner{max-width:1000px;margin:auto;display:flex;justify-content:space-between;gap:16px;align-items:center;flex-wrap:wrap}.site-nav a{color:#193b5a;text-decoration:none;font-weight:700}.site-nav a:hover{text-decoration:underline}footer{border-top:1px solid #dce2e9;text-align:center;padding:28px 20px;color:#52657a;font-size:.9rem}
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/lippi-icons.css">
+<link rel="stylesheet" href="/assets/lippi-refresh.css">
+<meta name="lippi-release" content="2026-11-27-article-2">
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="stylesheet" href="/assets/lippi-footer.css">
+
+<link rel="stylesheet" href="/assets/site-navigation.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a><div data-site-header data-current-page="article">
+<header class="site-masthead"><nav class="site-bar" aria-label="Main navigation">
+  <a class="site-brand" href="/" aria-label="Lippi home"><img src="/logo.svg" alt="Lippi" width="1120" height="280"></a>
+  <a class="site-link" href="/training.html">Training</a>
+  <button class="lippi-menu-button" type="button" aria-expanded="false" aria-controls="lippi-navigation"><span>Menu</span></button>
+  <div class="site-links" id="lippi-navigation">
+    <a class="site-link" href="/events.html">Events</a>
+    <a class="site-link" href="/independence.html#scope">Advisory</a>
+    <a class="site-link" href="/regulations.html">Regulatory</a>
+    <a class="site-link" href="/articles.html" aria-current="location">Articles</a>
+    <a class="site-link" href="/survey.html">Survey</a>
+  </div>
+  <a class="site-book" href="https://calendly.com/igormarchettilippi/20min" target="_blank" rel="noopener noreferrer">Book a call</a>
+</nav></header></div><!-- /site-header -->
+<main id="main" class="article">
+<a class="article-back" href="/articles.html">All articles</a>
+<p class="eyebrow">AI &amp; payments · 27 November 2026</p>
+<h1>AI Agents, Payments and the Next Customer</h1>
+<p class="lead">Before I let an AI agent spend money for me, I want to understand exactly what I have authorised.</p>
+<p class="byline">By Igor Marchetti Lippi · Lippi</p>
+<p>I can see the value of an AI assistant that helps me find a flight, compare prices and complete a booking. Before I let it pay, though, I would want to understand exactly what I have authorised.</p>
+<p>This is where the discussion about AI agents and payments becomes interesting to me.</p>
+<p>An AI agent can carry out tasks on someone's behalf. In shopping, that can mean finding products, comparing options and, where it has permission, completing a purchase. This is often called agentic commerce.</p>
+<p>The person or business behind the agent remains the customer. Their instructions, money and expectations still matter.</p>
+<p>With my background in payments, technology and risk, I look at this through a few practical questions. What has the customer agreed to? What can the agent spend? Who helps when something goes wrong?</p>
+<h2>A booking within budget can still miss the point</h2>
+<p>Imagine I ask an AI agent to book a flight to Lisbon for less than €200.</p>
+<p>It finds a ticket within the budget and completes the purchase. I then realise that the fare is non-refundable, arrives very late and does not include a bag.</p>
+<p>This is a fictional example, but it shows why a spending limit is only part of the instruction.</p>
+<p>The agent may have followed the budget exactly. The problem could be that my other needs were never made clear.</p>
+<p>Before buying, the service needs a way to establish which conditions matter and when it should ask me to confirm.</p>
+<h2>Payment companies are working on this</h2>
+<p><a href="https://developer.visa.com/docs/visa-intelligent-commerce" target="_blank" rel="noopener noreferrer">Visa Intelligent Commerce</a> describes customer-approved purchase instructions, agent checks and payment controls. <a href="https://www.mastercard.com/content/mccom/eu/ie/en/business/artificial-intelligence/mastercard-agent-pay.html" target="_blank" rel="noopener noreferrer">Mastercard Agent Pay</a> also focuses on registered agents and customer consent.</p>
+<p>For me, these are useful examples of how permission and trust are being built into payment processes. Each business still needs to understand how its chosen service works for its customers and markets.</p>
+<h2>Four things I would want to see</h2>
+<h2>1. Clear permission</h2>
+<p>The customer should understand which actions the agent can take, when it can make a purchase and when it must ask again.</p>
+<p>We need to check both who is giving the instruction and exactly what they have approved. The customer should also be able to change or withdraw permission for future activity.</p>
+<h2>2. Limits checked before payment</h2>
+<p>I would want clear rules for the total cost, currency, allowed purchases and how long the permission lasts.</p>
+<p>The total should include relevant fees. If the price or purchase conditions move outside what was agreed, the process should pause for fresh approval. Those limits need to be checked in the payment process itself.</p>
+<h2>3. A record that people can understand</h2>
+<p>If a customer questions a purchase, the team should be able to explain what was requested, what was approved and what happened.</p>
+<p>A useful record connects those steps. It should help the customer and the support team resolve the issue, while keeping personal information appropriately protected.</p>
+<h2>4. Someone responsible for helping</h2>
+<p>Customers need a clear route to a person who can investigate a problem.</p>
+<p>The business should know which team handles a failed payment, a repeated purchase or a refund request, and who can stop further activity.</p>
+<p>Pausing an agent and resolving an existing purchase need their own processes. A completed booking may still be subject to the provider's cancellation and refund terms.</p>
+<h2>Start with a small, clear use case</h2>
+<p>If I were testing this in a business, I would start with one task, a limited budget and a named owner.</p>
+<p>I would test awkward situations too: a price change, an unavailable product, a payment failure or a customer changing their mind.</p>
+<p>Then I would measure the outcome. How much time was saved? How often did someone need to step in? Were there complaints, repeated purchases or delays in resolving problems?</p>
+<p>For a business expanding between Brazil, Ireland, the UK and other markets, I would also check local payment methods, currencies, customer support and the refund process, and confirm relevant rules with the right specialists.</p>
+<p>I am interested in the convenience AI agents could bring. My confidence would come from understanding their permission, seeing that limits work and knowing how to get help.</p>
+<p>These are the kinds of practical questions I am using to shape the training I am developing at Lippi.</p>
+<p><strong>What would you need to see before allowing an AI agent to make a payment for you?</strong></p>
+<div class="cta"><h2>Continue the conversation</h2><p>Explore the practical training ideas at Lippi or share your thoughts on the article.</p><p><a href="/training.html">Lippi training</a> · <a href="/articles.html">All articles</a> · <a href="mailto:lippi@igormarchetti.me">Contact Lippi</a></p></div>
+<p class="note">This article is general commentary, not legal or regulatory advice. The travel booking is a fictional example and the article does not represent official Web Summit proceedings.</p>
+</main><div data-site-footer>
+<footer class="lippi-footer"><div class="lippi-footer-inner">
+<div class="lippi-footer-top">
+<div>
+<a class="lippi-footer-logo" href="/" aria-label="Lippi home"></a><strong class="lippi-visually-hidden">Lippi</strong><p><span data-key="footerOffer">GRC workshops for Brazilian fintechs and tech companies</span><br><span data-key="marketExperience">Prepare to answer questions from customers, partners and regulators in Europe.</span></p>
+<div class="lippi-footer-social">
+<a href="https://www.linkedin.com/in/igormarchetti/" target="_blank" rel="noopener noreferrer" aria-label="Igor Marchetti Lippi on LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.95v5.66H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0Z"></path></svg></a><a href="mailto:lippi@igormarchetti.me" aria-label="Email Lippi"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M3.5 6.5h17v11h-17zM4 7l8 6 8-6"></path></svg></a>
+</div>
+<a class="lippi-footer-email" href="mailto:lippi@igormarchetti.me">lippi@igormarchetti.me</a>
+</div>
+<div class="lippi-footer-links">
+<a class="lippi-footer-book" href="https://calendly.com/igormarchettilippi/20min" target="_blank" rel="noopener noreferrer" data-key="appointment">Book an appointment</a>
+<a href="/training.html" data-key="footerLink1">Training</a><a href="/events.html" data-key="eventsLink">Events</a><a href="/regulations.html" data-key="footerLink2">Regulatory updates</a><a href="/articles.html" data-key="footerLink3">Articles</a><a href="/articles.html#newsletter" data-key="footerLink4">Newsletter</a><a href="/#about" data-key="footerLink5">About Igor Marchetti Lippi</a><a href="/survey.html" data-key="footerLink6">Founder survey</a>
+</div>
+</div>
+<div class="lippi-footer-bottom">
+<a href="/privacy.html">Privacy and cookies</a>
+<p>© 2026 Igor Marchetti Lippi · Lippi</p>
+<a href="/independence.html#scope" data-key="footerLink7">Advisory scope</a><a href="/independence.html" data-key="footerLink8">Independence &amp; conflicts</a>
+</div>
+</div></footer>
+</div><!-- /site-footer -->
+<script src="/assets/lippi-motion.js" defer></script>
+<script src="/assets/lippi-select.js" defer></script>
+</body></html>
